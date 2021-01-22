@@ -1,0 +1,153 @@
+<co-modal-layout
+  [showCloseButton]="false"
+  [config]="{show: true, backdrop: 'static', keyboard: false, class: 'experiment-record'}"
+  [isBlocked]="false"
+  #coModalLayoutRef>
+
+  <div class="experiment-record-header bg-white">
+    <div class="container-fluid d-flex flex-row align-items-center justify-content-between h-100">
+      <div class="d-flex flex-row align-items-center">
+        <button class="btn p-0" (click)="onModalClose()">
+          <i class="icon back-arrow align-middle mr-3"></i>
+          <span class="align-middle">Back</span>
+        </button>
+      </div>
+      <div class="d-flex flex-row align-items-center">
+        <button class="mr-4 btn btn-ghost-icon-primary" [disabled]="loading && experiment?.id">
+          <span class="icon-wrapper">
+            <i class="icon note"></i>
+          </span>
+          Export to PDF
+        </button>
+        <button
+          [disabled]="loading && experiment?.id"
+          (click)="onEdit()"
+          class="mr-4 btn btn-ghost-icon-primary">
+          <span class="icon-wrapper">
+            <i class="icon pen-white"></i>
+          </span>
+          Edit
+        </button>
+        <button
+          class="btn btn-ghost-icon-primary"
+          (click)="onConfirmModalOpen()"
+          [disabled]="loading && experiment?.id">
+          <span class="icon-wrapper">
+            <i class="icon delete"></i>
+          </span>
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="experiment-record-content">
+    <div class="container-fluid py-3">
+      <div class="row mb-3">
+        <div class="col-12">
+          <div class="card position-relative border-gray-200 card-min-height">
+            <co-loading class="absolute-center" [loading]="loading"></co-loading>
+            <ng-container *ngIf="!loading && experiment">
+              <div class="card-header border-0 p-3 bg-white">
+                <h3 class="heading-lg mb-0">{{experiment.title}}</h3>
+              </div>
+              <div class="card-content px-3 pt-0 pb-4">
+                <co-experiment-details-info [experiment]="experiment"></co-experiment-details-info>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-12">
+          <div class="card border-gray-200">
+            <div class="card-header border-gray-200 p-3 bg-white">
+              <h3 class="heading-sm font-weight-600 mb-0">Protocol</h3>
+            </div>
+            <div class="card-content px-3 pt-3 pb-4 position-relative card-min-height">
+              <co-loading class="absolute-center" [loading]="loading"></co-loading>
+              <ng-container *ngIf="!loading && protocol">
+                <div [innerHTML]="protocol"></div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-12">
+          <div class="card border-gray-200">
+            <div class="card-header border-gray-200 p-3 bg-white">
+              <h3 class="heading-sm font-weight-600 mb-0">Conclusion</h3>
+            </div>
+            <div class="card-content px-3 pt-3 pb-4 position-relative card-min-height">
+              <co-loading class="absolute-center" [loading]="loading"></co-loading>
+              <ng-container *ngIf="!loading && conclusion">
+                <div [innerHTML]="conclusion"></div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-12">
+          <div class="card border-gray-200">
+            <div class="card-header border-gray-200 p-3 bg-white">
+              <h3 class="heading-sm font-weight-600 mb-0">Notes</h3>
+            </div>
+            <div class="card-content px-3 pt-3 pb-4 position-relative card-min-height">
+              <co-loading class="absolute-center" [loading]="loading"></co-loading>
+              <ng-container *ngIf="!loading && notes">
+                <div *ngFor="let note of notes" class="mb-4">
+                  <div class="text-xxs text-gray mb-2">{{note.datetime | date}}</div>
+                  <div class="text-black border-0 text-xl p-0">{{note.notes}}</div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-12">
+          <div class="card border-gray-200">
+            <div class="card-header border-gray-200 p-3 bg-white">
+              <h3 class="heading-sm font-weight-600 mb-0">Attachments</h3>
+            </div>
+            <div class="card-content px-3 pt-3 pb-4 position-relative card-min-height">
+              <co-loading class="absolute-center" [loading]="loading"></co-loading>
+              <ng-container *ngIf="!loading && notes">
+                <div>Data</div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="card border-gray-200">
+            <div class="card-header border-gray-200 p-3 bg-white">
+              <h3 class="heading-sm font-weight-600 mb-0">Links</h3>
+            </div>
+            <div class="card-content px-3 pt-3 pb-4 position-relative card-min-height">
+              <co-loading class="absolute-center" [loading]="loading"></co-loading>
+              <ng-container *ngIf="!loading && links">
+                <div class="mb-2" *ngFor="let link of links">
+                  <co-attachment
+                    [attachment]="link.link"
+                    [showCloseButton]="false"
+                    [truncateText]="false"
+                  ></co-attachment>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</co-modal-layout>
+<co-confirm-modal
+  [loading]="deleteExperimentLoading"
+  [closeOutside]="true"
+  [apiError]="apiError"
+  (confirmDelete)="onDeleteConfirm()"
+  #confirmModalRef
+></co-confirm-modal>

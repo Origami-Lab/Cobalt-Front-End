@@ -1,0 +1,45 @@
+<div class="row mb-3">
+  <div class="col-12">
+    <div class="d-flex justify-content-between align-items-center">
+      <span class="align-middle text-lg font-weight-600">Links({{files.length}})</span>
+      <button
+        *ngIf="files.length"
+        class="btn p-0"
+        (click)="isCollapsed = !isCollapsed"
+        [attr.aria-expanded]="!isCollapsed"
+        aria-controls="collapseBasic">
+        <i class="icon arrow-up-blue align-middle" [class.rotate]="!isCollapsed"></i>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <button class="btn btn-ghost-icon-primary">
+      Attach file
+      <span class="icon-wrapper">
+        <i class="icon content-add"></i>
+      </span>
+    </button>
+<!--    <input type="file" (change)="onChange($event.target.files[0])">-->
+  </div>
+</div>
+<div class="row" *ngIf="loading">
+  <div class="col-12">
+    <co-loading [loading]="true"></co-loading>
+  </div>
+</div>
+<div class="row" *ngIf="!loading" id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="true">
+  <div class="col-12">
+    <div *ngFor="let file of files" class="text-truncate">
+      <div class="mb-2">
+        <co-attachment
+          [attachment]="file.filePath"
+          [showCloseButton]="true"
+          [truncateText]="true"
+          (remove)="onConfirmModalOpen(file)"
+        ></co-attachment>
+      </div>
+    </div>
+  </div>
+</div>

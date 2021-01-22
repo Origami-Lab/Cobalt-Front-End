@@ -1,0 +1,21 @@
+@import '~ngx-toastr/toastr.css';
+
+.toast-container {
+  &.toast-bottom-right {
+    right: 0;
+  }
+
+  .toast {
+    width: 100%;
+  }
+
+  @include media-breakpoint-up(sm) {
+    &.toast-bottom-right {
+      right: 12px;
+    }
+
+    .toast {
+      width: auto;
+    }
+  }
+}

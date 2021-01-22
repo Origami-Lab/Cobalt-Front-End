@@ -1,0 +1,56 @@
+<div class="row mb-3">
+  <div class="col-12">
+    <div class="d-flex justify-content-between align-items-center">
+      <span class="align-middle text-lg font-weight-600">Links({{links.length}})</span>
+      <button
+        *ngIf="links.length"
+        class="btn p-0"
+        (click)="isCollapsed = !isCollapsed"
+        [attr.aria-expanded]="!isCollapsed"
+        aria-controls="collapseBasic">
+        <i class="icon arrow-up-blue align-middle" [class.rotate]="!isCollapsed"></i>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="row mb-3">
+  <div class="col-12">
+    <button class="btn btn-ghost-icon-primary" (click)="uploadModalRef.openModal()">
+      Add link
+      <span class="icon-wrapper">
+        <i class="icon content-add"></i>
+      </span>
+    </button>
+  </div>
+</div>
+<div class="row" *ngIf="loading">
+  <div class="col-12">
+    <co-loading [loading]="true"></co-loading>
+  </div>
+</div>
+<div class="row" *ngIf="!loading" id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="true">
+  <div class="col-12">
+    <div *ngFor="let link of links" class="text-truncate">
+      <div class="mb-2">
+        <co-attachment
+          [attachment]="link.link"
+          [showCloseButton]="true"
+          [truncateText]="true"
+          (remove)="onConfirmModalOpen(link)"
+        ></co-attachment>
+      </div>
+    </div>
+  </div>
+</div>
+<co-experiment-link-upload-modal
+  [experimentId]="experiment.id"
+  (uploadedLink)="addUploadedLink($event)"
+  #uploadModalRef
+></co-experiment-link-upload-modal>
+<co-confirm-modal
+  [loading]="deleteLoading"
+  [closeOutside]="true"
+  [apiError]="apiError"
+  (confirmDelete)="onDeleteConfirm()"
+  #confirmModalRef
+></co-confirm-modal>

@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="col-12">
+    <quill-editor
+      [modules]="config"
+      [format]="format"
+      [(ngModel)]="initialValue"
+      (ngModelChange)="onModelChange($event)"
+      (onEditorCreated)="onQuillCreated($event)"
+      #quillEditorRef
+    ></quill-editor>
+  </div>
+</div>

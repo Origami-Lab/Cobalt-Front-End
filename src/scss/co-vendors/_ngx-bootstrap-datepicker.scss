@@ -1,0 +1,21 @@
+@import '~ngx-bootstrap/datepicker/bs-datepicker';
+
+.theme-dark-blue {
+  .bs-datepicker-head {
+    background-color: $blue-600;
+  }
+
+  .bs-datepicker-body table td {
+    color: $blue-300;
+
+    span.selected,
+    &.selected span,
+    &[class*='select-']:after,
+    &[class*='select-'] span:after {
+      background-color: $blue-600;
+    }
+    &.week span {
+      color: $blue-600;
+    }
+  }
+}

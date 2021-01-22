@@ -1,0 +1,219 @@
+.form-group {
+  position: relative;
+  .input-group-append,
+  .input-group-prepend {
+    &.inset {
+      position: absolute;
+      top: 2.938rem;
+    }
+    &.inset-static {
+      padding: 0.25rem 0.875rem;
+      border-top: 0.063rem solid $gray-200;
+      border-bottom: 0.063rem solid $gray-200;
+    }
+  }
+  .input-group-prepend {
+    &.inset {
+      left: 0.625rem;
+    }
+  }
+  .input-group-append {
+    &.inset {
+      right: 0.625rem;
+    }
+  }
+}
+
+.form-control {
+  @include placeholder();
+  border: 0.063rem solid $input-border-color;
+  height: $input-height;
+
+  &:focus,
+  &.focus {
+    box-shadow: none;
+    border-color: $input-border-color-active;
+  }
+  &[type='number'] {
+    // remove default number input arrows
+    -moz-appearance: textfield;
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+    }
+  }
+  // remove clear button in IE
+  &::-ms-clear {
+    display: none;
+  }
+  &:disabled,
+  &[readonly] {
+    cursor: not-allowed;
+    background-color: $input-disabled-bg;
+    &:focus {
+      border-color: $input-disabled-border;
+    }
+  }
+  &.plain {
+    background: none;
+    border: none;
+    padding: 0;
+    height: auto;
+  }
+  &.ng-invalid.ng-touched,
+  &.ng-invalid.ng-dirty {
+    border: 0.125rem solid $input-invalid-border;
+  }
+}
+
+.input-with-icon-wrapper {
+  position: relative;
+
+  .form-control {
+    padding-right: 2.5rem;
+  }
+  &.plain {
+    .form-control {
+      padding-right: 2.188rem;
+    }
+    .input-icon {
+      right: 0;
+    }
+  }
+  .input-icon {
+    position: absolute;
+    top: 50%;
+    right: 0.875rem;
+    cursor: pointer;
+    @include translate(0, -50%);
+  }
+}
+
+.form-label {
+  font-family: $font-family-nunito;
+  font-size: $font-size-16;
+  font-weight: $font-weight-600;
+  margin-bottom: 0.625rem;
+  line-height: normal;
+  color: $black;
+}
+
+.co-checkbox {
+  position: relative;
+
+  label {
+    display: block;
+    width: 100%;
+    padding: 0.313rem 0.313rem 0.313rem 2.188rem;
+    position: relative;
+    cursor: pointer;
+    margin-bottom: 0;
+
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 0.313rem;
+      @include square(1.25rem);
+      background: $white;
+      border: 0.125rem solid $input-border-color;
+      border-radius: $border-radius-sm;
+    }
+  }
+
+  input[type='checkbox'] {
+    @include square(0);
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    border: none;
+    opacity: 0;
+
+    &:checked + label:before {
+      background: $blue-600 url('#{$icons-path}icons-outlined-navigation-check.svg') center center no-repeat;
+      background-size: contain;
+      border-color: transparent;
+    }
+
+    &.ng-invalid.ng-touched,
+    &.ng-invalid.ng-dirty {
+      & + label {
+        &:before {
+          border-color: $red-600;
+        }
+      }
+
+      &:checked + label:before {
+        background-color: $red-600;
+      }
+    }
+  }
+}
+
+.co-radio {
+  position: relative;
+
+  label {
+    display: block;
+    width: 100%;
+    padding: 0.313rem 0.313rem 0.313rem 2.188rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    position: relative;
+    cursor: pointer;
+    margin-bottom: 0;
+
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      border-radius: 100%;
+      @include square(1.25rem);
+      background: $white;
+      border: 0.125rem solid #cfd2d7;
+      left: 0;
+      top: 50%;
+      transform: translate(0, -50%);
+    }
+  }
+
+  input[type='radio'] {
+    height: 0;
+    width: 0;
+    position: absolute;
+    overflow: hidden;
+    border: none;
+    top: 0;
+    left: 0;
+    opacity: 0;
+
+    &:checked + label:before {
+      border: 0.375rem solid $blue-600;
+    }
+    &:disabled {
+      + label {
+        cursor: not-allowed;
+        &:before {
+          border: 0.063rem solid $gray;
+        }
+      }
+      &:checked {
+        + label:before {
+          border: 0.375rem solid $gray;
+        }
+      }
+    }
+
+    &.ng-invalid.ng-touched,
+    &.ng-invalid.ng-dirty {
+      & + label {
+        &:before {
+          border-color: $red-600;
+        }
+      }
+    }
+  }
+}

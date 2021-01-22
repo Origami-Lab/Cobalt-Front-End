@@ -1,0 +1,62 @@
+<div class="row experiment-details-header-height" *ngIf="!experiment">
+  <div class="col-12">
+    <co-loading [loading]="!experiment" class="absolute-center"></co-loading>
+  </div>
+</div>
+<div class="row" *ngIf="experiment">
+  <div class="col-12">
+    <div class="row mb-4 mb-md-0">
+      <div class="col-12 col-sm-6 mb-4 mb-sm-0">
+        <co-breadcrumb *ngIf="breadcrumbConfig" [breadcrumbConfig]="breadcrumbConfig"></co-breadcrumb>
+      </div>
+      <div class="col-12 col-sm-6 text-sm-right">
+        <a
+          [routerLink]="['/platform/view', {outlets: {modal: ['experiments', 'record', experiment.id]}}]"
+          class="btn btn-primary">Generate record</a>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-12">
+        <h2 class="heading-lg mb-0">{{experiment.title}}</h2>
+      </div>
+    </div>
+    <div class="row mb-3 pb-3">
+      <div class="col-12">
+        <div class="d-sm-flex flex-sm-row">
+        <span class="d-inline-block mr-2 mb-4 mb-sm-0">
+          <co-badge [status]="experiment.status"></co-badge>
+        </span>
+        <span class="d-inline-block mr-2 mb-4 mb-sm-0">
+          <a
+            class="align-middle btn btn-icon-left-sm-gray-200"
+            [queryParams]="experiment"
+            [routerLink]="['/platform/view', {outlets: {modal: ['experiments', 'management', 'edit']}}]">
+            <i class="icon pen"></i>
+            Edit experiment
+          </a>
+        </span>
+        <span class="d-inline-block mr-2 mb-4 mb-sm-0 mr-md-0">
+          <button
+            class="align-middle btn btn-icon-left-sm-gray-200"
+            (click)="onConfirmModalOpen()">
+            <i class="icon remove"></i>
+            Delete
+          </button>
+        </span>
+        <span class="d-inline-block d-md-none">
+          <button
+            class="align-middle btn btn-icon-left-sm-primary px-2"
+            (click)="onSideNavOpen()">
+            View attachments
+          </button>
+        </span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <co-experiment-details-info [experiment]="experiment"></co-experiment-details-info>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<fieldset class="form-group" [formGroup]="fromGroup">
+  <label [for]="controlName" class="form-label">{{label}}</label><span>*</span>
+  <input
+    type="text"
+    class="form-control"
+    [id]="controlName"
+    [formControlName]="controlName"
+    [placeholder]="placeholder"
+    #dp="bsDatepicker"
+    triggers=""
+    [bsConfig]="config"
+    bsDatepicker
+  >
+  <div class="input-group-append inset">
+    <i class="icon calendar-gray cursor-pointer" (click)="dp.toggle()" [attr.aria-expanded]="dp.isOpen"></i>
+  </div>
+  <co-form-control-errors [controlName]="controlName"></co-form-control-errors>
+</fieldset>

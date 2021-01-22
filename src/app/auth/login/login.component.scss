@@ -1,0 +1,19 @@
+@import '~src/scss/co-base';
+
+.login-section,
+.container {
+  height: auto;
+  @include media-breakpoint-up(lg) {
+    height: 100%;
+  }
+}
+
+.login-card {
+  padding: 3rem 1rem 1rem;
+  border-radius: $border-radius-md;
+  box-shadow: $login-card-box-shadow;
+}
+
+.general-error {
+  height: 31px;
+}

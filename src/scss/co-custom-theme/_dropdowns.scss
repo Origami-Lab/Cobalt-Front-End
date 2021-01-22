@@ -1,0 +1,20 @@
+.dropdown-menu {
+  box-shadow: 1px 1px 8px 0 rgba(119, 119, 124, 0.3);
+  border: 1px solid $gray-100;
+  color: $black;
+  border-radius: $border-radius-md;
+}
+.dropdown-item {
+  font-size: $font-size-15;
+  font-weight: $font-weight-600;
+  color: $black;
+}
+.dropdown-item:hover {
+  background-color: $blue-50;
+}
+.dropdown-item.active,
+.dropdown-item:active,
+.dropdown-item:focus {
+  background-color: $blue-600;
+  color: $white;
+}

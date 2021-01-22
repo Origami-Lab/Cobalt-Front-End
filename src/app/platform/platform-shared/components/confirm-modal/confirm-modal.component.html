@@ -1,0 +1,18 @@
+<ng-template #confirmDeleteModalRef>
+  <div class="modal-header flex-column">
+    <h3 class="heading-lg">Please confirm that you want delete {{deleteItemName}}</h3>
+    <p class="text-lg text-danger mt-4" *ngIf="apiError">Something went wrong</p>
+  </div>
+  <div class="modal-footer">
+    <button
+      class="btn btn-ghost-primary"
+      (click)="onModalClose()"
+    >Cancel</button>
+    <button
+      class="btn btn-primary"
+      [disabled]="loading || apiError"
+      [class.loading]="loading"
+      (click)="onDeleteConfirm()"
+    >Delete</button>
+  </div>
+</ng-template>

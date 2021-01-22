@@ -1,0 +1,32 @@
+.nav-item {
+  margin-right: 1.5rem;
+  &:last-of-type {
+    margin-right: 0;
+  }
+}
+.nav-tabs {
+  border: none;
+  .nav-link {
+    border: none;
+    border-bottom: 0.188rem solid transparent;
+    font-size: $font-size-19;
+    font-weight: $font-weight-700;
+    opacity: 0.4;
+    color: $black;
+    padding: 0.5rem;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      opacity: 1;
+      border-bottom: 0.188rem solid transparent;
+    }
+    &.active {
+      font-size: $font-size-19;
+      font-weight: $font-weight-700;
+      background-color: transparent;
+      opacity: 1;
+      color: $black;
+      border-bottom: 0.188rem solid $blue-600;
+    }
+  }
+}

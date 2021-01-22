@@ -1,0 +1,202 @@
+// stylelint-disable selector-no-qualifying-type
+
+//
+// Base styles
+//
+
+.btn {
+  display: inline-block;
+  font-weight: $btn-font-weight;
+  font-family: $font-family-nunito;
+  text-transform: uppercase;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  border: none;
+  position: relative;
+
+  @include button-size($btn-padding-y, $btn-padding-x, $btn-font-size, $btn-line-height, $btn-border-radius);
+  @include transition($btn-transition);
+
+  // Share hover and focus styles
+  @include hover-focus {
+    text-decoration: none;
+  }
+
+  &:focus,
+  &.focus {
+    outline: 0;
+    box-shadow: none;
+  }
+
+  &:not(:disabled):not(.disabled):active,
+  &:not(:disabled):not(.disabled).active {
+    box-shadow: none;
+    &:focus {
+      box-shadow: none;
+    }
+  }
+}
+
+.btn-dropdown {
+  @include button-size(0, 0, 15px, 15px, 0);
+  background: none;
+  &:focus,
+  &.focus {
+    box-shadow: none;
+  }
+}
+
+// Future-proof disabling of clicks on `<a>` elements
+a.btn.disabled,
+fieldset:disabled a.btn {
+  pointer-events: none;
+}
+
+//
+// Alternate buttons
+//
+
+@each $color, $value in $theme-colors {
+  .btn-#{$color} {
+    @include button-variant($value, $value);
+  }
+}
+
+@each $color, $value in $theme-colors {
+  .btn-icon-right-#{$color} {
+    @include button-icon-variant($value, $value);
+  }
+}
+
+@each $color, $value in $theme-colors {
+  .btn-icon-left-#{$color} {
+    @include button-icon-variant($value, $value, left);
+  }
+}
+
+@each $color, $value in $theme-colors {
+  .btn-icon-right-sm-#{$color} {
+    @include button-icon-sm-variant($value, $value);
+  }
+}
+
+@each $color, $value in $theme-colors {
+  .btn-icon-left-sm-#{$color} {
+    @include button-icon-sm-variant($value, $value, left);
+  }
+}
+
+@each $color, $value in $theme-colors {
+  .btn-ghost-#{$color} {
+    @include button-ghost-variant($value);
+  }
+}
+
+@each $color, $value in $theme-colors {
+  .btn-ghost-color-#{$color} {
+    @include button-ghost-color-variant($value);
+  }
+}
+
+@each $color, $value in $theme-colors {
+  .btn-ghost-icon-#{$color} {
+    @include button-ghost-icon-variant($value, left);
+  }
+}
+
+// Make a button look and behave like a link
+@each $color, $value in $theme-colors {
+  .btn-link-#{$color} {
+    @include button-link-variant($value);
+  }
+}
+
+////
+//// Block button
+////
+//
+.btn-block {
+  display: block;
+  width: 100%;
+
+  // Vertically space out multiple block buttons
+  + .btn-block {
+    margin-top: $btn-block-spacing-y;
+  }
+}
+//
+//.btn-mobile-block,
+//.btn-tablet-block,
+//.btn-small-tablet-block {
+//  display: block;
+//  width: 100%;
+//  padding-left: 0;
+//  padding-right: 0;
+//}
+//
+//.btn-mobile-block {
+//  @include media-breakpoint-up(sm) {
+//    padding-left: $btn-padding-y;
+//    padding-right: $btn-padding-y;
+//    width: auto;
+//    display: inline-block;
+//  }
+//}
+//
+//.btn-tablet-block {
+//  @include media-breakpoint-up(xl) {
+//    padding-left: $btn-padding-y;
+//    padding-right: $btn-padding-y;
+//    width: auto;
+//    display: inline-block;
+//  }
+//}
+//
+//.btn-small-tablet-block {
+//  @include media-breakpoint-up(md) {
+//    padding-left: $btn-padding-y;
+//    padding-right: $btn-padding-y;
+//    width: auto;
+//    display: inline-block;
+//  }
+//}
+//
+//.btn-mobile-font-size {
+//  font-size: $btn-font-size-xs;
+//  @include media-breakpoint-up(sm) {
+//    font-size: $btn-font-size-base;
+//  }
+//}
+//
+
+// Specificity overrides
+input[type='submit'],
+input[type='reset'],
+input[type='button'] {
+  &.btn-block {
+    width: 100%;
+  }
+}
+
+.btn.loading {
+  color: transparent;
+  pointer-events: none;
+  cursor: not-allowed;
+  box-shadow: none;
+
+  &:after {
+    content: '';
+    background: url('#{$icons-path}loader.svg') no-repeat 100% 100%;
+    background-size: $btn-loader-size $btn-loader-size;
+    display: inline-block;
+    @include size($btn-loader-size, $btn-loader-size);
+    @include center-element();
+  }
+  &[class*='btn-ghost'] {
+    &:after {
+      background: url('#{$icons-path}loader-blue.svg') no-repeat 100% 100%;
+      background-size: $btn-loader-size $btn-loader-size;
+    }
+  }
+}

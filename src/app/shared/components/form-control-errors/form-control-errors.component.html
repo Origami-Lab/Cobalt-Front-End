@@ -1,0 +1,64 @@
+<ng-container *ngIf="showErrors && formControl.touched">
+  <co-form-control-error
+    *ngIf="formControl.errors?.required && showErrors === 'required'"
+  >Required</co-form-control-error>
+  <co-form-control-error
+    *ngIf="(formControl.errors?.invalidEmailAddress || formControl.errors?.email) && (showErrors === 'invalidEmailAddress' || showErrors === 'email')"
+  >Invalid email address.</co-form-control-error>
+  <co-form-control-error
+    *ngIf="formControl.errors?.invalidPassword && showErrors === 'invalidPassword'"
+  >Invalid password. Password must be at least 6 characters long, and contain at least one number, one upper and lower case letter.</co-form-control-error>
+  <co-form-control-error
+    *ngIf="formControl.errors?.incorrectPassword && showErrors === 'incorrectPassword'"
+  >Incorrect password.</co-form-control-error>
+  <co-form-control-error
+    *ngIf="formControl.errors?.invalidName && showErrors === 'invalidName'"
+  >Incorrect Name. Name must be up to 50 characters long, and contain only upper and lower case letters</co-form-control-error>
+  <co-form-control-error
+    *ngIf="formControl.errors?.newPasswordNotDifferent && showErrors === 'newPasswordNotDifferent'"
+  >Incorrect password. New password must be different than the current one.</co-form-control-error>
+  <co-form-control-error
+    *ngIf="formControl.errors?.invalidCompare && showErrors === 'invalidCompare'"
+  >Confirmation and first password are not the same.</co-form-control-error>
+  <co-form-control-error
+    *ngIf="formControl.errors?.invalidUrl && showErrors === 'invalidUrl'"
+  >Invalid url</co-form-control-error>
+  <co-form-control-error
+    *ngIf="formControl.errors?.unknownError && showErrors === 'unknownError'"
+  >Unknown error has occurred</co-form-control-error>
+  <co-form-control-error
+    *ngIf="formControl.errors?.invalidNumber && showErrors === 'invalidNumber'"
+  >Please insert a valid number.</co-form-control-error>
+  <co-form-control-error
+    *ngIf="formControl.errors?.invalidWholeNumber && showErrors === 'invalidWholeNumber'"
+  >Please insert a valid whole number.</co-form-control-error>
+  <co-form-control-error
+    *ngIf="formControl.errors?.invalidPin && showErrors === 'invalidPin'"
+  >Please insert a valid whole number. Must be 4 digits.</co-form-control-error>
+  <co-form-control-error
+    *ngIf="formControl.errors?.invalidNoSpaceString && showErrors === 'invalidNoSpaceString'"
+  >No spaces are allowed.</co-form-control-error>
+  <co-form-control-error
+    *ngIf="formControl.errors?.invalidTime && showErrors === 'invalidTime'"
+  >Please insert a valid time. e.g. 12:00 AM</co-form-control-error>
+  <co-form-control-error
+    *ngIf="formControl.errors?.minlength && showErrors === 'minlength'"
+  >Minimum length {{formControl.errors.minlength.requiredLength}}</co-form-control-error>
+  <co-form-control-error
+    *ngIf="formControl.errors?.maxlength && showErrors === 'maxlength'"
+  >Maximum length {{formControl.errors.maxlength.requiredLength}}</co-form-control-error>
+  <co-form-control-error
+    *ngIf="formControl.errors?.wrongCredentials && showErrors === 'wrongCredentials'"
+  >Wrong credentials</co-form-control-error>
+  <co-form-control-error
+    *ngIf="formControl.errors?.usernameExists && showErrors === 'usernameExists'"
+  >Username already exists</co-form-control-error>
+  <co-form-control-error
+    *ngIf="formControl.errors?.invalidFileExtension && showErrors === 'invalidFileExtension'"
+  >Uploaded file must be {{formControl.errors?.invalidFileExtension?.requiredExtension}} format</co-form-control-error>
+  <co-form-control-error
+    *ngIf="formControl.errors?.bsDate?.invalid && showErrors === 'bsDate'"
+  >Date format should follow YYYY-MM-DD.</co-form-control-error>
+  <!-- show provided custom error messages below -->
+  <ng-content></ng-content>
+</ng-container>

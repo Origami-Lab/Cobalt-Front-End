@@ -1,0 +1,62 @@
+<div class="row h-100" *ngIf="loading">
+  <div class="col-12">
+    <co-loading [loading]="loading" class="absolute-center"></co-loading>
+  </div>
+</div>
+<div class="row h-100">
+  <div class="col-12">
+    <div class="notes-content-wrapper d-flex flex-column h-100">
+      <div class="d-flex flex-column flex-grow-1 notes-wrapper p-3" #notesWrapperRef>
+        <div [class.h-100]="!notes.length" #notesScrollContainerRef>
+          <ng-container *ngIf="!loading">
+            <ng-container *ngIf="notes.length; else emptyNotesRef">
+              <div *ngFor="let note of notes; let last = last" [class.mb-4]="!last" #noteRef>
+                <div class="note-created-at text-xxs text-gray mb-2">
+                  {{note.datetime | date}}
+                </div>
+                <textarea
+                  autosize
+                  class="submitted-note bg-transparent text-black border-0 text-xl p-0 w-100"
+                  readonly>{{note.notes}}</textarea>
+              </div>
+            </ng-container>
+          </ng-container>
+        </div>
+        <ng-template #emptyNotesRef>
+          <div class="d-flex h-100 align-items-center justify-content-center">
+            <span class="text-xl text-gray">Start adding your notes here</span>
+          </div>
+        </ng-template>
+      </div>
+      <div class="d-flex flex-column flex-grow-0 notes-add-wrapper p-3 border-top border-gray-200" *ngIf="!loading">
+        <form [formGroup]="notesForm" (ngSubmit)="onSubmit()">
+          <fieldset>
+            <div class="row">
+              <div class="col-12">
+                <textarea
+                  (focus)="toggleActionNoteActionButtons()"
+                  autosize
+                  class="form-control text-md"
+                  formControlName="note"></textarea>
+              </div>
+            </div>
+            <div class="row mt-4" *ngIf="showNoteActionButtons">
+              <div class="col-12">
+                <button
+                  [class.loading]="createNoteLoading"
+                  [disabled]="createNoteLoading"
+                  type="submit"
+                  class="btn btn-primary">Submit</button>
+                <button
+                  [disabled]="createNoteLoading"
+                  type="button"
+                  (click)="clearNoteInput()"
+                  class="btn btn-ghost-danger">Cancel</button>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

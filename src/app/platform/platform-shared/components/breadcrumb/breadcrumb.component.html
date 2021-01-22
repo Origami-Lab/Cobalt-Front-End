@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-12">
+    <div class="custom-breadcrumb-wrapper d-flex align-items-center flex-row">
+      <span class="custom-breadcrumb" *ngFor="let breadcrumb of breadcrumbConfig; let first = first; let last = last">
+        <i class="icon home align-middle mr-1" *ngIf="first"></i>
+        <a
+          class="align-middle"
+          [class.btn-link-gray-600]="last"
+          [class.btn-link-black]="!last"
+          [class.text-decoration-none]="last"
+          [routerLink]="getBreadcrumbURL(breadcrumb.path)">{{breadcrumb.label}}</a>
+        <i class="icon breadcrumb-arrow align-middle mx-1" *ngIf="!last"></i>
+      </span>
+    </div>
+  </div>
+</div>

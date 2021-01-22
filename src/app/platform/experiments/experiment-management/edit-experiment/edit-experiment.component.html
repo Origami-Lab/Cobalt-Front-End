@@ -1,0 +1,30 @@
+<co-modal-layout [config]="{show: true, backdrop: 'static', keyboard: false}" [isBlocked]="isBlocked" #coModalLayoutRef>
+  <div class="modal-header">
+    <h3 class="heading-lg">Edit experiment</h3>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-12">
+        <co-experiment-form
+          [loading]="loading"
+          [experiment]="experiment"
+          [apiErrors]="apiError"
+          (submitExperiment)="onFormSubmit($event)"
+          (valueChanges)="isFormDirty()"
+          #experimentFormRef></co-experiment-form>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button
+      class="btn btn-ghost-primary"
+      (click)="onModalClose()"
+    >Close</button>
+    <button
+      class="btn btn-primary"
+      (click)="experimentFormRef.submitForm()"
+      [disabled]="loading"
+      [class.loading]="loading"
+    >Edit</button>
+  </div>
+</co-modal-layout>

@@ -1,0 +1,105 @@
+.modal.show {
+  -webkit-overflow-scrolling: touch;
+}
+
+.modal-open {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+}
+
+.modal-dialog {
+  max-width: $modal-width-md;
+  box-shadow: $modal-box-shadow;
+  .close-modal-btn {
+    @include square(1.875rem);
+    background-color: $gray-100;
+    border-radius: $border-radius-sm;
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0.7;
+    transition: opacity 0.15s ease-in-out;
+    z-index: 50;
+    border: 0;
+    &:hover,
+    &:focus {
+      opacity: 1 !important;
+    }
+    .icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+}
+
+.modal-content {
+  padding: $modal-inner-padding-y $modal-inner-padding-x;
+  border-radius: $border-radius-md;
+  border: none;
+}
+
+.modal-header {
+  margin-bottom: 2rem;
+  > * {
+    margin-bottom: 0;
+  }
+}
+
+.modal-footer > .btn {
+  margin-right: 1rem;
+  &:last-of-type {
+    margin-right: 0;
+  }
+}
+
+.modal-body {
+  margin-bottom: 4rem;
+}
+
+.modal-header,
+.modal-body,
+.modal-footer {
+  padding: 0;
+  border: 0;
+}
+
+.modal-backdrop ~ .modal-backdrop {
+  z-index: 1050;
+}
+
+.modal-nested {
+  z-index: 1060;
+}
+
+.modal-dialog.experiment-record {
+  max-width: 100%;
+  margin: 0 auto;
+  height: 100%;
+
+  .modal-content {
+    height: 100%;
+    border-radius: 0;
+    padding: 0;
+    background: $gray-100;
+  }
+
+  .experiment-record-header {
+    height: $experiment-record-modal-header-height;
+    box-shadow: $experiment-record-modal-header-box-shadow;
+  }
+
+  .experiment-record-content {
+    overflow-y: auto;
+    height: calc(100% - #{$experiment-record-modal-header-height});
+  }
+
+  .experiment-content-section {
+    border-radius: $border-radius-sm;
+  }
+}

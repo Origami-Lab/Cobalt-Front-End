@@ -1,0 +1,250 @@
+<section class="ui-kit-section h-100 overflow-auto">
+  <router-outlet></router-outlet>
+  <router-outlet name="modal"></router-outlet>
+  <div class="container py-5">
+    <div class="row mb-5">
+      <div class="col-12">
+        <h1>Tabs</h1>
+        <tabset>
+          <tab heading="Basic title" id="tab1">Basic content</tab>
+          <tab heading="Basic Title 1">Basic content 1</tab>
+          <tab heading="Basic Title 2">Basic content 2</tab>
+        </tabset>
+      </div>
+    </div>
+    <div class="row mb-5">
+      <div class="col-12">
+        <h1>Dropdowns</h1>
+        <div class="btn-group" dropdown>
+          <button
+            id="button-basic"
+            dropdownToggle
+            type="button"
+            class="btn btn-primary dropdown-toggle"
+            aria-controls="dropdown-basic">
+            Button dropdown <span class="caret"></span>
+          </button>
+          <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+            <li role="menuitem"><a class="dropdown-item" href="#">Action</a></li>
+            <li role="menuitem"><a class="dropdown-item" href="#">Another action</a></li>
+            <li role="menuitem"><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <h1>Cards</h1>
+    <div class="row mb-5">
+      <div class="col-3">
+        <co-card [experiment]="experiment"></co-card>
+      </div>
+      <div class="col-3">
+        <co-card [experiment]="experiment"></co-card>
+      </div>
+      <div class="col-3">
+        <co-card [experiment]="experiment"></co-card>
+      </div>
+      <div class="col-3">
+        <co-card [experiment]="experiment"></co-card>
+      </div>
+    </div>
+    <div class="row mb-5">
+      <div class="col-12">
+        <h1>Buttons</h1>
+        <div class="row mb-4">
+          <div class="col-12">
+            <button class="mx-4 btn btn-primary">button</button>
+            <button class="mx-4 btn btn-primary loading">button</button>
+            <button class="mx-4 btn btn-primary" disabled>button</button>
+          </div>
+        </div>
+        <div class="row mb-4">
+          <div class="col-12">
+            <button class="mx-4 btn btn-ghost-primary">button</button>
+            <button class="mx-4 btn btn-ghost-primary" disabled>button</button>
+          </div>
+        </div>
+        <div class="row mb-4">
+          <div class="col-12">
+            <button class="mx-4 btn btn-icon-right-primary">
+              button
+              <span class="icon-wrapper">
+              <i class="icon content-add"></i>
+            </span>
+            </button>
+            <button class="mx-4 btn btn-icon-right-primary loading">
+              button
+              <span class="icon-wrapper">
+              <i class="icon content-add"></i>
+            </span>
+            </button>
+            <button class="mx-4 btn btn-icon-right-primary" disabled>
+              button
+              <span class="icon-wrapper">
+              <i class="icon content-add"></i>
+            </span>
+            </button>
+          </div>
+        </div>
+        <div class="row mb-4">
+          <div class="col-12">
+            <button class="mx-4 btn btn-icon-left-primary">
+            <span class="icon-wrapper">
+              <i class="icon outlined-content-add"></i>
+            </span>
+              button
+            </button>
+            <button class="mx-4 btn btn-icon-left-primary loading">
+              button
+              <span class="icon-wrapper">
+              <i class="icon outlined-content-add"></i>
+            </span>
+            </button>
+            <button class="mx-4 btn btn-icon-left-primary" disabled>
+              button
+              <span class="icon-wrapper">
+              <i class="icon outlined-content-add"></i>
+            </span>
+            </button>
+          </div>
+        </div>
+        <div class="row mb-4">
+          <div class="col-12">
+            <button class="mx-4 btn btn-ghost-icon-primary">
+            <span class="icon-wrapper">
+              <i class="icon outlined-content-add"></i>
+            </span>
+              button
+            </button>
+            <button class="mx-4 btn btn-ghost-icon-primary" disabled>
+            <span class="icon-wrapper">
+              <i class="icon outlined-content-add"></i>
+            </span>
+              button
+            </button>
+          </div>
+        </div>
+        <div class="row mb-4">
+          <div class="col-12">
+            <button class="mx-4 btn btn-icon-left-sm-gray-200">
+              <i class="icon pen"></i>
+              button
+            </button>
+            <button class="mx-4 btn btn-icon-left-sm-gray-200" disabled>
+              <i class="icon pen"></i>
+              button
+            </button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <button class="mx-4 btn btn-link-primary">
+              button
+            </button>
+            <button class="mx-4 btn btn-link-primary" disabled>
+              button
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mb-5">
+      <div class="col-12">
+        <h1>Modal</h1>
+        <div>
+          <a routerLink="/ui-kit/view/test-modal" class="btn btn-primary mr-4">Open modal</a>
+          <a
+            [routerLink]="['/ui-kit/view/',{outlets: {modal: ['test-outlet-modal']}}]"
+            class="btn btn-primary mr-4"
+          >Open outlet modal</a>
+          <a
+            [routerLink]="['/ui-kit/view/',{outlets: {modal: ['test-outlet-blocked-modal']}}]"
+            class="btn btn-primary mr-4"
+          >Open outlet blocked modal</a>
+          <a routerLink="/ui-kit/view/test-blocked-modal" class="btn btn-primary">Open blocked modal</a>
+        </div>
+      </div>
+    </div>
+    <h1>Journal Box</h1>
+    <div class="row mb-5">
+      <div class="col-12">
+        <co-card-row title="Journal - 21 Nov 2020" status="FINISHED"></co-card-row>
+      </div>
+      <div class="col-12 mt-5">
+        <co-card-row title="Journal - 21 Nov 2020" status="RUNNING"></co-card-row>
+      </div>
+    </div>
+    <div class="row mb-5">
+      <div class="col-12">
+        <h1>Inputs</h1>
+        <div class="form-group mb-4">
+          <label for="some-id" class="form-label">Label</label>
+          <input type="text" class="form-control" id="some-id">
+        </div>
+        <div class="form-group mb-4">
+          <label for="some-id-2" class="form-label">Label</label>
+          <input type="text" class="form-control focus" id="some-id-2">
+        </div>
+        <div class="form-group mb-4">
+          <label for="some-id-3" class="form-label">Label</label>
+          <input type="text" class="form-control ng-invalid ng-touched" id="some-id-3">
+        </div>
+        <div class="form-group mb-4">
+          <label for="some-id-4" class="form-label">Label</label>
+          <input type="text" class="form-control" disabled id="some-id-4">
+        </div>
+        <div class="form-group mb-4">
+          <div class="co-checkbox">
+            <input type="checkbox" class="form-control" id="checkbox-id">
+            <label for="checkbox-id" class="form-label">Checkbox button</label>
+          </div>
+          <div class="co-checkbox">
+            <input type="checkbox" class="form-control ng-invalid ng-touched" id="checkbox-id-2">
+            <label for="checkbox-id-2" class="form-label">Checkbox button</label>
+          </div>
+          <div class="co-checkbox">
+            <input type="checkbox" class="form-control" id="checkbox-id-3" checked>
+            <label for="checkbox-id-3" class="form-label">Checkbox button</label>
+          </div>
+          <div class="co-checkbox">
+            <input type="checkbox" class="form-control ng-invalid ng-touched" id="checkbox-id-4" checked>
+            <label for="checkbox-id-4" class="form-label">Checkbox button</label>
+          </div>
+          <div class="co-checkbox">
+            <input type="checkbox" class="form-control" id="checkbox-id-5" disabled>
+            <label for="checkbox-id-5" class="form-label">Checkbox button</label>
+          </div>
+          <div class="co-checkbox">
+            <input type="checkbox" class="form-control" id="checkbox-id-6" disabled checked>
+            <label for="checkbox-id-6" class="form-label">Checkbox button</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="co-radio">
+            <input type="radio" class="form-control" id="radio-id">
+            <label for="radio-id" class="form-label">Radio button</label>
+          </div>
+          <div class="co-radio">
+            <input type="radio" class="form-control ng-invalid ng-touched" id="radio-id-2">
+            <label for="radio-id-2" class="form-label">Radio button</label>
+          </div>
+          <div class="co-radio">
+            <input type="radio" class="form-control" id="radio-id-3" checked>
+            <label for="radio-id-3" class="form-label">Radio button</label>
+          </div>
+          <div class="co-radio">
+            <input type="radio" class="form-control ng-invalid ng-touched" id="radio-id-4" checked>
+            <label for="radio-id-4" class="form-label">Radio button</label>
+          </div>
+          <div class="co-radio">
+            <input type="radio" class="form-control" id="radio-id-5" disabled>
+            <label for="radio-id-5" class="form-label">Radio button</label>
+          </div>
+          <div class="co-radio">
+            <input type="radio" class="form-control" id="radio-id-6" disabled checked>
+            <label for="radio-id-6" class="form-label">Radio button</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

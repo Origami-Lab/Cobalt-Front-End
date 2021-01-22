@@ -1,0 +1,36 @@
+<section class="experiment-details-section" [class.expanded]="isExpanded">
+  <div class="experiment-details-content">
+    <div class="container container-padding-md">
+      <div class="row mb-5 experiment-details-header-height">
+        <div class="col-12">
+          <co-experiment-details-header
+            [experiment]="experiment"
+            (openConfirmModal)="onConfirmModalOpen()"
+            (openSideNav)="sideNavRef.toggleNavExpand()"
+          ></co-experiment-details-header>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <co-experiment-details-content
+            [experiment]="experiment"
+          ></co-experiment-details-content>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="experiment-details-side-nav">
+    <co-experiment-details-side-nav
+      [experiment]="experiment"
+      (toggleNav)="onNavToggle($event)"
+      #sideNavRef
+    ></co-experiment-details-side-nav>
+  </div>
+</section>
+<co-confirm-modal
+  [loading]="deleteExperimentLoading"
+  [closeOutside]="true"
+  [apiError]="apiError"
+  (confirmDelete)="onDeleteConfirm()"
+  #confirmModalRef
+></co-confirm-modal>

@@ -1,0 +1,370 @@
+@mixin translate($x, $y) {
+  transform: translate($x, $y);
+}
+
+@mixin center-element {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin size($width, $height) {
+  height: $height;
+  width: $width;
+}
+
+@mixin square($size) {
+  @include size($size, $size);
+}
+
+@mixin circle($size) {
+  @include square($size);
+  border-radius: 50%;
+}
+
+@mixin placeholder($color: $gray, $font-size: $font-size-16, $font-weight: $font-weight-400, $font-style: normal) {
+  &::-webkit-input-placeholder {
+    color: $color;
+    font-size: $font-size;
+    font-weight: $font-weight;
+    font-style: $font-style;
+  }
+  &:-moz-placeholder {
+    color: $color;
+    font-size: $font-size;
+    font-weight: $font-weight;
+    font-style: $font-style;
+  }
+  &::-moz-placeholder {
+    color: $color;
+    font-size: $font-size;
+    font-weight: $font-weight;
+    font-style: $font-style;
+  }
+  &::-webkit-input-placeholder {
+    color: $color;
+    font-size: $font-size;
+    font-weight: $font-weight;
+    font-style: $font-style;
+  }
+  &:-ms-input-placeholder {
+    color: $color;
+    font-size: $font-size;
+    font-weight: $font-weight;
+    font-style: $font-style;
+  }
+}
+
+@mixin animate($name, $time, $iteration, $type) {
+  animation: $name $time $iteration $type;
+}
+
+@mixin button-with-wrapper-icon($background, $position-property, $value) {
+  position: absolute;
+  #{$position-property}: $value;
+  top: 50%;
+  transform: translate(0, -50%);
+  background: $background;
+  border-radius: $btn-icon-wrapper-border-radius;
+  @include square($btn-icon-wrapper-size);
+
+  .icon {
+    @include square($btn-icon-size !important);
+    @include center-element();
+  }
+}
+
+@mixin button-with-icon($position-property, $value) {
+  position: absolute;
+  #{$position-property}: $value;
+  top: 50%;
+  transform: translate(0, -50%);
+  @include square($btn-icon-size-sm !important);
+}
+
+// Button variants
+//
+// Easily pump out default styles, as well as :hover, :focus, :active,
+// and disabled options for all buttons
+
+@mixin button-variant($background, $box-shadow-color, $hover-background: darken($background, 10%)) {
+  color: color-yiq($background);
+  background: $background;
+  box-shadow: $btn-box-shadow-size rgba($box-shadow-color, 0.4);
+  transition: $btn-transition;
+  text-align: center;
+
+  @include hover {
+    color: color-yiq($hover-background);
+    background-color: $hover-background;
+    box-shadow: none;
+  }
+
+  &:focus,
+  &.focus {
+    box-shadow: none;
+  }
+
+  &.loading {
+    background: $hover-background;
+  }
+
+  &.disabled,
+  &:disabled {
+    background: $gray-400;
+    color: $gray-700;
+    cursor: not-allowed;
+    border: 0;
+    box-shadow: none;
+
+    &:hover {
+      border-color: transparent;
+    }
+    &:focus {
+      box-shadow: none;
+    }
+  }
+}
+
+@mixin button-icon-variant($background, $box-shadow-color, $position-property: right, $hover-background: darken($background, 10%)) {
+  color: color-yiq($background);
+  background: $background;
+  box-shadow: $btn-box-shadow-size rgba($box-shadow-color, 0.4);
+  transition: $btn-transition;
+  padding-#{$position-property}: $btn-with-icon-padding;
+
+  @include hover {
+    color: color-yiq($hover-background);
+    background-color: $hover-background;
+    box-shadow: none;
+  }
+
+  .icon-wrapper {
+    @include button-with-wrapper-icon(lighten($background, 10%), $position-property, $btn-icon-padding);
+  }
+
+  &:focus,
+  &.focus {
+    box-shadow: none;
+  }
+
+  &.loading {
+    background: $hover-background;
+    .icon-wrapper {
+      display: none;
+    }
+  }
+
+  &.disabled,
+  &:disabled {
+    background: $gray-400;
+    color: $gray-700;
+    cursor: not-allowed;
+    border: 0;
+    box-shadow: none;
+
+    .icon-wrapper {
+      @include button-with-wrapper-icon($gray-500, $position-property, $btn-icon-padding);
+    }
+
+    &:hover {
+      border-color: transparent;
+    }
+    &:focus {
+      box-shadow: none;
+    }
+  }
+}
+
+@mixin button-icon-sm-variant($background, $box-shadow-color, $position-property: right, $hover-background: darken($background, 10%)) {
+  color: color-yiq($background);
+  background: $background;
+  box-shadow: $btn-box-shadow-size rgba($box-shadow-color, 0.4);
+  transition: $btn-transition;
+  @include button-size($btn-padding-y-sm, $btn-padding-x-sm, $btn-font-size-sm, $btn-line-height-sm, $btn-border-radius-sm);
+  text-transform: capitalize;
+  padding-#{$position-property}: $btn-with-icon-padding-sm;
+
+  @include hover {
+    color: color-yiq($hover-background);
+    background-color: $hover-background;
+    box-shadow: none;
+  }
+
+  .icon {
+    @include button-with-icon($position-property, $btn-icon-padding);
+  }
+
+  &:focus,
+  &.focus {
+    box-shadow: none;
+  }
+
+  &.loading {
+    background: $hover-background;
+    .icon-wrapper {
+      display: none;
+    }
+  }
+
+  &.disabled,
+  &:disabled {
+    background: $gray-400;
+    color: $gray-700;
+    cursor: not-allowed;
+    border: 0;
+    box-shadow: none;
+
+    .icon-wrapper {
+      @include button-with-wrapper-icon($gray-500, $position-property, $btn-icon-padding);
+    }
+
+    &:hover {
+      border-color: transparent;
+    }
+    &:focus {
+      box-shadow: none;
+    }
+  }
+}
+
+@mixin button-ghost-variant($hover-color) {
+  color: $black;
+  background: transparent;
+  transition: $btn-transition;
+  @include hover {
+    color: $hover-color;
+    box-shadow: none;
+  }
+
+  &:focus,
+  &.focus {
+    box-shadow: none;
+  }
+
+  &.disabled,
+  &:disabled {
+    background: transparent;
+    color: $gray-400;
+    cursor: not-allowed;
+    border: 0;
+    box-shadow: none;
+
+    &:hover {
+      border-color: transparent;
+    }
+    &:focus {
+      box-shadow: none;
+    }
+  }
+}
+
+@mixin button-ghost-color-variant($color, $hover-color: darken($color, 10%)) {
+  color: $color;
+  background: transparent;
+  transition: $btn-transition;
+  @include hover {
+    color: $hover-color;
+    box-shadow: none;
+  }
+
+  &:focus,
+  &.focus {
+    box-shadow: none;
+  }
+
+  &.disabled,
+  &:disabled {
+    background: transparent;
+    color: $gray-400;
+    cursor: not-allowed;
+    border: 0;
+    box-shadow: none;
+
+    &:hover {
+      border-color: transparent;
+    }
+    &:focus {
+      box-shadow: none;
+    }
+  }
+}
+
+@mixin button-ghost-icon-variant($color, $position-property, $hover-color: darken($color, 10%)) {
+  color: $color;
+  background: transparent;
+  transition: $btn-transition;
+  padding-#{$position-property}: $btn-with-icon-padding;
+  @include hover {
+    color: $hover-color;
+    box-shadow: none;
+    .icon-wrapper {
+      background: $hover-color;
+    }
+  }
+
+  .icon-wrapper {
+    transition: $btn-transition;
+    @include button-with-wrapper-icon(lighten($color, 10%), $position-property, $btn-icon-padding);
+  }
+
+  &:focus,
+  &.focus {
+    box-shadow: none;
+  }
+
+  &.disabled,
+  &:disabled {
+    background: transparent;
+    color: $gray-400;
+    cursor: not-allowed;
+    border: 0;
+    box-shadow: none;
+
+    .icon-wrapper {
+      @include button-with-wrapper-icon($gray-500, $position-property, $btn-icon-padding);
+    }
+
+    &:hover {
+      border-color: transparent;
+    }
+    &:focus {
+      box-shadow: none;
+    }
+  }
+}
+
+@mixin button-link-variant($color, $color-hover: darken($color, 10%)) {
+  color: $color;
+  border: 0;
+  background-color: transparent;
+  text-transform: none;
+  font-size: $btn-font-size-sm;
+  padding: 0;
+  text-decoration: $link-hover-decoration;
+
+  @include hover {
+    color: $color-hover;
+    text-decoration: $link-hover-decoration;
+  }
+
+  &:focus,
+  &.focus {
+    border-color: transparent;
+    box-shadow: none;
+  }
+}
+
+// Button sizes
+@mixin button-size($padding-y, $padding-x, $font-size, $line-height, $border-radius) {
+  padding: $padding-y $padding-x;
+  font-size: $font-size;
+  line-height: $line-height;
+  // Manually declare to provide an override to the browser default
+  @if $enable-rounded {
+    border-radius: $border-radius;
+  } @else {
+    border-radius: 0;
+  }
+}

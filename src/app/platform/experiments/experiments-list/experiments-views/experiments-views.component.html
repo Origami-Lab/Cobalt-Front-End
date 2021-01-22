@@ -1,0 +1,12 @@
+<div class="row" >
+  <ng-container *ngIf="view === ExperimentsView.GRID">
+    <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4" *ngFor="let experiment of experiments">
+      <co-card [experiment]="experiment" (openConfirmModal)="onConfirmModalOpen($event)"></co-card>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="view === ExperimentsView.LIST">
+    <div class="col-12 mt-3" *ngFor="let experiment of experiments">
+      <co-card-row [experiment]="experiment" (openConfirmModal)="onConfirmModalOpen($event)"></co-card-row>
+    </div>
+  </ng-container>
+</div>

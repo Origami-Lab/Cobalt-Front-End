@@ -1,0 +1,94 @@
+<section class="experiments-list-section">
+  <div class="container container-padding-md">
+    <div class="row mb-3 align-items-center">
+      <div class="col-12 col-sm-6 mb-4 mb-sm-0">
+        <h1 class="heading-lg mb-0">My Experiments</h1>
+      </div>
+      <div class="col-12 col-sm-6 text-sm-right">
+        <a
+          [routerLink]="['/platform/view', {outlets: {modal: ['experiments', 'management', 'create']}}]"
+          class="btn btn-icon-right-primary"
+          *ngIf="experiments.length">
+          Create New
+          <span class="icon-wrapper">
+            <i class="icon content-add"></i>
+          </span>
+        </a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <tabset>
+          <div class="col-12 mt-3 text-right text-md-right pr-0" *ngIf="experiments.length">
+            <button [class.active]="view === ExperimentsView.GRID" (click)="switchView(ExperimentsView.GRID)"
+              class="btn btn-icon-right-white view grid">
+              <i class="icon grid" aria-controls="dropdown-basic"></i>
+            </button>
+            <button [class.active]="view === ExperimentsView.LIST" (click)="switchView(ExperimentsView.LIST)"
+              class="btn btn-icon-right-white view list">
+              <i class="icon list" aria-controls="dropdown-basic"></i>
+            </button>
+          </div>
+          <tab heading="Ongoing" id="tab1">
+            <div class="row my-5" *ngIf="loading">
+              <div class="col-12">
+                <co-loading [loading]="loading"></co-loading>
+              </div>
+            </div>
+            <ng-container *ngIf="!loading">
+              <div *ngIf="experiments.length; else noExperiments" class="row mt-3">
+                <div class="col">
+                  <co-experiments-view
+                    [view]="view"
+                    [experiments]="experiments"
+                    (openConfirmModal)="onConfirmModalOpen($event)"
+                  ></co-experiments-view>
+                </div>
+              </div>
+            </ng-container>
+          </tab>
+          <tab heading="Past">
+            <div *ngIf="experiments.length" class="row mt-3">
+              <div class="col">
+                <co-experiments-view [view]="view" [experiments]="experiments"></co-experiments-view>
+              </div>
+            </div>
+          </tab>
+        </tabset>
+      </div>
+    </div>
+  </div>
+  <ng-template #noExperiments>
+    <div class="text-center mt-5 mb-5">
+      <div class="row">
+        <div class="col-12">
+          <img src="assets/origami.png" alt="logo" class="img-thumbnail border-0 experiment-logo">
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-12">
+          <h1 class="heading-md font-weight-600 mb-0">Create new experiment</h1>
+        </div>
+      </div>
+      <div class="row mt-1 mb-2">
+        <div class="col-12">
+          <p class="text-xl text-color-gray mb-0">Write protocol and describe your findings in your journal</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <a
+            [routerLink]="['/platform/view', {outlets: {modal: ['experiments', 'management', 'create']}}]"
+            class="mx-4 btn btn-primary">Create New</a>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</section>
+<co-confirm-modal
+  [loading]="deleteExperimentLoading"
+  [closeOutside]="true"
+  [apiError]="apiError"
+  (confirmDelete)="onDeleteConfirm()"
+  #confirmModalRef
+></co-confirm-modal>

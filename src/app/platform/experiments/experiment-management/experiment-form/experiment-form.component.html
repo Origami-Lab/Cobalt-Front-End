@@ -1,0 +1,29 @@
+<form [formGroup]="experimentForm">
+  <co-form-control-errors [control]="experimentForm"></co-form-control-errors>
+  <fieldset class="mb-4">
+    <label for="title" class="form-label">Title</label>
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter title"
+      formControlName="title"
+      id="title">
+    <co-form-control-errors [controlName]="'title'"></co-form-control-errors>
+  </fieldset>
+  <div class="row">
+    <div class="col-12 col-sm-6 mb-4 mb-sm-0">
+      <co-input-datepicker
+        controlName="startDate"
+        label="Start date"
+        placeholder="Select start date"
+      ></co-input-datepicker>
+    </div>
+    <div class="col-12 col-sm-6">
+      <co-input-datepicker
+        controlName="dueDate"
+        label="Due date"
+        placeholder="Select due date"
+      ></co-input-datepicker>
+    </div>
+  </div>
+</form>

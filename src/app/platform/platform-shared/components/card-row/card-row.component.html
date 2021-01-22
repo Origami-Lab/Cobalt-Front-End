@@ -1,0 +1,41 @@
+<a [routerLink]="['/platform/view/experiments/details/', experiment.id]" class="d-block text-decoration-none">
+  <div class="card pl-0">
+    <div class="d-flex flex-row justify-content-between card-header mt-0 align-items-center">
+      <h3 class="heading-sm mb-0">{{experiment.title}}</h3>
+      <div class="d-inline-flex justify-content-space-between ">
+        <div class="d-flex align-items-center">
+          <div class="mr-4">
+            <img src="assets/user-placeholder.png" alt="user" class="img-thumbnail border-0 user-icon">
+          </div>
+          <div
+            *ngIf="experiment.datetime"
+            class="d-flex text-center align-items-center mr-2">
+            <i class="icon calendar mr-2"></i>
+            <span class="date text-gray text-xs">{{experiment.datetime | date}}</span>
+          </div>
+          <co-badge [status]="experiment.status" class="mx-4"></co-badge>
+        </div>
+        <div class="btn-group" dropdown (click)="stopEventPropagation($event)">
+          <i class="icon card-menu card-menu" dropdownToggle aria-controls="dropdown-basic"></i>
+          <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="button-basic">
+            <li role="menuitem">
+              <a
+                class="dropdown-item"
+                [queryParams]="experiment"
+                [routerLink]="['/platform/view', {outlets: {modal: ['experiments', 'management', 'edit']}}]"
+              >Edit</a>
+            </li>
+            <li role="menuitem">
+              <a class="dropdown-item disabled" [routerLink]="['/platform/view/experiments/list']">Duplicate</a>
+            </li>
+            <li role="menuitem">
+              <button
+                class="dropdown-item"
+                (click)="onConfirmModalOpen()">Delete</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</a>

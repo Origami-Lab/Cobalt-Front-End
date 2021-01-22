@@ -1,0 +1,16 @@
+<div class="row h-100" *ngIf="loading">
+  <div class="col-12">
+    <co-loading [loading]="loading" class="absolute-center"></co-loading>
+  </div>
+</div>
+<div class="row h-100" *ngIf="!loading">
+  <div class="col-12">
+    <co-text-editor
+      [initialValue]="conclusion.conclusions"
+      format="html"
+      [contentWrapperHeight]="boxContentHeight"
+      (contentChanged)="onChange($event)"
+    ></co-text-editor>
+  </div>
+</div>
+

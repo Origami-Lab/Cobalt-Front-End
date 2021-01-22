@@ -1,0 +1,14 @@
+<co-modal-layout [config]="{show: true, backdrop: 'static', keyboard: false}" [isBlocked]="isBlocked" #coModalLayout>
+  <div class="modal-header">
+    <h3 class="heading-lg">Some random heading</h3>
+  </div>
+  <div class="modal-body">
+    Content
+  </div>
+  <div class="modal-footer">
+    <button
+      class="btn btn-ghost-primary"
+      (click)="onModalClose()">Close</button>
+    <button class="btn btn-primary">Button</button>
+  </div>
+</co-modal-layout>

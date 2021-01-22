@@ -1,0 +1,38 @@
+@import '~src/scss/co-base';
+
+.icon.nav-arrow {
+  transition: all 0.2s ease-in-out;
+  &.active {
+    transform: rotate(180deg);
+  }
+}
+
+.experiment-details-side-nav-wrapper {
+  width: 0;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  transition: all 0.2s ease-in-out;
+  box-shadow: -2px 0 4px 0 rgba(119, 119, 124, 0.15);
+  overflow: hidden;
+  z-index: 1;
+  @include media-breakpoint-up(md) {
+    width: 2.5rem;
+  }
+  &.expanded {
+    width: 13.375rem;
+  }
+}
+
+.experiment-details-side-nav-curtain {
+  position: fixed;
+  top: 0;
+  left: 100%;
+  right: 0;
+  bottom: 0;
+  background: rgba($black, 0.3);
+  &.active {
+    left: 0;
+  }
+}

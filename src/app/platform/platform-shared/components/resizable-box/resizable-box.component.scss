@@ -1,0 +1,18 @@
+@import '~src/scss/co-theme-variables/variables';
+
+.resizable-box-wrapper {
+  transition: all 1s ease-in-out;
+  border-radius: $border-radius-sm;
+  &.expanded {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 10;
+  }
+}
+
+.row-height {
+  height: calc(100% - 59px);
+}

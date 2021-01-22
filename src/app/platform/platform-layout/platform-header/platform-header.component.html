@@ -1,0 +1,92 @@
+<header class="header container-fluid align-items-center">
+  <div class="row justify-content-start no-gutters">
+    <div class="d-flex d-lg-none align-items-center justify-content-around px-2">
+      <button
+        class="btn icon burger-light d-flex cursor-pointer pointer pr-4 pl-2 py-4 pl-sm-2"
+        (click)="mobileNavigationService.navigationVisibility = !mobileNavigationService.navigationVisibility"
+      ></button>
+    </div>
+    <div class="d-flex px-2 px-sm-4 px-lg-0 align-items-center">
+      <h1 class="mb-0">
+        <a class="header-logo" routerLink="/platform/view">
+          <img src="assets/icons/my-cobalt-logo.svg" alt="My Cobalt">
+        </a>
+      </h1>
+    </div>
+  </div>
+</header>
+<div
+  class="curtain"
+  [ngClass]="{'active': mobileNavigationService.navigationVisibility}"
+  (click)="mobileNavigationService.navigationVisibility = false"
+></div>
+<nav class="side-nav" [class.active]="mobileNavigationService.navigationVisibility">
+  <div class="mobile-nav-wrapper d-flex flex-column flex-grow-1 h-100">
+    <div class="mobile-nav">
+      <div class="nav-vertical-scroll custom-scrollbar-gray-darker">
+        <div class="row no-gutters">
+          <div class="col">
+            <nav class="nav flex-column text-left">
+              <ng-container class="mb-5">
+                <a
+                  class="nav-link text-lg font-weight-600"
+                  routerLink="/platform/view/dashboard"
+                  routerLinkActive="active"
+                  (click)="mobileNavigationService.navigationVisibility = false"
+                >
+                  <span class="align-middle icon dashboard mr-3"></span>
+                  <span class="align-middle">Dashboard</span>
+                </a>
+                <a
+                  class="nav-link text-lg font-weight-600"
+                  routerLink="/platform/view/experiments/list"
+                  routerLinkActive="active"
+                  (click)="mobileNavigationService.navigationVisibility = false"
+                >
+                  <span class="align-middle icon experiment mr-3"></span>
+                  <span class="align-middle">Experiments</span>
+                </a>
+                <a
+                  class="nav-link text-lg font-weight-600"
+                  routerLink="/platform/view/journal/list"
+                  routerLinkActive="active"
+                  (click)="mobileNavigationService.navigationVisibility = false"
+                >
+                  <span class="align-middle icon journal mr-3"></span>
+                  <span class="align-middle">Journal</span>
+                </a>
+                <a
+                  class="nav-link text-lg font-weight-600"
+                  routerLink="/platform/view/reports"
+                  routerLinkActive="active"
+                  (click)="mobileNavigationService.navigationVisibility = false"
+                >
+                  <span class="align-middle icon report mr-3"></span>
+                  <span class="align-middle">Reports</span>
+                </a>
+                <a
+                  class="nav-link text-lg font-weight-600"
+                  routerLink="/platform/view/notebook"
+                  routerLinkActive="active"
+                  (click)="mobileNavigationService.navigationVisibility = false"
+                >
+                  <span class="align-middle icon notebook mr-3"></span>
+                  <span class="align-middle">Notebook</span>
+                </a>
+                <a
+                  class="nav-link text-lg font-weight-600"
+                  routerLink="/platform/view/my-team/list"
+                  routerLinkActive="active"
+                  (click)="mobileNavigationService.navigationVisibility = false"
+                >
+                  <span class="align-middle icon team mr-3"></span>
+                  <span class="align-middle">My Team</span>
+                </a>
+              </ng-container>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

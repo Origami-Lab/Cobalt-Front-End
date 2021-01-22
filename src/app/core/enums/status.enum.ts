@@ -1,0 +1,5 @@
+export enum Status {
+  FINISHED = 'FINISHED',
+  RUNNING = 'RUNNING',
+  IN_PREPARATION = 'IN_PREPARATION'
+}

@@ -1,0 +1,7 @@
+:host {
+  display: block;
+  &.prefix-with-asterisk:before {
+    content: '*';
+    margin-right: 0.125rem;
+  }
+}

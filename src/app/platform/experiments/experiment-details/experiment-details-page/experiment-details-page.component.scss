@@ -1,0 +1,17 @@
+@import '~src/scss/co-base';
+
+.experiment-details-section {
+  padding-right: 0;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+  transform: translateX(0);
+  @include media-breakpoint-up(md) {
+    padding-right: 2.5rem;
+  }
+  &.expanded {
+    padding-right: 0;
+    @include media-breakpoint-up(md) {
+      padding-right: 13.375rem;
+    }
+  }
+}

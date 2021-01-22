@@ -1,0 +1,35 @@
+<div class="experiment-details-side-nav-wrapper" [class.expanded]="isExpanded">
+  <div class="bg-white h-100" [class.active]="!isExpanded">
+    <div class="row border-bottom border-gray-200 mb-3">
+      <div class="col-12">
+        <button class="btn btn-link-white p-2" (click)="toggleNavExpand()">
+          <i class="icon nav-arrow" [class.active]="!isExpanded"></i>
+        </button>
+      </div>
+    </div>
+    <div [class.d-none]="!isExpanded">
+      <div class="row mt-5" *ngIf="!experiment">
+        <div class="col-12">
+          <co-loading [loading]="!experiment" class="absolute-center"></co-loading>
+        </div>
+      </div>
+      <ng-container *ngIf="experiment">
+        <div class="row mb-3 pb-4 border-bottom border-gray-200">
+          <div class="col-12">
+            <div class="px-3">
+              <co-experiment-file-upload [experiment]="experiment"></co-experiment-file-upload>
+            </div>
+          </div>
+        </div>
+        <div class="row pb-4 border-bottom border-gray-200">
+          <div class="col-12">
+            <div class="px-3">
+              <co-experiment-link-upload [experiment]="experiment"></co-experiment-link-upload>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
+<div class="experiment-details-side-nav-curtain d-block d-md-none" [class.active]="isExpanded"></div>

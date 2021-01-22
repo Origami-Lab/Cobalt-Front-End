@@ -1,0 +1,40 @@
+<a [routerLink]="['/platform/view/experiments/details/', experiment.id]" class="d-block text-decoration-none">
+  <div class="card">
+    <div class="card-header mt-0 pb-0 pt-0">
+      <h3 class="card-heading-height heading-sm mb-0 text-break-all">{{experiment.title | truncate:37}}</h3>
+      <div class="d-inline-flex justify-content-space-between">
+        <div class="btn-group" dropdown [autoClose]="true" (click)="stopEventPropagation($event)">
+          <i class="icon card-menu card-menu" dropdownToggle aria-controls="dropdown-basic"></i>
+          <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="button-basic">
+            <li role="menuitem">
+              <a
+                class="dropdown-item"
+                [queryParams]="experiment"
+                [routerLink]="['/platform/view', {outlets: {modal: ['experiments', 'management', 'edit']}}]"
+              >Edit</a>
+            </li>
+            <li role="menuitem">
+              <a class="dropdown-item disabled" [routerLink]="['/platform/view/experiments/list']">Duplicate</a>
+            </li>
+            <li role="menuitem">
+              <button
+                class="dropdown-item"
+                (click)="onConfirmModalOpen()">Delete</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="mt-2 mb-3">
+      <co-badge [status]="experiment.status" class="mx-4"></co-badge>
+    </div>
+    <div class="custom-card-footer pt-2 pb-2 mx-4">
+      <div
+        class="d-flex  text-center align-items-center"><i class="icon calendar mr-2"></i><span
+        class="date">{{experiment.datetime | date}}</span></div>
+      <div>
+        <img src="assets/user-placeholder.png" alt="user" class="img-thumbnail border-0 user-icon">
+      </div>
+    </div>
+  </div>
+</a>

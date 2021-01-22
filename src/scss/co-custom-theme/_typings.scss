@@ -1,0 +1,97 @@
+.heading-xxl {
+  font-family: $font-family-nunito;
+  font-size: $font-size-57;
+  font-weight: $font-weight-400;
+  line-height: $default-text-line-height;
+}
+
+.heading-xl {
+  font-family: $font-family-nunito;
+  font-size: $font-size-46;
+  font-weight: $font-weight-400;
+  line-height: $default-text-line-height;
+}
+
+.heading-lg {
+  font-family: $font-family-nunito;
+  font-size: $font-size-32;
+  font-weight: $font-weight-400;
+  line-height: $default-text-line-height;
+}
+
+.heading-md {
+  font-family: $font-family-nunito;
+  font-size: $font-size-23;
+  font-weight: $font-weight-400;
+  line-height: $default-text-line-height;
+}
+
+.heading-sm {
+  font-family: $font-family-nunito;
+  font-size: $font-size-19;
+  font-weight: $font-weight-400;
+  line-height: $default-text-line-height;
+}
+
+.text-xl {
+  font-family: $font-family-nunito;
+  font-size: $font-size-16;
+  font-weight: $font-weight-400;
+  line-height: $default-text-line-height;
+}
+
+.text-lg {
+  font-family: $font-family-nunito;
+  font-size: $font-size-15;
+  font-weight: $font-weight-400;
+  line-height: $default-text-line-height;
+}
+
+.text-md {
+  font-family: $font-family-nunito;
+  font-size: $font-size-14;
+  font-weight: $font-weight-400;
+  line-height: $default-text-line-height;
+}
+
+.text-sm {
+  font-family: $font-family-nunito;
+  font-size: $font-size-13;
+  font-weight: $font-weight-400;
+  line-height: $default-text-line-height;
+}
+
+.text-xs {
+  font-family: $font-family-nunito;
+  font-size: $font-size-12;
+  font-weight: $font-weight-400;
+  line-height: $default-text-line-height;
+}
+
+.text-xxs {
+  font-family: $font-family-nunito;
+  font-size: $font-size-10;
+  font-weight: $font-weight-400;
+  line-height: $default-text-line-height;
+}
+
+// format text helper classes
+.font-weight-400 {
+  font-weight: $font-weight-400 !important;
+}
+
+.font-weight-600 {
+  font-weight: $font-weight-600 !important;
+}
+
+.font-weight-700 {
+  font-weight: $font-weight-700 !important;
+}
+
+.line-height-1 {
+  line-height: 1 !important;
+}
+
+.text-break-all {
+  word-break: break-all !important;
+}

@@ -1,0 +1,182 @@
+.icon {
+  display: inline-block;
+  background-color: transparent;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: 0;
+
+  &.content-add {
+    @include square(18px);
+    background-image: url('#{$icons-path}icons-outlined-content-add.svg');
+  }
+
+  &.outlined-content-add {
+    @include square(30px);
+    background-image: url('#{$icons-path}icons-outlined-content-add-box.svg');
+  }
+
+  &.pen {
+    @include square(30px);
+    background-image: url('#{$icons-path}icons-outlined-image-edit.svg');
+  }
+
+  &.pen-white {
+    @include square(30px);
+    background-image: url('#{$icons-path}icons-outlined-image-pen.svg');
+  }
+
+  &.delete {
+    @include square(30px);
+    background-image: url('#{$icons-path}icons-outlined-action-delete.svg');
+  }
+
+  &.dashboard {
+    @include square(24px);
+    background-image: url('#{$icons-path}dashboard.svg');
+  }
+
+  &.experiment {
+    @include square(24px);
+    background-image: url('#{$icons-path}icons-experiment-gray.svg');
+  }
+
+  &.report {
+    @include square(24px);
+    background-image: url('#{$icons-path}report.svg');
+  }
+
+  &.journal {
+    @include square(24px);
+    background-image: url('#{$icons-path}journal.svg');
+  }
+
+  &.notebook {
+    @include square(24px);
+    background-image: url('#{$icons-path}notebook.svg');
+  }
+
+  &.team {
+    @include square(24px);
+    background-image: url('#{$icons-path}team.svg');
+  }
+
+  &.card-menu {
+    @include square(24px);
+    background-image: url('#{$icons-path}icons-outlined-navigation-more-vert.svg');
+  }
+
+  &.card-menu-hover {
+    @include square(24px);
+    background-image: url('#{$icons-path}icons-outlined-navigation-more-hover.svg');
+  }
+
+  &.calendar {
+    @include square(24px);
+    background-image: url('#{$icons-path}icons-outlined-action-calendar-today.svg');
+  }
+
+  &.calendar-gray {
+    @include square(24px);
+    background-image: url('#{$icons-path}icons-outlined-action-calendar-today-gray.svg');
+  }
+
+  &.nav-arrow {
+    @include square(24px);
+    background-image: url('#{$icons-path}icons-outlined-navigation-open-close-panel.svg');
+  }
+
+  &.fullscreen {
+    @include square(24px);
+    background-image: url('#{$icons-path}icons-outlined-navigation-fullscreen.svg');
+  }
+
+  &.exit-fullscreen {
+    @include square(24px);
+    background-image: url('#{$icons-path}icons-outlined-navigation-fullscreen-exit.svg');
+  }
+
+  &.home {
+    @include square(16px);
+    background-image: url('#{$icons-path}icons-outlined-action-home.svg');
+  }
+
+  &.remove {
+    @include square(16px);
+    background-image: url('#{$icons-path}icons-outlined-content-remove-circle.svg');
+  }
+
+  &.list {
+    @include size(20px, 20px);
+    background-image: url('#{$icons-path}icons-outlined-action-list.svg');
+  }
+
+  &.grid {
+    @include size(20px, 20px);
+    background-image: url('#{$icons-path}icons-outlined-image-grid.svg');
+  }
+
+  &.list-on {
+    @include size(20px, 20px);
+    background-image: url('#{$icons-path}icons-outlined-action-list-on.svg');
+  }
+
+  &.grid-on {
+    @include size(20px, 20px);
+    background-image: url('#{$icons-path}icons-outlined-image-grid-on.svg');
+  }
+
+  &.arrow-up {
+    @include size(20px, 20px);
+    background-image: url('#{$icons-path}arrow-up.svg');
+  }
+
+  &.arrow-down {
+    @include size(20px, 20px);
+    background-image: url('#{$icons-path}arrow-down.svg');
+  }
+
+  &.red-eye {
+    @include size(18px, 18px);
+    background-image: url('#{$icons-path}icons-outlined-image-remove-red-eye.svg');
+  }
+
+  &.search {
+    @include size(16px, 16px);
+    background-image: url('#{$icons-path}icons-outlined-action-search.svg');
+  }
+
+  &.loader-blue {
+    @include size(20px, 20px);
+    background-image: url('#{$icons-path}loader-blue.svg');
+  }
+
+  &.breadcrumb-arrow {
+    @include size(3px, 5px);
+    background-image: url('#{$icons-path}breadcrumb-arrow.svg');
+  }
+
+  &.delete {
+    @include square(24px);
+    background-image: url('#{$icons-path}icons-outlined-action-delete.svg');
+  }
+
+  &.note {
+    @include square(24px);
+    background-image: url('#{$icons-path}icons-outlined-av-note.svg');
+  }
+
+  &.back-arrow {
+    @include square(24px);
+    background-image: url('#{$icons-path}icons-outlined-navigation-arrow-back.svg');
+  }
+
+  &.pen-white {
+    @include square(24px);
+    background-image: url('#{$icons-path}icons-outlined-image-edit-white.svg');
+  }
+
+  &.arrow-up-blue {
+    @include square(24px);
+    background-image: url('#{$icons-path}icons-outlined-navigation-chevron-right.svg');
+  }
+}

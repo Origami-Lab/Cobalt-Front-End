@@ -1,0 +1,42 @@
+<div #bsModal="bs-modal" bsModal [config]="config" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" [ngClass]="config.class">
+    <div class="modal-content">
+      <button *ngIf="showCloseButton" type="button" (click)="onClose()" class="close-modal-btn cursor-pointer" aria-label="Close">
+        <span class="icon modal-close"></span>
+      </button>
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>
+
+<div #confirmModal="bs-modal"
+     class="modal fade modal-nested"
+     bsModal
+     role="alertdialog"
+     aria-labelledby="confirm-dialog-nested"
+     [config]="{show: false, backdrop: 'static', class: 'modal-lg', keyboard: false}">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="heading-lg text-dark-blue">You are about to exit</h4>
+      </div>
+      <div class="modal-body">
+        <p class="text-lg text-gray-900">You are about to leave and unsaved data will be lost. Click Exit to continue or Back to return.</p>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-ghost-primary"
+          id="confirm-cancel"
+          (click)="onConfirm(false)"
+        ><i class="icon back mr-1"></i>Back</button>
+        <button
+          type="button"
+          class="btn btn-primary btn-sm"
+          id="confirm-ok"
+          (click)="onConfirm(true)"
+         >Exit</button>
+      </div>
+    </div>
+  </div>
+</div>

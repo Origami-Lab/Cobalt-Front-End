@@ -1,0 +1,51 @@
+@import '~src/scss/co-theme-variables/variables';
+
+.card {
+  padding: 1rem 0 0 0;
+  border-radius: $border-radius-md;
+  box-shadow: $card-box-shadow;
+  .card-header {
+    margin: 0;
+    border-radius: 0;
+    border: none;
+    border-left: 0.313rem solid $blue-600;
+    background-color: $white;
+    display: inline-flex;
+    color: $black;
+    font-size: $font-size-19;
+    justify-content: space-between;
+
+    .card-heading-height {
+      height: 48px;
+      overflow: hidden;
+    }
+  }
+  .custom-card-footer {
+    border: none;
+    border-top: 0.1rem solid $gray-200;
+    margin-bottom: 0;
+    background-color: $white;
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .user-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: $border-radius-md;
+  }
+  .card-menu {
+    transition: all 0.2s ease-in-out;
+    &:hover {
+      background: $gray-400 url('#{$icons-path}icons-outlined-navigation-more-hover.svg');
+      border-radius: $border-radius-sm;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+  }
+  .date {
+    font-size: 0.75rem;
+    color: $gray;
+    font-weight: 600;
+  }
+}
