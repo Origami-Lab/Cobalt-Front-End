@@ -105,6 +105,12 @@ fieldset:disabled a.btn {
   }
 }
 
+@each $color, $value in $theme-colors {
+  .btn-ghost-icon-md-#{$color} {
+    @include button-ghost-md-icon-variant($value, left);
+  }
+}
+
 // Make a button look and behave like a link
 @each $color, $value in $theme-colors {
   .btn-link-#{$color} {
@@ -197,6 +203,9 @@ input[type='button'] {
     &:after {
       background: url('#{$icons-path}loader-blue.svg') no-repeat 100% 100%;
       background-size: $btn-loader-size $btn-loader-size;
+    }
+    .icon-wrapper {
+      display: none;
     }
   }
 }

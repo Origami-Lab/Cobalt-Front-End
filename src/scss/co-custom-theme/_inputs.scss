@@ -1,3 +1,49 @@
+.input-group {
+  position: relative;
+  &.border-radius-md {
+    .form-control {
+      border-radius: $border-radius-md !important;
+    }
+    .input-group-append,
+    .input-group-prepend {
+      &.inset {
+        border-top-right-radius: $border-radius-md;
+        border-bottom-right-radius: $border-radius-md;
+      }
+    }
+  }
+  .form-control {
+    border-top-right-radius: $border-radius-sm !important;
+    border-bottom-right-radius: $border-radius-sm !important;
+  }
+  .input-group-append,
+  .input-group-prepend {
+    &.inset {
+      position: absolute;
+      top: 1px;
+      bottom: 1px;
+      z-index: 3;
+      border-top-right-radius: $border-radius-sm;
+      border-bottom-right-radius: $border-radius-sm;
+      overflow: hidden;
+
+      .input-group-text {
+        border: 0;
+      }
+    }
+  }
+  .input-group-prepend {
+    &.inset {
+      left: 0;
+    }
+  }
+  .input-group-append {
+    &.inset {
+      right: 1px;
+    }
+  }
+}
+
 .form-group {
   position: relative;
   .input-group-append,
@@ -216,4 +262,7 @@
       }
     }
   }
+}
+
+.input-group {
 }

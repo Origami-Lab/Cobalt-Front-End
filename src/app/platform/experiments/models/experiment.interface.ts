@@ -9,4 +9,5 @@ export interface Experiment {
   dueDate: string;
   userid: string;
   startDate: string;
+  author: string;
 }

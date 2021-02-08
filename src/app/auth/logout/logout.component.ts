@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {AuthTokenService} from 'ngx-api-utils';
 
 @Component({
   selector: 'co-logout',
@@ -6,7 +7,9 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./logout.component.scss']
 })
 export class LogoutComponent implements OnInit {
-  constructor() {}
+  constructor(private authToken: AuthTokenService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.authToken.value$.next(undefined);
+  }
 }

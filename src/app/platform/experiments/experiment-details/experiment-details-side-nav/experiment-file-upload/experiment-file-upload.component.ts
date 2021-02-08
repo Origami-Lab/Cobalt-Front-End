@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {ExperimentDetailsService} from '../../experiment-details.service';
 import {AuthTokenService} from 'ngx-api-utils';
 import {JwtTokenPayload} from '../../../../../core/auth/jwt-token-payload';
@@ -18,10 +18,13 @@ import {Attachment} from '../../models/attachment.interface';
 export class ExperimentFileUploadComponent implements OnInit {
   @ViewChild('confirmModalRef')
   confirmModal: ConfirmModalComponent;
+  @ViewChild('uploadFileRef')
+  uploadFile: ElementRef;
   @Input()
   experiment: Experiment;
   isCollapsed = false;
   loading = true;
+  attachFileLoading = false;
   files: Attachment[] = [];
   deleteLoading = false;
   apiError: ApiError;
@@ -41,20 +44,30 @@ export class ExperimentFileUploadComponent implements OnInit {
       },
       () => {
         this.loading = false;
+        this.toastr.error('Could not load attachments');
       }
     );
   }
 
   onChange(file: File): void {
-    const fileReq = {
-      contentUrl: 'string',
-      filePath: file,
-      experimentId: '/experiments/2',
-      userid: this.authToken.payload.uid
+    const fileReq: Attachment = {
+      file,
+      filename: file.name,
+      experimentid: String(this.experiment.id),
+      userid: this.authToken.payload.uid.split('/').pop()
     };
-    this.experimentDetailsService.attachFile(fileReq).subscribe(s => {
-      console.log(s);
-    });
+    this.attachFileLoading = true;
+    this.experimentDetailsService.attachFile(fileReq).subscribe(
+      fileRes => {
+        this.files.push(fileRes);
+        this.attachFileLoading = false;
+        this.uploadFile.nativeElement.value = null;
+      },
+      () => {
+        this.attachFileLoading = false;
+        this.toastr.error(`${file.name} failed to upload`);
+      }
+    );
   }
 
   addUploadedFile(file: Attachment): void {
@@ -63,7 +76,7 @@ export class ExperimentFileUploadComponent implements OnInit {
 
   onConfirmModalOpen(file: Attachment): void {
     this.currentFile = file;
-    this.confirmModal.openModal(file.filePath);
+    this.confirmModal.openModal(file.filename);
   }
 
   onDeleteConfirm(): void {

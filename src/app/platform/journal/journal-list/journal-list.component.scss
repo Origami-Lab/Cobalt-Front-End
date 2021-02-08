@@ -1,37 +1,18 @@
-@import '~src/scss/co-theme-variables/variables';
+@import '~src/scss/co-base';
 
-.ngx-datatable {
-  background-color: $white !important;
-  border-radius: 0.5rem !important;
-  box-shadow: 0.125rem 0 0.25rem 0 $box-shadow-rgba-color !important;
+.journal-calendar-wrapper {
+  width: auto;
+  @include media-breakpoint-up(sm) {
+    width: 120px;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
 }
-.search {
-  padding: 0.375rem;
-  border-radius: 0.5rem;
-  font-size: 0.75rem;
-  color: $gray;
-  opacity: 0.6;
-}
-.pen-white,
-.delete {
-  width: 1.125rem;
-  height: 1.125rem;
-}
-.actions {
-  text-align: right;
-  padding-right: 1.3125rem;
-}
-.search-icon {
+.journal-content-wrapper {
   position: relative;
-  top: -1.5rem;
-  float: right;
-  margin-right: 0.25rem;
-}
-.experiment-logo {
-  background-color: transparent;
-  width: 19.625rem;
-  height: 18.188rem;
-}
-.form-control {
-  height: 2.125rem;
+
+  @include media-breakpoint-up(sm) {
+    padding-left: 144px;
+  }
 }

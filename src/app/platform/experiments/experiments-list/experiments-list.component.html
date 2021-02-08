@@ -48,9 +48,9 @@
             </ng-container>
           </tab>
           <tab heading="Past">
-            <div *ngIf="experiments.length" class="row mt-3">
+            <div *ngIf="pastExperiments.length; else noExperiments" class="row mt-3">
               <div class="col">
-                <co-experiments-view [view]="view" [experiments]="experiments"></co-experiments-view>
+                <co-experiments-view [view]="view" [experiments]="pastExperiments"></co-experiments-view>
               </div>
             </div>
           </tab>
@@ -59,30 +59,19 @@
     </div>
   </div>
   <ng-template #noExperiments>
-    <div class="text-center mt-5 mb-5">
+    <co-content-not-found>
       <div class="row">
         <div class="col-12">
-          <img src="assets/origami.png" alt="logo" class="img-thumbnail border-0 experiment-logo">
+          <h1 class="heading-md font-weight-600 mb-2">Create new experiment</h1>
+          <p class="text-xl text-color-gray mb-4">Write protocol and describe your findings in your journal</p>
+          <div>
+            <a
+              [routerLink]="['/platform/view', {outlets: {modal: ['experiments', 'management', 'create']}}]"
+              class="mx-4 btn btn-primary">Create New</a>
+          </div>
         </div>
       </div>
-      <div class="row mt-4">
-        <div class="col-12">
-          <h1 class="heading-md font-weight-600 mb-0">Create new experiment</h1>
-        </div>
-      </div>
-      <div class="row mt-1 mb-2">
-        <div class="col-12">
-          <p class="text-xl text-color-gray mb-0">Write protocol and describe your findings in your journal</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-12">
-          <a
-            [routerLink]="['/platform/view', {outlets: {modal: ['experiments', 'management', 'create']}}]"
-            class="mx-4 btn btn-primary">Create New</a>
-        </div>
-      </div>
-    </div>
+    </co-content-not-found>
   </ng-template>
 </section>
 <co-confirm-modal

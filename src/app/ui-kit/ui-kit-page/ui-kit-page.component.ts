@@ -15,7 +15,8 @@ export class UiKitPageComponent implements OnInit {
     dueDate: new Date().toISOString(),
     datetime: new Date().toISOString(),
     lastchange: new Date().toISOString(),
-    userid: '/users/1'
+    userid: '/users/1',
+    author: 'John Doe'
   };
   constructor() {}
 

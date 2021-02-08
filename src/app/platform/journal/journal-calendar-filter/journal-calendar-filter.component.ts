@@ -1,7 +1,8 @@
 import {Component, ViewChild, ElementRef, AfterViewInit, Output, EventEmitter, OnInit} from '@angular/core';
 import {NgxSmoothScrollService} from '@eunsatio/ngx-smooth-scroll';
-import {SelectedDate} from '../selected-date.interface';
-import {ScrollProperty} from '../scroll-property-interface';
+import {SelectedDate} from '../models/selected-date.interface';
+import {ScrollProperty} from '../models/scroll-property-interface';
+import {CalendarScrollPosition} from '../models/calendar-scroll-position.enum';
 
 @Component({
   selector: 'co-journal-calendar-filter',
@@ -9,8 +10,10 @@ import {ScrollProperty} from '../scroll-property-interface';
   styleUrls: ['./journal-calendar-filter.component.scss']
 })
 export class JournalCalendarFilterComponent implements OnInit {
-  @ViewChild('basicScroll', {static: true}) basicScrollElRef: ElementRef;
-  @Output() selectDate = new EventEmitter();
+  @ViewChild('basicScroll', {static: true})
+  basicScrollElRef: ElementRef;
+  @Output()
+  selectDate = new EventEmitter();
 
   dates = [
     {month: 'JAN', year: '2021', selected: false, monthNumber: '02', after: '01'},
@@ -26,7 +29,8 @@ export class JournalCalendarFilterComponent implements OnInit {
     {month: 'NOV', year: '2021', selected: false, monthNumber: '12', after: '11'},
     {month: 'DEC', year: '2021', selected: false, monthNumber: '13', after: '12'}
   ];
-  selected: SelectedDate;
+
+  currentDate: SelectedDate;
 
   groups = this.dates.reduce((acc, curr) => {
     if (acc.length === 0) {
@@ -48,34 +52,48 @@ export class JournalCalendarFilterComponent implements OnInit {
       timingFunction: '.13, 1.07, .51, 1.29',
       alignX: 'center',
       alignY: 'center',
-      stopOnArrival: false
+      stopOnArrival: true
     }
   };
+  CalendarScrollPosition = CalendarScrollPosition;
 
   constructor(private smoothScroll: NgxSmoothScrollService) {}
 
   ngOnInit(): void {}
+
   choseDate(date: SelectedDate): void {
-    this.selected = date;
-    this.selected.selected = !this.selected.selected;
-    this.selectDate.emit(this.selected);
+    if (this.currentDate && this.currentDate.month === date.month && this.currentDate.year === date.year) {
+      return;
+    }
+    this.currentDate = date;
+    this.currentDate.selected = true;
+    this.selectDate.emit(this.currentDate);
   }
+
+  onDropdownDateSelected(e: Event): void {
+    const {value} = e.target as any;
+    if (!value) {
+      return;
+    }
+    const date = this.dates[value];
+    this.choseDate(date);
+  }
+
   showAll(): void {
-    this.selectDate.emit('');
-    this.selected.selected = false;
+    this.selectDate.emit(null);
+    if (this.currentDate) {
+      this.currentDate.selected = false;
+    }
   }
-  scrollDown(): void {
-    if (this.directive.nth === this.basicScrollElRef.nativeElement.childElementCount - 1) {
+
+  scrollPosition(position: CalendarScrollPosition): void {
+    if (
+      (position === CalendarScrollPosition.DOWN && this.directive.nth === this.basicScrollElRef.nativeElement.childElementCount - 1) ||
+      (position === CalendarScrollPosition.UP && !this.directive.nth)
+    ) {
       return;
     }
-    this.directive.nth += 1;
-    this.smoothScroll.scrollToIndex(this.basicScrollElRef.nativeElement, '.scroll-content', this.directive.nth, this.directive.options);
-  }
-  scrollUp(): void {
-    if (this.directive.nth === 0) {
-      return;
-    }
-    this.directive.nth -= 1;
+    this.directive.nth += position === CalendarScrollPosition.UP ? -1 : 1;
     this.smoothScroll.scrollToIndex(this.basicScrollElRef.nativeElement, '.scroll-content', this.directive.nth, this.directive.options);
   }
 }

@@ -6,7 +6,6 @@ import {CoModalService} from '../co-modal.service';
 import {switchMap} from 'rxjs/operators';
 import {PlatformLayoutComponent} from '../../../platform/platform-layout/platform-layout/platform-layout.component';
 import {UiKitPageComponent} from '../../../ui-kit/ui-kit-page/ui-kit-page.component';
-import {ExperimentsPageComponent} from '../../../platform/experiments/experiments-page/experiments-page.component';
 
 @Component({
   selector: 'co-modal-layout',

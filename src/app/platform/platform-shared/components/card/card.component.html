@@ -5,7 +5,12 @@
       <div class="d-inline-flex justify-content-space-between">
         <div class="btn-group" dropdown [autoClose]="true" (click)="stopEventPropagation($event)">
           <i class="icon card-menu card-menu" dropdownToggle aria-controls="dropdown-basic"></i>
-          <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="button-basic">
+          <ul
+            id="dropdown-basic"
+            *dropdownMenu
+            class="dropdown-menu dropdown-menu-right"
+            role="menu"
+            aria-labelledby="button-basic">
             <li role="menuitem">
               <a
                 class="dropdown-item"
@@ -29,11 +34,14 @@
       <co-badge [status]="experiment.status" class="mx-4"></co-badge>
     </div>
     <div class="custom-card-footer pt-2 pb-2 mx-4">
-      <div
-        class="d-flex  text-center align-items-center"><i class="icon calendar mr-2"></i><span
-        class="date">{{experiment.datetime | date}}</span></div>
-      <div>
-        <img src="assets/user-placeholder.png" alt="user" class="img-thumbnail border-0 user-icon">
+      <div class="d-flex align-items-center">
+        <i class="icon calendar mr-2"></i>
+        <span class="date">{{experiment.datetime | date}}</span>
+      </div>
+      <div class="d-flex align-items-center">
+        <span class="user-profile-wrapper user-profile-size-sm">
+          <img src="assets/icons/outlined-editor-insert-photo.svg" alt="User Profile">
+        </span>
       </div>
     </div>
   </div>

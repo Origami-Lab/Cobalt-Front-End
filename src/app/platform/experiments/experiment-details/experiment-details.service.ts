@@ -7,6 +7,7 @@ import {Conclusion} from './models/conclusion.interface';
 import {Note} from './models/note.interface';
 import {transformToFormData} from '../../../core/utils/transform-to-form-data';
 import {Link} from './models/link.interface';
+import {Attachment} from './models/attachment.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -51,16 +52,16 @@ export class ExperimentDetailsService {
   }
 
   getFiles(experimentId: number): any {
-    return this.apiHttp.get<any>(`/media_object`, {params: {experimentid: String(experimentId)}});
+    return this.apiHttp.get<any>(`/media_objects`, {params: {experimentid: String(experimentId)}});
   }
 
-  attachFile(file: any): any {
-    const transformed = transformToFormData(file);
-    return this.apiHttp.post<any>(`/media_object`, transformed);
+  attachFile(attachment: Attachment): any {
+    const transformedAttachment = transformToFormData(attachment);
+    return this.apiHttp.post<any>(`/media_objects`, transformedAttachment);
   }
 
   deleteFile(fileId: number): Observable<void> {
-    return this.apiHttp.delete<void>(`/media_object/${fileId}`);
+    return this.apiHttp.delete<void>(`/media_objects/${fileId}`);
   }
 
   getLinks(experimentId: number): Observable<Link[]> {

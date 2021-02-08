@@ -23,9 +23,7 @@ import {JwtTokenPayload} from '../../../../../core/auth/jwt-token-payload';
   ]
 })
 export class ExperimentConclusionComponent implements OnInit, OnDestroy, ResizableBoxMethods {
-  private static conclusionInitialTemplate: Partial<Conclusion> = {
-    conclusions: '<h2><strong>Results</strong></h2>'
-  };
+  private static conclusionInitialTemplate = '<h2><strong>Results</strong></h2>';
   @Input()
   set experiment(experiment: Experiment) {
     this.experiment$.next(experiment);
@@ -55,7 +53,7 @@ export class ExperimentConclusionComponent implements OnInit, OnDestroy, Resizab
       )
       .subscribe(
         (conclusion: Conclusion) => {
-          this.conclusion = conclusion || ExperimentConclusionComponent.conclusionInitialTemplate;
+          this.conclusion = conclusion ? conclusion : {conclusions: ExperimentConclusionComponent.conclusionInitialTemplate};
           this.loading = false;
         },
         () => {
@@ -67,6 +65,7 @@ export class ExperimentConclusionComponent implements OnInit, OnDestroy, Resizab
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+    this.conclusion = undefined;
   }
 
   onChange(editorContent: TextEditorContentType): void {
@@ -91,6 +90,7 @@ export class ExperimentConclusionComponent implements OnInit, OnDestroy, Resizab
     this.experimentDetailsService.updateConclusion(conclusionReq).subscribe(
       () => {
         this.saveConclusionLoading = false;
+        this.toastr.success('Conclusion has been saved!');
       },
       () => {
         this.saveConclusionLoading = false;

@@ -179,4 +179,14 @@
     @include square(24px);
     background-image: url('#{$icons-path}icons-outlined-navigation-chevron-right.svg');
   }
+
+  &.close {
+    @include square(24px);
+    background-image: url('#{$icons-path}icons-outlined-navigation-close.svg');
+  }
+
+  &.burger-blue {
+    @include square(24px);
+    background-image: url('#{$icons-path}icons-outlined-navigation-menu.svg');
+  }
 }

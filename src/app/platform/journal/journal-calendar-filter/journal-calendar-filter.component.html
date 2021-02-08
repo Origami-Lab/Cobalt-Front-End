@@ -1,4 +1,4 @@
-<div class="journal-calendar">
+<div class="journal-calendar d-none d-sm-block">
   <div class="row mb-4">
     <div class="col-12 text-center">
       <button class="btn btn-primary" (click)="showAll()">
@@ -7,25 +7,24 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-12 text-center border-bottom">
-      <button class="btn d-inline-flex align-items-center pt-1 pb-1 pr-1 pl-1 mr-2 mb-2" (click)="scrollUp()">
-        <i class="icon arrow-up"></i>
-      </button>
+    <div class="col-12 text-center">
+      <div class="border-bottom border-gray-200">
+        <button
+          class="btn d-inline-flex align-items-center pt-1 pb-1 pr-1 pl-1 mr-2 mb-2"
+          (click)="scrollPosition(CalendarScrollPosition.UP)">
+          <i class="icon arrow-up"></i>
+        </button>
+      </div>
     </div>
   </div>
-  <div class="demo-section">
-    <div class="scroll-container-wrapper">
-      <div class="scroll-container basic-container" #basicScroll>
-        <div class="scroll-content" *ngFor="let group of groups">
-          <div class="calendar-body">
-            <div class="row date-row mb-2" *ngFor="let date of group"
-              [ngClass]="{'selected' : date === selected && selected.selected }" (click)="choseDate(date)">
-              <div class="col-6">
-                <span class="month">{{date.month}}</span>
-              </div>
-              <div class="col-6">
-                <span class="year">{{date.year}}</span>
-              </div>
+  <div class="overflow-hidden position-relative">
+    <div class="scroll-container overflow-hidden" #basicScroll>
+      <div class="scroll-content d-flex w-100 h-100 align-items-center justify-content-center" *ngFor="let group of groups">
+        <div class="calendar-body">
+          <div class="cursor-pointer mb-2" (click)="choseDate(date)" *ngFor="let date of group">
+            <div class="calendar-row" [ngClass]="{'selected-row' : date === currentDate && currentDate.selected}">
+              <span class="text-lg font-weight-600 text-uppercase text-black mr-2">{{date.month}}</span>
+              <span class="text-lg font-weight-600 text-gray-500">{{date.year}}</span>
             </div>
           </div>
         </div>
@@ -33,10 +32,21 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-12 text-center border-top">
-      <button class="btn d-inline-flex align-items-center pt-1 pb-1 pr-1 pl-1 mr-2 mt-2" (click)="scrollDown()">
-        <i class="icon arrow-down"></i>
-      </button>
+    <div class="col-12 text-center">
+      <div class="border-top border-gray-200">
+        <button
+          class="btn d-inline-flex align-items-center pt-1 pb-1 pr-1 pl-1 mr-2 mt-2"
+          (click)="scrollPosition(CalendarScrollPosition.DOWN)">
+          <i class="icon arrow-down"></i>
+        </button>
+      </div>
     </div>
   </div>
+</div>
+
+<div class="journal-calendar-mobile d-block d-sm-none">
+  <select class="form-control border-0" (change)="onDropdownDateSelected($event)">
+    <option value="" selected class="text-lg">Choose date</option>
+    <option class="text-xs" value="{{index}}" *ngFor="let date of dates; let index = index">{{date.month}} - {{date.year}}</option>
+  </select>
 </div>

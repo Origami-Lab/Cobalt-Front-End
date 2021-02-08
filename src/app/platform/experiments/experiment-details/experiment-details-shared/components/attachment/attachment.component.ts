@@ -7,7 +7,9 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 })
 export class AttachmentComponent implements OnInit {
   @Input()
-  attachment: string;
+  attachmentUrl: string;
+  @Input()
+  attachmentName: string;
   @Input()
   truncateText = false;
   @Input()

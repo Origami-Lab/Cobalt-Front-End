@@ -62,6 +62,7 @@ export class TextEditorComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+    this.initialValue = undefined;
   }
 
   onQuillCreated(quillInstance: Quill): void {

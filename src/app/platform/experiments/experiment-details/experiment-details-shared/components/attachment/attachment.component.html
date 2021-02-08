@@ -2,8 +2,8 @@
   class="attachment-wrapper border border-gray-200 text-primary text-xs font-weight-600"
   [class.text-truncate]="truncateText"
   [class.d-inline-block]="!truncateText">
-  <a [href]="attachment" target="_blank" rel="noreferrer noopener" class="align-middle">{{attachment}}</a>
+  <a [href]="attachmentUrl" target="_blank" rel="noreferrer noopener" class="align-middle">{{attachmentName}}</a>
   <button *ngIf="showCloseButton" class="align-middle delete-btn btn" (click)="onRemove()">
-    <i class="icon nav-arrow"></i>
+    <i class="icon close"></i>
   </button>
 </div>

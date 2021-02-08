@@ -1,7 +1,7 @@
 <div class="row mb-3">
   <div class="col-12">
     <div class="d-flex justify-content-between align-items-center">
-      <span class="align-middle text-lg font-weight-600">Links({{files.length}})</span>
+      <span class="align-middle text-lg font-weight-600">Attachments ({{files.length}})</span>
       <button
         *ngIf="files.length"
         class="btn p-0"
@@ -15,13 +15,17 @@
 </div>
 <div class="row">
   <div class="col-12">
-    <button class="btn btn-ghost-icon-primary">
+    <label
+      for="file-upload"
+      class="btn btn-ghost-icon-md-primary"
+      [class.loading]="attachFileLoading"
+      [class.disabled]="attachFileLoading">
       Attach file
       <span class="icon-wrapper">
         <i class="icon content-add"></i>
       </span>
-    </button>
-<!--    <input type="file" (change)="onChange($event.target.files[0])">-->
+    </label>
+    <input type="file" class="d-none" id="file-upload" #uploadFileRef (change)="onChange($event.target.files[0])">
   </div>
 </div>
 <div class="row" *ngIf="loading">
@@ -34,7 +38,8 @@
     <div *ngFor="let file of files" class="text-truncate">
       <div class="mb-2">
         <co-attachment
-          [attachment]="file.filePath"
+          [attachmentUrl]="file.contentUrl"
+          [attachmentName]="file.filename"
           [showCloseButton]="true"
           [truncateText]="true"
           (remove)="onConfirmModalOpen(file)"
@@ -43,3 +48,10 @@
     </div>
   </div>
 </div>
+<co-confirm-modal
+  [loading]="deleteLoading"
+  [closeOutside]="true"
+  [apiError]="apiError"
+  (confirmDelete)="onDeleteConfirm()"
+  #confirmModalRef
+></co-confirm-modal>

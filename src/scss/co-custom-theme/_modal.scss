@@ -92,11 +92,17 @@
   .experiment-record-header {
     height: $experiment-record-modal-header-height;
     box-shadow: $experiment-record-modal-header-box-shadow;
+    @include media-breakpoint-up(sm) {
+      height: $experiment-record-modal-header-height-sm;
+    }
   }
 
   .experiment-record-content {
     overflow-y: auto;
     height: calc(100% - #{$experiment-record-modal-header-height});
+    @include media-breakpoint-up(sm) {
+      height: calc(100% - #{$experiment-record-modal-header-height-sm});
+    }
   }
 
   .experiment-content-section {

@@ -17,6 +17,7 @@ import {ApiError} from '../../../../core/api-error/api-error';
 import {ExperimentsService} from '../../experiments.service';
 import {ConfirmModalComponent} from '../../../platform-shared/components/confirm-modal/confirm-modal.component';
 import {Link} from '../../experiment-details/models/link.interface';
+import {Attachment} from '../../experiment-details/models/attachment.interface';
 
 @Component({
   selector: 'co-experiment-record-modal',
@@ -33,6 +34,7 @@ export class ExperimentRecordModalComponent implements OnInit {
   conclusion: TextEditorContentType;
   notes: Note[];
   links: Link[];
+  attachments: Attachment[];
   loading = true;
   deleteExperimentLoading = false;
   apiError: ApiError;
@@ -58,18 +60,29 @@ export class ExperimentRecordModalComponent implements OnInit {
             this.experimentDetailsService.getProtocol(experimentId),
             this.experimentDetailsService.getConclusion(experimentId),
             this.experimentDetailsService.getNotes(experimentId),
-            this.experimentDetailsService.getLinks(experimentId)
+            this.experimentDetailsService.getLinks(experimentId),
+            this.experimentDetailsService.getFiles(experimentId)
           ])
         )
       )
-      .subscribe(([experiment, protocol, conclusions, notes, links]: [Experiment, Protocol, Conclusion, Note[], Link[]]) => {
-        this.experiment = experiment;
-        this.protocol = protocol && this.sanitized.bypassSecurityTrustHtml(protocol?.protocol as string);
-        this.conclusion = conclusions && this.sanitized.bypassSecurityTrustHtml(conclusions?.conclusions as string);
-        this.notes = notes;
-        this.links = links;
-        this.loading = false;
-      });
+      .subscribe(
+        ([experiment, protocol, conclusions, notes, links, attachments]: [
+          Experiment,
+          Protocol,
+          Conclusion,
+          Note[],
+          Link[],
+          Attachment[]
+        ]) => {
+          this.experiment = experiment;
+          this.protocol = protocol && this.sanitized.bypassSecurityTrustHtml(protocol?.protocol as string);
+          this.conclusion = conclusions && this.sanitized.bypassSecurityTrustHtml(conclusions?.conclusions as string);
+          this.notes = notes;
+          this.links = links;
+          this.attachments = attachments;
+          this.loading = false;
+        }
+      );
   }
 
   onModalClose(): void {

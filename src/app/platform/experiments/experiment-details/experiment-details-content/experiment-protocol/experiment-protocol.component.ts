@@ -23,9 +23,7 @@ import {JwtTokenPayload} from '../../../../../core/auth/jwt-token-payload';
   ]
 })
 export class ExperimentProtocolComponent implements OnInit, OnDestroy, ResizableBoxMethods {
-  private static protocolInitialTemplate: Partial<Protocol> = {
-    protocol: '<h2><strong>Protocol</strong></h2>'
-  };
+  private static protocolInitialTemplate = '<h2><strong>Protocol</strong></h2>';
   @Input()
   set experiment(experiment: Experiment) {
     this.experiment$.next(experiment);
@@ -55,7 +53,7 @@ export class ExperimentProtocolComponent implements OnInit, OnDestroy, Resizable
       )
       .subscribe(
         (protocol: Protocol) => {
-          this.protocol = protocol || ExperimentProtocolComponent.protocolInitialTemplate;
+          this.protocol = protocol ? protocol : {protocol: ExperimentProtocolComponent.protocolInitialTemplate};
           this.loading = false;
         },
         () => {
@@ -67,6 +65,7 @@ export class ExperimentProtocolComponent implements OnInit, OnDestroy, Resizable
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+    this.protocol = null;
   }
 
   onChange(editorContent: TextEditorContentType): void {
@@ -91,6 +90,7 @@ export class ExperimentProtocolComponent implements OnInit, OnDestroy, Resizable
     this.experimentDetailsService.updateProtocol(protocolReq).subscribe(
       () => {
         this.saveProtocolLoading = false;
+        this.toastr.success('Protocol has been saved!');
       },
       () => {
         this.saveProtocolLoading = false;

@@ -60,17 +60,24 @@
   animation: $name $time $iteration $type;
 }
 
-@mixin button-with-wrapper-icon($background, $position-property, $value) {
+@mixin button-with-wrapper-icon(
+  $background,
+  $position-property,
+  $value,
+  $wrapper-size: $btn-icon-wrapper-size,
+  $icon-size: $btn-icon-size,
+  $wrapper-border-radius: $btn-icon-wrapper-border-radius
+) {
   position: absolute;
   #{$position-property}: $value;
   top: 50%;
   transform: translate(0, -50%);
   background: $background;
-  border-radius: $btn-icon-wrapper-border-radius;
-  @include square($btn-icon-wrapper-size);
+  border-radius: $wrapper-border-radius;
+  @include square($wrapper-size);
 
   .icon {
-    @include square($btn-icon-size !important);
+    @include square($icon-size !important);
     @include center-element();
   }
 }
@@ -307,6 +314,51 @@
   .icon-wrapper {
     transition: $btn-transition;
     @include button-with-wrapper-icon(lighten($color, 10%), $position-property, $btn-icon-padding);
+  }
+
+  &:focus,
+  &.focus {
+    box-shadow: none;
+  }
+
+  &.disabled,
+  &:disabled {
+    background: transparent;
+    color: $gray-400;
+    cursor: not-allowed;
+    border: 0;
+    box-shadow: none;
+
+    .icon-wrapper {
+      @include button-with-wrapper-icon($gray-500, $position-property, $btn-icon-padding);
+    }
+
+    &:hover {
+      border-color: transparent;
+    }
+    &:focus {
+      box-shadow: none;
+    }
+  }
+}
+
+@mixin button-ghost-md-icon-variant($color, $position-property, $hover-color: darken($color, 10%)) {
+  color: $color;
+  background: transparent;
+  transition: $btn-transition;
+  font-size: $font-size-10;
+  padding-#{$position-property}: 2rem;
+  @include hover {
+    color: $hover-color;
+    box-shadow: none;
+    .icon-wrapper {
+      background: $hover-color;
+    }
+  }
+
+  .icon-wrapper {
+    transition: $btn-transition;
+    @include button-with-wrapper-icon(lighten($color, 10%), $position-property, $btn-icon-padding, 1.25rem, 0.938rem, $border-radius-sm);
   }
 
   &:focus,

@@ -1,11 +1,11 @@
-import {SelectedDate} from './selected-date.interface';
+import {SelectedDate} from './models/selected-date.interface';
 
-export function mapRequestParams(page: number, searchParam?: string, selectedDate?: SelectedDate): {[key: string]: string | string[]} {
-  let params: {[key: string]: string | string[]} = {page: String(page), title: searchParam};
-  if (!searchParam) {
+export function mapRequestParams(page: number, searchPhrase?: string, selectedDate?: SelectedDate): {[key: string]: string | string[]} {
+  let params: {[key: string]: string | string[]} = {page: String(page)};
+  if (searchPhrase) {
     params = {
       ...params,
-      title: ''
+      title: searchPhrase
     };
   }
   if (selectedDate) {

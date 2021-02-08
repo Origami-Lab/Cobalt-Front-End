@@ -39,6 +39,7 @@ export class CreateExperimentComponent implements OnInit {
     experiment.datetime = new Date().toISOString();
     experiment.lastchange = new Date().toISOString();
     experiment.status = Status.RUNNING;
+    experiment.author = 'John Doe';
     experiment.userid = this.authToken.payload.uid;
     this.experimentsService.createExperiment(experiment).subscribe(
       exp => {

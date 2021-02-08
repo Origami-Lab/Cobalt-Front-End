@@ -35,6 +35,8 @@ export class ConfirmModalComponent implements OnInit {
 
   onModalClose(): void {
     this.modalRef.hide();
+    this.loading = false;
+    this.apiError = null;
     this.modalClose.emit();
   }
 

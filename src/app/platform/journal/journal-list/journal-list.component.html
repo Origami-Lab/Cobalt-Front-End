@@ -6,86 +6,62 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-xs-12 col-md-2 mb-2 year">
-        <co-journal-calendar-filter (selectDate)="handleSelectDate($event)"></co-journal-calendar-filter>
-      </div>
-      <div class="col-xs-10 col-md-10">
-        <div class="row mb-2 align-items-center">
-          <div class="col-xs-12 col-md-3">
-            <input #search id="search" type="text" class="form-control search" placeholder="Search in journal"
-              aria-label="Search" aria-describedby="basic-addon1" />
-            <i class="icon search search-icon"></i>
+      <div class="col-12">
+        <div class="journal-content-wrapper">
+          <div class="journal-calendar-wrapper mb-4 mb-sm-0">
+            <co-journal-calendar-filter (selectDate)="onDateSelected($event)"></co-journal-calendar-filter>
           </div>
-          <div class="col-md-9 text-right">
-            <span class="text-gray text-xs">{{journals.length}} record in total</span>
+          <div class="row flex-lg-grow-1">
+            <div class="col-12">
+              <div class="row mb-4">
+                <div class="col-12 col-sm-7 col-md-4 col-lg-5 col-xl-3">
+                  <co-journal-search-filter
+                    [searchPhrase]="searchPhrase"
+                    (changeSearchPhrase)="onSearchPhrase($event)"
+                  ></co-journal-search-filter>
+                </div>
+                <div class="col-12 col-sm-5 col-md-8 col-lg-7 col-xl-9 text-right">
+                  <span *ngIf="journals" class="text-gray text-xs">{{journals.length}} record in total</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <ng-container *ngIf="!loading && !journals.length; else journalsTableRef">
+                    <co-content-not-found>
+                      <div class="row">
+                        <div class="col-12">
+                          <h1 class="heading-md font-weight-600 mb-2">There is no journals</h1>
+                          <p class="text-xl text-color-gray mb-4">Feel free to write a new protocol and describe your findings in your journal</p>
+                          <div>
+                            <a
+                              [routerLink]="['/platform/view', {outlets: {modal: ['experiments', 'management', 'create']}}]"
+                              class="mx-4 btn btn-primary">Create New</a>
+                          </div>
+                        </div>
+                      </div>
+                    </co-content-not-found>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <ngx-datatable #table *ngIf="journals.length; else noExperiments" class="material mb-4" [rows]="journals"
-          [columns]="columns" [footerHeight]="40" [columnMode]="ColumnMode.standard" [headerHeight]="70"
-          [externalPaging]="true" [count]="30" [rowHeight]="41" [offset]="page.pageNumber" [limit]="page.size"
-          (page)="setPage($event)">
-          <ng-container *ngFor="let col of columns; let first = first">
-            <ngx-datatable-column [name]="col.name" [prop]="col.prop" [width]="col.width">
-              <ng-template ngx-datatable-header-template>
-                <span>{{col.name}}</span>
-              </ng-template>
-              <ng-template ngx-datatable-cell-template let-row="row" let-value="value">
-                <span class="text-wrap text-break">{{col.defaultValue ? col.defaultValue(value) : value}}</span>
-              </ng-template>
-            </ngx-datatable-column>
-          </ng-container>
-          <ngx-datatable-column name="" sortable="false" flexGrow="1" [width]="140">
-            <ng-template ngx-datatable-cell-template>
-              <div class="actions">
-                <button class="btn btn-icon-right-primary d-inline-flex align-items-center pt-1 pb-1 pr-1 pl-1 mr-2">
-                  <i class="icon red-eye"></i>
-                </button>
-                <button class="btn btn-icon-right-primary d-inline-flex align-items-center pt-1 pb-1 pr-1 pl-1 mr-2">
-                  <i class="icon pen-white"></i>
-                </button>
-                <button class="btn btn-icon-right-primary d-inline-flex align-items-center pt-1 pb-1 pr-1 pl-1 mr-2">
-                  <i class="icon delete"></i>
-                </button>
-              </div>
-            </ng-template>
-          </ngx-datatable-column>
-          <ngx-datatable-footer>
-            <ng-template ngx-datatable-footer-template let-rowCount="rowCount" let-pageSize="pageSize"
-              let-selectedCount="selectedCount" let-curPage="curPage" let-offset="offset" let-isVisible="isVisible">
-              <datatable-pager [pagerLeftArrowIcon]="'datatable-icon-left'"
-                [pagerRightArrowIcon]="'datatable-icon-right'" [pagerPreviousIcon]="'datatable-icon-prev'"
-                [pagerNextIcon]="'datatable-icon-skip'" [page]="curPage" [size]="pageSize" [count]="rowCount"
-                [hidden]="!((rowCount / pageSize) > 1)" (change)="table.onFooterPage($event)">
-              </datatable-pager>
-            </ng-template>
-          </ngx-datatable-footer>
-        </ngx-datatable>
       </div>
     </div>
   </div>
 </section>
-<ng-template #noExperiments>
-  <div class="text-center mt-5 mb-5">
-    <div class="row">
-      <div class="col-12">
-        <img src="assets/origami.png" alt="logo" class="img-thumbnail border-0 experiment-logo">
-      </div>
-    </div>
-    <div class="row mt-4">
-      <div class="col-12">
-        <h1 class="heading-md font-weight-600 mb-0">There is no journal for selected month</h1>
-      </div>
-    </div>
-    <div class="row mt-1 mb-3">
-      <div class="col-12">
-        <p class="text-xl text-color-gray mb-0">Feel free to write a new protocol and describe your findings in your
-          journal</p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-12">
-        <button class="mx-4 btn btn-primary">Create New</button>
-      </div>
-    </div>
-  </div>
+<ng-template #journalsTableRef>
+  <co-journal-table
+    [journals]="journals"
+    [loading]="loading"
+    (changePage)="onPageChange($event)"
+    (openConfirmModal)="onConfirmModalOpen($event)"
+  ></co-journal-table>
 </ng-template>
+<co-confirm-modal
+  [loading]="deleteExperimentLoading"
+  [closeOutside]="true"
+  [apiError]="apiError"
+  (confirmDelete)="onDeleteConfirm()"
+  #confirmModalRef
+></co-confirm-modal>

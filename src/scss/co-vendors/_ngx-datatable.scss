@@ -1,0 +1,83 @@
+@import '~@swimlane/ngx-datatable/index.css';
+@import '~@swimlane/ngx-datatable/themes/material.scss';
+@import '~@swimlane/ngx-datatable/assets/icons.css';
+
+.ngx-datatable.material {
+  .datatable-body {
+    position: relative;
+
+    .progress-linear .container {
+      background-color: $blue-600;
+    }
+
+    .datatable-body-cell-label {
+      display: flex;
+      width: 100%;
+
+      span {
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        width: 100%;
+      }
+    }
+    & .datatable-body-row .datatable-body-cell {
+      padding: 0 0.75rem;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+    }
+  }
+  .datatable-row-even {
+    background-color: $blue-50 !important;
+  }
+  .datatable-row-odd {
+    background-color: $white !important;
+  }
+
+  .datatable-body-row {
+    .datatable-row-group {
+      transition: all 0.2s ease-in-out;
+    }
+    &:hover .datatable-row-group {
+      background-color: transparent !important;
+      box-shadow: 2px 2px 10px 0 $box-shadow-rgba-color;
+    }
+
+    .datatable-body-cell {
+      padding: 0.5rem 1rem !important;
+      font-size: $font-size-14;
+    }
+  }
+
+  .datatable-header .datatable-header-cell {
+    color: $black !important;
+    font-size: $font-size-13 !important;
+    font-weight: $font-weight-600 !important;
+  }
+
+  .datatable-footer {
+    .datatable-pager .pager li {
+      &:not(.pages) {
+        display: none;
+      }
+      &.active a {
+        border-radius: $border-radius-md;
+        border: solid 1px $primary !important;
+        background-color: $white !important;
+      }
+      a {
+        color: $black;
+        &:hover {
+          border: none;
+          border-radius: $border-radius-md;
+          color: $black !important;
+          background-color: $gray-200 !important;
+        }
+      }
+    }
+  }
+  .datatable-row-detail {
+    background: $white !important;
+  }
+}

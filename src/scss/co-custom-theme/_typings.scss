@@ -75,6 +75,11 @@
   line-height: $default-text-line-height;
 }
 
+.text-size-none {
+  font-size: $font-size-0;
+  line-height: $default-text-line-height;
+}
+
 // format text helper classes
 .font-weight-400 {
   font-weight: $font-weight-400 !important;

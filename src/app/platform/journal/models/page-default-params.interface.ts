@@ -1,6 +1,6 @@
 import {SelectedDate} from './selected-date.interface';
 export interface PageDefaultParams {
-  searchParam: string;
+  searchPhrase: string;
   selectedDate: SelectedDate;
   pageNumber: number;
 }

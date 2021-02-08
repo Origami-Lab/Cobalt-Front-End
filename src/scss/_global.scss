@@ -16,19 +16,10 @@ body {
 .main-wrapper {
   width: 100%;
   position: relative;
-  //padding-top: 50px;
-  //width: 100%;
-  //position: relative;
-  //height: 100%;
-  //padding-top: 50px;
-  //overflow-x: hidden;
-  //overflow-y: scroll;
-  //min-height: calc(100vh - 145px);
   &.no-side-nav {
     padding-top: 0;
   }
   @include media-breakpoint-up(sm) {
-    //padding-top: 50px;
     &.no-side-nav {
       padding-top: 0;
     }
@@ -42,51 +33,17 @@ body {
     }
   }
 }
-.ngx-datatable datatable-row-wrapper,
-datatable-header,
-datatable-footer {
-  padding: 0.625rem 9.25rem 0.625rem 0rem;
-  opacity: 0.7;
-  font-size: 0.875rem;
+
+.border-radius-lg {
+  border-radius: $border-radius-lg;
 }
 
-.ngx-datatable datatable-row-wrapper:nth-child(2n + 1) {
-  background-color: $blue-50 !important;
-}
-
-.ngx-datatable .datatable-body .datatable-row-wrapper {
-  padding-top: 0;
-  padding-bottom: 0;
-}
-
-.datatable-body-row:hover .datatable-row-group {
-  background-color: $blue-50 !important;
-}
-
-.ngx-datatable.material .datatable-body .datatable-body-row .datatable-body-cell {
-  padding: 0.5rem 1.2rem !important;
-}
-
-.ngx-datatable.material .datatable-header .datatable-header-cell {
-  color: $black !important;
-  font-weight: bold !important;
-}
-
-.ngx-datatable .datatable-footer .datatable-pager .pager li a {
-  color: $black;
-}
-
-.ngx-datatable.material .datatable-footer .datatable-pager li.active a {
+.border-radius-md {
   border-radius: $border-radius-md;
-  border: solid 1px $primary !important;
-  background-color: $white !important;
 }
 
-.ngx-datatable.material .datatable-footer .datatable-pager a:hover {
-  border: none;
-  border-radius: $border-radius-md;
-  color: $black !important;
-  background-color: $gray-200 !important;
+.border-radius-sm {
+  border-radius: $border-radius-sm;
 }
 
 .absolute-center {
@@ -104,41 +61,21 @@ datatable-footer {
   padding-top: 35px;
   padding-bottom: 35px;
 }
-@media only screen and (max-width: 1024px) {
-  datatable-body-cell {
-    width: 12.5rem !important;
+
+.user-profile-wrapper {
+  padding: 0.25rem;
+  background: $blue-50;
+  display: inline-block;
+  border-radius: $border-radius-md;
+  font-size: $font-size-0;
+  &.user-profile-size-lg {
+    img {
+      @include size(19px, 21px);
+    }
   }
-  .datatable-header-cell {
-    width: 12.5rem !important;
-  }
-  .datatable-footer {
-    padding: 0;
-  }
-}
-@media only screen and (max-width: 768px) {
-  datatable-body-cell {
-    width: 11.875rem !important;
-  }
-  .datatable-header-cell {
-    width: 11.875rem !important;
-  }
-  .datatable-footer {
-    padding: 0;
-  }
-}
-@media only screen and (max-width: 600px) {
-  datatable-body-cell {
-    width: 6.563rem !important;
-    height: 3.438rem !important;
-  }
-  .ngx-datatable.material .datatable-body .datatable-body-row .datatable-body-cell {
-    padding: 0px !important;
-    padding-right: 0.1rem !important;
-  }
-  .datatable-header-cell {
-    width: 6.25rem !important;
-  }
-  .datatable-footer {
-    padding: 0;
+  &.user-profile-size-md {
+    img {
+      @include size(15px, 17px);
+    }
   }
 }

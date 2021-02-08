@@ -1,7 +1,7 @@
 <div class="row mb-3">
   <div class="col-12">
     <div class="d-flex justify-content-between align-items-center">
-      <span class="align-middle text-lg font-weight-600">Links({{links.length}})</span>
+      <span class="align-middle text-lg font-weight-600">Links ({{links.length}})</span>
       <button
         *ngIf="links.length"
         class="btn p-0"
@@ -15,7 +15,7 @@
 </div>
 <div class="row mb-3">
   <div class="col-12">
-    <button class="btn btn-ghost-icon-primary" (click)="uploadModalRef.openModal()">
+    <button class="btn btn-ghost-icon-md-primary" (click)="uploadModalRef.openModal()">
       Add link
       <span class="icon-wrapper">
         <i class="icon content-add"></i>
@@ -33,7 +33,8 @@
     <div *ngFor="let link of links" class="text-truncate">
       <div class="mb-2">
         <co-attachment
-          [attachment]="link.link"
+          [attachmentUrl]="link.link"
+          [attachmentName]="link.link"
           [showCloseButton]="true"
           [truncateText]="true"
           (remove)="onConfirmModalOpen(link)"

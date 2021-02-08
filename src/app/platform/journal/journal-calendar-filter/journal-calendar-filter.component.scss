@@ -2,90 +2,28 @@
 
 .journal-calendar {
   background-color: $white;
-  padding: 1rem 0.5rem 1rem;
-  justify-content: center;
-  align-items: center;
-  border-radius: 0.5rem;
-  display: grid;
-}
-.month {
-  font-size: 0.9375rem;
-  font-weight: 600;
-}
-.year {
-  opacity: 0.6;
-  font-size: 0.9375rem;
-  font-weight: 600;
-  letter-spacing: 0.15px;
-  color: $gray;
-}
-.selected {
-  background-color: $primary;
-  color: $white;
-  border-radius: 0.1875rem;
+  padding: 1rem 0;
+  border-radius: $border-radius-md;
 }
 
-:host {
-  display: block;
-  width: 100%;
-  height: 100%;
-  overflow: {
-    x: hidden;
-    y: auto;
+.calendar-row {
+  padding: 0.25rem 0.5rem;
+  border-radius: $border-radius-md;
+  &.selected-row {
+    background-color: $primary;
+    .text-lg {
+      color: $white !important;
+    }
   }
 }
 
 .scroll-container {
-  width: 21.25rem;
   height: 11.3125rem;
-  overflow: hidden;
-  display: block;
-  max-width: 100%;
-
-  .scroll-wrapper {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .scroll-content {
-    width: 100%;
-    height: 100%;
-    flex-shrink: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font: {
-      font-size: 2rem;
-      weight: 600;
-    }
+  &:focus {
+    outline: none;
   }
 }
-.scroll-container:focus {
-  outline: none;
-}
-.scroll-container-wrapper {
-  position: relative;
-  overflow: hidden;
-}
 
-.scroll-console {
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 60%;
-  margin: auto;
-  padding: 0 0.75rem;
-  border-bottom: {
-    left-radius: 0.75rem;
-    right-radius: 0.75rem;
-  }
-}
-.date-row {
-  cursor: pointer;
+.form-control {
+  height: 1.75rem;
 }

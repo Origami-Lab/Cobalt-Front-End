@@ -1,0 +1,14 @@
+@import '~src/scss/co-theme-variables/variables';
+
+.ngx-datatable {
+  background-color: $white !important;
+  border-radius: 0.5rem !important;
+  box-shadow: 0.125rem 0 0.25rem 0 $box-shadow-rgba-color !important;
+}
+
+.btn-icon-right-primary {
+  .icon {
+    width: 0.85rem;
+    height: 0.85rem;
+  }
+}

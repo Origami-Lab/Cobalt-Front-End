@@ -66,6 +66,7 @@ export class ExperimentLinkUploadModalComponent implements OnInit {
         this.loading = false;
         this.toastr.success(`Link - ${linkRes.link} - has been uploaded successfully`);
         this.uploadedLink.emit(linkRes);
+        this.linkForm.reset();
         this.onModalClose();
       },
       () => {

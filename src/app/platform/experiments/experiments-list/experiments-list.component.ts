@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ExperimentsService} from '../experiments.service';
 import {Experiment} from '../models/experiment.interface';
 import {ExperimentsView} from '../models/experiments-view.enum';
-import {filter, map} from 'rxjs/operators';
+import {filter} from 'rxjs/operators';
 import {ApiHttpErrorResponse} from '../../../core/api-error/api-http-error-response';
 import {HttpErrorResponse} from '@angular/common/http';
 import {ConfirmModalComponent} from '../../platform-shared/components/confirm-modal/confirm-modal.component';
@@ -21,6 +21,7 @@ export class ExperimentsListComponent implements OnInit, OnDestroy {
   confirmModal: ConfirmModalComponent;
 
   experiments: Experiment[] = [];
+  pastExperiments: Experiment[] = [];
   ExperimentsView = ExperimentsView;
   loading = true;
   view: ExperimentsView = ExperimentsView.GRID;

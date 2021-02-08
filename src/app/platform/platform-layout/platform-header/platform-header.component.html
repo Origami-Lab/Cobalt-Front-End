@@ -1,17 +1,35 @@
 <header class="header container-fluid align-items-center">
-  <div class="row justify-content-start no-gutters">
-    <div class="d-flex d-lg-none align-items-center justify-content-around px-2">
-      <button
-        class="btn icon burger-light d-flex cursor-pointer pointer pr-4 pl-2 py-4 pl-sm-2"
-        (click)="mobileNavigationService.navigationVisibility = !mobileNavigationService.navigationVisibility"
-      ></button>
-    </div>
-    <div class="d-flex px-2 px-sm-4 px-lg-0 align-items-center">
+  <div class="row justify-content-between no-gutters align-items-center">
+    <div class="d-flex px-2 px-lg-0 align-items-center">
+      <div class="mr-2">
+        <button
+          class="btn icon burger-blue cursor-pointer d-inline-block d-lg-none"
+          (click)="mobileNavigationService.navigationVisibility = !mobileNavigationService.navigationVisibility"
+        ></button>
+      </div>
       <h1 class="mb-0">
         <a class="header-logo" routerLink="/platform/view">
           <img src="assets/icons/my-cobalt-logo.svg" alt="My Cobalt">
         </a>
       </h1>
+    </div>
+    <div class="d-flex" dropdown [autoClose]="true" placement="bottom right">
+      <button
+        class="btn p-1 bg-primary-100 border-radius-md"
+        aria-controls="dropdown-user-profile"
+        dropdownToggle
+        >
+        <img src="assets/icons/outlined-editor-insert-photo.svg" alt="My Cobalt">
+      </button>
+      <ul
+        id="dropdown-user-profile"
+        *dropdownMenu
+        class="dropdown-menu dropdown-menu-right"
+        role="menu">
+        <li role="menuitem">
+          <a routerLink="/auth/logout" class="dropdown-item">logout</a>
+        </li>
+      </ul>
     </div>
   </div>
 </header>

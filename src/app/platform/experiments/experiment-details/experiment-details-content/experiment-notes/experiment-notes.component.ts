@@ -87,10 +87,11 @@ export class ExperimentNotesComponent implements OnInit, AfterViewInit, OnDestro
 
   clearNoteInput(): void {
     this.notesForm.reset();
+    this.showNoteActionButtons = false;
   }
 
-  toggleActionNoteActionButtons(): void {
-    this.showNoteActionButtons = !this.showNoteActionButtons;
+  showActionNoteActionButtons(): void {
+    this.showNoteActionButtons = true;
   }
 
   onSubmit(): void {
@@ -110,7 +111,6 @@ export class ExperimentNotesComponent implements OnInit, AfterViewInit, OnDestro
       note => {
         this.createNoteLoading = false;
         this.clearNoteInput();
-        this.toggleActionNoteActionButtons();
         this.notes.push(note);
       },
       () => {

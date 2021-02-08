@@ -14,6 +14,7 @@ import {BreadcrumbComponent} from './components/breadcrumb/breadcrumb.component'
 import {ConfirmModalComponent} from './components/confirm-modal/confirm-modal.component';
 import {CoModalModule} from '../../shared/co-modal/co-modal.module';
 import {CardRowComponent} from './components/card-row/card-row.component';
+import {ContentNotFoundComponent} from './components/content-not-found/content-not-found.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {CardRowComponent} from './components/card-row/card-row.component';
     ResizableBoxComponent,
     TextEditorComponent,
     BreadcrumbComponent,
-    ConfirmModalComponent
+    ConfirmModalComponent,
+    ContentNotFoundComponent
   ],
   imports: [CommonModule, SharedModule, BsDatepickerModule, BsDropdownModule, QuillModule, NgxMutationObserverModule, CoModalModule],
   exports: [
@@ -35,7 +37,8 @@ import {CardRowComponent} from './components/card-row/card-row.component';
     TextEditorComponent,
     BreadcrumbComponent,
     BadgeComponent,
-    ConfirmModalComponent
+    ConfirmModalComponent,
+    ContentNotFoundComponent
   ]
 })
 export class PlatformSharedModule {}
