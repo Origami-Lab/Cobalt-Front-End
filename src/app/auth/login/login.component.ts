@@ -11,8 +11,8 @@ import {Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   loginForm = this.fb.group({
-    email: [null, Validators.required],
-    password: [null, Validators.required]
+    email: ['admin@admin.com', Validators.required],
+    password: ['admin', Validators.required]
   });
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {}
