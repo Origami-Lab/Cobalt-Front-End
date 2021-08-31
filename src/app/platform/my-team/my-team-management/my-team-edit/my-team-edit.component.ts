@@ -45,7 +45,6 @@ export class MyTeamEditComponent implements OnInit, OnDestroy {
 
   onFormSubmit(myTeamForm: Partial<MyTeam>): void {
     console.log('update', myTeamForm);
-    //TO DO : update action
   }
 
   ngOnDestroy(): void {
