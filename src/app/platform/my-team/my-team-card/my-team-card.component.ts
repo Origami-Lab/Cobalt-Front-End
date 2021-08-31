@@ -5,7 +5,7 @@ import {ToastrService} from 'ngx-toastr';
 import {ApiError} from 'src/app/core/api-error/api-error';
 import {ApiHttpErrorResponse} from 'src/app/core/api-error/api-http-error-response';
 import {ConfirmModalComponent} from '../../platform-shared/components/confirm-modal/confirm-modal.component';
-import {IMyTeam} from '../models/my-team.interface';
+import {MyTeam} from '../models/my-team.interface';
 import {MyTeamService} from '../my-team.service';
 
 @Component({
@@ -21,7 +21,7 @@ export class MyTeamCardComponent implements OnInit {
   confirmModal: ConfirmModalComponent;
 
   @Input()
-  teamCardElement: IMyTeam;
+  teamCardElement: MyTeam;
 
   constructor(private myTeamService: MyTeamService, private toastr: ToastrService, private router: Router) {}
 

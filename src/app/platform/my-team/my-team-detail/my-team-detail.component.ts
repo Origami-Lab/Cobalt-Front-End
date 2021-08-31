@@ -6,7 +6,7 @@ import {ApiError} from 'src/app/core/api-error/api-error';
 import {ApiHttpErrorResponse} from 'src/app/core/api-error/api-http-error-response';
 import {BreadcrumbConfig} from '../../platform-shared/components/breadcrumb/breadcrumb-config.interface';
 import {ConfirmModalComponent} from '../../platform-shared/components/confirm-modal/confirm-modal.component';
-import {IMyTeam} from '../models/my-team.interface';
+import {MyTeam} from '../models/my-team.interface';
 import {MyTeamService} from '../my-team.service';
 
 @Component({
@@ -16,7 +16,7 @@ import {MyTeamService} from '../my-team.service';
 })
 export class MyTeamDetailComponent implements OnInit {
   loading = true;
-  teamItem: IMyTeam;
+  teamItem: MyTeam;
   breadcrumbConfig: BreadcrumbConfig[];
   apiError: ApiError;
   deleteTeamLoading = false;

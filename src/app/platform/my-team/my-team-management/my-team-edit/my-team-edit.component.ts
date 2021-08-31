@@ -3,7 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {ApiError} from 'src/app/core/api-error/api-error';
 import {CoModalLayoutComponent} from 'src/app/shared/co-modal/co-modal-layout/co-modal-layout.component';
-import {IMyTeam} from '../../models/my-team.interface';
+import {MyTeam} from '../../models/my-team.interface';
 import {MyTeamService} from '../../my-team.service';
 export interface IQueryParams {
   id: string;
@@ -43,17 +43,9 @@ export class MyTeamEditComponent implements OnInit, OnDestroy {
     this.modal.onClose();
   }
 
-  onFormSubmit(myTeamForm: Partial<IMyTeam>): void {
+  onFormSubmit(myTeamForm: Partial<MyTeam>): void {
     console.log('update', myTeamForm);
-    // this.myTeamService.createMyTeam(myTeamForm).subscribe(
-    //   rs => {
-    //     this.loading = false;
-    //     this.router.navigate(['platform/view/my-team/detail', rs.id]).then(() => this.onModalClose());
-    //   },
-    //   (httpResponseError: ApiHttpErrorResponse | HttpErrorResponse) => {
-    //     this.apiError = httpResponseError.error;
-    //   }
-    // );
+    //TO DO : update action
   }
 
   ngOnDestroy(): void {

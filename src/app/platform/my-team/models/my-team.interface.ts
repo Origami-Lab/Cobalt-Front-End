@@ -1,4 +1,4 @@
-export interface IMyTeam {
+export interface MyTeam {
   id?: string;
   name: string;
   deletableXp: boolean;

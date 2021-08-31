@@ -5,7 +5,7 @@ import {Router} from '@angular/router';
 import {ApiError} from 'src/app/core/api-error/api-error';
 import {ApiHttpErrorResponse} from 'src/app/core/api-error/api-http-error-response';
 import {CoModalLayoutComponent} from 'src/app/shared/co-modal/co-modal-layout/co-modal-layout.component';
-import {IMyTeam} from '../../models/my-team.interface';
+import {MyTeam} from '../../models/my-team.interface';
 import {MyTeamService} from '../../my-team.service';
 @Component({
   selector: 'co-my-team-create',
@@ -26,7 +26,7 @@ export class MyTeamCreateComponent implements OnInit {
     this.modal.onClose();
   }
 
-  onFormSubmit(myTeamForm: Partial<IMyTeam>): void {
+  onFormSubmit(myTeamForm: Partial<MyTeam>): void {
     this.myTeamService.createMyTeam(myTeamForm).subscribe(
       rs => {
         this.loading = false;

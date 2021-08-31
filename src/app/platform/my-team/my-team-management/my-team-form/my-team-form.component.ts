@@ -1,19 +1,19 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {Subscription} from 'rxjs';
 import {distinctUntilChanged, map} from 'rxjs/operators';
 import {CustomValidators} from 'src/app/core/utils/custom-validators';
 import {markFormControlAsTouched} from 'src/app/shared/utils/mark-form-control-as-touched';
-import {IMyTeam} from '../../models/my-team.interface';
+import {MyTeam} from '../../models/my-team.interface';
 
 @Component({
   selector: 'co-my-team-form',
   templateUrl: './my-team-form.component.html',
   styleUrls: ['./my-team-form.component.scss']
 })
-export class MyTeamFormComponent implements OnInit {
+export class MyTeamFormComponent implements OnInit, OnDestroy {
   @Input()
-  set myTeam(myTeam: IMyTeam) {
+  set myTeam(myTeam: MyTeam) {
     if (!myTeam) {
       return;
     }
@@ -25,7 +25,7 @@ export class MyTeamFormComponent implements OnInit {
   constructor(private fb: FormBuilder) {}
 
   @Output()
-  submitMyTeam = new EventEmitter<Partial<IMyTeam>>();
+  submitMyTeam = new EventEmitter<Partial<MyTeam>>();
 
   private subscription: Subscription;
   myTeamForm = this.fb.group({
@@ -55,6 +55,10 @@ export class MyTeamFormComponent implements OnInit {
         distinctUntilChanged()
       )
       .subscribe(this.valueChanges);
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
   submitForm(): void {
     markFormControlAsTouched(this.myTeamForm);
