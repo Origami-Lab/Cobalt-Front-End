@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, OnDestroy, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {ApiError} from 'src/app/core/api-error/api-error';
@@ -14,7 +14,7 @@ export interface IQueryParams {
   templateUrl: './my-team-edit.component.html',
   styleUrls: ['./my-team-edit.component.scss']
 })
-export class MyTeamEditComponent implements OnInit {
+export class MyTeamEditComponent implements OnInit, OnDestroy {
   @ViewChild('coModalLayoutRef', {static: true})
   modal: CoModalLayoutComponent;
   loading = false;
