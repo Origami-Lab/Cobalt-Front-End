@@ -26,7 +26,7 @@ export class MyTeamCreateComponent implements OnInit {
     this.modal.onClose();
   }
 
-  onFormSubmit(myTeamForm: Partial<IMyTeam>) {
+  onFormSubmit(myTeamForm: Partial<IMyTeam>): void {
     this.myTeamService.createMyTeam(myTeamForm).subscribe(
       rs => {
         this.loading = false;

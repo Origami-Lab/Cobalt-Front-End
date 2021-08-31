@@ -32,7 +32,7 @@ export class MyTeamDetailComponent implements OnInit {
     this.generateBreadcrumbConfig(myTeamId);
   }
 
-  getTeamsById(id: string) {
+  getTeamsById(id: string): void {
     this.myTeamService
       .getTeamsById(id)
       .pipe()
@@ -55,7 +55,7 @@ export class MyTeamDetailComponent implements OnInit {
     ];
   }
 
-  onConfirmModalOpen(name) {
+  onConfirmModalOpen(name): void {
     this.confirmModal.openModal(name);
   }
 

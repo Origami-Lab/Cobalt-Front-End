@@ -56,11 +56,6 @@ export class MyTeamFormComponent implements OnInit {
       )
       .subscribe(this.valueChanges);
   }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
-
   submitForm(): void {
     markFormControlAsTouched(this.myTeamForm);
 

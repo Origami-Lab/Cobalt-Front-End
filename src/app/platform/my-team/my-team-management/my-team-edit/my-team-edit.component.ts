@@ -5,7 +5,7 @@ import {ApiError} from 'src/app/core/api-error/api-error';
 import {CoModalLayoutComponent} from 'src/app/shared/co-modal/co-modal-layout/co-modal-layout.component';
 import {IMyTeam} from '../../models/my-team.interface';
 import {MyTeamService} from '../../my-team.service';
-export interface queryParams {
+export interface IQueryParams {
   id: string;
 }
 
@@ -24,19 +24,18 @@ export class MyTeamEditComponent implements OnInit {
   constructor(private activeRouter: ActivatedRoute, private myTeamService: MyTeamService) {}
 
   ngOnInit(): void {
-    this.subscription = this.activeRouter.queryParams.subscribe((rs: queryParams) => {
+    this.subscription = this.activeRouter.queryParams.subscribe((rs: IQueryParams) => {
       this.getTeamsById(rs.id);
     });
   }
 
-  getTeamsById(id: string) {
+  getTeamsById(id: string): void {
     this.loading = true;
     this.myTeamService
       .getTeamsById(id)
       .pipe()
       .subscribe(rs => {
         this.loading = false;
-        console.log('xxxx', rs);
       });
   }
 
@@ -44,7 +43,7 @@ export class MyTeamEditComponent implements OnInit {
     this.modal.onClose();
   }
 
-  onFormSubmit(myTeamForm: Partial<IMyTeam>) {
+  onFormSubmit(myTeamForm: Partial<IMyTeam>): void {
     console.log('update', myTeamForm);
     // this.myTeamService.createMyTeam(myTeamForm).subscribe(
     //   rs => {

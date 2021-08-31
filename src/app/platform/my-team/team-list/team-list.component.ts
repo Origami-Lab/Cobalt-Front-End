@@ -16,13 +16,13 @@ export class TeamListComponent implements OnInit {
     this.getTeamsList();
   }
 
-  getTeamsList() {
+  getTeamsList(): void {
     this.myTeamService.getTeamsList().subscribe(rs => {
       this.myTeamList = rs;
     });
   }
 
-  goDetail(teamID) {
+  goDetail(teamID): void {
     this.router.navigate(['platform/view/my-team/detail/', teamID]);
   }
 }

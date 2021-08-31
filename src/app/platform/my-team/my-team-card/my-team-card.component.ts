@@ -15,7 +15,7 @@ import {MyTeamService} from '../my-team.service';
 })
 export class MyTeamCardComponent implements OnInit {
   apiError: ApiError;
-  deleteTeamLoading: boolean = false;
+  deleteTeamLoading = false;
 
   @ViewChild('confirmModalRef', {static: true})
   confirmModal: ConfirmModalComponent;
@@ -27,11 +27,11 @@ export class MyTeamCardComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onConfirmModalOpen(name: string) {
+  onConfirmModalOpen(name: string): void {
     this.confirmModal.openModal(name);
   }
 
-  onDeleteConfirm() {
+  onDeleteConfirm(): void {
     this.deleteTeamLoading = true;
     this.myTeamService.deleteTeamById(this.teamCardElement.id).subscribe(
       () => {
