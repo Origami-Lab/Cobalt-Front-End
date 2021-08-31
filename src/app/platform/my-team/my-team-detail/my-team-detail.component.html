@@ -1,0 +1,62 @@
+<div class="container pt-4" *ngIf="teamItem">
+  <co-breadcrumb *ngIf="breadcrumbConfig" [breadcrumbConfig]="breadcrumbConfig"></co-breadcrumb>
+
+  <div class="bg-white p-5 mt-4 radius-10">
+    <div class="d-flex align-items-center ">
+      <h3 class="mr-3 fz-40 text-cap">{{teamItem.name}}</h3>
+      <span class="d-inline-block mr-2 mb-4 mb-sm-0">
+        <a class="align-middle btn btn-icon-left-sm-gray-200" [queryParams]="{id: teamItem.id}"
+          [routerLink]="['/platform/view', {outlets: {modal: ['my-team', 'management', 'edit']}}]">
+          <i class="icon pen"></i>
+          Edit My Team
+        </a>
+      </span>
+      <span class="d-inline-block mr-2 mb-4 mb-sm-0 mr-md-0">
+        <button class="align-middle btn btn-icon-left-sm-gray-200" (click)="onConfirmModalOpen(teamItem.name)">
+          <i class="icon remove"></i>
+          Delete
+        </button>
+      </span>
+    </div>
+    <div class="row mt-3">
+      <div class="col-6"><b>Link Name</b>: {{teamItem.linkName}}</div>
+      <div class="col-6"><b>Link Href</b>: {{teamItem.linkHref}}</div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-6"><b>Orgid</b>: {{teamItem.orgid}}</div>
+      <div class="col-6"><b>Datetime</b>: {{teamItem.datetime}}</div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-6"><b>Stamp Cert</b>: {{teamItem.stampcert}}</div>
+      <div class="col-6"><b>Stamp Hash</b>: {{teamItem.stamphash}}</div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-6"><b>Stamp Login</b>: {{teamItem.stamplogin}}</div>
+      <div class="col-6"><b>Stamp Pass</b>: {{teamItem.stamppass}}</div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-6"><b>Stamp Provider</b>: {{teamItem.stampprovider}}</div>
+      <div class="col-6"><b>Visible</b>: {{teamItem.visible}}</div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-6"><b>Force Can Read</b>: {{teamItem.forceCanread}}</div>
+      <div class="col-6"><b>Force Can Write</b>: {{teamItem.forceCanwrite}}</div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-6"><b>Do Force Can Read</b>: {{teamItem.doForceCanread}}</div>
+      <div class="col-6"><b>Do Force Can Write</b>: {{teamItem.doForceCanwrite}}</div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-6"><b>Public DB</b>: {{teamItem.publicDb}}</div>
+      <div class="col-6"><b>deletableXp</b>: {{teamItem.deletableXp}}</div>
+    </div>
+  </div>
+</div>
+
+<co-confirm-modal
+  [loading]="deleteTeamLoading"
+  [closeOutside]="true"
+  [apiError]="apiError"
+  (confirmDelete)="onDeleteConfirm()"
+  #confirmModalRef
+></co-confirm-modal>

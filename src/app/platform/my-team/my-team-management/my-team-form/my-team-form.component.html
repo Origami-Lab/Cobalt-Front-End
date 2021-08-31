@@ -1,0 +1,127 @@
+<form [formGroup]="myTeamForm">
+  <co-form-control-errors [control]="myTeamForm"></co-form-control-errors>
+  <div class="row">
+    <fieldset class="mb-4 col-6">
+      <label for="title" class="form-label">Name</label>
+      <input type="text" class="form-control" placeholder="Enter Name" formControlName="name" id="name">
+      <co-form-control-errors [controlName]="'name'"></co-form-control-errors>
+    </fieldset>
+    <div class="col-6">
+      <co-input-datepicker controlName="datetime" label="Start date" placeholder="Select date">
+      </co-input-datepicker>
+    </div>
+  </div>
+
+  <div class="row">
+    <fieldset class="mb-4 col-6">
+      <label for="title" class="form-label">Link Name</label>
+      <input type="text" class="form-control" placeholder="Enter Link Name" formControlName="linkName" id="linkName">
+      <co-form-control-errors [controlName]="'linkName'"></co-form-control-errors>
+    </fieldset>
+    <fieldset class="mb-4 col-6">
+      <label for="title" class="form-label">Link Href</label>
+      <input type="text" class="form-control" placeholder="Enter Link Href" formControlName="linkHref" id="linkHref">
+      <co-form-control-errors [controlName]="'linkHref'"></co-form-control-errors>
+    </fieldset>
+  </div>
+
+  <div class="row">
+    <fieldset class="mb-4 col-6">
+      <label for="title" class="form-label">Stamp Login</label>
+      <input type="text" class="form-control" placeholder="Enter Stamp Login" formControlName="stamplogin"
+        id="stamplogin">
+      <co-form-control-errors [controlName]="'stamplogin'"></co-form-control-errors>
+    </fieldset>
+    <fieldset class="mb-4 col-6">
+      <label for="title" class="form-label">Stamp Pass</label>
+      <input type="text" class="form-control" placeholder="Enter Stamp Pass" formControlName="stamppass" id="stamppass">
+      <co-form-control-errors [controlName]="'stamppass'"></co-form-control-errors>
+    </fieldset>
+  </div>
+
+  <div class="row">
+    <fieldset class="mb-4 col-6">
+      <label for="title" class="form-label">Stamp Provider</label>
+      <input type="text" class="form-control" placeholder="Enter Stamp Provider" formControlName="stampprovider"
+        id="stampprovider">
+      <co-form-control-errors [controlName]="'stampprovider'"></co-form-control-errors>
+    </fieldset>
+    <fieldset class="mb-4 col-6">
+      <label for="title" class="form-label">Stamp Cert</label>
+      <input type="text" class="form-control" placeholder="Enter Stamp Cert" formControlName="stampcert" id="stampcert">
+      <co-form-control-errors [controlName]="'stampcert'"></co-form-control-errors>
+    </fieldset>
+  </div>
+
+  <div class="row">
+    <fieldset class="mb-4 col-6">
+      <label for="title" class="form-label">Stamp Hash</label>
+      <input type="text" class="form-control" placeholder="Enter Stamp Hash" formControlName="stamphash" id="stamphash">
+      <co-form-control-errors [controlName]="'stamphash'"></co-form-control-errors>
+    </fieldset>
+    <fieldset class="mb-4 col-6">
+      <label for="title" class="form-label">Orgid</label>
+      <input type="text" class="form-control" placeholder="Enter orgid" formControlName="orgid" id="orgid">
+      <co-form-control-errors [controlName]="'orgid'"></co-form-control-errors>
+    </fieldset>
+  </div>
+
+  <div class="row">
+    <fieldset class="mb-4 col-6">
+      <label for="title" class="form-label">Force Can Read</label>
+      <input type="text" class="form-control" placeholder="Enter Force Canread" formControlName="forceCanread"
+        id="forceCanread">
+      <co-form-control-errors [controlName]="'forceCanread'"></co-form-control-errors>
+    </fieldset>
+    <fieldset class="mb-4 col-6">
+      <label for="title" class="form-label">Force Can Write</label>
+      <input type="text" class="form-control" placeholder="Enter Force Can Write" formControlName="forceCanwrite"
+        id="forceCanwrite">
+      <co-form-control-errors [controlName]="'forceCanwrite'"></co-form-control-errors>
+    </fieldset>
+  </div>
+
+  <div class="row">
+    <fieldset class="mb-4 col-4">
+      <div class="d-flex align-items-center">
+        <label for="title" class="form-label mb-0">Public DB</label>
+        <input type="checkbox" class="form-control custom-checkbox ml-2" formControlName="publicDb" id="publicDb">
+      </div>
+      <co-form-control-errors [controlName]="'publicDb'"></co-form-control-errors>
+    </fieldset>
+    <fieldset class="mb-4 col-4">
+      <div class="d-flex align-items-center">
+        <label for="title" class="form-label mb-0">DeletableXp</label>
+        <input type="checkbox" class="form-control custom-checkbox ml-2" formControlName="deletableXp" id="deletableXp">
+      </div>
+      <co-form-control-errors [controlName]="'deletableXp'"></co-form-control-errors>
+    </fieldset>
+    <fieldset class="mb-4 col-4">
+      <div class="d-flex align-items-center">
+        <label for="title" class="form-label mb-0">Visible</label>
+        <input type="checkbox" class="form-control custom-checkbox ml-2" formControlName="visible" id="visible">
+      </div>
+      <co-form-control-errors [controlName]="'visible'"></co-form-control-errors>
+    </fieldset>
+  </div>
+
+  <div class="row">
+    <fieldset class="mb-4 col-4">
+      <div class="d-flex align-items-center">
+        <label for="title" class="form-label mb-0">Do Force Can Read</label>
+        <input type="checkbox" class="form-control custom-checkbox ml-2" formControlName="doForceCanread"
+          id="doForceCanread">
+      </div>
+      <co-form-control-errors [controlName]="'doForceCanread'"></co-form-control-errors>
+    </fieldset>
+    <fieldset class="mb-4 col-6">
+      <div class="align-items-center d-flex">
+        <label for="title" class="form-label mb-0">Do Force Can Write</label>
+        <input type="checkbox" class="form-control custom-checkbox ml-2" formControlName="doForceCanwrite" id="doForceCanwrite">
+      </div>
+      <co-form-control-errors [controlName]="'doForceCanwrite'"></co-form-control-errors>
+    </fieldset>
+    
+  </div>
+
+</form>

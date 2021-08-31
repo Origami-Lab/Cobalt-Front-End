@@ -46,6 +46,11 @@ const routes: Routes = [
         loadChildren: () => import('./my-team/my-team.module').then(m => m.MyTeamModule)
       },
       {
+        path: 'my-team/management',
+        loadChildren: () => import('./my-team/my-team-management/my-team-management.module').then(m => m.MyTeamManagementModule),
+        outlet: 'modal'
+      },
+      {
         path: 'notebook',
         loadChildren: () => import('./notebook/notebook.module').then(m => m.NotebookModule)
       },
