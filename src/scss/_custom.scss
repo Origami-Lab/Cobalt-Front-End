@@ -1,0 +1,288 @@
+.transition {
+  transition: all 0.5s;
+}
+.text-cap {
+  text-transform: capitalize;
+}
+
+.flex-1 {
+  flex: 1;
+}
+.no-resize {
+  resize: none;
+}
+
+.position-sticky {
+  position: sticky;
+}
+
+.t-0 {
+  top: 0;
+}
+
+.font-bold {
+  font-weight: bold;
+}
+
+.ab-full {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.h-100vh {
+  height: 100vh;
+}
+
+.mh-100vh {
+  min-height: 100vh;
+}
+
+.vertical-middle {
+  vertical-align: middle;
+}
+
+.vertical-top {
+  vertical-align: top !important;
+}
+
+.vertical-bottom {
+  vertical-align: bottom !important;
+}
+
+.none-underline {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.opacity-0 {
+  opacity: 0;
+}
+
+.outline-none {
+  outline: none;
+
+  &:active,
+  &:hover {
+    outline: none;
+  }
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+@for $i from 1 through 80 {
+  .#{radius-}#{$i} {
+    border-radius: $i + px;
+  }
+
+  .#{order-}#{$i} {
+    order: $i;
+  }
+}
+
+@mixin loopTo100($name) {
+  @for $i from 1 through 100 {
+    .#{fz-}#{$name}#{$i} {
+      font-size: $i + px !important;
+    }
+
+    .#{width-}#{$name}#{$i} {
+      width: percentage($i / 100) !important;
+    }
+
+    .#{height-}#{$name}#{$i} {
+      height: $i + px;
+    }
+
+    .#{opacity-}#{$name}#{$i} {
+      opacity: calc(#{$i} / 100);
+    }
+  }
+}
+
+@mixin lineHeight($name) {
+  @for $i from 10 through 50 {
+    .#{lh-}#{$name}#{$i} {
+      line-height: $i + px !important;
+    }
+  }
+}
+
+@mixin paddingMixin($name, $value) {
+  .#{p-}#{$name}#{$value} {
+    padding-left: $value + px !important;
+    padding-right: $value + px !important;
+    padding-top: $value + px !important;
+    padding-bottom: $value + px !important;
+  }
+
+  .#{px-}#{$name}#{$value} {
+    padding-left: $value + px !important;
+    padding-right: $value + px !important;
+  }
+
+  .#{py-}#{$name}#{$value} {
+    padding-top: $value + px !important;
+    padding-bottom: $value + px !important;
+  }
+
+  .#{pt-}#{$name}#{$value} {
+    padding-top: $value + px !important;
+  }
+
+  .#{pl-}#{$name}#{$value} {
+    padding-left: $value + px !important;
+  }
+
+  .#{pr-}#{$name}#{$value} {
+    padding-right: $value + px !important;
+  }
+
+  .#{pb-}#{$name}#{$value} {
+    padding-bottom: $value + px !important;
+  }
+}
+
+@mixin marginMixin($name, $value) {
+  .#{m-}#{$name}#{$value} {
+    margin-left: $value + px !important;
+    margin-right: $value + px !important;
+    margin-top: $value + px !important;
+    margin-bottom: $value + px !important;
+  }
+
+  .#{mx-}#{$name}#{$value} {
+    margin-left: $value + px !important;
+    margin-right: $value + px !important;
+  }
+
+  .#{my-}#{$name}#{$value} {
+    margin-top: $value + px !important;
+    margin-bottom: $value + px !important;
+  }
+
+  .#{mt-}#{$name}#{$value} {
+    margin-top: $value + px !important;
+  }
+
+  .#{mr-}#{$name}#{$value} {
+    margin-right: $value + px !important;
+  }
+
+  .#{ml-}#{$name}#{$value} {
+    margin-left: $value + px !important;
+  }
+
+  .#{mb-}#{$name}#{$value} {
+    margin-bottom: $value + px !important;
+  }
+}
+
+@mixin col($name, $value) {
+  .#{col-}#{$name}#{$value} {
+    flex: 0 0 calc(#{$value} * (100% / 12)) !important;
+    max-width: calc(#{$value} * (100% / 12)) !important;
+  }
+}
+
+@mixin colOffset($name, $value) {
+  .#{offset-}#{$name}#{$value} {
+    margin-left: calc(100% / 12 * #{$value}) !important;
+  }
+}
+
+@mixin gap($name, $value) {
+  .#{gap-}#{$name}#{$value} {
+    gap: $value + px !important;
+  }
+
+  .#{gap-y-}#{$name}#{$value} {
+    row-gap: $value + px !important;
+  }
+
+  .#{gap-x-}#{$name}#{$value} {
+    column-gap: $value + px !important;
+  }
+}
+
+@mixin colMixin($name) {
+  @for $i from 1 through 12 {
+    @include col($name, $i);
+    @include colOffset($name, $i);
+  }
+}
+
+@mixin pmMixin($name) {
+  @for $i from 6 through 200 {
+    @include paddingMixin($name, $i);
+    @include marginMixin($name, $i);
+  }
+}
+
+@mixin gapMixin($name) {
+  @for $i from 0 through 100 {
+    @include gap($name, $i);
+  }
+}
+
+@include loopTo100('');
+@include pmMixin('');
+@include lineHeight('');
+@include gapMixin('');
+
+@media (min-width: 576px) {
+  @include loopTo100('sm-');
+  @include pmMixin('sm-');
+  @include lineHeight('sm-');
+  @include gapMixin('sm-');
+}
+
+@media (min-width: 768px) {
+  @include loopTo100('md-');
+  @include pmMixin('md-');
+  @include lineHeight('md-');
+  @include gapMixin('md-');
+}
+
+@media (min-width: 992px) {
+  @include loopTo100('lg-');
+  @include pmMixin('lg-');
+  @include lineHeight('lg-');
+  @include gapMixin('lg-');
+}
+
+@media (min-width: 1200px) {
+  @include loopTo100('xl-');
+  @include pmMixin('xl-');
+  @include lineHeight('xl-');
+  @include gapMixin('xl-');
+}
+
+@media (min-width: 1366px) {
+  @include loopTo100('xxl-');
+  @include pmMixin('xxl-');
+  @include lineHeight('xxl-');
+  @include gapMixin('xxl-');
+}
+
+@media (min-width: 1440px) {
+  @include loopTo100('3xl-');
+  @include pmMixin('3xl-');
+  @include lineHeight('3xl-');
+  @include colMixin('3xl-');
+  @include gapMixin('3xl-');
+}
+
+@media (min-width: 1920px) {
+  @include loopTo100('4xl-');
+  @include pmMixin('4xl-');
+  @include lineHeight('4xl-');
+  @include colMixin('4xl-');
+  @include gapMixin('4xl-');
+}
