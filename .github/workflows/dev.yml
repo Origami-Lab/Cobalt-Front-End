@@ -13,6 +13,7 @@ jobs:
   deploy:
     environment:
       name: dev
+      url: https://app.cobalt-dev.origamilab.ch
     name: Build and deploy
     runs-on: ubuntu-latest
 
