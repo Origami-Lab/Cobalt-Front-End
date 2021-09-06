@@ -5,12 +5,12 @@ import {CoModalModule} from 'src/app/shared/co-modal/co-modal.module';
 import {PlatformSharedModule} from '../platform-shared/platform-shared.module';
 import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
 import {ManageTeamsRoutingModule} from './manage-teams-routing.module';
-import {MangeTeamsPageComponent} from './mange-teams-page/mange-teams-page.component';
-import {MangeTeamsListComponent} from './mange-teams-list/mange-teams-list.component';
+import {ManageTeamsPageComponent} from './manage-teams-page/manage-teams-page.component';
+import {ManageTeamsListComponent} from './manage-teams-list/manage-teams-list.component';
 import {TeamsModule} from '../teams/teams.module';
 import {MyTeamModule} from '../my-team/my-team.module';
 @NgModule({
-  declarations: [MangeTeamsPageComponent, MangeTeamsListComponent],
+  declarations: [ManageTeamsPageComponent, ManageTeamsListComponent],
   imports: [
     CommonModule,
     SharedModule,

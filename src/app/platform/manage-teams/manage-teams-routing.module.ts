@@ -1,12 +1,12 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {MangeTeamsListComponent} from './mange-teams-list/mange-teams-list.component';
-import {MangeTeamsPageComponent} from './mange-teams-page/mange-teams-page.component';
+import {ManageTeamsListComponent} from './manage-teams-list/manage-teams-list.component';
+import {ManageTeamsPageComponent} from './manage-teams-page/manage-teams-page.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: MangeTeamsPageComponent,
+    component: ManageTeamsPageComponent,
     children: [
       {
         path: '',
@@ -15,7 +15,7 @@ const routes: Routes = [
       },
       {
         path: 'list',
-        component: MangeTeamsListComponent
+        component: ManageTeamsListComponent
       }
     ]
   }

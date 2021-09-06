@@ -3,11 +3,11 @@ import {Team} from '../../teams/model/team.interface';
 import {TeamsService} from '../../teams/teams.service';
 
 @Component({
-  selector: 'co-mange-teams-list',
-  templateUrl: './mange-teams-list.component.html',
-  styleUrls: ['./mange-teams-list.component.scss']
+  selector: 'co-manage-teams-list',
+  templateUrl: './manage-teams-list.component.html',
+  styleUrls: ['./manage-teams-list.component.scss']
 })
-export class MangeTeamsListComponent implements OnInit {
+export class ManageTeamsListComponent implements OnInit {
   pageNumber = 1;
   teamList: Team[];
   loading = true;
