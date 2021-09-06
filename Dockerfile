@@ -17,14 +17,13 @@ RUN yarn global add @api-platform/client-generator
 # prevent the reinstallation of node modules at every changes in the source code
 COPY package.json ./
 RUN set -eux; \
-	npm install
+  npm install
 
 COPY . ./
 
 VOLUME /usr/src/client/node_modules
 
 ENV HTTPS true
-
 CMD ["yarn", "start:stage"]
 
 
@@ -32,10 +31,8 @@ CMD ["yarn", "start:stage"]
 # depends on the "development" stage above
 FROM api_platform_client_development AS api_platform_client_build
 
-ARG REACT_APP_API_ENTRYPOINT
-
 RUN set -eux; \
-	yarn build
+  yarn build
 
 
 # "nginx" stage
@@ -46,4 +43,6 @@ COPY docker/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
 
 WORKDIR /usr/src/client/build
 
-COPY --from=api_platform_client_build /usr/src/client/build ./
+COPY --from=api_platform_client_build /usr/src/client/dist/cobalt/* ./
+
+EXPOSE 80

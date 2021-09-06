@@ -10,3 +10,5 @@ tslint.json
 charts
 ci
 **/*.html
+helm
+.github
