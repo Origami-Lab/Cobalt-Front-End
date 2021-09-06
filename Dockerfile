@@ -43,6 +43,6 @@ COPY docker/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
 
 WORKDIR /usr/src/client/build
 
-COPY --from=api_platform_client_build /usr/src/client/dist/cobalt/* ./
+COPY --from=api_platform_client_build /usr/src/client/dist/cobalt ./
 
 EXPOSE 80

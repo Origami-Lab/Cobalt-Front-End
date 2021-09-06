@@ -4,7 +4,7 @@ replicaCount: 1
 image:
   repository: rg.fr-par.scw.cloud/cobalt/cobalt-front-end
   tag: latest
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 
 nameOverride: ""
 fullnameOverride: ""
