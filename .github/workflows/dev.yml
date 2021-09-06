@@ -35,4 +35,4 @@ jobs:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         with:
           args: |
-            helm upgrade cobalt-frontend helm --namespace=default -f helm/values.dev.yaml
+            helm upgrade cobalt-front-end helm --namespace=default -f helm/values.dev.yaml

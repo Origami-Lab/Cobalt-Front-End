@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  gatewayBaseUrl: 'https://cobalt.dev.hdwebsoft.co/',
+  gatewayBaseUrl: 'https://api.cobalt-dev.origamilab.ch/',
   authToken: {
     name: 'co_token'
   }
