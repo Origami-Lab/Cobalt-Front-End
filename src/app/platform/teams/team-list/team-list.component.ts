@@ -17,7 +17,7 @@ export class TeamListComponent implements OnInit {
   teamList: Team[];
 
   @Input()
-  showViewMember? = true;
+  showViewMember = true;
 
   @Input()
   title: string;

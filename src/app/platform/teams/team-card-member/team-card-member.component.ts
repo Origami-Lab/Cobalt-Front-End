@@ -40,7 +40,7 @@ export class TeamCardMemberComponent implements OnInit {
     e.stopPropagation();
   }
 
-  emitViewWork(id: number | string) {
+  emitViewWork(id: number | string): void {
     this.viewWork.emit(id);
   }
 

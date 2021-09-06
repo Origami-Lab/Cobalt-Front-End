@@ -23,7 +23,7 @@ export class TeamCardComponent implements OnInit {
   apiError: ApiError;
 
   @Input()
-  showViewMember?: boolean = true;
+  showViewMember = true;
 
   @Output()
   viewMember = new EventEmitter<number | string>();
