@@ -24,7 +24,6 @@ COPY . ./
 VOLUME /usr/src/client/node_modules
 
 ENV HTTPS true
-
 CMD ["yarn", "start:stage"]
 
 

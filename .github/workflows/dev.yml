@@ -1,0 +1,34 @@
+name: dev
+on: workflow_dispatch
+
+env:
+  IMAGE: ${{ secrets.DOCKER_REGISTRY }}/cobalt-front-end
+  TAG: latest
+
+jobs:
+  deploy:
+    environment:
+      name: dev
+    name: Build and deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: build image
+        run: |
+          docker build -t $IMAGE:$TAG .
+
+      - name: push image
+        run: |
+          docker login ${{ secrets.DOCKER_REGISTRY }} -u nologin -p ${{ secrets.SCW_SECRET_KEY }}
+          docker push $IMAGE:$TAG
+
+      - name: deploy
+        uses: wahyd4/kubectl-helm-action@master
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+        with:
+          args: |
+            helm upgrade cobalt helm --namespace=default -f helm/values.dev.yaml
