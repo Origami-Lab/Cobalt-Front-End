@@ -2,9 +2,9 @@ import {Component, OnInit, OnDestroy, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {ApiError} from 'src/app/core/api-error/api-error';
+import {Team} from 'src/app/platform/teams/model/team.interface';
+import {TeamsService} from 'src/app/platform/teams/teams.service';
 import {CoModalLayoutComponent} from 'src/app/shared/co-modal/co-modal-layout/co-modal-layout.component';
-import {MyTeam} from '../../models/my-team.interface';
-import {MyTeamService} from '../../my-team.service';
 export interface IQueryParams {
   id: string;
 }
@@ -21,7 +21,7 @@ export class MyTeamEditComponent implements OnInit, OnDestroy {
   apiError: ApiError;
   subscription: Subscription;
 
-  constructor(private activeRouter: ActivatedRoute, private myTeamService: MyTeamService) {}
+  constructor(private activeRouter: ActivatedRoute, private teamService: TeamsService) {}
 
   ngOnInit(): void {
     this.subscription = this.activeRouter.queryParams.subscribe((rs: IQueryParams) => {
@@ -31,7 +31,7 @@ export class MyTeamEditComponent implements OnInit, OnDestroy {
 
   getTeamsById(id: string): void {
     this.loading = true;
-    this.myTeamService
+    this.teamService
       .getTeamsById(id)
       .pipe()
       .subscribe(rs => {
@@ -43,7 +43,7 @@ export class MyTeamEditComponent implements OnInit, OnDestroy {
     this.modal.onClose();
   }
 
-  onFormSubmit(myTeamForm: Partial<MyTeam>): void {
+  onFormSubmit(myTeamForm: Partial<Team>): void {
     console.log('update', myTeamForm);
   }
 

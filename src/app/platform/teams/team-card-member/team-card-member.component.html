@@ -5,7 +5,7 @@
         <img src="assets/icons/outlined-editor-insert-photo.svg" alt="user"
           class="img-thumbnail border-0 bg-transparent">
       </div>
-      <h3 class="text-lg mb-0">{{teamCardElement.name}}</h3>
+      <h3 class="text-lg mb-0">David</h3>
     </div>
 
     <div class="d-inline-flex justify-content-space-between">
@@ -14,11 +14,7 @@
         <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu"
           aria-labelledby="button-basic">
           <li role="menuitem">
-            <a class="dropdown-item pointer" [queryParams]="{id: teamCardElement.id}"
-              [routerLink]="['/platform/view', {outlets: {modal: ['my-team', 'management', 'edit']}}]">Edit</a>
-          </li>
-          <li role="menuitem">
-            <button class="dropdown-item" (click)="onConfirmModalOpen(teamCardElement.name)">Delete</button>
+            <button class="dropdown-item" (click)="onConfirmModalOpen(memberEl.name)">Delete</button>
           </li>
         </ul>
       </div>
@@ -28,9 +24,10 @@
     <span class="text-gray text-xs">3 experiments</span>
   </div>
   <div class="custom-card-footer pt-2 pb-2 text-center">
-    <button class="btn btn-ghost-primary text-primary mt-0 mb-0 pt-0 pb-0">View Work</button>
+    <button class="btn btn-ghost-primary text-primary mt-0 mb-0 pt-0 pb-0" (click)="emitViewWork(memberEl.id)">View
+      Work</button>
   </div>
 </div>
 
-<co-confirm-modal [loading]="deleteTeamLoading" [closeOutside]="true" [apiError]="apiError"
-  (confirmDelete)="onDeleteConfirm()" #confirmModalRef></co-confirm-modal>
+<co-confirm-modal [closeOutside]="true" [loading]="loading" [apiError]="apiError" (confirmDelete)="onDeleteConfirm()" #confirmModalRef>
+</co-confirm-modal>

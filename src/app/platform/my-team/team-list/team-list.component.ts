@@ -1,28 +1,26 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {MyTeamService} from '../my-team.service';
+import {Team} from '../../teams/model/team.interface';
+import {TeamsService} from '../../teams/teams.service';
 
 @Component({
-  selector: 'co-team-list',
+  selector: 'co-my-team-list',
   templateUrl: './team-list.component.html',
   styleUrls: ['./team-list.component.scss']
 })
 export class TeamListComponent implements OnInit {
-  myTeamList = [];
+  teamList: Team[];
+  page: number = 1;
 
-  constructor(private myTeamService: MyTeamService, private readonly router: Router) {}
+  constructor(private teamsService: TeamsService, private readonly router: Router) {}
 
   ngOnInit(): void {
-    this.getTeamsList();
+    this.getTeamsList(this.page);
   }
 
-  getTeamsList(): void {
-    this.myTeamService.getTeamsList().subscribe(rs => {
-      this.myTeamList = rs;
+  getTeamsList(page: number): void {
+    this.teamsService.getTeamsList(page).subscribe((rs: Team[]) => {
+      this.teamList = rs;
     });
-  }
-
-  goDetail(teamID): void {
-    this.router.navigate(['platform/view/my-team/detail/', teamID]);
   }
 }

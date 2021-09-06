@@ -100,6 +100,15 @@
                   <span class="align-middle icon team mr-3"></span>
                   <span class="align-middle">My Team</span>
                 </a>
+                <a
+                  class="nav-link text-lg font-weight-600"
+                  routerLink="/platform/view/manage-team/list"
+                  routerLinkActive="active"
+                  (click)="mobileNavigationService.navigationVisibility = false"
+                >
+                  <span class="align-middle icon team mr-3"></span>
+                  <span class="align-middle">Manage Team</span>
+                </a>
               </ng-container>
             </nav>
           </div>
