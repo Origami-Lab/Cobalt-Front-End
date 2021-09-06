@@ -8,9 +8,9 @@ import {TeamsService} from '../../teams/teams.service';
   styleUrls: ['./mange-teams-list.component.scss']
 })
 export class MangeTeamsListComponent implements OnInit {
-  pageNumber: number = 1;
+  pageNumber = 1;
   teamList: Team[];
-  loading: boolean = true;
+  loading = true;
   title: 'Manage Teams';
 
   constructor(private teamsService: TeamsService) {}

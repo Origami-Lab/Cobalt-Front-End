@@ -15,7 +15,7 @@ export class MyTeamCreateComponent implements OnInit {
   @ViewChild('coModalLayoutRef', {static: true})
   modal: CoModalLayoutComponent;
 
-  loading: boolean = false;
+  loading = false;
   apiError: ApiError;
 
   constructor(private teamService: TeamsService, private router: Router) {}

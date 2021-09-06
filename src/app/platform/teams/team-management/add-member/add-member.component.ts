@@ -13,7 +13,7 @@ export class AddMemberComponent implements OnInit {
   modal: CoModalLayoutComponent;
 
   userList: User[];
-  loading: boolean = false;
+  loading = false;
   constructor(private teamsService: TeamsService) {}
 
   ngOnInit(): void {

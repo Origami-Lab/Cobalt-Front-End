@@ -10,7 +10,7 @@ import {TeamsService} from '../../teams/teams.service';
 })
 export class TeamListComponent implements OnInit {
   teamList: Team[];
-  page: number = 1;
+  page = 1;
 
   constructor(private teamsService: TeamsService, private readonly router: Router) {}
 

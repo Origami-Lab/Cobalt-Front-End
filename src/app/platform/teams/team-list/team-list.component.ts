@@ -17,13 +17,13 @@ export class TeamListComponent implements OnInit {
   teamList: Team[];
 
   @Input()
-  showViewMember?: boolean = true;
+  showViewMember? = true;
 
   @Input()
   title: string;
 
   apiError: ApiError;
-  loading: boolean = false;
+  loading = false;
 
   constructor(private router: Router, private teamsService: TeamsService, private toastr: ToastrService) {}
 
@@ -33,7 +33,7 @@ export class TeamListComponent implements OnInit {
     this.router.navigate(['platform/view/teams/team-members/', id]);
   }
 
-  resetError() {
+  resetError(): void {
     this.apiError = null;
   }
 

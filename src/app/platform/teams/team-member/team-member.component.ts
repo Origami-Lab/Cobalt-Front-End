@@ -26,7 +26,7 @@ export class TeamMemberComponent implements OnInit {
       });
   }
 
-  resetError() {
+  resetError(): void {
     this.apiError = null;
   }
 
