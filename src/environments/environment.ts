@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  gatewayBaseUrl: '/api/',
+  gatewayBaseUrl: 'https://cobalt.dev.hdwebsoft.co/',
   authToken: {
     name: 'co_token'
   }

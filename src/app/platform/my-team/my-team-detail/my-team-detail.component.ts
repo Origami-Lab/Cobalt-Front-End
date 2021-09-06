@@ -6,9 +6,8 @@ import {ApiError} from 'src/app/core/api-error/api-error';
 import {ApiHttpErrorResponse} from 'src/app/core/api-error/api-http-error-response';
 import {BreadcrumbConfig} from '../../platform-shared/components/breadcrumb/breadcrumb-config.interface';
 import {ConfirmModalComponent} from '../../platform-shared/components/confirm-modal/confirm-modal.component';
-import {MyTeam} from '../models/my-team.interface';
-import {MyTeamService} from '../my-team.service';
-
+import {Team} from '../../teams/model/team.interface';
+import {TeamsService} from '../../teams/teams.service';
 @Component({
   selector: 'co-my-team-detail',
   templateUrl: './my-team-detail.component.html',
@@ -16,7 +15,7 @@ import {MyTeamService} from '../my-team.service';
 })
 export class MyTeamDetailComponent implements OnInit {
   loading = true;
-  teamItem: MyTeam;
+  teamItem: Team;
   breadcrumbConfig: BreadcrumbConfig[];
   apiError: ApiError;
   deleteTeamLoading = false;
@@ -24,7 +23,7 @@ export class MyTeamDetailComponent implements OnInit {
   @ViewChild('confirmModalRef', {static: true})
   confirmModal: ConfirmModalComponent;
 
-  constructor(private myTeamService: MyTeamService, private route: ActivatedRoute, private toastr: ToastrService, private router: Router) {}
+  constructor(private myTeamService: TeamsService, private route: ActivatedRoute, private toastr: ToastrService, private router: Router) {}
 
   ngOnInit(): void {
     const {myTeamId} = this.route.snapshot.params;
