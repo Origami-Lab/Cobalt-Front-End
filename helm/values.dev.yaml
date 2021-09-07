@@ -6,6 +6,10 @@ image:
   tag: latest
   pullPolicy: Always
 
+imagePullSecrets: [{
+  name: registry-secret
+}]
+
 nameOverride: ""
 fullnameOverride: ""
 
