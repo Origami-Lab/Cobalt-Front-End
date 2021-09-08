@@ -2,7 +2,7 @@ import {Component, Input, OnInit, Output, EventEmitter, ViewChild} from '@angula
 import {Router} from '@angular/router';
 import {ApiError} from 'src/app/core/api-error/api-error';
 import {ConfirmModalComponent} from '../../platform-shared/components/confirm-modal/confirm-modal.component';
-import {Team, TeamDelete} from '../model/team.interface';
+import {Team, TeamDelete, User} from '../model/team.interface';
 
 @Component({
   selector: 'co-team-card-member',
@@ -14,7 +14,7 @@ export class TeamCardMemberComponent implements OnInit {
   confirmModal: ConfirmModalComponent;
 
   @Input()
-  memberEl: Team;
+  memberEl: User;
 
   @Input()
   loading: boolean;
@@ -52,8 +52,8 @@ export class TeamCardMemberComponent implements OnInit {
   onDeleteConfirm(): void {
     this.deleteTeam.emit({
       modal: this.confirmModal,
-      id: this.memberEl.id
-      // name: this.memberEl.name
+      id: this.memberEl.userid,
+      name: this.memberEl.name
     });
   }
 }

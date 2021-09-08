@@ -1,29 +1,30 @@
 <co-modal-layout [config]="{show: true, backdrop: 'static', keyboard: false}" #coModalLayoutRef>
-    <div class="modal-header d-flex justify-content-between">
-        <h3 class="heading-lg">Add Member</h3>
-        <co-team-search></co-team-search>
-    </div>
-    <div class="modal-body">
-        <div class="row">
-            <div class="col-12">
-              <div class="table-responsive">
-                  <table class="table table-bordered">
-                      <tr>
-                          <th><input type="checkbox"/></th>
-                          <th>Name</th>
-                      </tr>
-                      <tr *ngFor="let item of userList">
-                          <td><input type="checkbox"/></td>
-                          <td>{{item.name}}</td>
-                      </tr>
-                  </table>
-              </div>
-            </div>
+  <div class="modal-header d-flex justify-content-between">
+    <h3 class="heading-lg">Add Member</h3>
+    <co-team-search></co-team-search>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-12">
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <tr>
+              <th>Name</th>
+              <th></th>
+            </tr>
+            <tr *ngFor="let item of userList">
+              <td>{{item.name}}</td>
+              <td>
+                <button *ngIf="!item.isAdded" class="px-4 btn btn-primary" [disabled]="loading" [class.loading]="loading" (click)="addMember(item.userid)">Add</button>
+                <button *ngIf="item.isAdded" class="btn btn-danger" [disabled]="loading" [class.loading]="loading" (click)="removeMember(item.userid)">Remove</button>
+              </td>
+            </tr>
+          </table>
         </div>
+      </div>
     </div>
-    <div class="modal-footer">
-        <button class="btn btn-ghost-primary" (click)="onModalClose()">Close</button>
-        <button class="btn btn-primary"  [disabled]="loading"
-            [class.loading]="loading">Add</button>
-    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-ghost-primary" (click)="onModalClose()">Close</button>
+  </div>
 </co-modal-layout>
