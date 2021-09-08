@@ -23,7 +23,7 @@ export class TeamMemberComponent implements OnInit {
     this.getTeamDetailById(id);
   }
 
-  getTeamDetailById(id: string) {
+  getTeamDetailById(id: string): void {
     this.loading = true;
     this.teamsServer
       .getTeamsById(id)
@@ -43,8 +43,8 @@ export class TeamMemberComponent implements OnInit {
     this.apiError = null;
   }
 
-  onViewMember(id) {
-    console.log('view work');
+  onViewMember(id): void {
+    // TO DO
   }
 
   onDeleteTeam(deleteEL: TeamDelete): void {
