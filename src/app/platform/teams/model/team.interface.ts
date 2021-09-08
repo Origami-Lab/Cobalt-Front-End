@@ -14,11 +14,13 @@ export interface Team {
   stamphash: string;
   orgid: string;
   publicDb: boolean;
-  forceCanread: string;
-  forceCanwrite: string;
-  doForceCanread: boolean;
-  doForceCanwrite: boolean;
-  visible: boolean;
+  forceCanread?: string;
+  forceCanwrite?: string;
+  doForceCanread?: boolean;
+  doForceCanwrite?: boolean;
+  visible?: boolean;
+  users?: Array<any>;
+  users2teams?: Array<any>;
 }
 
 export interface TeamDelete {

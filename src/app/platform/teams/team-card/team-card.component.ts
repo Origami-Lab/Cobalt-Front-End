@@ -52,6 +52,15 @@ export class TeamCardComponent implements OnInit {
     this.confirmModal.openModal(name);
   }
 
+  displayMember(): string {
+    let suffixes = '';
+    let memberLabel = `${this.teamEl.users.length} Member${suffixes}`;
+    if (this.teamEl.users.length > 1) {
+      suffixes = 's';
+    }
+    return memberLabel;
+  }
+
   onDeleteConfirm(): void {
     this.deleteTeam.emit({
       modal: this.confirmModal,
