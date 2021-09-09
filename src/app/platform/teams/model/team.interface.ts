@@ -21,12 +21,14 @@ export interface Team {
   visible?: boolean;
   users?: Array<any>;
   users2teams?: Array<any>;
+  totalUsers?: number;
 }
 
 export interface TeamDelete {
   modal: ConfirmModalComponent;
   id: string | number;
   name?: string;
+  userId?: string | number;
 }
 
 export interface User {
@@ -46,6 +48,14 @@ export interface User {
   pdfa?: boolean;
   lastLogin?: string;
   isAdded?: boolean;
+  totalExperiments?: number;
+  teams?: Array<UserTeam>;
+}
+
+export interface UserTeam {
+  id: number | string;
+  name: string;
+  users2teams_id: number;
 }
 
 export interface User2Team {

@@ -59,4 +59,8 @@ export class ManageTeamsListComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
+
+  removeDeletedTeam(teamId: number | string): void {
+    this.teamList = this.teamList.filter(team => team.id !== teamId);
+  }
 }

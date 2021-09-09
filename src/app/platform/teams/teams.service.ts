@@ -15,8 +15,8 @@ export class TeamsService {
   readonly userEvent$ = new Subject<UserEvents>();
   constructor(private apiHttp: ApiHttpService) {}
 
-  getTeamsList(page: number): Observable<Team[]> {
-    return this.apiHttp.get<Team[]>(`/teams?page=${page}`);
+  getTeamsList(page: number, sortBy: string = 'desc'): Observable<Team[]> {
+    return this.apiHttp.get<Team[]>(`/teams?page=${page}&order[id]=${sortBy}`);
   }
 
   getTeamsById(id: string): Observable<Team> {

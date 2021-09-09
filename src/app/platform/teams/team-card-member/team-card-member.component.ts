@@ -52,8 +52,18 @@ export class TeamCardMemberComponent implements OnInit {
   onDeleteConfirm(): void {
     this.deleteTeam.emit({
       modal: this.confirmModal,
-      id: this.memberEl.userid,
-      name: this.memberEl.name
+      id: this.memberEl.teams[0].users2teams_id,
+      name: this.memberEl.name,
+      userId: this.memberEl.userid
     });
+  }
+
+  displayExperiment(): string {
+    let suffixes = '';
+    if (this.memberEl.totalExperiments > 1) {
+      suffixes = 's';
+    }
+    const memberLabel = `${this.memberEl.totalExperiments} Experiment${suffixes}`;
+    return memberLabel;
   }
 }

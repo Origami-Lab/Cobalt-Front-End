@@ -5,7 +5,7 @@ import {ToastrService} from 'ngx-toastr';
 import {Subscription} from 'rxjs';
 import {ApiError} from 'src/app/core/api-error/api-error';
 import {ApiHttpErrorResponse} from 'src/app/core/api-error/api-http-error-response';
-import {Team} from 'src/app/platform/teams/model/team.interface';
+import {Team, User2Team} from 'src/app/platform/teams/model/team.interface';
 import {TeamsService} from 'src/app/platform/teams/teams.service';
 import {CoModalLayoutComponent} from 'src/app/shared/co-modal/co-modal-layout/co-modal-layout.component';
 @Component({
@@ -32,6 +32,7 @@ export class MyTeamCreateComponent implements OnInit {
     this.loading = true;
     this.teamService.createMyTeam(myTeamForm).subscribe(
       rs => {
+        this.addMember(rs.id);
         this.loading = false;
         this.toastr.success(`Team has been create successfully`);
         this.onModalClose();
@@ -42,5 +43,20 @@ export class MyTeamCreateComponent implements OnInit {
         this.apiError = httpResponseError.error;
       }
     );
+  }
+
+  addMember(teamId: string): void {
+    const userId = localStorage.getItem('user_id');
+    if (!userId) {
+      return;
+    }
+    const params: User2Team = {
+      teams: `/teams/${teamId}`,
+      users: `/users/${userId}`
+    };
+    this.teamService
+      .addMember2Team(params)
+      .pipe()
+      .subscribe(() => {});
   }
 }
