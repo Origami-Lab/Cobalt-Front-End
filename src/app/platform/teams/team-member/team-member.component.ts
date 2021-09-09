@@ -1,6 +1,6 @@
 import {HttpErrorResponse} from '@angular/common/http';
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import {ApiError} from 'src/app/core/api-error/api-error';
 import {ApiHttpErrorResponse} from 'src/app/core/api-error/api-http-error-response';
@@ -16,7 +16,7 @@ export class TeamMemberComponent implements OnInit {
   apiError: ApiError;
   team: Team;
   loading = false;
-  constructor(private teamsServer: TeamsService, private route: ActivatedRoute, private toastr: ToastrService) {}
+  constructor(private teamsServer: TeamsService, private route: ActivatedRoute, private toastr: ToastrService, private router: Router) {}
 
   ngOnInit(): void {
     const {id} = this.route.snapshot.params;
@@ -44,7 +44,7 @@ export class TeamMemberComponent implements OnInit {
   }
 
   onViewMember(id): void {
-    // TO DO
+    this.router.navigate(['/platform/view/journal/list', {id}]);
   }
 
   onDeleteTeam(deleteEL: TeamDelete): void {
@@ -57,7 +57,7 @@ export class TeamMemberComponent implements OnInit {
           this.loading = false;
           deleteEL.modal.onModalClose();
           this.toastr.success(`${deleteEL?.name} has been successfully deleted`);
-          this.removeDeletedUser2Team(deleteEL.id);
+          this.removeDeletedUser2Team(deleteEL.userId as number);
         },
         (httpResponseError: ApiHttpErrorResponse | HttpErrorResponse) => {
           this.apiError = httpResponseError.error;
@@ -66,7 +66,7 @@ export class TeamMemberComponent implements OnInit {
       );
   }
 
-  removeDeletedUser2Team(userId: number | string): void {
-    this.team.users = this.team.users.filter(user => user.id !== userId);
+  removeDeletedUser2Team(userId: number): void {
+    this.team.users = this.team.users.filter(user => user.userid !== userId);
   }
 }

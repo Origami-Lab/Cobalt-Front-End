@@ -54,10 +54,19 @@ export class TeamCardComponent implements OnInit {
 
   displayMember(): string {
     let suffixes = '';
-    if (this.teamEl.users.length > 1) {
-      suffixes = 's';
+    let num = 0;
+    if (this.teamEl.totalUsers) {
+      num = this.teamEl.totalUsers;
+      if (this.teamEl.totalUsers > 1) {
+        suffixes = 's';
+      }
+    } else {
+      if (this.teamEl.users.length > 1) {
+        suffixes = 's';
+      }
+      num = this.teamEl.users.length;
     }
-    const memberLabel = `${this.teamEl.users.length} Member${suffixes}`;
+    const memberLabel = `${num} Member${suffixes}`;
     return memberLabel;
   }
 

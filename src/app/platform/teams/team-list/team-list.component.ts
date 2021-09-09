@@ -1,5 +1,5 @@
 import {HttpErrorResponse} from '@angular/common/http';
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import {ApiError} from 'src/app/core/api-error/api-error';
@@ -22,6 +22,9 @@ export class TeamListComponent implements OnInit {
   @Input()
   title: string;
 
+  @Output()
+  removeEl = new EventEmitter<number | string>();
+
   apiError: ApiError;
   loading = false;
 
@@ -43,7 +46,7 @@ export class TeamListComponent implements OnInit {
       () => {
         this.loading = false;
         this.toastr.success(`${deleteEL?.name} has been successfully deleted`);
-        this.removeDeletedTeam(deleteEL.id);
+        this.removeEl.emit(deleteEL.id);
         deleteEL.modal.onModalClose();
       },
       (httpResponseError: ApiHttpErrorResponse | HttpErrorResponse) => {
@@ -51,9 +54,5 @@ export class TeamListComponent implements OnInit {
         this.loading = false;
       }
     );
-  }
-
-  removeDeletedTeam(teamId: number | string): void {
-    this.teamList = this.teamList.filter(team => team.id !== teamId);
   }
 }
