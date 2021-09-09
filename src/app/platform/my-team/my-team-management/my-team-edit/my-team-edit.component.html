@@ -5,7 +5,7 @@
     <div class="modal-body">
         <div class="row">
             <div class="col-12">
-              <co-my-team-form (submitMyTeam)="onFormSubmit($event)" #myTeamForm></co-my-team-form>
+              <co-my-team-form [apiError]= 'apiError' [teamName]= 'teamName' (submitMyTeam)="onFormSubmit($event)" #myTeamForm></co-my-team-form>
             </div>
         </div>
     </div>

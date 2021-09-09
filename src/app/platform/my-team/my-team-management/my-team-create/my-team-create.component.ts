@@ -1,6 +1,8 @@
 import {HttpErrorResponse} from '@angular/common/http';
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
+import {Subscription} from 'rxjs';
 import {ApiError} from 'src/app/core/api-error/api-error';
 import {ApiHttpErrorResponse} from 'src/app/core/api-error/api-http-error-response';
 import {Team} from 'src/app/platform/teams/model/team.interface';
@@ -18,7 +20,7 @@ export class MyTeamCreateComponent implements OnInit {
   loading = false;
   apiError: ApiError;
 
-  constructor(private teamService: TeamsService, private router: Router) {}
+  constructor(private teamService: TeamsService, private router: Router, private toastr: ToastrService) {}
 
   ngOnInit(): void {}
 
@@ -31,7 +33,9 @@ export class MyTeamCreateComponent implements OnInit {
     this.teamService.createMyTeam(myTeamForm).subscribe(
       rs => {
         this.loading = false;
-        this.router.navigate(['platform/view/my-team/detail', rs.id]).then(() => this.onModalClose());
+        this.toastr.success(`Team has been create successfully`);
+        this.onModalClose();
+        // this.router.navigate(['platform/view/my-team/detail', rs.id]).then(() => this.onModalClose());
       },
       (httpResponseError: ApiHttpErrorResponse | HttpErrorResponse) => {
         this.loading = false;

@@ -13,6 +13,13 @@ import {markFormControlAsTouched} from 'src/app/shared/utils/mark-form-control-a
 })
 export class MyTeamFormComponent implements OnInit, OnDestroy {
   @Input()
+  set teamName(name: string) {
+    if (!name) {
+      return;
+    }
+    this.myTeamForm.reset({name});
+  }
+  @Input()
   loading: boolean;
 
   @Input()

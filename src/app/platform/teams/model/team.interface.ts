@@ -14,11 +14,13 @@ export interface Team {
   stamphash: string;
   orgid: string;
   publicDb: boolean;
-  forceCanread: string;
-  forceCanwrite: string;
-  doForceCanread: boolean;
-  doForceCanwrite: boolean;
-  visible: boolean;
+  forceCanread?: string;
+  forceCanwrite?: string;
+  doForceCanread?: boolean;
+  doForceCanwrite?: boolean;
+  visible?: boolean;
+  users?: Array<any>;
+  users2teams?: Array<any>;
 }
 
 export interface TeamDelete {
@@ -30,16 +32,20 @@ export interface TeamDelete {
 export interface User {
   name: string;
   password: string;
-  mfaSecret: string;
-  token: string;
-  limitNb: boolean;
-  scCreate: string;
-  scEdit: string;
-  scSubmit: string;
-  scTodo: string;
-  incFilesPdf: boolean;
-  pdfa: boolean;
-  lastLogin: string;
+  avatar: string;
+  userid?: string;
+  email?: string;
+  mfaSecret?: string;
+  token?: string;
+  limitNb?: boolean;
+  scCreate?: string;
+  scEdit?: string;
+  scSubmit?: string;
+  scTodo?: string;
+  incFilesPdf?: boolean;
+  pdfa?: boolean;
+  lastLogin?: string;
+  isAdded?: boolean;
 }
 
 export interface User2Team {

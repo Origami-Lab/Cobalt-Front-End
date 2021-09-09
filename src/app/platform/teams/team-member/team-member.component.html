@@ -1,9 +1,9 @@
 <section class="team-list-section">
   <div class="container container-padding-md">
     <div class="row mb-5 align-items-center">
-      <div class="col-12 d-flex justify-content-between">
-        <h1 class="heading-md mb-0">Team 001</h1>
-        <a [routerLink]="['/platform/view', {outlets: {modal: ['teams', 'management', 'add-member']}}]"
+      <div class="col-12 d-flex justify-content-between" *ngIf="team">
+        <h1 class="heading-md mb-0">{{team.name}}</h1>
+        <a [queryParams]="{id: team.id}" [routerLink]="['/platform/view', {outlets: {modal: ['teams', 'management', 'add-member']}}]"
           class="btn btn-icon-right-primary">
           Add Member
           <span class="icon-wrapper">
@@ -12,9 +12,16 @@
         </a>
       </div>
     </div>
-    <div class="row" *ngIf="memberList">
-      <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4" *ngFor="let item of memberList">
-        <co-team-card-member [memberEL]="item" [apiError]="apiError" [loading]="loading" (viewWork)="onViewMember($event)" (deleteTeam) = "onDeleteTeam($event)" (resetError)= "resetError()"></co-team-card-member>
+    <div *ngIf="loading">
+      <div class="col-12">
+        <co-loading [loading]="loading"></co-loading>
+      </div>
+    </div>
+    <div *ngIf="!loading">
+      <div class="row" *ngIf="team.users">
+        <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4" *ngFor="let item of team.users">
+          <co-team-card-member [memberEl]="item" [apiError]="apiError" [loading]="loading" (viewWork)="onViewMember($event)" (deleteTeam) = "onDeleteTeam($event)" (resetError)= "resetError()"></co-team-card-member>
+        </div>
       </div>
     </div>
   </div>
