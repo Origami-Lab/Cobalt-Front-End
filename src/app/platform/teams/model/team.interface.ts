@@ -34,7 +34,7 @@ export interface TeamDelete {
 export interface User {
   name: string;
   password: string;
-  avatar: string;
+  avatar?: string;
   userid?: string;
   email?: string;
   mfaSecret?: string;
@@ -50,12 +50,15 @@ export interface User {
   isAdded?: boolean;
   totalExperiments?: number;
   teams?: Array<UserTeam>;
+  roles?: string[];
+  users2teams?: Array<User2Team>;
 }
 
 export interface UserTeam {
   id: number | string;
   name: string;
   users2teams_id: number;
+  totalUsers?: number;
 }
 
 export interface User2Team {

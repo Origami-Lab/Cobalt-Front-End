@@ -9,7 +9,7 @@
             <p class="text-xl text-gray mb-0">Log in with your university account</p>
           </div>
           <div class="login-card-content">
-            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit($event)">
               <div class="general-error mb-2">
                 <co-form-control-errors [control]="loginForm">
                   <co-form-control-error *ngIf="loginForm.errors?.wrongLoginCredentials" class="">

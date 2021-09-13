@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {formatDate} from '@angular/common';
 import {ColumnMode, DatatableComponent} from '@swimlane/ngx-datatable';
 import {Experiment} from '../../experiments/models/experiment.interface';
@@ -14,7 +14,7 @@ import {ToastrService} from 'ngx-toastr';
   templateUrl: './journal-table.component.html',
   styleUrls: ['./journal-table.component.scss']
 })
-export class JournalTableComponent implements OnInit {
+export class JournalTableComponent implements OnInit, OnDestroy {
   @ViewChild('journalTableRef', {static: true})
   journalTable: DatatableComponent;
   @Input()
@@ -58,7 +58,13 @@ export class JournalTableComponent implements OnInit {
     pageNumber: 0
   };
   private subscription: Subscription;
-  formatJournalDate = (date: string) => formatDate(date, 'yyyy-MM-dd', 'en-US');
+  formatJournalDate = (date: string) => {
+    if (date) {
+      formatDate(date, 'yyyy-MM-dd', 'en-US');
+    } else {
+      return '';
+    }
+  };
 
   get hideColumns(): boolean {
     return this.windowSizeService.isLg;
@@ -76,6 +82,10 @@ export class JournalTableComponent implements OnInit {
         this.journalTable.rowDetail.collapseAllRows();
         this.journalTable.recalculate();
       });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   setPage(pageInfo: any): void {
