@@ -32,7 +32,7 @@ export class MyTeamCreateComponent implements OnInit {
     this.loading = true;
     this.teamService.createMyTeam(myTeamForm).subscribe(
       rs => {
-        this.addMember(rs.id);
+        // this.addMember(rs.id);
         this.loading = false;
         this.toastr.success(`Team has been create successfully`);
         this.onModalClose();

@@ -18,7 +18,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onSubmit(): void {
+  onSubmit(event: Event): void {
+    event.preventDefault();
     markFormControlAsTouched(this.loginForm);
 
     if (!this.loginForm.valid) {

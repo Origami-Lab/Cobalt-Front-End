@@ -29,7 +29,7 @@ export class TeamListComponent implements OnInit, OnDestroy {
 
   getTeamByUser(): void {
     this.authService.getUserById().subscribe(rs => {
-      this.teamList = rs.teams;
+      this.teamList = rs.teams.reverse();
     });
   }
 

@@ -68,5 +68,8 @@ export class TeamMemberComponent implements OnInit {
 
   removeDeletedUser2Team(userId: number): void {
     this.team.users = this.team.users.filter(user => user.userid !== userId);
+    if (this.team.users.length === 0 || userId.toString() === localStorage.getItem('user_id')) {
+      this.router.navigate(['/platform/view/my-team/list']);
+    }
   }
 }

@@ -56,9 +56,9 @@ export class TeamsService {
   }
 
   addMember2Team(formData: User2Team): any {
-    return this.apiHttp.post<UserEvents>('/users2teams', formData).pipe(
+    return this.apiHttp.post<User2Team>('/users2teams', formData).pipe(
       tap(rs => {
-        (this.userEvent$ as Subject<UserEvents>).next(rs);
+        this.triggerMemberEvent(new ChanageUser(rs), this.userEvent$);
       })
     );
   }
@@ -69,5 +69,9 @@ export class TeamsService {
 
   private triggerEvent(e: TeamEvents, events$: Subject<TeamEvents>): void {
     (events$ as Subject<TeamEvents>).next(e);
+  }
+
+  private triggerMemberEvent(e: UserEvents, events$: Subject<UserEvents>): void {
+    (events$ as Subject<UserEvents>).next(e);
   }
 }

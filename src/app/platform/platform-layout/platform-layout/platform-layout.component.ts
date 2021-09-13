@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {AuthService} from 'src/app/auth/auth.service';
+import {UserRolesService} from 'src/app/auth/user-role.service';
 
 @Component({
   selector: 'co-platform-layout',

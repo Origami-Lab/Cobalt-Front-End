@@ -2,7 +2,7 @@ import {Component, Input, OnInit, Output, EventEmitter, ViewChild} from '@angula
 import {Router} from '@angular/router';
 import {ApiError} from 'src/app/core/api-error/api-error';
 import {ConfirmModalComponent} from '../../platform-shared/components/confirm-modal/confirm-modal.component';
-import {Team, TeamDelete, User} from '../model/team.interface';
+import {TeamDelete, User} from '../model/team.interface';
 
 @Component({
   selector: 'co-team-card-member',
@@ -15,6 +15,9 @@ export class TeamCardMemberComponent implements OnInit {
 
   @Input()
   memberEl: User;
+
+  @Input()
+  teamId: string;
 
   @Input()
   loading: boolean;
@@ -49,10 +52,18 @@ export class TeamCardMemberComponent implements OnInit {
     this.confirmModal.openModal(name);
   }
 
+  displayDeleletion(): string {
+    if (this.memberEl.userid.toString() === localStorage.getItem('user_id')) {
+      return 'Leave Team';
+    }
+    return 'Delete';
+  }
+
   onDeleteConfirm(): void {
+    const refTeamId = this.memberEl.teams.find(el => el.id === this.teamId);
     this.deleteTeam.emit({
       modal: this.confirmModal,
-      id: this.memberEl.teams[0].users2teams_id,
+      id: refTeamId.users2teams_id,
       name: this.memberEl.name,
       userId: this.memberEl.userid
     });
