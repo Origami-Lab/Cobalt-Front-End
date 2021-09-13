@@ -1,7 +1,6 @@
-import {User} from './model/team.interface';
-
+import {User2Team} from './model/team.interface';
 export class ChanageUser {
-  constructor(public user: User) {}
+  constructor(public user: User2Team) {}
 }
 
 export type UserEvents = ChanageUser;

@@ -59,6 +59,7 @@ export interface UserTeam {
 }
 
 export interface User2Team {
+  id?: number;
   teams: string;
   users: string;
 }

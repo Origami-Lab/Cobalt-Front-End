@@ -100,7 +100,7 @@
                   <span class="align-middle icon team mr-3"></span>
                   <span class="align-middle">My Team</span>
                 </a>
-                <a
+                <a *ngIf="checkHiddenMenu()"
                   class="nav-link text-lg font-weight-600"
                   routerLink="/platform/view/manage-team/list"
                   routerLinkActive="active"
