@@ -61,8 +61,6 @@ export class JournalTableComponent implements OnInit, OnDestroy {
   formatJournalDate = (date: string) => {
     if (date) {
       formatDate(date, 'yyyy-MM-dd', 'en-US');
-    } else {
-      return '';
     }
   };
 
