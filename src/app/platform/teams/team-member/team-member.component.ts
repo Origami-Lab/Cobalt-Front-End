@@ -44,7 +44,7 @@ export class TeamMemberComponent implements OnInit {
   }
 
   onViewMember(id): void {
-    this.router.navigate(['/platform/view/journal/list', {id}]);
+    this.router.navigate(['/platform/view/experiments/list', {id}]);
   }
 
   onDeleteTeam(deleteEL: TeamDelete): void {

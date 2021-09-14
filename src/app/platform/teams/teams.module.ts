@@ -10,8 +10,16 @@ import {TeamPageComponent} from './team-page/team-page.component';
 import {TeamsRoutingModule} from './teams-routing.module';
 import {TeamCardMemberComponent} from './team-card-member/team-card-member.component';
 import {SharedModule} from 'src/app/shared/shared.module';
+import {MemberListComponent} from './member-list/member-list.component';
 @NgModule({
-  declarations: [TeamCardComponent, TeamListComponent, TeamMemberComponent, TeamPageComponent, TeamCardMemberComponent],
+  declarations: [
+    TeamCardComponent,
+    TeamListComponent,
+    TeamMemberComponent,
+    TeamPageComponent,
+    TeamCardMemberComponent,
+    MemberListComponent
+  ],
   imports: [CommonModule, BsDropdownModule, PlatformSharedModule, RouterModule, TeamsRoutingModule, SharedModule],
   exports: [TeamCardComponent, TeamListComponent]
 })

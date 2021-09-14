@@ -107,8 +107,27 @@
 }
 
 .avatar {
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   object-fit: cover;
   border-radius: 5px;
+}
+
+.notification {
+  width: 20px;
+  margin-right: 30px;
+  cursor: pointer;
+}
+
+.arrow-btn {
+  position: relative;
+  &::before {
+    position: absolute;
+    right: -18px;
+    top: 15px;
+    content: '';
+    border-right: 6px solid transparent;
+    border-top: 6px solid #7b7b7b;
+    border-left: 6px solid transparent;
+  }
 }
