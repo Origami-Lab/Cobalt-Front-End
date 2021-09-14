@@ -20,4 +20,9 @@
     width: 1.875rem;
     height: 1.875rem;
   }
+  .img-thumbnail {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+  }
 }

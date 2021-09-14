@@ -2,8 +2,9 @@
   <div class="card-header mt-0 pb-0 pt-0 d-flex align-items-center justify-content-between">
     <div class="d-flex align-items-center">
       <div class="mr-3">
-        <img [src]="memberEl.avatar ? memberEl.avatar : 'assets/icons/outlined-editor-insert-photo.svg'" alt="user"
+        <img *ngIf="memberEl.avatar" [src]="memberEl.avatar" alt="user"
           class="img-thumbnail border-0 bg-transparent">
+        <div class="name bg-yellow d-flex align-items-center justify-content-center font-bold fz-24 text-uppercase text-white" *ngIf="!memberEl.avatar">{{memberEl.name.charAt(0)}}</div>
       </div>
       <h3 class="text-lg mb-0">{{memberEl.name}}</h3>
     </div>

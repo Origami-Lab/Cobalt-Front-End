@@ -22,6 +22,12 @@ export interface Team {
   users?: Array<any>;
   users2teams?: Array<any>;
   totalUsers?: number;
+  userAvatars?: Array<MemberShortInfo>;
+}
+
+export interface MemberShortInfo {
+  avatar: string;
+  name: string;
 }
 
 export interface TeamDelete {
@@ -57,7 +63,7 @@ export interface User {
 export interface UserTeam {
   id: number | string;
   name: string;
-  users2teams_id: number;
+  users2teamsId: number;
   totalUsers?: number;
 }
 

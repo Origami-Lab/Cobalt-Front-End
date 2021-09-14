@@ -1,8 +1,8 @@
 <div class="card">
   <div class="card-header mt-0 pb-0 pt-0 d-flex align-items-center justify-content-between">
     <div class="d-flex align-items-center">
-      <div class="p-2 bg-primary-100 mr-3 border-radius-md">
-        <img src="assets/icons/outlined-editor-insert-photo.svg" alt="user"
+      <div class="p-2 bg-yellow mr-3 radius-13">
+        <img src="assets/icons/user-group.svg" alt="user"
           class="img-thumbnail border-0 bg-transparent">
       </div>
       <h3 class="text-lg mb-0">{{teamEl.name}}</h3>
@@ -27,9 +27,8 @@
   <div class="mx-4 mt-2 mb-2">
     <span class="text-gray text-xs">{{displayMember()}}</span>
   </div>
-  <div class="custom-card-footer pt-2 pb-2 text-center" *ngIf="showViewMember">
-    <button class="btn btn-ghost-primary text-primary mt-0 mb-0 pt-0 pb-0" (click)="emitViewMember(teamEl.id)">View
-      Member</button>
+  <div class="custom-card-footer pt-2 pb-2 text-center" *ngIf="showViewMember" (click)="emitViewMember(teamEl.id)">
+    <co-member-list [totalMember] = "totalMember" [memberAvartarList]="memberAvartarList"></co-member-list>
   </div>
 </div>
 

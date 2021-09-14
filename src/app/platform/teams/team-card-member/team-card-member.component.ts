@@ -63,7 +63,7 @@ export class TeamCardMemberComponent implements OnInit {
     const refTeamId = this.memberEl.teams.find(el => el.id === this.teamId);
     this.deleteTeam.emit({
       modal: this.confirmModal,
-      id: refTeamId.users2teams_id,
+      id: refTeamId.users2teamsId,
       name: this.memberEl.name,
       userId: this.memberEl.userid
     });

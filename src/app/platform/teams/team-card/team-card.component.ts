@@ -2,7 +2,7 @@ import {Component, Input, OnInit, Output, EventEmitter, ViewChild} from '@angula
 import {Router} from '@angular/router';
 import {ApiError} from 'src/app/core/api-error/api-error';
 import {ConfirmModalComponent} from '../../platform-shared/components/confirm-modal/confirm-modal.component';
-import {Team, TeamDelete} from '../model/team.interface';
+import {MemberShortInfo, Team, TeamDelete} from '../model/team.interface';
 
 @Component({
   selector: 'co-team-card',
@@ -10,6 +10,8 @@ import {Team, TeamDelete} from '../model/team.interface';
   styleUrls: ['./team-card.component.scss']
 })
 export class TeamCardComponent implements OnInit {
+  totalMember = 0;
+  memberAvartarList = [];
   @ViewChild('confirmModalRef', {static: true})
   confirmModal: ConfirmModalComponent;
 
@@ -36,7 +38,33 @@ export class TeamCardComponent implements OnInit {
 
   constructor(private router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.checkUserAvatar();
+    this.countMember();
+  }
+
+  countMember(): void {
+    if (this.teamEl.totalUsers) {
+      this.totalMember = this.teamEl.totalUsers;
+    } else {
+      this.totalMember = this.teamEl.users.length;
+    }
+  }
+  checkUserAvatar(): void {
+    if (this.teamEl.userAvatars) {
+      this.memberAvartarList = this.teamEl.userAvatars;
+    } else {
+      this.teamEl.users.map((el, index) => {
+        const info = {
+          avatar: el.avatar,
+          name: el.name
+        };
+        if (index < 3) {
+          this.memberAvartarList.push(info);
+        }
+      });
+    }
+  }
 
   stopEventPropagation(e: Event): void {
     e.preventDefault();
@@ -54,19 +82,10 @@ export class TeamCardComponent implements OnInit {
 
   displayMember(): string {
     let suffixes = '';
-    let num = 0;
-    if (this.teamEl.totalUsers) {
-      num = this.teamEl.totalUsers;
-      if (this.teamEl.totalUsers > 1) {
-        suffixes = 's';
-      }
-    } else {
-      if (this.teamEl.users.length > 1) {
-        suffixes = 's';
-      }
-      num = this.teamEl.users.length;
+    if (this.totalMember > 1) {
+      suffixes = 's';
     }
-    const memberLabel = `${num} Member${suffixes}`;
+    const memberLabel = `${this.totalMember} Member${suffixes}`;
     return memberLabel;
   }
 
