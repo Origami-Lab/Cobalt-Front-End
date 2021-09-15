@@ -1,7 +1,7 @@
 <header class="header container-fluid align-items-center">
   <div class="row justify-content-between no-gutters align-items-center">
     <div class="d-flex px-lg-0 align-items-center">
-      <div class="mr-2">
+      <div class="mr-sm-2 mr-1">
         <button class="btn icon burger-blue cursor-pointer d-inline-block d-lg-none"
           (click)="mobileNavigationService.navigationVisibility = !mobileNavigationService.navigationVisibility"></button>
       </div>
@@ -11,15 +11,15 @@
         </a>
       </h1>
     </div>
-    <div class="d-flex pr-lg-5 pr-2">
-      <div class="pr-lg-30">
-        <a class="nav-link text-lg font-weight-600"
+    <div class="d-flex pr-lg-5 pr-3">
+      <div class="pr-lg-30 pr-7">
+        <a class="text-lg font-weight-600 "
           (click)="mobileNavigationService.navigationVisibility = false">
           <span class="align-middle icon menu mr-2 "></span>
           <span class="align-middle  text-df">Workspace</span>
         </a>
       </div>
-      <img class="notification mr-lg-30 mr-10" src="assets/icons/alarm.svg" alt="Notification">
+      <img class="notification mr-lg-30 mr-7" src="assets/icons/alarm.svg" alt="Notification">
       <div class="d-flex" dropdown [autoClose]="true" placement="bottom right">
         <button *ngIf="!loading" class="btn p-0 arrow-btn" aria-controls="dropdown-user-profile" dropdownToggle>
           <img class="avatar" *ngIf="userInfo.avatar" [src]="userInfo.avatar" alt="My Cobalt">
