@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from 'src/app/auth/auth.service';
 import {UserRolesService} from 'src/app/auth/user-role.service';
-import {UserRoles} from 'src/app/core/enums/user-roles.enum';
 import {User} from '../../teams/model/team.interface';
 import {MobileNavigationService} from '../mobile-navigation.service';
 
@@ -33,22 +32,12 @@ export class PlatformHeaderComponent implements OnInit {
         rs => {
           this.userInfo = rs;
           this.userRolesService.setRoles(rs.roles);
-          this.checkHiddenMenu();
+          this.userRolesService.setUserInfo(rs);
           this.loading = false;
         },
         () => {
           this.loading = false;
         }
       );
-  }
-
-  checkHiddenMenu(): void {
-    const userRoleList = this.userRolesService.getRoles();
-    const ind = userRoleList.find(el => el === UserRoles.ROLE_ADMIN);
-    if (ind) {
-      this.isAdmin = true;
-    } else {
-      this.isAdmin = false;
-    }
   }
 }

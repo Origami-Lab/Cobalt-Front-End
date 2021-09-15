@@ -1,7 +1,10 @@
 <div class="main-page h-100 bg-gray-100">
   <co-platform-header></co-platform-header>
   <div class="main-wrapper">
-    <router-outlet></router-outlet>
+    <co-nav></co-nav>
+    <div class="flex-1 main-layout">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 </div>
 <router-outlet name="modal"></router-outlet>

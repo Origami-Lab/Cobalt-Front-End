@@ -14,6 +14,7 @@ body {
 }
 
 .main-wrapper {
+  display: flex;
   width: 100%;
   position: relative;
   &.no-side-nav {
@@ -25,7 +26,6 @@ body {
     }
   }
   @include media-breakpoint-up(lg) {
-    padding-left: 240px;
     &.no-side-nav {
       min-height: calc(100vh - 225px);
       padding-left: 0;

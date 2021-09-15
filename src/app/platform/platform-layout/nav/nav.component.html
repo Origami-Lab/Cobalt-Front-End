@@ -1,0 +1,59 @@
+<nav class="side-nav" [class.active]="mobileNavigationService.navigationVisibility || isExpanded">
+  <div class="bg"></div>
+  <div class="row border-bottom border-gray-200 mb-3 d-none d-lg-block">
+    <div class="col-12 text-right" [ngClass]="{'text-center': isExpanded}">
+      <button class="btn btn-link-white p-2" (click)="toggleMenu()">
+        <i class="icon nav-arrow" [class.active]="isExpanded"></i>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-nav-wrapper position-relative bg-white d-flex flex-column flex-grow-1 h-100">
+    <div class="mobile-nav">
+      <div class="nav-vertical-scroll custom-scrollbar-gray-darker">
+        <div class="row no-gutters">
+          <div class="col">
+            <nav class="nav flex-column text-left">
+              <ng-container class="mb-5">
+                <a class="nav-link text-lg font-weight-600" routerLink="/platform/view/dashboard"
+                  routerLinkActive="active" (click)="mobileNavigationService.navigationVisibility = false">
+                  <span class="align-middle icon dashboard mr-3" title="Dashboard"></span>
+                  <span class="align-middle menu-name">Dashboard</span>
+                </a>
+                <a class="nav-link text-lg font-weight-600" routerLink="/platform/view/experiments/list"
+                  routerLinkActive="active" (click)="mobileNavigationService.navigationVisibility = false">
+                  <span class="align-middle icon experiment mr-3" title="Experiments"></span>
+                  <span class="align-middle menu-name">Experiments</span>
+                </a>
+                <a class="nav-link text-lg font-weight-600" routerLink="/platform/view/journal/list"
+                  routerLinkActive="active" (click)="mobileNavigationService.navigationVisibility = false">
+                  <span class="align-middle icon journal mr-3" title="Journal"></span>
+                  <span class="align-middle menu-name">Journal</span>
+                </a>
+                <a class="nav-link text-lg font-weight-600" routerLink="/platform/view/reports"
+                  routerLinkActive="active" (click)="mobileNavigationService.navigationVisibility = false">
+                  <span class="align-middle icon report mr-3" title="Reports"></span>
+                  <span class="align-middle menu-name">Reports</span>
+                </a>
+                <a class="nav-link text-lg font-weight-600" routerLink="/platform/view/notebook"
+                  routerLinkActive="active" (click)="mobileNavigationService.navigationVisibility = false">
+                  <span class="align-middle icon notebook mr-3" title="Notebook"></span>
+                  <span class="align-middle menu-name">Notebook</span>
+                </a>
+                <a class="nav-link text-lg font-weight-600" routerLink="/platform/view/my-team/list"
+                  routerLinkActive="active" (click)="mobileNavigationService.navigationVisibility = false">
+                  <span class="align-middle icon team mr-3" title="My Team"></span>
+                  <span class="align-middle menu-name">My Team</span>
+                </a>
+                <a *ngIf="isAdmin" class="nav-link text-lg font-weight-600" routerLink="/platform/view/manage-team/list"
+                  routerLinkActive="active" (click)="mobileNavigationService.navigationVisibility = false">
+                  <span class="align-middle icon team mr-3" title="Manage Teams"></span>
+                  <span class="align-middle menu-name">Manage Teams</span>
+                </a>
+              </ng-container>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
