@@ -1,0 +1,102 @@
+@import '~src/scss/co-base';
+.curtain {
+  display: none;
+  &.active {
+    display: block;
+    @include media-breakpoint-up(lg) {
+      display: none;
+    }
+  }
+}
+
+.side-nav {
+  background: $white;
+  position: sticky;
+  top: $header-height;
+  width: 15rem;
+  transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: $nav-box-shadow;
+  .menu-name {
+    transition: 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 1;
+    position: relative;
+  }
+  @media (min-width: 992px) {
+    &.active {
+      width: 70px;
+      transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      .menu-name {
+        transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        opacity: 0;
+        position: absolute;
+      }
+    }
+  }
+
+  .nav-arrow {
+    transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    &.active {
+      transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transform: rotate(180deg);
+    }
+  }
+  @media (max-width: 991px) {
+    width: 0px;
+    transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    &.active {
+      width: 15rem;
+      transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      .bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba($color: #000000, $alpha: 0.4);
+      }
+    }
+  }
+
+  @media (max-width: 767px) {
+    &.active {
+      width: 100vw;
+      transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+  }
+
+  .nav-link {
+    padding: 0.625rem 1.5rem;
+    color: $gray;
+    transition: color 0.13s ease-in-out, background-color 0.13s ease-in-out;
+    position: relative;
+    &:before {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0.313rem;
+      height: 100%;
+      content: '';
+      transition: background-color 0.13s ease-in-out;
+      background-color: transparent;
+    }
+    &.active:before {
+      background-color: $blue-500;
+    }
+    &:hover {
+      background-color: $blue-50;
+    }
+    &:hover,
+    &.active {
+      color: $blue-500;
+      .icon {
+        filter: invert(49%) sepia(60%) saturate(4590%) hue-rotate(193deg) brightness(101%) contrast(101%);
+      }
+    }
+  }
+
+  .nav-vertical-scroll {
+    height: calc(100vh - #{$header-height});
+    overflow-y: auto;
+  }
+}

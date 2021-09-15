@@ -4,9 +4,10 @@ import {PlatformLayoutComponent} from './platform-layout/platform-layout.compone
 import {SharedModule} from '../../shared/shared.module';
 import {PlatformHeaderComponent} from './platform-header/platform-header.component';
 import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
+import {NavComponent} from './nav/nav.component';
 
 @NgModule({
-  declarations: [PlatformLayoutComponent, PlatformHeaderComponent],
+  declarations: [PlatformLayoutComponent, PlatformHeaderComponent, NavComponent],
   imports: [CommonModule, SharedModule, BsDropdownModule],
   exports: [PlatformLayoutComponent]
 })
