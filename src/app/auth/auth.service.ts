@@ -10,14 +10,15 @@ import {User} from '../platform/teams/model/team.interface';
   providedIn: 'root'
 })
 export class AuthService {
-  private static loginJwtToken =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJ1aWQiOiIvdXNlcnMvMSIsImlhdCI6MTUxNjIzOTAyMn0.yg_DJ9ReDJS4elmNIzDhN-LyeWUbr8qss32wmaCcwLc';
-  readonly userEvent$ = new Subject<User>();
   constructor(private authToken: AuthTokenService, private apiHttp: ApiHttpService, private userRolesService: UserRolesService) {}
+  readonly userEvent$ = new Subject<User>();
 
   login(loginCredentials: LoginCredentials): Observable<any> {
-    this.authToken.value$.next(AuthService.loginJwtToken);
-    return this.apiHttp.post('/authentication_token', loginCredentials).pipe(
+    const options = {
+      headers: this.apiHttp.headersWithNoAuthorization(),
+      withCredentials: false
+    };
+    return this.apiHttp.post('/authentication_token', loginCredentials, options).pipe(
       tap(rs => {
         this.userRolesService.setRoles(rs.data.roles);
         this.authToken.value$.next(rs.token);

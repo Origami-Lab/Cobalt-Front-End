@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
     email: ['', Validators.required],
     password: ['', Validators.required]
   });
+  loading = false;
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private ngZone: NgZone) {}
 
@@ -21,19 +22,20 @@ export class LoginComponent implements OnInit {
   onSubmit(event: Event): void {
     event.preventDefault();
     markFormControlAsTouched(this.loginForm);
-
     if (!this.loginForm.valid) {
       return;
     }
-
+    this.loading = true;
     this.authService.login(this.loginForm.value).subscribe(
       () => {
         this.router.navigateByUrl('/platform/view/experiments/list');
+        this.loading = false;
       },
       () => {
         this.ngZone.run(() => {
           this.loginForm.setErrors({wrongLoginCredentials: true});
         });
+        this.loading = false;
       }
     );
   }
