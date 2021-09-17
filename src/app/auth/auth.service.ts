@@ -27,11 +27,12 @@ export class AuthService {
     );
   }
 
-  getUserById(): Observable<any> {
-    const userId = localStorage.getItem('user_id');
+  getUserById(userId?: string | number, isUpdate: boolean = true): Observable<any> {
     return this.apiHttp.get<any>(`/users/${userId}`).pipe(
       tap(rs => {
-        (this.userEvent$ as Subject<User>).next(rs);
+        if (isUpdate) {
+          (this.userEvent$ as Subject<User>).next(rs);
+        }
       })
     );
   }
