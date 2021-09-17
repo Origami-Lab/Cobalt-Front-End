@@ -54,7 +54,7 @@ export class ExperimentFileUploadComponent implements OnInit {
       file,
       filename: file.name,
       experimentid: String(this.experiment.id),
-      userid: this.authToken.payload.uid.split('/').pop()
+      userid: localStorage.getItem('user_id')
     };
     this.attachFileLoading = true;
     this.experimentDetailsService.attachFile(fileReq).subscribe(
