@@ -61,3 +61,20 @@
     }
   }
 }
+
+#dropdown-workspace {
+  img {
+    max-width: 60px;
+    height: 50px;
+  }
+  .parent-items {
+    > div {
+      width: 98px;
+      height: 98px;
+      text-align: center;
+      &:hover {
+        background-color: rgba($color: #2962ff, $alpha: 0.2);
+      }
+    }
+  }
+}

@@ -25,8 +25,9 @@ export class PlatformHeaderComponent implements OnInit {
 
   getUserInfo(): void {
     this.loading = true;
+    const userId = localStorage.getItem('user_id');
     this.authorService
-      .getUserById()
+      .getUserById(userId)
       .pipe()
       .subscribe(
         rs => {

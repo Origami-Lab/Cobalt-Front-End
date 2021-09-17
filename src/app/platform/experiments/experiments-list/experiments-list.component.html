@@ -1,7 +1,11 @@
 <section class="experiments-list-section">
   <div class="container container-padding-md">
     <div class="row mb-3 align-items-center">
-      <div class="col-12 col-sm-6 mb-4 mb-sm-0">
+      <div *ngIf="userId" class="col-12 col-sm-6 mb-4 mb-sm-0">
+        <h1 class="heading-lg mb-0">{{userInfo?.name}}'s Experiments</h1>
+        <div class="text-primary pointer" (click)="goMyExpriment()">View My Experiments</div>
+      </div>
+      <div *ngIf="!userId" class="col-12 col-sm-6 mb-4 mb-sm-0">
         <h1 class="heading-lg mb-0">My Experiments</h1>
       </div>
       <div class="col-12 col-sm-6 text-sm-right">

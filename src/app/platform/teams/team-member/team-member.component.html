@@ -1,6 +1,9 @@
 <section class="team-list-section">
   <div class="container container-padding-md">
     <div class="row mb-5 align-items-center">
+      <div class="col-12 col-sm-6 mb-20 mb-sm-0">
+        <co-breadcrumb *ngIf="breadcrumbConfig" [breadcrumbConfig]="breadcrumbConfig"></co-breadcrumb>
+      </div>
       <div class="col-12 d-flex justify-content-between" *ngIf="team">
         <h1 class="heading-md mb-0">{{team.name}}</h1>
         <!-- <a [queryParams]="{id: team.id}" [routerLink]="['/platform/view', {outlets: {modal: ['teams', 'management', 'add-member']}}]"

@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {filter} from 'rxjs/operators';
 import {AuthService} from 'src/app/auth/auth.service';
+import {BreadcrumbConfig} from '../../platform-shared/components/breadcrumb/breadcrumb-config.interface';
 import {Team} from '../../teams/model/team.interface';
 import {EditTeam} from '../../teams/team.events';
 import {TeamsService} from '../../teams/teams.service';
@@ -25,10 +26,20 @@ export class TeamListComponent implements OnInit, OnDestroy {
     this.watchUpdate();
     this.watchCreateTeam();
     this.getTeamByUser();
+    this.setCurrentUrl();
+  }
+
+  setCurrentUrl(): void {
+    const teamUrlInfo: BreadcrumbConfig = {
+      label: 'My Team',
+      path: ['my-team', 'list']
+    };
+    localStorage.setItem('team_url', JSON.stringify(teamUrlInfo));
   }
 
   getTeamByUser(): void {
-    this.authService.getUserById().subscribe(rs => {
+    const userId = localStorage.getItem('user_id');
+    this.authService.getUserById(userId).subscribe(rs => {
       this.teamList = rs.teams.reverse();
     });
   }

@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {filter} from 'rxjs/operators';
+import {BreadcrumbConfig} from '../../platform-shared/components/breadcrumb/breadcrumb-config.interface';
 import {Team} from '../../teams/model/team.interface';
 import {EditTeam} from '../../teams/team.events';
 import {TeamsService} from '../../teams/teams.service';
@@ -23,6 +24,7 @@ export class ManageTeamsListComponent implements OnInit, OnDestroy {
     this.getTeamsList(this.pageNumber);
     this.watchUpdate();
     this.watchCreateTeam();
+    this.setCurrentUrl();
   }
 
   getTeamsList(pageNumber: number): void {
@@ -62,5 +64,13 @@ export class ManageTeamsListComponent implements OnInit, OnDestroy {
 
   removeDeletedTeam(teamId: number | string): void {
     this.teamList = this.teamList.filter(team => team.id !== teamId);
+  }
+
+  setCurrentUrl(): void {
+    const teamUrlInfo: BreadcrumbConfig = {
+      label: 'Manage Teams',
+      path: ['manage-team', 'list']
+    };
+    localStorage.setItem('team_url', JSON.stringify(teamUrlInfo));
   }
 }

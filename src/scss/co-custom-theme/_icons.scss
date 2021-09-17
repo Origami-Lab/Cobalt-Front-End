@@ -195,7 +195,7 @@
   }
 
   &.menu {
-    @include square(24px);
+    @include square(20px);
     background-image: url('#{$icons-path}menu.svg');
     @media (max-width: 991px) {
       @include square(15px);

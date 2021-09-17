@@ -13,8 +13,8 @@ export class ExperimentsService {
 
   constructor(private apiHttp: ApiHttpService) {}
 
-  getExperiments(): any {
-    return this.apiHttp.get<Experiment[]>('/experiments?page=1');
+  getExperiments(page: number, userId?: string | number): any {
+    return this.apiHttp.get<Experiment[]>(`/experiments?page=${page}&userid=${userId}`);
   }
 
   getExperimentById(experimentId: number): Observable<Experiment> {
