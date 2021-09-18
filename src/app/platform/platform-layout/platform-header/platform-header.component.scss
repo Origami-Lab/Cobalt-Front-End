@@ -51,7 +51,8 @@
   &::before {
     position: absolute;
     right: -18px;
-    top: 15px;
+    top: 50%;
+    transform: translateY(-50%);
     content: '';
     border-right: 6px solid transparent;
     border-top: 6px solid #7b7b7b;
@@ -59,6 +60,26 @@
     @media (max-width: 575px) {
       right: -15px;
     }
+  }
+}
+
+.btn-ws {
+  a {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:hover {
+      background-color: rgba($color: #000000, $alpha: 0.1);
+    }
+  }
+}
+
+.btn-ws[aria-expanded='true'] {
+  a {
+    background-color: rgba(95, 99, 104, 0.24);
   }
 }
 
