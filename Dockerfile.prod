@@ -32,7 +32,7 @@ CMD ["yarn", "start:stage"]
 FROM api_platform_client_development AS api_platform_client_build
 
 RUN set -eux; \
-  yarn build
+  yarn prod:build
 
 
 # "nginx" stage

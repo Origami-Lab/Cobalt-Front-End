@@ -1,0 +1,68 @@
+
+replicaCount: 1
+
+image:
+  repository: rg.fr-par.scw.cloud/cobalt-prod/cobalt-front-end
+  tag: latest
+  pullPolicy: Always
+
+imagePullSecrets: [{
+  name: registry-secret
+}]
+
+nameOverride: ""
+fullnameOverride: ""
+
+service:
+  type: ClusterIP
+  port: 80
+  containerPort: 80
+
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/issuer: "letsencrypt-prod"
+  hosts:
+    - host: cobalt.origamilab.ch
+      path: /
+      pathType: Prefix
+  tls:
+    - secretName: cobalt-front-end-tls
+      hosts:
+        - cobalt.origamilab.ch
+
+resources:
+#  limits:
+#    cpu: 500m
+#    memory: 500Mi
+#  requests:
+#    cpu: 500m
+#    memory: 500Mi
+
+livenessProbe:
+#  httpGet:
+#    path: /
+#    port: http
+#    scheme: HTTP
+#  initialDelaySeconds: 30
+#  periodSeconds: 30
+#  timeoutSeconds: 30
+readinessProbe:
+#  httpGet:
+#    path: /
+#    port: http
+#    scheme: HTTP
+#  initialDelaySeconds: 30
+#  periodSeconds: 30
+#  timeoutSeconds: 30
+
+tolerations: []
+
+affinity: {}
+
+configmap: {}
+
+secret: {}
+
+secretLink: {}
