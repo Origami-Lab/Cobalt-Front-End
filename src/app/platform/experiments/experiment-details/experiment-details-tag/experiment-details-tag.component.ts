@@ -82,7 +82,7 @@ export class ExperimentDetailsTagComponent implements OnInit {
     this.removeTagFromExperiment(tag.id);
   }
 
-  removeTagFromExperiment(id: number) {
+  removeTagFromExperiment(id: number): void {
     this.loading = true;
     this.experimentsService.removeTagFromExperiment(id).subscribe(
       () => {
@@ -95,7 +95,7 @@ export class ExperimentDetailsTagComponent implements OnInit {
     );
   }
 
-  removeTagFormTagList(id: number) {
+  removeTagFormTagList(id: number): void {
     this.tagItems = this.tagItems.filter(el => el.id !== id);
   }
 
