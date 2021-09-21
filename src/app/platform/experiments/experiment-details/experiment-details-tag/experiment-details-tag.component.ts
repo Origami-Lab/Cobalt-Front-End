@@ -52,7 +52,7 @@ export class ExperimentDetailsTagComponent implements OnInit {
   addItems(tagList: Labels[], label: string): void {
     const tagForm: ExperimentTag = {
       experimentId: this.experiment.id,
-      label: label,
+      label,
       color: this.randomColor()
     };
     const tag = tagList.find(el => {
