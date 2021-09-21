@@ -53,10 +53,9 @@
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-12">
-        <co-experiment-details-info [experiment]="experiment"></co-experiment-details-info>
-      </div>
+    <div class="d-lg-flex">
+      <co-experiment-details-info [experiment]="experiment"></co-experiment-details-info>
+      <co-experiment-details-tag [experiment] = "experiment" class="flex-1"></co-experiment-details-tag>
     </div>
   </div>
 </div>

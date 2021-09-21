@@ -1,0 +1,78 @@
+.input-tag {
+  form {
+    input.ng2-tag-input__text-input {
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 13px;
+      height: 32px;
+      margin-top: 3px;
+    }
+  }
+  .bootstrap {
+    tag {
+      display: none !important;
+    }
+  }
+}
+
+.render-tag {
+  > div {
+    padding: 3px 10px 3px 20px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    font-size: 13px;
+    border-radius: 30px;
+    color: #fff;
+    img {
+      max-width: 9px;
+      margin-left: 10px;
+    }
+  }
+}
+
+.tag-input {
+  input,
+  input:focus-visible {
+    border: 1px solid #ddd !important;
+    border-radius: 5px;
+    font-size: 13px;
+    height: 32px;
+    margin-top: 3px;
+    padding: 0 10px;
+    outline: none;
+  }
+
+  .fake-loading {
+    width: 177px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 32px;
+  }
+}
+
+.bs-dropdown {
+  margin-top: -23px;
+  button {
+    opacity: 0;
+  }
+
+  ul {
+    padding: 10px 15px;
+    max-height: 300px;
+    overflow-y: auto;
+    display: flex !important;
+    flex-wrap: wrap;
+    max-width: 300px;
+    list-style: none;
+    li {
+      border-radius: 30px;
+      padding: 3px 15px;
+      font-size: 13px;
+      margin-bottom: 3px;
+      color: #fff;
+      cursor: pointer;
+      margin-right: 5px;
+    }
+  }
+}

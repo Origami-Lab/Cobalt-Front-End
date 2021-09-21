@@ -10,4 +10,13 @@ export interface Experiment {
   userid: string;
   startDate: string;
   author: string;
+  experiments2labels?: Array<Experiments2labels>;
+}
+
+export interface Experiments2labels {
+  color: string;
+  experimentId: number;
+  id: number;
+  label: string;
+  labelId: number;
 }
