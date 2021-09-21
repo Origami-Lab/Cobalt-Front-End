@@ -133,7 +133,7 @@ export class ExperimentDetailsTagComponent implements OnInit {
           this.dropdown.hide();
         }
 
-        this.inputLoading;
+        this.inputLoading = false;
       });
   }
 
