@@ -64,7 +64,7 @@ export class ExperimentDetailsTagComponent implements OnInit {
     this.addTagToExperiment(tagForm);
   }
 
-  checkIsExistInTagItems(): Boolean {
+  checkIsExistInTagItems(): boolean {
     const ind = this.tagItems.findIndex(el => el.label === this.tagKey);
     if (ind > -1) {
       return true;
