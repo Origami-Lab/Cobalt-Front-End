@@ -185,7 +185,8 @@ input[type='button'] {
   }
 }
 
-.btn.loading {
+.btn.loading,
+.loading-el {
   color: transparent;
   pointer-events: none;
   cursor: not-allowed;
@@ -207,5 +208,12 @@ input[type='button'] {
     .icon-wrapper {
       display: none;
     }
+  }
+}
+
+.loading-el {
+  &:after {
+    background: url('#{$icons-path}loader-blue.svg') no-repeat 100% 100%;
+    background-size: $btn-loader-size $btn-loader-size;
   }
 }

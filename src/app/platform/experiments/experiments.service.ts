@@ -4,6 +4,7 @@ import {ApiHttpService} from 'ngx-api-utils';
 import {Experiment} from './models/experiment.interface';
 import {EditExperiment, ExperimentEvents} from './experiment.events';
 import {tap} from 'rxjs/operators';
+import {ExperimentTag, Labels} from './experiment-details/models/tag.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +36,18 @@ export class ExperimentsService {
         this.triggerEvent(new EditExperiment(experimentResponse));
       })
     );
+  }
+
+  addTagToExperiment(form: ExperimentTag): Observable<ExperimentTag> {
+    return this.apiHttp.post<ExperimentTag>('/experiments2labels', form);
+  }
+
+  removeTagFromExperiment(tagId: number): Observable<ExperimentTag> {
+    return this.apiHttp.delete<ExperimentTag>(`/experiments2labels/${tagId}`);
+  }
+
+  getAllTag(label?: string): Observable<Labels[]> {
+    return this.apiHttp.get<Labels[]>(`/labels?label=${label}`);
   }
 
   private triggerEvent(e: ExperimentEvents): void {
