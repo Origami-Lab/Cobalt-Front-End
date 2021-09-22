@@ -25,6 +25,7 @@ export class ExperimentDetailsTagComponent implements OnInit {
   tagKey: string;
   inputChange = new Subject<string>();
   inputLoading = false;
+  isOpenAddTag = false;
 
   constructor(private experimentsService: ExperimentsService) {
     this.inputChange.pipe(debounceTime(500), distinctUntilChanged()).subscribe(value => {
@@ -36,7 +37,12 @@ export class ExperimentDetailsTagComponent implements OnInit {
     this.tagItems = this.experiment.experiments2labels;
   }
 
+  toogleAddTag(): void {
+    this.isOpenAddTag = !this.isOpenAddTag;
+  }
+
   addTag(): void {
+    this.dropdown.hide();
     if (!this.checkIsExistInTagItems()) {
       this.experimentsService
         .getAllTag(this.tagKey)
@@ -62,6 +68,7 @@ export class ExperimentDetailsTagComponent implements OnInit {
       tagForm.labelId = tag.id;
     }
     this.addTagToExperiment(tagForm);
+    this.isOpenAddTag = false;
   }
 
   checkIsExistInTagItems(): boolean {
@@ -147,5 +154,6 @@ export class ExperimentDetailsTagComponent implements OnInit {
     this.addTagToExperiment(tagForm);
     this.dropdown.hide();
     this.tagKey = '';
+    this.isOpenAddTag = false;
   }
 }
