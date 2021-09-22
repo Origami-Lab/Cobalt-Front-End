@@ -31,9 +31,10 @@
 }
 
 .tag-input {
+  right: 0;
   > div.position-absolute {
     top: -5px;
-    left: 35px;
+    left: -179px;
     max-width: 0px;
     overflow: hidden;
     &.active {
