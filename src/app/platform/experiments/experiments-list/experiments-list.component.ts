@@ -50,7 +50,6 @@ export class ExperimentsListComponent implements OnInit, OnDestroy {
     });
     this.subscription = this.activeRouter.queryParams.subscribe(rs => {
       this.userId = rs.id;
-      console.log('user id', this.userId);
       if (this.userId) {
         this.getUserById(this.userId);
       }

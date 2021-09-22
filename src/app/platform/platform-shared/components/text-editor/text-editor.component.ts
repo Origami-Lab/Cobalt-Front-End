@@ -1,15 +1,19 @@
-import {Component, Input, OnInit, Output, EventEmitter, ViewChild, ElementRef, OnDestroy} from '@angular/core';
+import {Component, Input, OnInit, Output, EventEmitter, ViewChild, ElementRef, OnDestroy, ViewEncapsulation} from '@angular/core';
 import Quill from 'quill';
 import {QuillModules} from 'ngx-quill/lib/quill-editor.interfaces';
 import {BehaviorSubject, combineLatest, fromEvent, Subject, Subscription} from 'rxjs';
 import {debounceTime, filter, startWith, tap} from 'rxjs/operators';
 import {availableToolbarFeaturesConfig} from './available-toolbar-features-config.const';
 import {TextEditorContentType} from './text-editor-content.type';
-
+import BlotFormatter from 'quill-blot-formatter';
+import {ImageDrop} from 'quill-image-drop-module';
+Quill.register('modules/blotFormatter', BlotFormatter);
+Quill.register('modules/imageDrop', ImageDrop);
 @Component({
   selector: 'co-text-editor',
   templateUrl: './text-editor.component.html',
-  styleUrls: ['./text-editor.component.scss']
+  styleUrls: ['./text-editor.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class TextEditorComponent implements OnInit, OnDestroy {
   @ViewChild('quillEditorRef', {static: true})
@@ -90,7 +94,9 @@ export class TextEditorComponent implements OnInit, OnDestroy {
           undo: () => this.quillInstance.history.undo()
         }
       },
-      history: {delay: 2000, maxStack: 500, userOnly: true}
+      history: {delay: 2000, maxStack: 500, userOnly: true},
+      blotFormatter: {},
+      imageDrop: true
     } as QuillModules;
   }
 
