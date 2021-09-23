@@ -2,11 +2,18 @@ import {Component, Input, OnInit, Output, EventEmitter, ViewChild, ElementRef, O
 import Quill from 'quill';
 import {QuillModules} from 'ngx-quill/lib/quill-editor.interfaces';
 import {BehaviorSubject, combineLatest, fromEvent, Subject, Subscription} from 'rxjs';
-import {debounceTime, filter, startWith, tap} from 'rxjs/operators';
+import {debounceTime, filter, map, startWith, tap} from 'rxjs/operators';
 import {availableToolbarFeaturesConfig} from './available-toolbar-features-config.const';
 import {TextEditorContentType} from './text-editor-content.type';
 import BlotFormatter from 'quill-blot-formatter';
 import {ImageDrop} from 'quill-image-drop-module';
+import ImageUploader from 'quill-image-uploader';
+import {ExperimentDetailsService} from 'src/app/platform/experiments/experiment-details/experiment-details.service';
+import {FileUpload} from 'src/app/shared/interfaces/file-upload.interface';
+import QuillImageDropAndPaste from 'quill-image-drop-and-paste';
+
+Quill.register('modules/imageDropAndPaste', QuillImageDropAndPaste);
+Quill.register('modules/imageUploader', ImageUploader);
 Quill.register('modules/blotFormatter', BlotFormatter);
 Quill.register('modules/imageDrop', ImageDrop);
 @Component({
@@ -43,7 +50,7 @@ export class TextEditorComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   private _initialValue: TextEditorContentType;
 
-  constructor() {}
+  constructor(private experimentDetailsService: ExperimentDetailsService) {}
 
   ngOnInit(): void {
     this.addQuillIcons();
@@ -96,8 +103,23 @@ export class TextEditorComponent implements OnInit, OnDestroy {
       },
       history: {delay: 2000, maxStack: 500, userOnly: true},
       blotFormatter: {},
-      imageDrop: true
+      // imageDrop: true,
+      imageUploader: {
+        upload: file => {
+          return this.experimentDetailsService
+            .uploadFile(file)
+            .pipe(map((rs: FileUpload) => rs.contentUrl))
+            .toPromise();
+        }
+      },
+      imageDropAndPaste: {}
     } as QuillModules;
+  }
+
+  returnFile(fileURL: string): Promise<string> {
+    return new Promise(resolve => {
+      resolve(fileURL);
+    });
   }
 
   setEditorContentHeight(editorContentHeight: number): void {

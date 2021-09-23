@@ -75,4 +75,9 @@ export class ExperimentDetailsService {
   deleteLink(linkId: number): Observable<void> {
     return this.apiHttp.delete<void>(`/experiments_links/${linkId}`);
   }
+
+  uploadFile(file: File): any {
+    const transformedAttachment = transformToFormData({file, filename: file.name});
+    return this.apiHttp.post<any>(`/file_uploads`, transformedAttachment);
+  }
 }
