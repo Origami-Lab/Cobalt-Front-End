@@ -1,5 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {Experiment} from '../../models/experiment.interface';
+import {ExperimentProtocolComponent} from './experiment-protocol/experiment-protocol.component';
 
 @Component({
   selector: 'co-experiment-details-content',
@@ -7,9 +8,23 @@ import {Experiment} from '../../models/experiment.interface';
   styleUrls: ['./experiment-details-content.component.scss']
 })
 export class ExperimentDetailsContentComponent implements OnInit {
+  @ViewChild('experimentProtocolRef')
+  experimentProtocol: ExperimentProtocolComponent;
+
+  @ViewChild('experimentConclusionRef')
+  experimentConclusion: ExperimentProtocolComponent;
+
   @Input()
   experiment: Experiment;
   constructor() {}
+
+  onSaveProtocol(): void {
+    this.experimentProtocol.save();
+  }
+
+  onSaveConclusion(): void {
+    this.experimentConclusion.save();
+  }
 
   ngOnInit(): void {}
 }

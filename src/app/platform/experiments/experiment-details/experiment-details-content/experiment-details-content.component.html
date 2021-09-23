@@ -7,7 +7,7 @@
             class="btn btn-ghost-color-primary py-1"
             [disabled]="experimentProtocolRef.loading || experimentProtocolRef.saveProtocolLoading"
             [class.loading]="experimentProtocolRef.saveProtocolLoading"
-            (click)="experimentProtocolRef.save()"
+            (click)="onSaveProtocol()"
           >Save</button>
           <co-experiment-protocol [experiment]="experiment" #experimentProtocolRef></co-experiment-protocol>
         </co-resizable-box>
@@ -27,7 +27,7 @@
             class="btn btn-ghost-color-primary py-1"
             [disabled]="experimentConclusionRef.loading || experimentConclusionRef.saveConclusionLoading"
             [class.loading]="experimentConclusionRef.saveConclusionLoading"
-            (click)="experimentConclusionRef.save()"
+            (click)="onSaveConclusion()"
           >Save</button>
           <co-experiment-conclusion [experiment]="experiment" #experimentConclusionRef></co-experiment-conclusion>
         </co-resizable-box>

@@ -7,12 +7,13 @@
             [experiment]="experiment"
             (openConfirmModal)="onConfirmModalOpen()"
             (openSideNav)="sideNavRef.toggleNavExpand()"
+            (routerLeave) ="onLeaveRouter()"
           ></co-experiment-details-header>
         </div>
       </div>
       <div class="row">
         <div class="col-12">
-          <co-experiment-details-content
+          <co-experiment-details-content #experimentDetailContentRef
             [experiment]="experiment"
           ></co-experiment-details-content>
         </div>
