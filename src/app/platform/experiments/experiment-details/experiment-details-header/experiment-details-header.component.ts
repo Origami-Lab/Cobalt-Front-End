@@ -1,6 +1,7 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {Experiment} from '../../models/experiment.interface';
 import {BreadcrumbConfig} from '../../../platform-shared/components/breadcrumb/breadcrumb-config.interface';
+import {ExperimentDetailsInfoComponent} from '../experiment-details-shared/components/experiment-details-info/experiment-details-info.component';
 
 @Component({
   selector: 'co-experiment-details-header',
@@ -21,8 +22,12 @@ export class ExperimentDetailsHeaderComponent implements OnInit {
   }
   @Output()
   openConfirmModal = new EventEmitter<void>();
+
   @Output()
   openSideNav = new EventEmitter<void>();
+
+  @Output()
+  onLeaveRouter = new EventEmitter<void>();
 
   breadcrumbConfig: BreadcrumbConfig[];
   private _experiment: Experiment;
@@ -50,5 +55,9 @@ export class ExperimentDetailsHeaderComponent implements OnInit {
 
   onSideNavOpen(): void {
     this.openSideNav.emit();
+  }
+
+  checkUpdate(): void {
+    this.onLeaveRouter.emit();
   }
 }

@@ -10,7 +10,7 @@
         <co-breadcrumb *ngIf="breadcrumbConfig" [breadcrumbConfig]="breadcrumbConfig"></co-breadcrumb>
       </div>
       <div class="col-12 col-sm-6 text-sm-right">
-        <a
+        <a (click) = 'checkUpdate()'
           [routerLink]="['/platform/view', {outlets: {modal: ['experiments', 'record', experiment.id]}}]"
           class="btn btn-primary">View Journal</a>
       </div>
@@ -54,7 +54,7 @@
       </div>
     </div>
     <div class="d-lg-flex">
-      <co-experiment-details-info [experiment]="experiment"></co-experiment-details-info>
+      <co-experiment-details-info [experiment]="experiment" #experimentDetailInfoRef></co-experiment-details-info>
       <co-experiment-details-tag [experiment] = "experiment" class="flex-1"></co-experiment-details-tag>
     </div>
   </div>
