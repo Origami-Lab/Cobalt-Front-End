@@ -27,7 +27,7 @@ export class ExperimentDetailsHeaderComponent implements OnInit {
   openSideNav = new EventEmitter<void>();
 
   @Output()
-  onLeaveRouter = new EventEmitter<void>();
+  routerLeave = new EventEmitter<void>();
 
   breadcrumbConfig: BreadcrumbConfig[];
   private _experiment: Experiment;
@@ -58,6 +58,6 @@ export class ExperimentDetailsHeaderComponent implements OnInit {
   }
 
   checkUpdate(): void {
-    this.onLeaveRouter.emit();
+    this.routerLeave.emit();
   }
 }
