@@ -109,6 +109,10 @@ export class ExperimentRecordModalComponent implements OnInit {
     );
   }
 
+  exportToWord(): void {
+    console.log('export to word');
+  }
+
   onEdit(): void {
     this.router.navigate(['/platform/view/experiments/details', this.experiment.id]).then(() => this.onModalClose());
   }
