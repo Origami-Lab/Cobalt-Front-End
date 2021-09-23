@@ -1,4 +1,4 @@
-export interface fileUpload {
+export interface FileUpload {
   contentUrl: string;
   filePath: string;
   filename: string;

@@ -9,7 +9,7 @@ import BlotFormatter from 'quill-blot-formatter';
 import {ImageDrop} from 'quill-image-drop-module';
 import ImageUploader from 'quill-image-uploader';
 import {ExperimentDetailsService} from 'src/app/platform/experiments/experiment-details/experiment-details.service';
-import {fileUpload} from 'src/app/shared/interfaces/file-upload.interface';
+import {FileUpload} from 'src/app/shared/interfaces/file-upload.interface';
 import QuillImageDropAndPaste from 'quill-image-drop-and-paste';
 
 Quill.register('modules/imageDropAndPaste', QuillImageDropAndPaste);
@@ -108,7 +108,7 @@ export class TextEditorComponent implements OnInit, OnDestroy {
         upload: file => {
           return this.experimentDetailsService
             .uploadFile(file)
-            .pipe(map((rs: fileUpload) => rs.contentUrl))
+            .pipe(map((rs: FileUpload) => rs.contentUrl))
             .toPromise();
         }
       },
