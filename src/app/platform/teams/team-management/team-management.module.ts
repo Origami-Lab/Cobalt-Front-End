@@ -9,9 +9,11 @@ import {AddMemberComponent} from './add-member/add-member.component';
 import {TeamSearchComponent} from './team-search/team-search.component';
 import {PlatformSharedModule} from '../../platform-shared/platform-shared.module';
 import {SharedModule} from 'src/app/shared/shared.module';
+import {TeamsModule} from '../teams.module';
+import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
 
 @NgModule({
   declarations: [TeamCreateComponent, TeamEditComponent, TeamFormComponent, AddMemberComponent, TeamSearchComponent],
-  imports: [CommonModule, TeamManagementRoutingModule, CoModalModule, PlatformSharedModule, SharedModule]
+  imports: [CommonModule, TeamManagementRoutingModule, CoModalModule, PlatformSharedModule, SharedModule, TeamsModule, BsDropdownModule]
 })
 export class TeamManagementModule {}

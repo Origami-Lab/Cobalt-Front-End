@@ -4,7 +4,10 @@ import {ApiHttpService} from 'ngx-api-utils';
 import {Team, User, User2Team} from './model/team.interface';
 import {EditTeam, TeamEvents} from './team.events';
 import {tap} from 'rxjs/operators';
-import {ChanageUser, UserEvents} from './user.events';
+
+export interface UserWithTeam extends User {
+  teamId?: string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +15,7 @@ import {ChanageUser, UserEvents} from './user.events';
 export class TeamsService {
   readonly events$ = new Subject<TeamEvents>();
   readonly createEvent$ = new Subject<TeamEvents>();
-  readonly userEvent$ = new Subject<UserEvents>();
+  readonly memberEvent$ = new Subject<UserWithTeam>();
   constructor(private apiHttp: ApiHttpService) {}
 
   getTeamsList(page: number, sortBy: string = 'desc'): Observable<Team[]> {
@@ -43,8 +46,8 @@ export class TeamsService {
     return this.apiHttp.get<User2Team[]>(`/users2teams`);
   }
 
-  getAllUser(): Observable<User[]> {
-    return this.apiHttp.get<User[]>('/users');
+  getUser(keySearch?: string): Observable<User[]> {
+    return this.apiHttp.get<User[]>(`/users?query=${keySearch}`);
   }
 
   updateTeam(id: string, teamForm): any {
@@ -55,10 +58,10 @@ export class TeamsService {
     );
   }
 
-  addMember2Team(formData: User2Team): any {
+  addMember2Team(formData: User2Team, user: UserWithTeam): any {
     return this.apiHttp.post<User2Team>('/users2teams', formData).pipe(
-      tap(rs => {
-        this.triggerMemberEvent(new ChanageUser(rs), this.userEvent$);
+      tap(() => {
+        this.memberEvent$.next(user);
       })
     );
   }
@@ -69,9 +72,5 @@ export class TeamsService {
 
   private triggerEvent(e: TeamEvents, events$: Subject<TeamEvents>): void {
     (events$ as Subject<TeamEvents>).next(e);
-  }
-
-  private triggerMemberEvent(e: UserEvents, events$: Subject<UserEvents>): void {
-    (events$ as Subject<UserEvents>).next(e);
   }
 }

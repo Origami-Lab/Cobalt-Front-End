@@ -25,6 +25,7 @@ export class ManageTeamsListComponent implements OnInit, OnDestroy {
     this.watchUpdate();
     this.watchCreateTeam();
     this.setCurrentUrl();
+    this.watchInviteMember();
   }
 
   getTeamsList(pageNumber: number): void {
@@ -46,6 +47,17 @@ export class ManageTeamsListComponent implements OnInit, OnDestroy {
   watchCreateTeam(): void {
     this.subscription = this.teamsService.createEvent$.pipe(filter(e => e instanceof EditTeam)).subscribe(({team}) => {
       this.teamList.unshift(team);
+    });
+  }
+
+  watchInviteMember(): void {
+    this.subscription = this.teamsService.memberEvent$.pipe().subscribe(rs => {
+      this.teamList = this.teamList.map(team => {
+        if (team.id.toString() === rs.teamId) {
+          team.users.push(rs);
+        }
+        return team;
+      });
     });
   }
 

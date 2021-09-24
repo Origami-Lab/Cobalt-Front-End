@@ -14,7 +14,7 @@
     </div>
     <div class="row" *ngIf="teamList">
       <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4" *ngFor="let item of teamList">
-        <co-team-card [showViewMember]="showViewMember" [teamEl]="item" [apiError]="apiError" [loading]="loading"
+        <co-team-card [isShowInvite]="isShowInvite" [showViewMember]="showViewMember" [teamEl]="item" [apiError]="apiError" [loading]="loading"
           (viewMember)="onViewMember($event)" (deleteTeam)="onDeleteTeam($event)" (resetError)="resetError()">
         </co-team-card>
       </div>

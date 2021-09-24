@@ -2,8 +2,7 @@
   <div class="card-header mt-0 pb-0 pt-0 d-flex align-items-center justify-content-between">
     <div class="d-flex align-items-center">
       <div class="p-2 bg-yellow mr-3 radius-13">
-        <img src="assets/icons/user-group.svg" alt="user"
-          class="img-thumbnail border-0 bg-transparent">
+        <img src="assets/icons/user-group.svg" alt="user" class="img-thumbnail border-0 bg-transparent">
       </div>
       <h3 class="text-lg mb-0">{{teamEl.name}}</h3>
     </div>
@@ -27,10 +26,17 @@
   <div class="mx-4 mt-2 mb-2">
     <span class="text-gray text-xs">{{displayMember()}}</span>
   </div>
-  <div class="custom-card-footer pt-2 pb-2 text-center" *ngIf="showViewMember" (click)="emitViewMember(teamEl.id)">
-    <co-member-list [totalMember] = "totalMember" [memberAvartarList]="memberAvartarList"></co-member-list>
+  <div class="custom-card-footer pt-2 pb-2 text-center d-flex justify-content-center" *ngIf="showViewMember"
+    (click)="emitViewMember(teamEl.id)">
+    <co-member-list [totalMember]="totalMember" [memberAvartarList]="memberAvartarList"></co-member-list>
+    <a *ngIf="isShowInvite" (click)="stopEventPropagation($event)" [queryParams]="{id: teamEl.id}"
+      [routerLink]="['/platform/view', {outlets: {modal: ['teams', 'management', 'add-member']}}]"
+      class="d-flex align-items-center btn py-1 px-10 text-cap border radius-5 btn-sm ml-2">
+      <span class="align-middle icon team mr-2" title="Invite"></span>Invite
+    </a>
   </div>
 </div>
 
-<co-confirm-modal [closeOutside]="true" [loading]="loading" [apiError]="apiError" (confirmDelete)="onDeleteConfirm()" #confirmModalRef>
+<co-confirm-modal [closeOutside]="true" [loading]="loading" [apiError]="apiError" (confirmDelete)="onDeleteConfirm()"
+  #confirmModalRef>
 </co-confirm-modal>
