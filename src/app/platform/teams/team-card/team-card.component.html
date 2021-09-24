@@ -29,7 +29,7 @@
   <div class="custom-card-footer pt-2 pb-2 text-center d-flex justify-content-center" *ngIf="showViewMember"
     (click)="emitViewMember(teamEl.id)">
     <co-member-list [totalMember]="totalMember" [memberAvartarList]="memberAvartarList"></co-member-list>
-    <a *ngIf="isShowInvite" (click)="stopEventPropagation($event)" [queryParams]="{id: teamEl.id}"
+    <a (click)="stopEventPropagation($event)" [queryParams]="{id: teamEl.id}"
       [routerLink]="['/platform/view', {outlets: {modal: ['teams', 'management', 'add-member']}}]"
       class="d-flex align-items-center btn py-1 px-10 text-cap border radius-5 btn-sm ml-2">
       <span class="align-middle icon team mr-2" title="Invite"></span>Invite

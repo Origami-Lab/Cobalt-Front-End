@@ -29,7 +29,7 @@ export class TeamCardComponent implements OnInit {
   showViewMember = true;
 
   @Input()
-  isShowInvite = false;
+  isShowInvite = true;
 
   @Output()
   viewMember = new EventEmitter<number | string>();
