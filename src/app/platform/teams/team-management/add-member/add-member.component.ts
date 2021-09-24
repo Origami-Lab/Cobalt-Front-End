@@ -149,7 +149,7 @@ export class AddMemberComponent implements OnInit {
   }
 
   stopPropagation(e: Event): void {
-    e.stopPropagation;
-    e.preventDefault;
+    e.stopPropagation();
+    e.preventDefault();
   }
 }
