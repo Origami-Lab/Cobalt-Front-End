@@ -24,7 +24,7 @@
              <p class="mb-0 fz-13">{{item.email}}</p>
            </div>
          </li>
-         <li class="p-10" *ngIf="userList.length === 0" (click)="stopPropagation()">No users were found</li>
+         <li class="p-10" *ngIf="userList.length === 0" (click)="stopPropagation($event)">No users were found</li>
         </ul>
       </div>
     </div>

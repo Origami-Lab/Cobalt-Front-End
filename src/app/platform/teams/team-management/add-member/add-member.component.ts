@@ -114,7 +114,7 @@ export class AddMemberComponent implements OnInit {
 
   addMember(user: User): void {
     this.loading = true;
-    let userWithTeam: UserWithTeam = user;
+    const userWithTeam: UserWithTeam = user;
     userWithTeam.teamId = this.teamId;
     const params: User2Team = {
       teams: `/teams/${this.teamId}`,
