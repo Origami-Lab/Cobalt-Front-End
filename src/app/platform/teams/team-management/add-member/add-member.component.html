@@ -14,7 +14,7 @@
       </button>
       <div id="dropdown-user-list" *dropdownMenu class="dropdown-menu py-0">
         <ul>
-         <li class="d-flex p-10" *ngFor="let item of userList" (click)="inviteUser(item)">
+         <li class="d-flex p-10 position-relative" [ngClass]="{'not-allow': item.isInvite}" *ngFor="let item of userList" (click)="inviteUser(item)">
            <div class="avatar">  
             <img *ngIf="item.avatar" [src]="item.avatar" />
             <span *ngIf="!item.avatar">{{item.name.charAt(0)}}</span>
@@ -23,6 +23,7 @@
              <p class="mb-0 fz-13 font-bold">{{item.name}}</p>
              <p class="mb-0 fz-13">{{item.email}}</p>
            </div>
+           <img *ngIf="item.isInvite" class="check-icon" src="assets/icons/check.svg"/>
          </li>
          <li class="p-10" *ngIf="userList.length === 0" (click)="stopPropagation($event)">No users were found</li>
         </ul>

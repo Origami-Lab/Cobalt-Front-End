@@ -39,9 +39,15 @@
       list-style: none;
       margin: 0;
       padding: 0;
+      max-height: 500px;
+      overflow-y: auto;
       li {
         border-bottom: 1px solid #ddd;
         cursor: pointer;
+        &.not-allow {
+          cursor: not-allowed;
+          background-color: rgba($color: royalblue, $alpha: 0.1);
+        }
         &:hover {
           background-color: rgba($color: royalblue, $alpha: 0.1);
         }
@@ -77,6 +83,13 @@
               border: 1px solid #a8aeb5;
             }
           }
+        }
+
+        .check-icon {
+          width: 15px;
+          top: 23px;
+          right: 15px;
+          position: absolute;
         }
       }
     }

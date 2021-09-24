@@ -8,6 +8,9 @@ import {CoModalLayoutComponent} from 'src/app/shared/co-modal/co-modal-layout/co
 import {MemberShortInfo, Team, User, User2Team, UserTeam} from '../../model/team.interface';
 import {TeamsService, UserWithTeam} from '../../teams.service';
 
+export interface UserList extends User {
+  isInvite?: boolean;
+}
 @Component({
   selector: 'co-add-member',
   templateUrl: './add-member.component.html',
@@ -19,7 +22,7 @@ export class AddMemberComponent implements OnInit {
 
   @ViewChild('dropdown') dropdown: BsDropdownDirective;
 
-  userList: User[];
+  userList: UserList[];
   loading = false;
   subscription: Subscription;
   teamId: string;
@@ -66,14 +69,17 @@ export class AddMemberComponent implements OnInit {
       });
   }
 
-  filterUserUnInvite(user: User[]): void {
-    this.userList = user.filter(item => {
+  filterUserUnInvite(user: UserList[]): void {
+    this.userList = user.map(item => {
       const userInfo = this.teamInfo.users.find(el => {
         return el.userid === item.userid;
       });
       if (!userInfo) {
-        return item;
+        item.isInvite = false;
+      } else {
+        item.isInvite = true;
       }
+      return item;
     });
   }
 
@@ -143,9 +149,12 @@ export class AddMemberComponent implements OnInit {
     }
   }
 
-  inviteUser(user: User): void {
-    this.addMember(user);
+  inviteUser(user: UserList): void {
     this.keySearch = '';
+    if (user.isInvite) {
+      return;
+    }
+    this.addMember(user);
   }
 
   stopPropagation(e: Event): void {
