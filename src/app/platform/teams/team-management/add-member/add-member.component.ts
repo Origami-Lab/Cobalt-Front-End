@@ -68,10 +68,10 @@ export class AddMemberComponent implements OnInit {
 
   filterUserUnInvite(user: User[]): void {
     this.userList = user.filter(item => {
-      const user = this.teamInfo.users.find(el => {
+      const userInfo = this.teamInfo.users.find(el => {
         return el.userid === item.userid;
       });
-      if (!user) {
+      if (!userInfo) {
         return item;
       }
     });
