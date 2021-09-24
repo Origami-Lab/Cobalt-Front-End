@@ -21,6 +21,6 @@ import {MemberListComponent} from './member-list/member-list.component';
     MemberListComponent
   ],
   imports: [CommonModule, BsDropdownModule, PlatformSharedModule, RouterModule, TeamsRoutingModule, SharedModule],
-  exports: [TeamCardComponent, TeamListComponent]
+  exports: [TeamCardComponent, TeamListComponent, MemberListComponent]
 })
 export class TeamsModule {}

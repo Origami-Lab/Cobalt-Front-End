@@ -1,7 +1,8 @@
 <div class="member-list" *ngIf="memberAvartarList">
   <ul>
-    <li>
-      <span *ngIf="totalMember > memberAvartarList.length" class="number">{{totalMember - memberAvartarList.length}}</span>
+    <li *ngIf="totalMember > memberAvartarList.length">
+      <span class="number">{{totalMember -
+        memberAvartarList.length}}</span>
     </li>
     <li *ngFor="let item of memberAvartarList">
       <img *ngIf="item.avatar" [src]="item.avatar" />

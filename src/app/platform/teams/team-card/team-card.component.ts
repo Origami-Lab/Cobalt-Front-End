@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {ApiError} from 'src/app/core/api-error/api-error';
 import {ConfirmModalComponent} from '../../platform-shared/components/confirm-modal/confirm-modal.component';
 import {MemberShortInfo, Team, TeamDelete} from '../model/team.interface';
+import {TeamsService} from '../teams.service';
 
 @Component({
   selector: 'co-team-card',
@@ -11,7 +12,7 @@ import {MemberShortInfo, Team, TeamDelete} from '../model/team.interface';
 })
 export class TeamCardComponent implements OnInit {
   totalMember = 0;
-  memberAvartarList = [];
+  memberAvartarList: MemberShortInfo[] = [];
   @ViewChild('confirmModalRef', {static: true})
   confirmModal: ConfirmModalComponent;
 
@@ -27,6 +28,9 @@ export class TeamCardComponent implements OnInit {
   @Input()
   showViewMember = true;
 
+  @Input()
+  isShowInvite = false;
+
   @Output()
   viewMember = new EventEmitter<number | string>();
 
@@ -36,7 +40,7 @@ export class TeamCardComponent implements OnInit {
   @Output()
   resetError = new EventEmitter();
 
-  constructor(private router: Router) {}
+  constructor(private teamsService: TeamsService) {}
 
   ngOnInit(): void {
     this.checkUserAvatar();

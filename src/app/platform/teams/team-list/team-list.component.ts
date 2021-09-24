@@ -20,6 +20,9 @@ export class TeamListComponent implements OnInit {
   showViewMember = true;
 
   @Input()
+  isShowInvite = false;
+
+  @Input()
   title: string;
 
   @Output()

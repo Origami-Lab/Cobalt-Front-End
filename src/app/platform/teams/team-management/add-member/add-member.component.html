@@ -1,30 +1,42 @@
 <co-modal-layout [config]="{show: true, backdrop: 'static', keyboard: false}" #coModalLayoutRef>
-  <div class="modal-header d-flex justify-content-between">
-    <h3 class="heading-lg">Add Member</h3>
-    <co-team-search></co-team-search>
-  </div>
-  <div class="modal-body">
-    <div class="row">
-      <div class="col-12">
-        <div class="table-responsive">
-          <table class="table table-bordered">
-            <tr>
-              <th>Name</th>
-              <th></th>
-            </tr>
-            <tr *ngFor="let item of userList">
-              <td>{{item.name}}</td>
-              <td>
-                <button *ngIf="!item.isAdded" class="px-4 btn btn-primary" [disabled]="loading" [class.loading]="loading" (click)="addMember(item.userid)">Add</button>
-                <button *ngIf="item.isAdded" class="btn btn-danger" [disabled]="loading" [class.loading]="loading" (click)="removeMember(item.userid)">Remove</button>
-              </td>
-            </tr>
-          </table>
-        </div>
+  <div class="add-member">
+    <h3 class="font-bold mb-15">Add user to <span class="text-uppercase">{{teamInfo?.name}}</span></h3>
+    <i class="icon close align-middle" ></i>
+    <div class="line">
+      <span class="text-primary font-bold">Share</span>
+    </div>
+
+    <h4 class="mt-30 font-bold">Search User</h4>
+    <input [(ngModel)]="keySearch" (ngModelChange)="searchDebounce($event)" class="position-relative w-100 border radius-5 mt-20 p-10" type="text" placeholder="Add project members by name or email..." />
+    <p *ngIf="inputLoading" class="fz-13">Loading...</p>
+    <div dropdown #dropdown="bs-dropdown" class="bs-dropdown position-relative" [autoClose]="true">
+      <button dropdownToggle type="button">
+      </button>
+      <div id="dropdown-user-list" *dropdownMenu class="dropdown-menu py-0">
+        <ul>
+         <li class="d-flex p-10" *ngFor="let item of userList" (click)="inviteUser(item)">
+           <div class="avatar">  
+            <img *ngIf="item.avatar" [src]="item.avatar" />
+            <span *ngIf="!item.avatar">{{item.name.charAt(0)}}</span>
+           </div>
+           <div class="pl-10">
+             <p class="mb-0 fz-13 font-bold">{{item.name}}</p>
+             <p class="mb-0 fz-13">{{item.email}}</p>
+           </div>
+         </li>
+         <li class="p-10" *ngIf="userList.length === 0" (click)="stopPropagation()">No users were found</li>
+        </ul>
       </div>
     </div>
-  </div>
-  <div class="modal-footer">
-    <button class="btn btn-ghost-primary" (click)="onModalClose()">Close</button>
+
+    <div class="d-flex justify-content-between pt-40 border-bottom pb-30">
+      <div class="fz-14 d-flex align-items-center">
+        <co-member-list *ngIf="memberAvartarList" [totalMember] = "totalMember" [memberAvartarList]="memberAvartarList"></co-member-list>
+        <span class="ml-2" *ngIf="memberAvartarList">{{memberAvartarList[0]?.name}} {{showOtherMember(totalMember)}}</span>
+      </div>
+      <div class="text-primary font-bold">View all member</div>
+    </div>
+    <div class="py-30 border-top mt-35 footer">
+    </div>
   </div>
 </co-modal-layout>
