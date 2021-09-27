@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Subject} from 'rxjs';
 import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 import {AuthService} from 'src/app/auth/auth.service';
+import {Page} from 'src/app/platform/journal/models/page.interface';
 import {User} from 'src/app/platform/teams/model/team.interface';
 import {UserDropDown} from '../../manage-users.interface';
 
@@ -17,6 +18,9 @@ export class ManageUsersListContentComponent implements OnInit {
   @Input()
   userList: User[];
 
+  @Input()
+  page: Page;
+
   @Output()
   userDeleted = new EventEmitter<User>();
 
@@ -25,6 +29,9 @@ export class ManageUsersListContentComponent implements OnInit {
 
   @Output()
   itemSelected = new EventEmitter<UserDropDown>();
+
+  @Output()
+  changePage = new EventEmitter<Page>();
 
   dropdownList: UserDropDown[];
   constructor(private authService: AuthService) {
@@ -56,5 +63,9 @@ export class ManageUsersListContentComponent implements OnInit {
 
   searchDebounce($event: string): void {
     this.inputChange.next($event);
+  }
+
+  onChangePage(page: Page): void {
+    this.changePage.emit(page);
   }
 }

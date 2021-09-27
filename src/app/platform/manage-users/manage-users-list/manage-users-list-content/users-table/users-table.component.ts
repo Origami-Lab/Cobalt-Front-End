@@ -1,9 +1,10 @@
 import {formatDate} from '@angular/common';
-import {Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {ColumnMode} from '@swimlane/ngx-datatable';
 import {ToastrService} from 'ngx-toastr';
 import {finalize} from 'rxjs/operators';
 import {AuthService} from 'src/app/auth/auth.service';
+import {CountUser} from 'src/app/auth/model/auth.interface';
 import {WindowSizeService} from 'src/app/core/utils/window-size.service';
 import {Page} from 'src/app/platform/journal/models/page.interface';
 import {ConfirmModalComponent} from 'src/app/platform/platform-shared/components/confirm-modal/confirm-modal.component';
@@ -22,6 +23,9 @@ export class UsersTableComponent implements OnInit {
   userList: User[];
 
   @Input()
+  page: Page;
+
+  @Input()
   userRoles: UserDropDown[];
 
   @Output()
@@ -30,14 +34,11 @@ export class UsersTableComponent implements OnInit {
   @Output()
   userDeleted = new EventEmitter<User>();
 
-  page: Page = {
-    size: 10,
-    pageNumber: 0
-  };
   loading = false;
   ColumnMode = ColumnMode;
   roleList: UserDropDown[];
   currentUser: User;
+  totalUser = 0;
   columns = [
     {
       canAutoResize: true,
@@ -68,7 +69,9 @@ export class UsersTableComponent implements OnInit {
 
   constructor(private windowSizeService: WindowSizeService, private authService: AuthService, private toastr: ToastrService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.countUser();
+  }
 
   fomatDate(date: string): string {
     if (date) {
@@ -122,5 +125,11 @@ export class UsersTableComponent implements OnInit {
           this.toastr.error(`Can not delete ${this.currentUser.email}`);
         }
       );
+  }
+
+  countUser(): void {
+    this.authService.coutUser().subscribe((rs: CountUser) => {
+      this.totalUser = rs.total;
+    });
   }
 }
