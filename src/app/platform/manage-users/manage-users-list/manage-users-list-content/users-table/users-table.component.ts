@@ -98,7 +98,7 @@ export class UsersTableComponent implements OnInit {
     return this.windowSizeService.isLg;
   }
 
-  removeUser(userItem: User) {
+  removeUser(userItem: User): void {
     this.confirmModal.openModal(userItem.email);
     this.currentUser = userItem;
   }

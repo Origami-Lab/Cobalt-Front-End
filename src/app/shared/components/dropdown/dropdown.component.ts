@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, SimpleChange} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {UserDropDown} from 'src/app/platform/manage-users/manage-users.interface';
 
 @Component({
@@ -6,7 +6,7 @@ import {UserDropDown} from 'src/app/platform/manage-users/manage-users.interface
   templateUrl: './dropdown.component.html',
   styleUrls: ['./dropdown.component.scss']
 })
-export class DropdownComponent implements OnInit {
+export class DropdownComponent implements OnInit, OnChanges {
   defaultSelection: UserDropDown;
   dropList: UserDropDown[] = [];
   @Input()
@@ -19,9 +19,9 @@ export class DropdownComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  ngOnChanges(change: SimpleChange): void {
-    if (change['dropdownList']) {
-      this.dropList = change['dropdownList'].currentValue;
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.dropdownList) {
+      this.dropList = changes.dropdownList.currentValue;
       const filterAll = {
         name: '',
         label: 'All'

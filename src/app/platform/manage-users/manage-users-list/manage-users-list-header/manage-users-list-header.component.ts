@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {finalize} from 'rxjs/operators';
 import {AuthService} from 'src/app/auth/auth.service';
 import {Count, CountUser} from 'src/app/auth/model/auth.interface';
@@ -10,7 +10,7 @@ import {ManageUsersCreateComponent} from '../../manage-users-create/manage-users
   templateUrl: './manage-users-list-header.component.html',
   styleUrls: ['./manage-users-list-header.component.scss']
 })
-export class ManageUsersListHeaderComponent implements OnInit {
+export class ManageUsersListHeaderComponent implements OnInit, OnChanges {
   userCount: CountUser;
   countLoading = false;
   @ViewChild('userModalRef')
@@ -29,7 +29,7 @@ export class ManageUsersListHeaderComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes && changes['updateNumber'] && changes['updateNumber'].currentValue) {
+    if (changes && changes.updateNumber && changes.updateNumber.currentValue) {
       this.countUser();
     }
   }
