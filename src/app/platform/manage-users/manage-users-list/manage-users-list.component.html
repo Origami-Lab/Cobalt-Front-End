@@ -1,0 +1,6 @@
+<div>
+  <div class="container container-padding-md">
+    <co-manage-users-list-header [updateNumber] = "updateNumber" (userCreated) ='onUserCreated()'></co-manage-users-list-header>
+    <co-manage-users-list-content *ngIf="userList" [userList] = 'userList' (userDeleted) = "userDeleted($event)" (itemSelected) = "itemSelected($event)" (search) = search($event)></co-manage-users-list-content>
+  </div>
+</div>

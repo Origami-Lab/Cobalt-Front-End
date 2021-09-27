@@ -1,0 +1,29 @@
+.bs-dropdown {
+  button {
+    line-height: 5px;
+    border: none;
+    padding: 0;
+    margin: 0;
+    outline: none;
+    color: #7b7b7b;
+    background: transparent;
+  }
+
+  .dropdown-menu {
+    width: 200px;
+  }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    li {
+      &:hover {
+        background-color: rgba($color: royalblue, $alpha: 0.1);
+      }
+    }
+  }
+}
+
+ngx-datatable {
+  box-shadow: none !important;
+}

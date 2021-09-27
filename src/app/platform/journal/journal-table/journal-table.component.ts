@@ -58,11 +58,11 @@ export class JournalTableComponent implements OnInit, OnDestroy {
     pageNumber: 0
   };
   private subscription: Subscription;
-  formatJournalDate(date: string): void {
+  formatJournalDate(date: string): string {
     if (date) {
-      formatDate(date, 'yyyy-MM-dd', 'en-US');
+      return formatDate(date, 'yyyy-MM-dd', 'en-US');
     } else {
-      return null;
+      return '';
     }
   }
 

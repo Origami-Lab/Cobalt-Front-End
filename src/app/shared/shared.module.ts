@@ -8,9 +8,11 @@ import {FormControlErrorComponent} from './components/form-control-errors/form-c
 import {FormControlErrorsComponent} from './components/form-control-errors/form-control-errors.component';
 import {LoadingComponent} from './components/loading/loading.component';
 import {TruncatePipe} from './pipes/truncate.pipe';
+import {DropdownComponent} from './components/dropdown/dropdown.component';
+import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
 
 @NgModule({
-  imports: [CommonModule, HttpClientModule, RouterModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, HttpClientModule, RouterModule, FormsModule, ReactiveFormsModule, BsDropdownModule],
   exports: [
     HttpClientModule,
     RouterModule,
@@ -20,9 +22,17 @@ import {TruncatePipe} from './pipes/truncate.pipe';
     FormControlErrorsComponent,
     FormControlErrorComponent,
     LoadingComponent,
-    TruncatePipe
+    TruncatePipe,
+    DropdownComponent
   ],
-  declarations: [NotFoundComponent, FormControlErrorComponent, FormControlErrorsComponent, LoadingComponent, TruncatePipe],
+  declarations: [
+    NotFoundComponent,
+    FormControlErrorComponent,
+    FormControlErrorsComponent,
+    LoadingComponent,
+    TruncatePipe,
+    DropdownComponent
+  ],
   providers: [
     // NOTE: No singleton provider should be added here!
   ]

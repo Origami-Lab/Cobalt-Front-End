@@ -1,0 +1,49 @@
+.dropdown {
+  button.bg-white {
+    width: 200px;
+    &::before {
+      content: '';
+      position: absolute;
+      right: 10px;
+      top: 18px;
+      border-left: 5px solid transparent;
+      border-top: 8px solid #755858;
+      border-right: 5px solid transparent;
+    }
+    &:focus-visible,
+    &:focus,
+    &:hover {
+      background-color: #fff !important;
+    }
+    outline: none;
+  }
+
+  #user-drop-down {
+    width: 200px;
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      li {
+        margin-bottom: 2px;
+        &:hover,
+        &.active {
+          background-color: rgba($color: royalblue, $alpha: 0.1);
+        }
+        &.active {
+          .check-icon {
+            display: block;
+          }
+        }
+
+        .check-icon {
+          display: none;
+          width: 15px;
+          top: 12px;
+          right: 15px;
+          position: absolute;
+        }
+      }
+    }
+  }
+}

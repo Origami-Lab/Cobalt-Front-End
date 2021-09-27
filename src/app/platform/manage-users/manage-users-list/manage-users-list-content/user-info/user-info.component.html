@@ -1,0 +1,11 @@
+<div class="user-info d-flex align-items-center">
+  <div class="avatar">  
+    <img *ngIf="userInfo.avatar" [src]="userInfo.avatar" />
+    <span *ngIf="!userInfo.avatar && userInfo.name">{{userInfo.name.charAt(0)}}</span>
+    <span *ngIf="!userInfo.avatar && !userInfo.name">{{userInfo.email.charAt(0)}}</span>
+   </div>
+   <div class="pl-10">
+     <p class="mb-0 fz-13 font-bold">{{userInfo.name}}</p>
+     <p class="mb-0 fz-13">{{userInfo.email}}</p>
+   </div>
+</div>

@@ -58,6 +58,7 @@ export interface User {
   teams?: Array<UserTeam>;
   roles?: string[];
   users2teams?: Array<User2Team>;
+  lastActivity?: string;
 }
 
 export interface UserTeam {
