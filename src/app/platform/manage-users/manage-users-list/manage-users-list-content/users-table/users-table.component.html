@@ -1,0 +1,66 @@
+<ngx-datatable #journalTableRef class="material mb-4" [rows]="userList" [columns]="columns" [footerHeight]="40"
+  [columnMode]="ColumnMode.flex" [headerHeight]="50" [externalPaging]="true" [count]="10" [loadingIndicator]="loading"
+  [rowHeight]="'auto'" [offset]="page.pageNumber" [limit]="page.size" (page)="setPage($event)">
+
+  <ngx-datatable-column [flexGrow]="2" [canAutoResize]="true" [resizeable]="true" [draggable]="false" [sortable]="true"
+    cellClass="justify-content-end">
+    <ng-template ngx-datatable-header-template>
+      <span>Name</span>
+    </ng-template>
+    <ng-template ngx-datatable-cell-template let-row="row">
+      <co-user-info [userItem] = 'row'></co-user-info>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ng-container *ngFor="let col of columns; let first = first">
+    <ngx-datatable-column
+      [name]="col.name"
+      [prop]="col.prop"
+      [sortable]="col.sortable"
+      [flexGrow]="col.flexGrow"
+      [resizeable]="col.resizeable"
+      [canAutoResize]="col.canAutoResize"
+      [draggable]="col.draggable"
+      [maxWidth]="(first && hideColumns) && col.minWidth"
+      [minWidth]="(first && hideColumns) && col.minWidth"
+      cellClass="{{(!first && hideColumns) && 'd-none'}}"
+    >
+      <ng-template ngx-datatable-header-template>
+        <span [ngClass]="{'d-none d-lg-inline-block': !first}">{{col.name}}</span>
+      </ng-template>
+      <ng-template ngx-datatable-cell-template let-row="row" let-value="value" let-expanded="expanded">
+        <i
+          *ngIf="first"
+          [class.datatable-icon-right]="!expanded"
+          [class.datatable-icon-down]="expanded"
+          title="Expand/Collapse Row"
+          (click)="toggleExpandRow(row)"
+          class="d-inline-block d-lg-none align-middle"
+        ></i>
+        <span class="text-wrap text-break align-middle">{{col.defaultValue ? col.defaultValue(value) : value}}</span>
+      </ng-template>
+    </ngx-datatable-column>
+  </ng-container>
+
+  <ngx-datatable-column [flexGrow]="1" [canAutoResize]="true" [resizeable]="true" [draggable]="false" [sortable]="false"
+    cellClass="justify-content-end">
+    <ng-template ngx-datatable-cell-template let-row="row">
+      <div class="text-right w-100 pr-30">
+        <div dropdown #dropdown="bs-dropdown" placement="bottom right" class="bs-dropdown" [autoClose]="true">
+          <button class="fz-30" dropdownToggle type="button">
+            ...
+          </button>
+          <div *dropdownMenu class="dropdown-menu dropdown-menu-right py-0">
+            <ul>
+             <li class="pointer px-15 py-10 fz-14" (click)="removeUser(row)">Remove</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </ngx-datatable-column>
+</ngx-datatable>
+
+<co-confirm-modal [closeOutside]="true" [loading]="loading" (confirmDelete)="onDeleteConfirm()"
+  #confirmModalRef>
+</co-confirm-modal>

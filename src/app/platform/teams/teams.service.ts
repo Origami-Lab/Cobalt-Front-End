@@ -46,8 +46,8 @@ export class TeamsService {
     return this.apiHttp.get<User2Team[]>(`/users2teams`);
   }
 
-  getUser(keySearch?: string): Observable<User[]> {
-    return this.apiHttp.get<User[]>(`/users?query=${keySearch}`);
+  getUser(keySearch: string = '', roleName: string = '', order: string = 'desc'): Observable<User[]> {
+    return this.apiHttp.get<User[]>(`/users?query=${keySearch}&role=${roleName}&order=${order}`);
   }
 
   updateTeam(id: string, teamForm): any {

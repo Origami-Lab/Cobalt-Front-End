@@ -2,9 +2,10 @@ import {Injectable} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
 import {tap} from 'rxjs/operators';
 import {ApiHttpService, AuthTokenService} from 'ngx-api-utils';
-import {LoginCredentials} from './model/auth.interface';
+import {CountUser, LoginCredentials, UserForm} from './model/auth.interface';
 import {UserRolesService} from './user-role.service';
 import {User} from '../platform/teams/model/team.interface';
+import {UserDropDown} from '../platform/manage-users/manage-users.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -35,5 +36,21 @@ export class AuthService {
         }
       })
     );
+  }
+
+  createUser(userForm: UserForm): Observable<UserForm> {
+    return this.apiHttp.post<UserForm>('/users', userForm);
+  }
+
+  coutUser(): Observable<CountUser> {
+    return this.apiHttp.get<CountUser>('/count_users');
+  }
+
+  getUserRoles(): Observable<UserDropDown[]> {
+    return this.apiHttp.get<UserDropDown[]>('/user_roles');
+  }
+
+  removeUser(userId: string): Observable<any> {
+    return this.apiHttp.delete<any>(`/users/${userId}`);
   }
 }

@@ -50,6 +50,10 @@ const routes: Routes = [
         loadChildren: () => import('./manage-teams/manage-teams.module').then(m => m.ManageTeamsModule)
       },
       {
+        path: 'manage-users',
+        loadChildren: () => import('./manage-users/manage-users.module').then(m => m.ManageUsersModule)
+      },
+      {
         path: 'teams',
         loadChildren: () => import('./teams/teams.module').then(m => m.TeamsModule)
       },
