@@ -63,8 +63,8 @@ export class AddMemberComponent implements OnInit {
           this.inputLoading = false;
         })
       )
-      .subscribe((rs: User[]) => {
-        this.filterUserUnInvite(rs);
+      .subscribe(rs => {
+        this.filterUserUnInvite(rs.body);
         this.dropdown.show();
       });
   }

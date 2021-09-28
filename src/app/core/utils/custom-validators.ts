@@ -12,4 +12,11 @@ export class CustomValidators {
     }
     return null;
   }
+  static validateEmail(control: AbstractControl): customValidatorType {
+    const urlPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    if (control && control.value && !control.value.match(urlPattern)) {
+      return {invalidEmailAddress: true};
+    }
+    return null;
+  }
 }

@@ -200,4 +200,9 @@
       @include square(15px);
     }
   }
+
+  &.eyes {
+    @include square(20px);
+    background-image: url('#{$icons-path}eye.svg');
+  }
 }
