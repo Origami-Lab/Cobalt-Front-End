@@ -1,4 +1,4 @@
-<ngx-datatable [rows]="userInvitedList" #memberRef class="material mb-4" [footerHeight]="0"
+<ngx-datatable [rows]="userInvitedList" #memberRef class="material user-table mb-4" [footerHeight]="0"
   [columnMode]="ColumnMode.force" [headerHeight]="0" [externalPaging]="true" [count]="page.totalItem"
   [loadingIndicator]="loading" [rowHeight]="'auto'" [offset]="page.pageNumber" [limit]="page.size"
   (page)="setPage($event)">

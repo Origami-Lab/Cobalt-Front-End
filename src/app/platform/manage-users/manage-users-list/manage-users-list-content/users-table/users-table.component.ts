@@ -41,7 +41,6 @@ export class UsersTableComponent implements OnInit {
   ColumnMode = ColumnMode;
   roleList: UserDropDown[];
   currentUser: User;
-  totalUser = 0;
   columns = [
     {
       canAutoResize: true,
@@ -72,9 +71,7 @@ export class UsersTableComponent implements OnInit {
 
   constructor(private windowSizeService: WindowSizeService, private authService: AuthService, private toastr: ToastrService) {}
 
-  ngOnInit(): void {
-    this.countUser();
-  }
+  ngOnInit(): void {}
 
   fomatDate(date: string): string {
     if (date) {
@@ -128,12 +125,6 @@ export class UsersTableComponent implements OnInit {
           this.toastr.error(`Can not delete ${this.currentUser.email}`);
         }
       );
-  }
-
-  countUser(): void {
-    this.authService.coutUser().subscribe((rs: CountUser) => {
-      this.totalUser = rs.total;
-    });
   }
 
   toggleExpandRow(row): void {
