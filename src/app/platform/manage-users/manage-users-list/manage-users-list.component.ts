@@ -29,6 +29,7 @@ export class ManageUsersListComponent implements OnInit {
       .getUser(search, role, page, itemsPerPage)
       .pipe()
       .subscribe(rs => {
+        this.page.totalItem = Number(rs.headers.get('totalitems'));
         this.userList = rs.body;
       });
   }

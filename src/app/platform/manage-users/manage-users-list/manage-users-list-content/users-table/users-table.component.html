@@ -1,5 +1,5 @@
 <ngx-datatable #userTableRef class="material mb-4" [rows]="userList" [columns]="columns" [footerHeight]="40"
-  [columnMode]="ColumnMode.flex" [headerHeight]="50" [externalPaging]="true" [count]="totalUser"
+  [columnMode]="ColumnMode.flex" [headerHeight]="50" [externalPaging]="true" [count]="page.totalItem"
   [loadingIndicator]="loading" [rowHeight]="'auto'" [offset]="page.pageNumber" [limit]="page.size"
   (page)="setPage($event)">
 
