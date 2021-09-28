@@ -23,6 +23,15 @@ import {PlatformSharedModule} from '../platform-shared/platform-shared.module';
     ManageUsersCreateComponent,
     UserInfoComponent
   ],
-  imports: [CommonModule, ManageUsersRoutingModule, SharedModule, CoModalModule, NgxDatatableModule, BsDropdownModule, PlatformSharedModule]
+  imports: [
+    CommonModule,
+    ManageUsersRoutingModule,
+    SharedModule,
+    CoModalModule,
+    NgxDatatableModule,
+    BsDropdownModule,
+    PlatformSharedModule
+  ],
+  exports: [UserInfoComponent]
 })
 export class ManageUsersModule {}

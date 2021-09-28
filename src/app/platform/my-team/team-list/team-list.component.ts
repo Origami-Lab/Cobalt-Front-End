@@ -27,6 +27,7 @@ export class TeamListComponent implements OnInit, OnDestroy {
     this.watchCreateTeam();
     this.getTeamByUser();
     this.setCurrentUrl();
+    this.watchInviteMember();
   }
 
   setCurrentUrl(): void {
@@ -47,6 +48,12 @@ export class TeamListComponent implements OnInit, OnDestroy {
   watchUpdate(): void {
     this.subscription = this.teamsService.events$.pipe(filter(e => e instanceof EditTeam)).subscribe(({team}) => {
       this.applyTeamChanges(team);
+    });
+  }
+
+  watchInviteMember(): void {
+    this.subscription = this.teamsService.memberEvent$.pipe().subscribe(rs => {
+      this.getTeamByUser();
     });
   }
 

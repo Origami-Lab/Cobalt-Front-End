@@ -28,6 +28,7 @@ export interface Team {
 export interface MemberShortInfo {
   avatar: string;
   name: string;
+  email?: string;
 }
 
 export interface TeamDelete {

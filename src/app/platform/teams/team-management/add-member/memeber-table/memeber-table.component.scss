@@ -1,0 +1,16 @@
+ngx-datatable {
+  box-shadow: none !important;
+  max-height: 45vh !important;
+  overflow-y: auto !important;
+}
+
+.ngx-datatable.material {
+  .datatable-row-even,
+  .datatable-row-odd {
+    background-color: #fff !important;
+    border-bottom: 1px solid #ddd;
+  }
+  .datatable-footer {
+    border-top: 0px;
+  }
+}

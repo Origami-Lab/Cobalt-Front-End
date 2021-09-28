@@ -1,7 +1,7 @@
 <div class="">
-  <div class="d-sm-flex justify-content-between">
-    <h3 class="font-bold fz-lg-40 fz-30">Cobalt Members</h3>
-    <div class="d-flex align-items-center mt-15">
+  <div class="d-sm-flex justify-content-between align-items-center">
+    <h3 class="font-bold fz-lg-30 fz-30">Cobalt Members</h3>
+    <div class="d-flex align-items-center mt-lg-0 mt-15">
       <a (click)= "openModal()"
         class="btn btn-icon-right-primary">
         Add User
@@ -13,12 +13,12 @@
   </div>
 
   <div class="d-flex py-lg-50 py-30">
-    <div class="col border-right text-center">
+    <div class="col text-center">
       <h4 class="font-bold" *ngIf="!countLoading">{{userCount.total}}</h4>
       <co-loading [loading]="countLoading"></co-loading>
       <p *ngIf="!countLoading">Memmbers</p>
     </div>
-    <div class="col border-right text-center" *ngFor="let item of userCount?.byRoles">
+    <div class="col text-center border-left" *ngFor="let item of userCount?.byRoles">
       <co-loading [loading]="countLoading"></co-loading>
       <h4 class="font-bold" *ngIf="!countLoading">{{item.count}}</h4>
       <p>{{getRoleName(item)}}</p>

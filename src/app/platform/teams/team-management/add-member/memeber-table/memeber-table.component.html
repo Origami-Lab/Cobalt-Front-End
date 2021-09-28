@@ -1,0 +1,14 @@
+<ngx-datatable [rows]="userInvitedList" #memberRef class="material mb-4" [footerHeight]="0"
+  [columnMode]="ColumnMode.force" [headerHeight]="0" [externalPaging]="true" [count]="page.totalItem"
+  [loadingIndicator]="loading" [rowHeight]="'auto'" [offset]="page.pageNumber" [limit]="page.size"
+  (page)="setPage($event)">
+
+  <ngx-datatable-column [canAutoResize]="true" [resizeable]="true" [draggable]="false" [sortable]="false"
+    cellClass="justify-content-end align-items-center">
+    <ng-template ngx-datatable-cell-template let-row="row">
+      <div class="d-flex align-items-center">
+        <co-user-info [userItem]='row'></co-user-info>
+      </div>
+    </ng-template>
+  </ngx-datatable-column>
+</ngx-datatable>

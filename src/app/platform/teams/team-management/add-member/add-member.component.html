@@ -31,12 +31,14 @@
       </div>
     </div>
 
-    <div class="d-flex justify-content-between pt-40 border-bottom pb-30">
+    <!-- <div class="d-flex justify-content-between pt-40 border-bottom pb-30">
       <div class="fz-14 d-flex align-items-center">
         <co-member-list *ngIf="memberAvartarList" [totalMember] = "totalMember" [memberAvartarList]="memberAvartarList"></co-member-list>
         <span class="ml-2" *ngIf="memberAvartarList">{{memberAvartarList[0]?.name}} {{showOtherMember(totalMember)}}</span>
       </div>
-      <div class="text-primary font-bold">View all member</div>
+    </div> -->
+    <div class="pt-30">
+      <co-memeber-table *ngIf="userInvitedList" [userList] = "userInvitedList"></co-memeber-table>
     </div>
     <div class="py-30 border-top mt-35 footer">
     </div>

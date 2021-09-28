@@ -32,6 +32,7 @@ export class AddMemberComponent implements OnInit {
   inputChange = new Subject<string>();
   keySearch = '';
   inputLoading = false;
+  userInvitedList: User[];
 
   constructor(private teamsService: TeamsService, private activeRouter: ActivatedRoute, private toastr: ToastrService) {
     this.inputChange.pipe(debounceTime(500), distinctUntilChanged()).subscribe(value => {
@@ -89,6 +90,7 @@ export class AddMemberComponent implements OnInit {
       .pipe()
       .subscribe((rs: Team) => {
         this.teamInfo = rs;
+        this.userInvitedList = rs.users;
         this.totalMember = rs.users.length;
         this.addItemToMemberList(rs);
       });
@@ -135,6 +137,8 @@ export class AddMemberComponent implements OnInit {
           this.loading = false;
           this.toastr.success(`Member has been added successfully`);
           this.updateUserMember(user);
+          this.userInvitedList.unshift(user);
+          this.userInvitedList = [...this.userInvitedList];
         },
         () => {
           this.loading = false;
