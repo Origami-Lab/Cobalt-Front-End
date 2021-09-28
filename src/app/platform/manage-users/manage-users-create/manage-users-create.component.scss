@@ -10,3 +10,26 @@
   top: -10px;
   right: -8px;
 }
+
+.w-49 {
+  width: 49%;
+}
+
+.icon.eyes {
+  top: 20px;
+  right: 15px;
+  cursor: pointer;
+}
+
+.hide-eyes {
+  &::before {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 20px;
+    right: 9px;
+    top: -5px;
+    transform: rotate(30deg);
+    background-color: #7b7b7b;
+  }
+}

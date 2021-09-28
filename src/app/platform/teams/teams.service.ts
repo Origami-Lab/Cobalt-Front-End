@@ -4,6 +4,7 @@ import {ApiHttpService} from 'ngx-api-utils';
 import {Team, User, User2Team} from './model/team.interface';
 import {EditTeam, TeamEvents} from './team.events';
 import {tap} from 'rxjs/operators';
+import {HttpHeaderResponse, HttpResponse} from '@angular/common/http';
 
 export interface UserWithTeam extends User {
   teamId?: string;
@@ -52,8 +53,10 @@ export class TeamsService {
     page: number = 1,
     itemsPerPage: number = 30,
     order: string = 'desc'
-  ): Observable<User[]> {
-    return this.apiHttp.get<User[]>(`/users?query=${keySearch}&role=${roleName}&order=${order}&itemsPerPage=${itemsPerPage}&page=${page}`);
+  ): Observable<HttpResponse<User[]>> {
+    return this.apiHttp.get<User[]>(`/users?query=${keySearch}&role=${roleName}&order=${order}&itemsPerPage=${itemsPerPage}&page=${page}`, {
+      observe: 'response'
+    });
   }
 
   updateTeam(id: string, teamForm): any {

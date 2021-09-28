@@ -1,6 +1,6 @@
 import {formatDate} from '@angular/common';
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {ColumnMode} from '@swimlane/ngx-datatable';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation} from '@angular/core';
+import {ColumnMode, DatatableComponent} from '@swimlane/ngx-datatable';
 import {ToastrService} from 'ngx-toastr';
 import {finalize} from 'rxjs/operators';
 import {AuthService} from 'src/app/auth/auth.service';
@@ -14,9 +14,12 @@ import {UserDropDown} from '../../../manage-users.interface';
 @Component({
   selector: 'co-users-table',
   templateUrl: './users-table.component.html',
-  styleUrls: ['./users-table.component.scss']
+  styleUrls: ['./users-table.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class UsersTableComponent implements OnInit {
+  @ViewChild('userTableRef', {static: true})
+  userTableRef: DatatableComponent;
   @ViewChild('confirmModalRef', {static: true})
   confirmModal: ConfirmModalComponent;
   @Input()
@@ -50,7 +53,7 @@ export class UsersTableComponent implements OnInit {
       flexGrow: 2,
       prop: 'roles',
       name: 'Type',
-      minWidth: 270,
+      minWidth: 170,
       defaultValue: (type: string) => this.getTypeName(type)
     },
     {
@@ -131,5 +134,9 @@ export class UsersTableComponent implements OnInit {
     this.authService.coutUser().subscribe((rs: CountUser) => {
       this.totalUser = rs.total;
     });
+  }
+
+  toggleExpandRow(row): void {
+    this.userTableRef.rowDetail.toggleExpandRow(row);
   }
 }

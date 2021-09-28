@@ -15,7 +15,8 @@ export class ManageUsersListComponent implements OnInit {
   roleName = '';
   page: Page = {
     size: 10,
-    pageNumber: 0
+    pageNumber: 0,
+    totalItem: 0
   };
   constructor(private teamService: TeamsService) {}
 
@@ -27,8 +28,8 @@ export class ManageUsersListComponent implements OnInit {
     this.teamService
       .getUser(search, role, page, itemsPerPage)
       .pipe()
-      .subscribe((rs: User[]) => {
-        this.userList = rs;
+      .subscribe(rs => {
+        this.userList = rs.body;
       });
   }
 

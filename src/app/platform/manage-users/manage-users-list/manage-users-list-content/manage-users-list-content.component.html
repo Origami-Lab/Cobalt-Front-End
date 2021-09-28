@@ -1,10 +1,10 @@
 <div>
-  <div class="d-flex justify-content-between mb-20">
-    <div class="position-relative flex-1 ">
+  <div class="d-sm-flex justify-content-between mb-20">
+    <div class="position-relative flex-1 mb-2 mb-sm-0">
       <i class="icon search position-absolute"></i>
-      <input (ngModelChange)="searchDebounce($event)" type="text" class="border radius-5 pl-40 pr-10 fz-14 outline-none w-100 h-100" [(ngModel)]="keySearch" placeholder="Search by name or email"/>
+      <input (ngModelChange)="searchDebounce($event)" type="text" class="py-10 border radius-5 pl-40 pr-10 fz-14 outline-none w-100 h-100" [(ngModel)]="keySearch" placeholder="Search by name or email"/>
     </div>
-    <co-dropdown class="ml-3" (itemSelected)="onItemSelected($event)" [dropdownList] = 'dropdownList'></co-dropdown>
+    <co-dropdown class="ml-sm-3" (itemSelected)="onItemSelected($event)" [dropdownList] = 'dropdownList'></co-dropdown>
   </div>
   <co-users-table *ngIf="dropdownList" [page]="page" [userList] = "userList" [userRoles]="dropdownList" (userDeleted) = 'onUserDelete($event)' (changePage)='onChangePage($event)'></co-users-table>
 </div>

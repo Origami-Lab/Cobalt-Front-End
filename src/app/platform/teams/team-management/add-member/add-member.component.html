@@ -14,10 +14,11 @@
       </button>
       <div id="dropdown-user-list" *dropdownMenu class="dropdown-menu py-0">
         <ul>
-         <li class="d-flex p-10 position-relative" [ngClass]="{'not-allow': item.isInvite}" *ngFor="let item of userList" (click)="inviteUser(item)">
+         <li class="d-flex p-10 position-relative align-items-center" [ngClass]="{'not-allow': item.isInvite}" *ngFor="let item of userList" (click)="inviteUser(item)">
            <div class="avatar">  
             <img *ngIf="item.avatar" [src]="item.avatar" />
-            <span *ngIf="!item.avatar">{{item.name.charAt(0)}}</span>
+            <span *ngIf="!item.avatar && item.name">{{item.name.charAt(0)}}</span>
+            <span *ngIf="!item.avatar && !item.name">{{item.email.charAt(0)}}</span>
            </div>
            <div class="pl-10">
              <p class="mb-0 fz-13 font-bold">{{item.name}}</p>
