@@ -49,7 +49,7 @@
                   <span class="align-middle icon team mr-3" title="Manage Teams"></span>
                   <span class="align-middle menu-name">Manage Teams</span>
                 </a>
-                <a class="nav-link text-lg font-weight-600" [routerLinkActiveOptions]="{ exact: true }" routerLink="/platform/view/manage-users/list"
+                <a *ngIf="isAdmin" class="nav-link text-lg font-weight-600" [routerLinkActiveOptions]="{ exact: true }" routerLink="/platform/view/manage-users/list"
                   routerLinkActive="active" (click)="mobileNavigationService.navigationVisibility = false">
                   <span class="align-middle icon team mr-3" title="Manage Teams"></span>
                   <span class="align-middle menu-name">Manage User</span>

@@ -12,6 +12,12 @@ export class DropdownComponent implements OnInit, OnChanges {
   @Input()
   dropdownList: UserDropDown[];
 
+  @Input()
+  title: string;
+
+  @Input()
+  isShowAll = true;
+
   @Output()
   itemSelected = new EventEmitter<UserDropDown>();
 
@@ -27,8 +33,11 @@ export class DropdownComponent implements OnInit, OnChanges {
         label: 'All'
       };
       if (this.dropList) {
-        this.dropList.unshift(filterAll);
+        if (this.isShowAll) {
+          this.dropList.unshift(filterAll);
+        }
         this.defaultSelection = this.dropList[0];
+        this.itemSelected.emit(this.defaultSelection);
       }
     }
   }

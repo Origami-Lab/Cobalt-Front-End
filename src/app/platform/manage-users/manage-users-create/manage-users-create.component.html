@@ -31,15 +31,22 @@
         <co-form-control-errors [controlName]="'lastName'"></co-form-control-errors>
       </fieldset>
     </div>
-    <fieldset class="mb-4">
-      <label for="password" class="form-label mb-18">User Password</label>
-      <div class="position-relative">
-        <input [type]="isShowEyes ? 'text' : 'password'" id="password" class="form-control" formControlName="password"
-          placeholder="Enter User Password">
-        <i class="icon eyes position-absolute" [ngClass]="{'hide-eyes': isShowEyes}" (click)="toggleEye()"></i>
-      </div>
-      <co-form-control-errors [controlName]="'password'"></co-form-control-errors>
-    </fieldset>
+    <div class="d-flex justify-content-between">
+      <fieldset class="mb-4 w-49">
+        <label for="password" class="form-label mb-18">User Password</label>
+        <div class="position-relative">
+          <input [type]="isShowEyes ? 'text' : 'password'" id="password" class="form-control" formControlName="password"
+            placeholder="Enter User Password">
+          <i class="icon eyes position-absolute" [ngClass]="{'hide-eyes': isShowEyes}" (click)="toggleEye()"></i>
+        </div>
+        <co-form-control-errors [controlName]="'password'"></co-form-control-errors>
+      </fieldset>
+
+      <fieldset class="mb-4 w-49">
+        <label for="password" class="form-label mb-18">Role</label>
+        <co-dropdown [isShowAll]='false' [title] = "'Role'"  [dropdownList] = 'dropdownList' (itemSelected) = 'itemSelected($event)'></co-dropdown>
+      </fieldset>
+    </div>
     <fieldset>
       <div class="text-right">
         <button class="btn btn-primary px-30" type="submit" [disabled]="loading" [class.loading]="loading">Save</button>

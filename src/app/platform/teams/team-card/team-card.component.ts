@@ -61,7 +61,8 @@ export class TeamCardComponent implements OnInit {
       this.teamEl.users.map((el, index) => {
         const info = {
           avatar: el.avatar,
-          name: el.name
+          name: el.name,
+          email: el.email
         };
         if (index < 3) {
           this.memberAvartarList.push(info);

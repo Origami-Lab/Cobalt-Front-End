@@ -52,12 +52,7 @@ export class ManageTeamsListComponent implements OnInit, OnDestroy {
 
   watchInviteMember(): void {
     this.subscription = this.teamsService.memberEvent$.pipe().subscribe(rs => {
-      this.teamList = this.teamList.map(team => {
-        if (team.id.toString() === rs.teamId) {
-          team.users.push(rs);
-        }
-        return team;
-      });
+      this.getTeamsList(this.pageNumber);
     });
   }
 
