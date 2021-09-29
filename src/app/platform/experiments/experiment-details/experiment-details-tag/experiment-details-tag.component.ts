@@ -62,7 +62,7 @@ export class ExperimentDetailsTagComponent implements OnInit {
       color: this.randomColor()
     };
     const tag = tagList.find(el => {
-      return el.label.toString() === label.toString();
+      return el.label.toString().toLowerCase() === label.toString().toLowerCase();
     });
     if (tag) {
       tagForm.labelId = tag.id;
@@ -72,7 +72,7 @@ export class ExperimentDetailsTagComponent implements OnInit {
   }
 
   checkIsExistInTagItems(): boolean {
-    const ind = this.tagItems.findIndex(el => el.label === this.tagKey);
+    const ind = this.tagItems.findIndex(el => el.label.toLowerCase() === this.tagKey.toLowerCase());
     if (ind > -1) {
       return true;
     }
