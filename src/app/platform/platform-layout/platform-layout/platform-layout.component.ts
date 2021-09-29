@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-
 @Component({
   selector: 'co-platform-layout',
   templateUrl: './platform-layout.component.html',

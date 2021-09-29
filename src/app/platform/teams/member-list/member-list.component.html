@@ -1,0 +1,13 @@
+<div class="member-list" *ngIf="memberAvartarList">
+  <ul>
+    <li *ngIf="totalMember > memberAvartarList.length">
+      <span class="number">{{totalMember -
+        memberAvartarList.length}}</span>
+    </li>
+    <li *ngFor="let item of memberAvartarList">
+      <img *ngIf="item.avatar" [src]="item.avatar" />
+      <span *ngIf="!item.avatar && item.name">{{item.name.charAt(0)}}</span>
+      <span *ngIf="!item.avatar && !item.name && item.email">{{item?.email.charAt(0)}}</span>
+    </li>
+  </ul>
+</div>

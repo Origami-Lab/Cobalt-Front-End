@@ -46,6 +46,28 @@ const routes: Routes = [
         loadChildren: () => import('./my-team/my-team.module').then(m => m.MyTeamModule)
       },
       {
+        path: 'manage-team',
+        loadChildren: () => import('./manage-teams/manage-teams.module').then(m => m.ManageTeamsModule)
+      },
+      {
+        path: 'manage-users',
+        loadChildren: () => import('./manage-users/manage-users.module').then(m => m.ManageUsersModule)
+      },
+      {
+        path: 'teams',
+        loadChildren: () => import('./teams/teams.module').then(m => m.TeamsModule)
+      },
+      {
+        path: 'my-team/management',
+        loadChildren: () => import('./my-team/my-team-management/my-team-management.module').then(m => m.MyTeamManagementModule),
+        outlet: 'modal'
+      },
+      {
+        path: 'teams/management',
+        loadChildren: () => import('./teams/team-management/team-management.module').then(m => m.TeamManagementModule),
+        outlet: 'modal'
+      },
+      {
         path: 'notebook',
         loadChildren: () => import('./notebook/notebook.module').then(m => m.NotebookModule)
       },

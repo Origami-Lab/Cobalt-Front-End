@@ -10,6 +10,7 @@ import {ConfirmModalComponent} from '../../../platform-shared/components/confirm
 import {ApiError} from '../../../../core/api-error/api-error';
 import {ApiHttpErrorResponse} from '../../../../core/api-error/api-http-error-response';
 import {HttpErrorResponse} from '@angular/common/http';
+import {ExperimentDetailsContentComponent} from '../experiment-details-content/experiment-details-content.component';
 
 @Component({
   selector: 'co-experiment-details-page',
@@ -17,9 +18,10 @@ import {HttpErrorResponse} from '@angular/common/http';
   styleUrls: ['./experiment-details-page.component.scss']
 })
 export class ExperimentDetailsPageComponent implements OnInit, OnDestroy {
+  @ViewChild('experimentDetailContentRef')
+  experimentDetail: ExperimentDetailsContentComponent;
   @ViewChild('confirmModalRef', {static: true})
   confirmModal: ConfirmModalComponent;
-
   isExpanded = true;
   experiment: Experiment;
   loading = true;
@@ -74,5 +76,10 @@ export class ExperimentDetailsPageComponent implements OnInit, OnDestroy {
         this.deleteExperimentLoading = false;
       }
     );
+  }
+
+  onLeaveRouter(): void {
+    this.experimentDetail.onSaveConclusion();
+    this.experimentDetail.onSaveProtocol();
   }
 }

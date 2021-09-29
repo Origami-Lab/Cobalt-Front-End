@@ -1,11 +1,10 @@
-<co-modal-layout
-  [showCloseButton]="false"
-  [config]="{show: true, backdrop: 'static', keyboard: false, class: 'experiment-record'}"
-  [isBlocked]="false"
+<co-modal-layout [showCloseButton]="false"
+  [config]="{show: true, backdrop: 'static', keyboard: false, class: 'experiment-record'}" [isBlocked]="false"
   #coModalLayoutRef>
 
   <div class="experiment-record-header bg-white">
-    <div class="container-fluid d-flex flex-column flex-sm-row align-items-sm-center justify-content-sm-between h-100 pt-3 pt-sm-0">
+    <div
+      class="container-fluid d-flex flex-column flex-sm-row align-items-sm-center justify-content-sm-between h-100 pt-3 pt-sm-0">
       <div class="d-flex flex-row align-items-center mb-4 mb-sm-0">
         <button class="btn p-0" (click)="onModalClose()">
           <i class="icon back-arrow align-middle mr-3"></i>
@@ -13,26 +12,25 @@
         </button>
       </div>
       <div class="d-flex flex-column flex-sm-row align-items-start align-items-sm-center">
-        <button
-          class="mr-sm-4 btn btn-ghost-icon-primary"
-          [disabled]="true">
+        <button class="mr-sm-4 btn btn-ghost-icon-primary" (click)="exportToWord('export-to-word', experiment.title)">
+          <span class="icon-wrapper">
+            <i class="icon note"></i>
+          </span>
+          Export to Word
+        </button>
+        <button class="mr-sm-4 btn btn-ghost-icon-primary" [disabled]="true">
           <span class="icon-wrapper">
             <i class="icon note"></i>
           </span>
           Export to PDF
         </button>
-        <button
-          [disabled]="loading && !experiment?.id"
-          (click)="onEdit()"
-          class="mr-sm-4 btn btn-ghost-icon-primary">
+        <button [disabled]="loading && !experiment?.id" (click)="onEdit()" class="mr-sm-4 btn btn-ghost-icon-primary">
           <span class="icon-wrapper">
             <i class="icon pen-white"></i>
           </span>
           Edit
         </button>
-        <button
-          class="btn btn-ghost-icon-primary"
-          (click)="onConfirmModalOpen()"
+        <button class="btn btn-ghost-icon-primary" (click)="onConfirmModalOpen()"
           [disabled]="loading && !experiment?.id">
           <span class="icon-wrapper">
             <i class="icon delete"></i>
@@ -42,7 +40,7 @@
       </div>
     </div>
   </div>
-  <div class="experiment-record-content">
+  <div class="experiment-record-content" id="export-to-word">
     <div class="container-fluid py-3">
       <div class="row mb-3">
         <div class="col-12">
@@ -117,12 +115,8 @@
               <co-loading class="absolute-center" [loading]="loading"></co-loading>
               <ng-container *ngIf="!loading && attachments">
                 <div class="mb-2" *ngFor="let attachment of attachments">
-                  <co-attachment
-                    [attachmentUrl]="attachment.contentUrl"
-                    [attachmentName]="attachment.filename"
-                    [showCloseButton]="false"
-                    [truncateText]="false"
-                  ></co-attachment>
+                  <co-attachment [attachmentUrl]="attachment.contentUrl" [attachmentName]="attachment.filename"
+                    [showCloseButton]="false" [truncateText]="false"></co-attachment>
                 </div>
               </ng-container>
             </div>
@@ -139,12 +133,8 @@
               <co-loading class="absolute-center" [loading]="loading"></co-loading>
               <ng-container *ngIf="!loading && links">
                 <div class="mb-2" *ngFor="let link of links">
-                  <co-attachment
-                    [attachmentUrl]="link.link"
-                    [attachmentName]="link.link"
-                    [showCloseButton]="false"
-                    [truncateText]="false"
-                  ></co-attachment>
+                  <co-attachment [attachmentUrl]="link.link" [attachmentName]="link.link" [showCloseButton]="false"
+                    [truncateText]="false"></co-attachment>
                 </div>
               </ng-container>
             </div>
@@ -154,10 +144,5 @@
     </div>
   </div>
 </co-modal-layout>
-<co-confirm-modal
-  [loading]="deleteExperimentLoading"
-  [closeOutside]="true"
-  [apiError]="apiError"
-  (confirmDelete)="onDeleteConfirm()"
-  #confirmModalRef
-></co-confirm-modal>
+<co-confirm-modal [loading]="deleteExperimentLoading" [closeOutside]="true" [apiError]="apiError"
+  (confirmDelete)="onDeleteConfirm()" #confirmModalRef></co-confirm-modal>

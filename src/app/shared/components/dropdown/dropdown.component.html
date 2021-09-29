@@ -1,0 +1,14 @@
+<div class="dropdown h-100" *ngIf="dropList">
+  <div dropdown #dropdown="bs-dropdown" class="bs-dropdown position-relative h-100" [autoClose]="true">
+    <button class="bg-white fz-14 radius-5 p-10 border text-left" dropdownToggle type="button">
+      {{title? title : 'Member Type'}}: {{defaultSelection?.label}}
+    </button>
+    <div id="user-drop-down" *dropdownMenu class="dropdown-menu py-0">
+      <ul>
+       <li class="p-10 fz-14 pointer position-relative" *ngFor="let item of dropList" (click)="secletOption(item)" [ngClass]="{'active': item.label === defaultSelection.label}">{{item.label}}
+        <img class="check-icon" src="assets/icons/check.svg"/>
+       </li>
+      </ul>
+    </div>
+  </div>
+</div>

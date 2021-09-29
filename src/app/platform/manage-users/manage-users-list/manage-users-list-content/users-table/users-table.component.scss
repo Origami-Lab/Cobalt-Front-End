@@ -1,0 +1,43 @@
+.bs-dropdown {
+  button {
+    line-height: 5px;
+    border: none;
+    padding: 0;
+    margin: 0;
+    outline: none;
+    color: #7b7b7b;
+    background: transparent;
+  }
+
+  .dropdown-menu {
+    width: 200px;
+    @media (max-width: 991px) {
+      right: 160px !important;
+    }
+  }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    li {
+      &:hover {
+        background-color: rgba($color: royalblue, $alpha: 0.1);
+      }
+    }
+  }
+}
+
+ngx-datatable {
+  box-shadow: none !important;
+}
+
+.ngx-datatable.material {
+  .datatable-row-even,
+  .datatable-row-odd {
+    background-color: #fff !important;
+    border-bottom: 1px solid #ddd;
+  }
+  .datatable-footer {
+    border-top: 0px;
+  }
+}

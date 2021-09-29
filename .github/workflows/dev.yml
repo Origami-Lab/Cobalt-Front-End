@@ -1,0 +1,40 @@
+name: dev
+on:
+  # workflow_dispatch
+  push:
+    branches:
+      - develop
+
+env:
+  IMAGE: ${{ secrets.DOCKER_REGISTRY }}/cobalt-front-end
+  TAG: latest
+
+jobs:
+  deploy:
+    environment:
+      name: dev
+      url: https://app.cobalt-dev.origamilab.ch
+    name: Build and deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Build image
+        run: |
+          docker build -t $IMAGE:$TAG .
+
+      - name: Push image
+        run: |
+          docker login ${{ secrets.DOCKER_REGISTRY }} -u nologin -p ${{ secrets.SCW_SECRET_KEY }}
+          docker push $IMAGE:$TAG
+
+      - name: Deploy
+        uses: wahyd4/kubectl-helm-action@master
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+        with:
+          args: |
+            helm uninstall cobalt-front-end
+            helm install cobalt-front-end helm --namespace=default -f helm/values.dev.yaml

@@ -1,110 +1,53 @@
 <header class="header container-fluid align-items-center">
   <div class="row justify-content-between no-gutters align-items-center">
-    <div class="d-flex px-2 px-lg-0 align-items-center">
-      <div class="mr-2">
-        <button
-          class="btn icon burger-blue cursor-pointer d-inline-block d-lg-none"
-          (click)="mobileNavigationService.navigationVisibility = !mobileNavigationService.navigationVisibility"
-        ></button>
+    <div class="d-flex px-lg-0 align-items-center">
+      <div class="mr-sm-2 mr-1">
+        <button class="btn icon burger-blue cursor-pointer d-inline-block d-lg-none"
+          (click)="mobileNavigationService.navigationVisibility = !mobileNavigationService.navigationVisibility"></button>
       </div>
       <h1 class="mb-0">
-        <a class="header-logo" routerLink="/platform/view">
+        <a class="header-logo d-flex align-items-center" routerLink="/platform/view">
+          <img class="img-icon mr-2" src="assets/icons/logo.png"/>
           <img src="assets/icons/my-cobalt-logo.svg" alt="My Cobalt">
         </a>
       </h1>
     </div>
-    <div class="d-flex" dropdown [autoClose]="true" placement="bottom right">
-      <button
-        class="btn p-1 bg-primary-100 border-radius-md"
-        aria-controls="dropdown-user-profile"
-        dropdownToggle
-        >
-        <img src="assets/icons/outlined-editor-insert-photo.svg" alt="My Cobalt">
-      </button>
-      <ul
-        id="dropdown-user-profile"
-        *dropdownMenu
-        class="dropdown-menu dropdown-menu-right"
-        role="menu">
-        <li role="menuitem">
-          <a routerLink="/auth/logout" class="dropdown-item">logout</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</header>
-<div
-  class="curtain"
-  [ngClass]="{'active': mobileNavigationService.navigationVisibility}"
-  (click)="mobileNavigationService.navigationVisibility = false"
-></div>
-<nav class="side-nav" [class.active]="mobileNavigationService.navigationVisibility">
-  <div class="mobile-nav-wrapper d-flex flex-column flex-grow-1 h-100">
-    <div class="mobile-nav">
-      <div class="nav-vertical-scroll custom-scrollbar-gray-darker">
-        <div class="row no-gutters">
-          <div class="col">
-            <nav class="nav flex-column text-left">
-              <ng-container class="mb-5">
-                <a
-                  class="nav-link text-lg font-weight-600"
-                  routerLink="/platform/view/dashboard"
-                  routerLinkActive="active"
-                  (click)="mobileNavigationService.navigationVisibility = false"
-                >
-                  <span class="align-middle icon dashboard mr-3"></span>
-                  <span class="align-middle">Dashboard</span>
-                </a>
-                <a
-                  class="nav-link text-lg font-weight-600"
-                  routerLink="/platform/view/experiments/list"
-                  routerLinkActive="active"
-                  (click)="mobileNavigationService.navigationVisibility = false"
-                >
-                  <span class="align-middle icon experiment mr-3"></span>
-                  <span class="align-middle">Experiments</span>
-                </a>
-                <a
-                  class="nav-link text-lg font-weight-600"
-                  routerLink="/platform/view/journal/list"
-                  routerLinkActive="active"
-                  (click)="mobileNavigationService.navigationVisibility = false"
-                >
-                  <span class="align-middle icon journal mr-3"></span>
-                  <span class="align-middle">Journal</span>
-                </a>
-                <a
-                  class="nav-link text-lg font-weight-600"
-                  routerLink="/platform/view/reports"
-                  routerLinkActive="active"
-                  (click)="mobileNavigationService.navigationVisibility = false"
-                >
-                  <span class="align-middle icon report mr-3"></span>
-                  <span class="align-middle">Reports</span>
-                </a>
-                <a
-                  class="nav-link text-lg font-weight-600"
-                  routerLink="/platform/view/notebook"
-                  routerLinkActive="active"
-                  (click)="mobileNavigationService.navigationVisibility = false"
-                >
-                  <span class="align-middle icon notebook mr-3"></span>
-                  <span class="align-middle">Notebook</span>
-                </a>
-                <a
-                  class="nav-link text-lg font-weight-600"
-                  routerLink="/platform/view/my-team/list"
-                  routerLinkActive="active"
-                  (click)="mobileNavigationService.navigationVisibility = false"
-                >
-                  <span class="align-middle icon team mr-3"></span>
-                  <span class="align-middle">My Team</span>
-                </a>
-              </ng-container>
-            </nav>
+    <div class="d-flex pr-lg-5 pr-3 align-items-center">
+      <div class="pr-lg-20 pr-7" dropdown [autoClose]="true" placement="bottom left">
+        <button  class="btn p-0 btn-ws" aria-controls="dropdown-workspace" dropdownToggle>
+          <a class="text-lg font-weight-600 pointer"
+            (click)="mobileNavigationService.navigationVisibility = false">
+            <span class="align-middle icon menu"></span>
+          </a>
+        </button>
+        <div id="dropdown-workspace" *dropdownMenu class="dropdown-menu dropdown-menu-right px-50 py-30" role="menu">
+          <div class="d-flex parent-items">
+            <div class="pointer p-10">
+              <img src="/assets/icons/journal.png"/>
+              <div class="fz-15 pt-6">Journal</div>
+            </div>
+            <div class="p-10 mr-10">
+              <a href="https://molview.org/" target="_blank"><img src="/assets/icons/molview.png"/></a>
+              <div class="fz-15 pt-6">MolView</div>
+            </div>
           </div>
         </div>
       </div>
+      <img class="notification mr-lg-30 mr-7" src="assets/icons/alarm.svg" alt="Notification">
+      <div class="d-flex" dropdown [autoClose]="true" placement="bottom right">
+        <button *ngIf="!loading" class="btn p-0 arrow-btn" aria-controls="dropdown-user-profile" dropdownToggle>
+          <img class="avatar" *ngIf="userInfo.avatar" [src]="userInfo.avatar" alt="My Cobalt">
+          <span
+            class="avatar bg-yellow d-block d-flex align-items-center justify-content-center font-bold fz-lg-24 fz-18 text-uppercase text-white"
+            *ngIf="!userInfo.avatar">{{userInfo.name.charAt(0)}}</span>
+        </button>
+        <co-loading *ngIf="loading" [loading]="true"></co-loading>
+        <ul id="dropdown-user-profile" *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu">
+          <li role="menuitem">
+            <a routerLink="/auth/logout" class="dropdown-item">logout</a>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
-</nav>
+</header>

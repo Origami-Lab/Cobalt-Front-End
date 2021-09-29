@@ -1,0 +1,76 @@
+<ngx-datatable #userTableRef class="material mb-4" [rows]="userList" [columns]="columns" [footerHeight]="40"
+  [columnMode]="ColumnMode.flex" [headerHeight]="50" [externalPaging]="true" [count]="page.totalItem"
+  [loadingIndicator]="loading" [rowHeight]="'auto'" [offset]="page.pageNumber" [limit]="page.size"
+  (page)="setPage($event)">
+
+
+  <ngx-datatable-row-detail [rowHeight]="80">
+    <ng-template let-row="row" ngx-datatable-row-detail-template>
+      <div class="mb-2">
+        <span class="font-weight-600 align-middle mr-3 fz-14">Type:</span>
+        <span class="align-middle fz-13">{{getTypeName(row.roles)}}</span>
+      </div>
+      <div class="mb-2">
+        <span class="font-weight-600 align-middle mr-3 fz-14">Last Activity:</span>
+        <span class="align-middle fz-13">{{fomatDate(row.lastActivity)}}</span>
+      </div>
+    </ng-template>
+  </ngx-datatable-row-detail>
+
+  <ngx-datatable-column [flexGrow]="hideColumns ? 12 : 2" [canAutoResize]="true" [resizeable]="true" [draggable]="false"
+    [sortable]="true" cellClass="justify-content-end align-items-center">
+    <ng-template ngx-datatable-header-template>
+      <span>Name</span>
+    </ng-template>
+    <ng-template ngx-datatable-cell-template let-row="row">
+      <div class="d-flex align-items-center">
+        <i [class.datatable-icon-right]="!expanded" [class.datatable-icon-down]="expanded" title="Expand/Collapse Row"
+          (click)="toggleExpandRow(row)" class="d-inline-block d-lg-none align-middle"></i>
+        <co-user-info [userItem]='row'></co-user-info>
+      </div>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ng-container *ngFor="let col of columns; let first = first">
+    <ngx-datatable-column [name]="col.name" [prop]="col.prop" [sortable]="col.sortable" [flexGrow]="col.flexGrow"
+      [resizeable]="col.resizeable" [canAutoResize]="col.canAutoResize" [draggable]="col.draggable"
+      [maxWidth]="hideColumns && col.minWidth" [minWidth]="hideColumns&& col.minWidth"
+      cellClass="{{hideColumns && 'd-none'}}">
+      <ng-template ngx-datatable-header-template>
+        <span class="d-none d-lg-inline-block">{{col.name}}</span>
+      </ng-template>
+      <ng-template ngx-datatable-cell-template let-row="row" let-value="value" let-expanded="expanded">
+        <span class="text-wrap text-break align-middle">{{col.defaultValue ? col.defaultValue(value) : value}}</span>
+      </ng-template>
+    </ngx-datatable-column>
+  </ng-container>
+
+  <ngx-datatable-column [minWidth]="hideColumns && '50'" [flexGrow]="1" [canAutoResize]="true" [resizeable]="true"
+    [draggable]="false" [sortable]="false" cellClass="justify-content-end">
+    <ng-template ngx-datatable-cell-template let-row="row">
+      <div class="text-right w-100 pr-30">
+        <div dropdown #dropdown="bs-dropdown" placement="bottom right" class="bs-dropdown" [autoClose]="true">
+          <button class="fz-30" dropdownToggle type="button">
+            ...
+          </button>
+          <div *dropdownMenu class="dropdown-menu py-0 dropdown-menu-right">
+            <ul>
+              <li class="pointer px-15 py-10 fz-14" (click)="removeUser(row)">Remove </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-footer>
+    <ng-template ngx-datatable-footer-template let-rowCount="rowCount" let-pageSize="pageSize" let-curPage="curPage">
+      <datatable-pager [page]="curPage" [size]="pageSize" [count]="rowCount" [hidden]="!((rowCount / pageSize) > 1)"
+        (change)="userTableRef.onFooterPage($event)">
+      </datatable-pager>
+    </ng-template>
+  </ngx-datatable-footer>
+</ngx-datatable>
+
+<co-confirm-modal [closeOutside]="true" [loading]="loading" (confirmDelete)="onDeleteConfirm()" #confirmModalRef>
+</co-confirm-modal>

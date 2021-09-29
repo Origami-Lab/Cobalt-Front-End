@@ -7,8 +7,8 @@ import {ApiError} from '../../../../core/api-error/api-error';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {Experiment} from '../../models/experiment.interface';
-import {AuthTokenService} from 'ngx-api-utils';
-import {JwtTokenPayload} from '../../../../core/auth/jwt-token-payload';
+import {User} from 'src/app/platform/teams/model/team.interface';
+import {UserRolesService} from 'src/app/auth/user-role.service';
 
 @Component({
   selector: 'co-create-experiment',
@@ -20,14 +20,13 @@ export class CreateExperimentComponent implements OnInit {
   modal: CoModalLayoutComponent;
   loading = false;
   apiError: ApiError;
+  userInfo: User;
 
-  constructor(
-    private experimentsService: ExperimentsService,
-    private router: Router,
-    private authToken: AuthTokenService<JwtTokenPayload>
-  ) {}
+  constructor(private experimentsService: ExperimentsService, private router: Router, private userService: UserRolesService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.userInfo = this.userService.getUserInfo();
+  }
 
   onModalClose(): void {
     this.modal.onClose();
@@ -39,8 +38,7 @@ export class CreateExperimentComponent implements OnInit {
     experiment.datetime = new Date().toISOString();
     experiment.lastchange = new Date().toISOString();
     experiment.status = Status.RUNNING;
-    experiment.author = 'John Doe';
-    experiment.userid = this.authToken.payload.uid;
+    experiment.author = this.userInfo.name;
     this.experimentsService.createExperiment(experiment).subscribe(
       exp => {
         this.loading = false;

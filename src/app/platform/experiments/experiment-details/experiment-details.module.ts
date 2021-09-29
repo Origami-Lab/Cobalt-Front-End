@@ -16,7 +16,8 @@ import {TextareaAutosizeModule} from 'ngx-textarea-autosize';
 import {ExperimentDetailsSharedModule} from './experiment-details-shared/experiment-details-shared.module';
 import {ExperimentLinkUploadModalComponent} from './experiment-details-side-nav/experiment-link-upload-modal/experiment-link-upload-modal.component';
 import {CollapseModule} from 'ngx-bootstrap/collapse';
-
+import {ExperimentDetailsTagComponent} from './experiment-details-tag/experiment-details-tag.component';
+import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
 @NgModule({
   declarations: [
     ExperimentDetailsPageComponent,
@@ -28,7 +29,8 @@ import {CollapseModule} from 'ngx-bootstrap/collapse';
     ExperimentNotesComponent,
     ExperimentConclusionComponent,
     ExperimentFileUploadComponent,
-    ExperimentLinkUploadModalComponent
+    ExperimentLinkUploadModalComponent,
+    ExperimentDetailsTagComponent
   ],
   imports: [
     CommonModule,
@@ -37,7 +39,9 @@ import {CollapseModule} from 'ngx-bootstrap/collapse';
     PlatformSharedModule,
     TextareaAutosizeModule,
     ExperimentDetailsSharedModule,
-    CollapseModule
-  ]
+    CollapseModule,
+    BsDropdownModule
+  ],
+  exports: [ExperimentDetailsTagComponent]
 })
 export class ExperimentDetailsModule {}

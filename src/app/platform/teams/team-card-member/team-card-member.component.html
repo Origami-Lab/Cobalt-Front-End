@@ -1,0 +1,34 @@
+<div class="card">
+  <div class="card-header mt-0 pb-0 pt-0 d-flex align-items-center justify-content-between">
+    <div class="d-flex align-items-center">
+      <div class="mr-3">
+        <img *ngIf="memberEl.avatar" [src]="memberEl.avatar" alt="user"
+          class="img-thumbnail border-0 bg-transparent">
+        <div class="name bg-yellow d-flex align-items-center justify-content-center font-bold fz-24 text-uppercase text-white" *ngIf="!memberEl.avatar">{{memberEl.name.charAt(0)}}</div>
+      </div>
+      <h3 class="text-lg mb-0">{{memberEl.name}}</h3>
+    </div>
+
+    <div class="d-inline-flex justify-content-space-between">
+      <div class="btn-group" dropdown [autoClose]="true" (click)="stopEventPropagation($event)">
+        <i class="icon card-menu card-menu" dropdownToggle aria-controls="dropdown-basic"></i>
+        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu"
+          aria-labelledby="button-basic">
+          <li role="menuitem">
+            <button class="dropdown-item" (click)="onConfirmModalOpen(memberEl.name)">{{displayDeleletion()}}</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="mx-4 mt-2 mb-2">
+    <span class="text-gray text-xs">{{displayExperiment()}}</span>
+  </div>
+  <div class="custom-card-footer pt-2 pb-2 text-center">
+    <button class="btn btn-ghost-primary text-primary mt-0 mb-0 pt-0 pb-0" (click)="emitViewWork(memberEl.userid)">View
+      Work</button>
+  </div>
+</div>
+
+<co-confirm-modal [closeOutside]="true" [loading]="loading" [apiError]="apiError" (confirmDelete)="onDeleteConfirm()" #confirmModalRef>
+</co-confirm-modal>

@@ -188,5 +188,21 @@
   &.burger-blue {
     @include square(24px);
     background-image: url('#{$icons-path}icons-outlined-navigation-menu.svg');
+    @media (max-width: 767px) {
+      @include square(15px);
+    }
+  }
+
+  &.menu {
+    @include square(20px);
+    background-image: url('#{$icons-path}menu.svg');
+    @media (max-width: 991px) {
+      @include square(15px);
+    }
+  }
+
+  &.eyes {
+    @include square(20px);
+    background-image: url('#{$icons-path}eye.svg');
   }
 }

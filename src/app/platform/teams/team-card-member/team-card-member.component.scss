@@ -1,0 +1,30 @@
+@import '~src/scss/co-theme-variables/variables';
+.card {
+  padding: 1rem 0 0 0;
+  border-radius: $border-radius-md;
+  box-shadow: $card-box-shadow;
+  .card-header {
+    margin: 0;
+    border-radius: 0;
+    border: none;
+    background-color: $white;
+    color: $black;
+    font-size: $font-size-19;
+  }
+  .custom-card-footer {
+    border: none;
+    border-top: 0.1rem solid $gray-200;
+  }
+
+  .experiment-icon {
+    width: 1.875rem;
+    height: 1.875rem;
+  }
+  .img-thumbnail,
+  .name {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+}

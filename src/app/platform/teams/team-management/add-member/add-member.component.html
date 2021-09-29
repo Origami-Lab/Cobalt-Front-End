@@ -1,0 +1,46 @@
+<co-modal-layout [config]="{show: true, backdrop: 'static', keyboard: false}" #coModalLayoutRef>
+  <div class="add-member">
+    <h3 class="font-bold mb-15">Add user to <span class="text-uppercase">{{teamInfo?.name}}</span></h3>
+    <i class="icon close align-middle" ></i>
+    <div class="line">
+      <span class="text-primary font-bold">Share</span>
+    </div>
+
+    <h4 class="mt-30 font-bold">Search User</h4>
+    <input [(ngModel)]="keySearch" (ngModelChange)="searchDebounce($event)" class="position-relative w-100 border radius-5 mt-20 p-10" type="text" placeholder="Add project members by name or email..." />
+    <p *ngIf="inputLoading" class="fz-13">Loading...</p>
+    <div dropdown #dropdown="bs-dropdown" class="bs-dropdown position-relative" [autoClose]="true">
+      <button dropdownToggle type="button">
+      </button>
+      <div id="dropdown-user-list" *dropdownMenu class="dropdown-menu py-0">
+        <ul>
+         <li class="d-flex p-10 position-relative align-items-center" [ngClass]="{'not-allow': item.isInvite}" *ngFor="let item of userList" (click)="inviteUser(item)">
+           <div class="avatar">  
+            <img *ngIf="item.avatar" [src]="item.avatar" />
+            <span *ngIf="!item.avatar && item.name">{{item.name.charAt(0)}}</span>
+            <span *ngIf="!item.avatar && !item.name">{{item.email.charAt(0)}}</span>
+           </div>
+           <div class="pl-10">
+             <p class="mb-0 fz-13 font-bold">{{item.name}}</p>
+             <p class="mb-0 fz-13">{{item.email}}</p>
+           </div>
+           <img *ngIf="item.isInvite" class="check-icon" src="assets/icons/check.svg"/>
+         </li>
+         <li class="p-10" *ngIf="userList.length === 0" (click)="stopPropagation($event)">No users were found</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- <div class="d-flex justify-content-between pt-40 border-bottom pb-30">
+      <div class="fz-14 d-flex align-items-center">
+        <co-member-list *ngIf="memberAvartarList" [totalMember] = "totalMember" [memberAvartarList]="memberAvartarList"></co-member-list>
+        <span class="ml-2" *ngIf="memberAvartarList">{{memberAvartarList[0]?.name}} {{showOtherMember(totalMember)}}</span>
+      </div>
+    </div> -->
+    <div class="pt-30">
+      <co-memeber-table *ngIf="userInvitedList" [userList] = "userInvitedList"></co-memeber-table>
+    </div>
+    <div class="py-30 border-top mt-35 footer">
+    </div>
+  </div>
+</co-modal-layout>

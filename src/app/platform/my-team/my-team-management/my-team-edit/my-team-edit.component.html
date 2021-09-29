@@ -1,0 +1,17 @@
+<co-modal-layout [config]="{show: true, backdrop: 'static', keyboard: false}" #coModalLayoutRef>
+    <div class="modal-header">
+        <h3 class="heading-lg">Edit Team</h3>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-12">
+              <co-my-team-form [apiError]= 'apiError' [teamName]= 'teamName' (submitMyTeam)="onFormSubmit($event)" #myTeamForm></co-my-team-form>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-ghost-primary" (click)="onModalClose()">Close</button>
+        <button class="btn btn-primary" (click)="myTeamForm.submitForm()" [disabled]="loading"
+            [class.loading]="loading">Update</button>
+    </div>
+</co-modal-layout>

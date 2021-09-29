@@ -1,9 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, NgZone, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {markFormControlAsTouched} from '../../shared/utils/mark-form-control-as-touched';
 import {AuthService} from '../auth.service';
 import {Router} from '@angular/router';
-
 @Component({
   selector: 'co-login',
   templateUrl: './login.component.html',
@@ -11,27 +10,32 @@ import {Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   loginForm = this.fb.group({
-    email: ['admin@admin.com', Validators.required],
-    password: ['admin', Validators.required]
+    email: ['', Validators.required],
+    password: ['', Validators.required]
   });
+  loading = false;
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {}
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private ngZone: NgZone) {}
 
   ngOnInit(): void {}
 
-  onSubmit(): void {
+  onSubmit(event: Event): void {
+    event.preventDefault();
     markFormControlAsTouched(this.loginForm);
-
     if (!this.loginForm.valid) {
       return;
     }
-
+    this.loading = true;
     this.authService.login(this.loginForm.value).subscribe(
       () => {
         this.router.navigateByUrl('/platform/view/experiments/list');
+        this.loading = false;
       },
       () => {
-        this.loginForm.setErrors({wrongLoginCredentials: true});
+        this.ngZone.run(() => {
+          this.loginForm.setErrors({wrongLoginCredentials: true});
+        });
+        this.loading = false;
       }
     );
   }

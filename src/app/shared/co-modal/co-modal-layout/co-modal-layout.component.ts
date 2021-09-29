@@ -78,6 +78,14 @@ export class CoModalLayoutComponent implements OnInit, OnDestroy {
     this.onClose();
   }
 
+  openModal(): void {
+    this.bsModal.show();
+  }
+
+  closeModal(): void {
+    this.bsModal.hide();
+  }
+
   onClose(forced = false): void {
     if (forced || !this.svModalService.isBlocked$.value) {
       this.svModalService.isBlocked$.next(false); // to be sure that canDeactivate wont be triggered if is true

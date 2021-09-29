@@ -12,6 +12,6 @@ export const availableToolbarFeaturesConfig = [
   [{color: []}, {background: []}], // dropdown with defaults from theme
   [{font: []}],
   [{align: []}],
-  ['clean'] // remove formatting button
-  // ['link', 'image', 'video'], // link and image, video
+  ['clean'], // remove formatting button
+  ['link', 'image'] // link and image, video
 ];

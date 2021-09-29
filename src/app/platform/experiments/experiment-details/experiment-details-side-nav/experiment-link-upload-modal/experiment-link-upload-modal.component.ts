@@ -58,7 +58,7 @@ export class ExperimentLinkUploadModalComponent implements OnInit {
     const link: Link = {
       link: this.linkForm.value.link,
       experimentId: `/experiments/${this.experimentId}`,
-      userId: this.authToken.payload.uid
+      userId: localStorage.getItem('user_id')
     };
 
     this.experimentDetailsService.attachLink(link).subscribe(

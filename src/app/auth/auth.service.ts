@@ -1,32 +1,56 @@
 import {Injectable} from '@angular/core';
-import {Observable, of, throwError} from 'rxjs';
-import {switchMap, tap} from 'rxjs/operators';
-import {AuthTokenService} from 'ngx-api-utils';
+import {Observable, Subject} from 'rxjs';
+import {tap} from 'rxjs/operators';
+import {ApiHttpService, AuthTokenService} from 'ngx-api-utils';
+import {CountUser, LoginCredentials, UserForm} from './model/auth.interface';
+import {UserRolesService} from './user-role.service';
+import {User} from '../platform/teams/model/team.interface';
+import {UserDropDown} from '../platform/manage-users/manage-users.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private static loginCredentials = {
-    email: 'admin@admin.com',
-    password: 'admin'
-  };
-  private static loginJwtToken =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJ1aWQiOiIvdXNlcnMvMSIsImlhdCI6MTUxNjIzOTAyMn0.yg_DJ9ReDJS4elmNIzDhN-LyeWUbr8qss32wmaCcwLc';
+  constructor(private authToken: AuthTokenService, private apiHttp: ApiHttpService, private userRolesService: UserRolesService) {}
+  readonly userEvent$ = new Subject<User>();
 
-  constructor(private authToken: AuthTokenService) {}
-
-  login(loginCredentials: any): Observable<any> {
-    return of(loginCredentials).pipe(
-      switchMap(credentials => {
-        if (credentials.email === AuthService.loginCredentials.email && credentials.password === AuthService.loginCredentials.password) {
-          return of(true);
-        }
-        return throwError('Wrong credentials');
-      }),
-      tap(() => {
-        this.authToken.value$.next(AuthService.loginJwtToken);
+  login(loginCredentials: LoginCredentials): Observable<any> {
+    const options = {
+      headers: this.apiHttp.headersWithNoAuthorization(),
+      withCredentials: false
+    };
+    return this.apiHttp.post('/authentication_token', loginCredentials, options).pipe(
+      tap(rs => {
+        this.userRolesService.setRoles(rs.data.roles);
+        this.authToken.value$.next(rs.token);
+        localStorage.setItem('user_id', rs.data.userid);
       })
     );
+  }
+
+  getUserById(userId?: string | number, isUpdate: boolean = true): Observable<any> {
+    return this.apiHttp.get<any>(`/users/${userId}`).pipe(
+      tap(rs => {
+        if (isUpdate) {
+          (this.userEvent$ as Subject<User>).next(rs);
+        }
+      })
+    );
+  }
+
+  createUser(userForm: UserForm): Observable<UserForm> {
+    return this.apiHttp.post<UserForm>('/users', userForm);
+  }
+
+  coutUser(): Observable<CountUser> {
+    return this.apiHttp.get<CountUser>('/count_users');
+  }
+
+  getUserRoles(): Observable<UserDropDown[]> {
+    return this.apiHttp.get<UserDropDown[]>('/user_roles');
+  }
+
+  removeUser(userId: string): Observable<any> {
+    return this.apiHttp.delete<any>(`/users/${userId}`);
   }
 }

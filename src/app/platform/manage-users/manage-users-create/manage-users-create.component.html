@@ -1,0 +1,56 @@
+<co-modal-layout [config]="modalConfig" #userModalRef>
+  <div class="d-flex justify-content-between align-items-center pb-20 position-relative">
+    <h3 class="font-bold">Add User</h3>
+    <i class="icon close align-middle pointer" (click)="closeModal()"></i>
+  </div>
+  <form [formGroup]="createForm" (ngSubmit)="onSubmit($event)" class="create-user">
+    <hr class="pb-30" />
+    <div class="general-error mb-2">
+      <co-form-control-errors [control]="createForm">
+        <co-form-control-error *ngIf="createForm.errors?.wrongCreateUser" class="">
+          <div class="p-2 badge badge-danger-50 d-block text-left text-danger-900 text-xs font-weight-700">
+            Can not create User</div>
+        </co-form-control-error>
+      </co-form-control-errors>
+    </div>
+    <fieldset class="mb-4">
+      <label for="email" class="form-label mb-18">User Email</label>
+      <input type="text" id="email" class="form-control" formControlName="email" placeholder="Enter User Email">
+      <co-form-control-errors [controlName]="'email'"></co-form-control-errors>
+    </fieldset>
+    <div class="d-flex justify-content-between">
+      <fieldset class="mb-4 w-49">
+        <label for="email" class="form-label mb-18">First Name</label>
+        <input type="text" id="firstName" class="form-control" formControlName="firstName"
+          placeholder="Enter First Name">
+        <co-form-control-errors [controlName]="'firstName'"></co-form-control-errors>
+      </fieldset>
+      <fieldset class="mb-4 w-49">
+        <label for="email" class="form-label mb-18">Last Name</label>
+        <input type="text" id="lastName" class="form-control" formControlName="lastName" placeholder="Enter Last Name">
+        <co-form-control-errors [controlName]="'lastName'"></co-form-control-errors>
+      </fieldset>
+    </div>
+    <div class="d-flex justify-content-between">
+      <fieldset class="mb-4 w-49">
+        <label for="password" class="form-label mb-18">User Password</label>
+        <div class="position-relative">
+          <input [type]="isShowEyes ? 'text' : 'password'" id="password" class="form-control" formControlName="password"
+            placeholder="Enter User Password">
+          <i class="icon eyes position-absolute" [ngClass]="{'hide-eyes': isShowEyes}" (click)="toggleEye()"></i>
+        </div>
+        <co-form-control-errors [controlName]="'password'"></co-form-control-errors>
+      </fieldset>
+
+      <fieldset class="mb-4 w-49">
+        <label for="password" class="form-label mb-18">Role</label>
+        <co-dropdown [isShowAll]='false' [title] = "'Role'"  [dropdownList] = 'dropdownList' (itemSelected) = 'itemSelected($event)'></co-dropdown>
+      </fieldset>
+    </div>
+    <fieldset>
+      <div class="text-right">
+        <button class="btn btn-primary px-30" type="submit" [disabled]="loading" [class.loading]="loading">Save</button>
+      </div>
+    </fieldset>
+  </form>
+</co-modal-layout>
