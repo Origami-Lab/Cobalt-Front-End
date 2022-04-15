@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  getUserInfo(id: number) {
+  getUserInfo(id: number): void {
     this.authService.getUserById(id).subscribe(rs => {
       const options = {
         withCredentials: false
@@ -65,6 +65,4 @@ export class LoginComponent implements OnInit {
       });
     });
   }
-
-  createSection() {}
 }
