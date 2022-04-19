@@ -36,8 +36,6 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     this.authService.login(this.loginForm.value).subscribe(
       rs => {
-        this.getUserInfo(rs.data.userid);
-        return;
         this.router.navigateByUrl('/platform/view/experiments/list');
         this.loading = false;
       },
@@ -48,21 +46,5 @@ export class LoginComponent implements OnInit {
         this.loading = false;
       }
     );
-  }
-
-  getUserInfo(id: number): void {
-    this.authService.getUserById(id).subscribe(rs => {
-      const options = {
-        withCredentials: false
-      };
-      const params = {
-        apikey: environment.apiKey,
-        name: 'Admin',
-        authorMapper: 'dev4'
-      };
-      this.http.post(`https://etherpad.cobalt.origamilab.ch/createAuthorIfNotExistsFor/`, params, options).subscribe(() => {
-        console.log('okay baby');
-      });
-    });
   }
 }

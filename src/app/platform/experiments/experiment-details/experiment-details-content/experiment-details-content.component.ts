@@ -18,12 +18,23 @@ export class ExperimentDetailsContentComponent implements OnInit {
   experiment: Experiment;
   constructor() {}
 
+  protocolOldEditor: boolean = false;
+  conclusionOldEditor: boolean = false;
+
   onSaveProtocol(): void {
-    // this.experimentProtocol.save();
+    this.experimentProtocol.save();
   }
 
   onSaveConclusion(): void {
-    // this.experimentConclusion.save();
+    this.experimentConclusion.save();
+  }
+
+  protocolEditor(): void {
+    this.protocolOldEditor = true;
+  }
+
+  conclusionEditor(): void {
+    this.conclusionOldEditor = true;
   }
 
   ngOnInit(): void {}

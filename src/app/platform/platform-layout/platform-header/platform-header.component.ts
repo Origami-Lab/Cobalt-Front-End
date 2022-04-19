@@ -42,7 +42,7 @@ export class PlatformHeaderComponent implements OnInit {
           this.userRolesService.setRoles(rs.roles);
           this.userRolesService.setUserInfo(rs);
           this.loading = false;
-
+          localStorage.setItem('userName', rs.name);
           this.checkIsHasPadId(rs);
         },
         () => {

@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {RESIZABLE_BOX} from '../../../../platform-shared/components/resizable-box/resizable-box.token';
 import {ResizableBoxMethods} from '../../../../platform-shared/components/resizable-box/resizable-box.interface';
 import {TextEditorContentType} from '../../../../platform-shared/components/text-editor/text-editor-content.type';
@@ -25,7 +25,7 @@ import * as uuid from 'uuid';
   ]
 })
 export class ExperimentProtocolComponent implements OnInit, OnDestroy, ResizableBoxMethods {
-  private static protocolInitialTemplate = '<h2><strong>Protocol</strong></h2>';
+  private static protocolInitialTemplate = '';
   @Input()
   set experiment(experiment: Experiment) {
     this.experiment$.next(experiment);
@@ -33,6 +33,9 @@ export class ExperimentProtocolComponent implements OnInit, OnDestroy, Resizable
   get experiment(): Experiment {
     return this.experiment$.value;
   }
+
+  @Output()
+  checkEditor = new EventEmitter<void>();
 
   boxContentHeight: number;
   protocol: Protocol | Partial<Protocol>;
@@ -49,8 +52,10 @@ export class ExperimentProtocolComponent implements OnInit, OnDestroy, Resizable
   ) {}
 
   iframeURL = '';
+  isOldEditor: boolean = false;
 
   ngOnInit(): void {
+    console.log('zzzzz', this.authToken);
     this.subscription = this.experiment$
       .pipe(
         filter(e => !!e),
@@ -60,10 +65,17 @@ export class ExperimentProtocolComponent implements OnInit, OnDestroy, Resizable
         (protocol: Protocol) => {
           this.protocol = protocol ? protocol : {protocol: ExperimentProtocolComponent.protocolInitialTemplate};
           this.loading = false;
-          if (!this.protocol.padid) {
-            this.createGroupPad(protocol);
+          if (protocol && protocol.protocol) {
+            this.isOldEditor = true;
+            this.checkEditor.emit();
           } else {
-            this.iframeURL = `https://etherpad.cobalt.origamilab.ch/p/${this.protocol.padid}?showChat=true`;
+            if (!this.protocol.padid) {
+              this.createGroupPad(protocol);
+            } else {
+              this.iframeURL = `https://etherpad.cobalt.origamilab.ch/p/${
+                this.protocol.padid
+              }?showChat=true&userName=${localStorage.getItem('userName')}`;
+            }
           }
         },
         () => {
@@ -85,14 +97,15 @@ export class ExperimentProtocolComponent implements OnInit, OnDestroy, Resizable
       apikey: environment.apiKey
     };
     this.http.post(`${environment.padUrl}createGroupPad`, params, options).subscribe((rs: any) => {
-      console.log('qqqqq', rs);
       if (protocol) {
         this.updateProtocal(rs.data.padID, protocol.id);
         this.setHtml(rs.data.padID, protocol.protocol as string);
       } else {
         this.save(rs.data.padID as string);
       }
-      this.iframeURL = `https://etherpad.cobalt.origamilab.ch/p/${rs.data.padID}?showChat=true`;
+      this.iframeURL = `https://etherpad.cobalt.origamilab.ch/p/${rs.data.padID}?showChat=true&userName=${localStorage.getItem(
+        'userName'
+      )}`;
     });
   }
 
@@ -126,7 +139,7 @@ export class ExperimentProtocolComponent implements OnInit, OnDestroy, Resizable
     this.boxContentHeight = boxContentHeight;
   }
 
-  save(padid: string): void {
+  save(padid?: string): void {
     this.saveProtocolLoading = true;
     const protocolReq: Protocol = this.protocol.id
       ? ({...this.protocol, experimentId: `/experiments/${this.experiment.id}`} as Protocol)
