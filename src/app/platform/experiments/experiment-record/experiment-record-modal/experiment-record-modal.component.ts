@@ -11,13 +11,14 @@ import {Experiment} from '../../models/experiment.interface';
 import {TextEditorContentType} from '../../../platform-shared/components/text-editor/text-editor-content.type';
 import {DomSanitizer} from '@angular/platform-browser';
 import {ApiHttpErrorResponse} from '../../../../core/api-error/api-http-error-response';
-import {HttpErrorResponse} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {ToastrService} from 'ngx-toastr';
 import {ApiError} from '../../../../core/api-error/api-error';
 import {ExperimentsService} from '../../experiments.service';
 import {ConfirmModalComponent} from '../../../platform-shared/components/confirm-modal/confirm-modal.component';
 import {Link} from '../../experiment-details/models/link.interface';
 import {Attachment} from '../../experiment-details/models/attachment.interface';
+import {environment} from 'src/environments/environment';
 
 @Component({
   selector: 'co-experiment-record-modal',
@@ -47,7 +48,8 @@ export class ExperimentRecordModalComponent implements OnInit {
     private experimentsService: ExperimentsService,
     private route: ActivatedRoute,
     private router: Router,
-    private sanitized: DomSanitizer
+    private sanitized: DomSanitizer,
+    private http: HttpClient
   ) {}
 
   ngOnInit(): void {
@@ -81,8 +83,35 @@ export class ExperimentRecordModalComponent implements OnInit {
           this.links = links;
           this.attachments = attachments;
           this.loading = false;
+
+          if (!protocol.protocol && protocol.padid) {
+            this.getText(protocol.padid).then(rs => {
+              this.protocol = rs;
+            });
+          }
+
+          if (!conclusions.conclusions && conclusions.padid) {
+            this.getText(conclusions.padid).then(rs => {
+              this.conclusion = rs;
+            });
+          }
         }
       );
+  }
+
+  async getText(padID: string): Promise<String> {
+    let contentText = '';
+    const options = {
+      withCredentials: false
+    };
+
+    const params = {
+      padID,
+      apikey: environment.apiKey
+    };
+    const data: any = await this.http.post(`${environment.padUrl}getText`, params, options).toPromise();
+    contentText = data.data.text;
+    return contentText;
   }
 
   onModalClose(): void {
