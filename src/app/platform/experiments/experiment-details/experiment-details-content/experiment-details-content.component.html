@@ -3,12 +3,12 @@
     <div class="col-12 col-xl-6 position-static mb-4">
       <div class="content-box-wrapper">
         <co-resizable-box title="Protocol">
-          <button
+          <!-- <button
             class="btn btn-ghost-color-primary py-1"
             [disabled]="experimentProtocolRef.loading || experimentProtocolRef.saveProtocolLoading"
             [class.loading]="experimentProtocolRef.saveProtocolLoading"
             (click)="onSaveProtocol()"
-          >Save</button>
+          >Save</button> -->
           <co-experiment-protocol [experiment]="experiment" #experimentProtocolRef></co-experiment-protocol>
         </co-resizable-box>
       </div>
@@ -23,12 +23,9 @@
     <div class="col-12 position-static">
       <div class="content-box-wrapper">
         <co-resizable-box title="Conclusion">
-          <button
-            class="btn btn-ghost-color-primary py-1"
+          <!-- <button class="btn btn-ghost-color-primary py-1"
             [disabled]="experimentConclusionRef.loading || experimentConclusionRef.saveConclusionLoading"
-            [class.loading]="experimentConclusionRef.saveConclusionLoading"
-            (click)="onSaveConclusion()"
-          >Save</button>
+            [class.loading]="experimentConclusionRef.saveConclusionLoading" (click)="onSaveConclusion()">Save</button> -->
           <co-experiment-conclusion [experiment]="experiment" #experimentConclusionRef></co-experiment-conclusion>
         </co-resizable-box>
       </div>

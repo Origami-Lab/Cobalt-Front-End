@@ -19,11 +19,11 @@ export class ExperimentDetailsContentComponent implements OnInit {
   constructor() {}
 
   onSaveProtocol(): void {
-    this.experimentProtocol.save();
+    // this.experimentProtocol.save();
   }
 
   onSaveConclusion(): void {
-    this.experimentConclusion.save();
+    // this.experimentConclusion.save();
   }
 
   ngOnInit(): void {}

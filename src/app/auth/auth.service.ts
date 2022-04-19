@@ -53,4 +53,8 @@ export class AuthService {
   removeUser(userId: string): Observable<any> {
     return this.apiHttp.delete<any>(`/users/${userId}`);
   }
+
+  updateUserProfile(profile: UserForm, userId: number): Observable<any> {
+    return this.apiHttp.put(`/users/${userId}`, profile);
+  }
 }

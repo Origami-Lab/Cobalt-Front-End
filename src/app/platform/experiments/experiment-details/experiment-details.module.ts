@@ -18,6 +18,7 @@ import {ExperimentLinkUploadModalComponent} from './experiment-details-side-nav/
 import {CollapseModule} from 'ngx-bootstrap/collapse';
 import {ExperimentDetailsTagComponent} from './experiment-details-tag/experiment-details-tag.component';
 import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
+import {PipeModule} from 'src/app/shared/pipe.module';
 @NgModule({
   declarations: [
     ExperimentDetailsPageComponent,
@@ -40,7 +41,8 @@ import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
     TextareaAutosizeModule,
     ExperimentDetailsSharedModule,
     CollapseModule,
-    BsDropdownModule
+    BsDropdownModule,
+    PipeModule
   ],
   exports: [ExperimentDetailsTagComponent]
 })
