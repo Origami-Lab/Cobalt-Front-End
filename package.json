@@ -40,7 +40,7 @@
     "ngx-api-utils": "^1.0.10",
     "ngx-bootstrap": "^6.2.0",
     "ngx-logger": "^4.1.9",
-    "ngx-mutation-observer": "^1.0.1",
+    "ngx-mutation-observer": "1.0.1",
     "ngx-quill": "^13.0.1",
     "ngx-textarea-autosize": "^2.0.3",
     "ngx-toastr": "^13.2.0",
