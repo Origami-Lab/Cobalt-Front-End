@@ -3,6 +3,8 @@ import {FormBuilder, Validators} from '@angular/forms';
 import {markFormControlAsTouched} from '../../shared/utils/mark-form-control-as-touched';
 import {AuthService} from '../auth.service';
 import {Router} from '@angular/router';
+import {HttpClient} from '@angular/common/http';
+import {environment} from 'src/environments/environment';
 @Component({
   selector: 'co-login',
   templateUrl: './login.component.html',
@@ -15,7 +17,13 @@ export class LoginComponent implements OnInit {
   });
   loading = false;
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private ngZone: NgZone) {}
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router,
+    private ngZone: NgZone,
+    private http: HttpClient
+  ) {}
 
   ngOnInit(): void {}
 
@@ -27,7 +35,7 @@ export class LoginComponent implements OnInit {
     }
     this.loading = true;
     this.authService.login(this.loginForm.value).subscribe(
-      () => {
+      rs => {
         this.router.navigateByUrl('/platform/view/experiments/list');
         this.loading = false;
       },

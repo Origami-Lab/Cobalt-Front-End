@@ -17,7 +17,6 @@ import {DatePipe} from '@angular/common';
 import {QuillModule} from 'ngx-quill';
 import {ToastrModule} from 'ngx-toastr';
 import {CollapseModule} from 'ngx-bootstrap/collapse';
-
 @NgModule({
   declarations: [AppComponent],
   imports: [

@@ -3,14 +3,11 @@
     <co-loading [loading]="loading" class="absolute-center"></co-loading>
   </div>
 </div>
-<div class="row h-100" *ngIf="!loading">
+<div class="d-flex h-100" *ngIf="!loading">
   <div class="col-12">
-    <co-text-editor
-      [initialValue]="conclusion.conclusions"
-      format="html"
-      [contentWrapperHeight]="boxContentHeight"
-      (contentChanged)="onChange($event)"
-    ></co-text-editor>
+
+    <iframe class="w-100" [src]='iframeURL | safe' height=400 *ngIf="!isOldEditor"></iframe>
+    <co-text-editor *ngIf="isOldEditor" [initialValue]="conclusion.conclusions" format="html"
+      [contentWrapperHeight]="boxContentHeight" (contentChanged)="onChange($event)"></co-text-editor>
   </div>
 </div>
-
