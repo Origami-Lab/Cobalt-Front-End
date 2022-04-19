@@ -18,8 +18,8 @@ export class ExperimentDetailsContentComponent implements OnInit {
   experiment: Experiment;
   constructor() {}
 
-  protocolOldEditor: boolean = false;
-  conclusionOldEditor: boolean = false;
+  protocolOldEditor = false;
+  conclusionOldEditor = false;
 
   onSaveProtocol(): void {
     this.experimentProtocol.save();

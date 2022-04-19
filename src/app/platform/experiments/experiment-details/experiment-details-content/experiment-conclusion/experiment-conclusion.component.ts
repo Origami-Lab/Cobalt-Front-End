@@ -49,7 +49,7 @@ export class ExperimentConclusionComponent implements OnInit, OnDestroy, Resizab
     private http: HttpClient
   ) {}
 
-  isOldEditor: boolean = false;
+  isOldEditor = false;
 
   @Output()
   checkEditor = new EventEmitter<void>();

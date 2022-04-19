@@ -52,10 +52,9 @@ export class ExperimentProtocolComponent implements OnInit, OnDestroy, Resizable
   ) {}
 
   iframeURL = '';
-  isOldEditor: boolean = false;
+  isOldEditor = false;
 
   ngOnInit(): void {
-    console.log('zzzzz', this.authToken);
     this.subscription = this.experiment$
       .pipe(
         filter(e => !!e),
