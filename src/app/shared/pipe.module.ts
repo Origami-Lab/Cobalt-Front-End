@@ -8,7 +8,7 @@ import {SafePipe} from './safe.pipe';
   exports: [SafePipe]
 })
 export class PipeModule {
-  static forRoot() {
+  static forRoot(): any {
     return {
       ngModule: PipeModule,
       providers: []

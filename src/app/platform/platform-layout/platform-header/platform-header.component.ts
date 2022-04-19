@@ -86,7 +86,9 @@ export class PlatformHeaderComponent implements OnInit {
     if (sessionId) {
       this.iframeURl = `https://etherpad.cobalt.origamilab.ch/auth_session?sessionID=${sessionId}`;
     }
-    if (isSession) return;
+    if (isSession) {
+      return;
+    }
     localStorage.setItem('isSession', 'true');
     const options = {
       withCredentials: false
