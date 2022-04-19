@@ -99,7 +99,7 @@ export class ExperimentRecordModalComponent implements OnInit {
       );
   }
 
-  async getText(padID: string): Promise<String> {
+  async getText(padID: string): Promise<string> {
     let contentText = '';
     const options = {
       withCredentials: false
