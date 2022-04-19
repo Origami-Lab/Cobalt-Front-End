@@ -72,7 +72,7 @@ export class ExperimentConclusionComponent implements OnInit, OnDestroy, Resizab
       );
   }
 
-  createGroupPad(conclusion: Conclusion) {
+  createGroupPad(conclusion: Conclusion): void {
     const options = {
       withCredentials: false
     };
@@ -94,7 +94,7 @@ export class ExperimentConclusionComponent implements OnInit, OnDestroy, Resizab
     });
   }
 
-  setHtml(padID: string, html: string) {
+  setHtml(padID: string, html: string): void {
     const options = {
       withCredentials: false
     };
@@ -107,7 +107,7 @@ export class ExperimentConclusionComponent implements OnInit, OnDestroy, Resizab
     this.http.post(`${environment.padUrl}setHTML`, params, options).subscribe((rs: any) => {});
   }
 
-  updateConclusion(padid: string, id: number) {
+  updateConclusion(padid: string, id: number): void {
     this.experimentDetailsService.updateConclusion({id, padid}).subscribe(() => {});
   }
 

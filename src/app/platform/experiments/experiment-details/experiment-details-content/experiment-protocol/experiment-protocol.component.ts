@@ -73,7 +73,7 @@ export class ExperimentProtocolComponent implements OnInit, OnDestroy, Resizable
       );
   }
 
-  createGroupPad(protocol: Protocol) {
+  createGroupPad(protocol: Protocol): void {
     const options = {
       withCredentials: false
     };
@@ -96,7 +96,7 @@ export class ExperimentProtocolComponent implements OnInit, OnDestroy, Resizable
     });
   }
 
-  setHtml(padID: string, html: string) {
+  setHtml(padID: string, html: string): void {
     const options = {
       withCredentials: false
     };
@@ -109,7 +109,7 @@ export class ExperimentProtocolComponent implements OnInit, OnDestroy, Resizable
     this.http.post(`${environment.padUrl}setHTML`, params, options).subscribe((rs: any) => {});
   }
 
-  updateProtocal(padid: string, id: number) {
+  updateProtocal(padid: string, id: number): void {
     this.experimentDetailsService.updateProtocol({id, padid}).subscribe(() => {});
   }
 

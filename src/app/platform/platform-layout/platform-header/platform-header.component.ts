@@ -51,7 +51,7 @@ export class PlatformHeaderComponent implements OnInit {
       );
   }
 
-  checkIsHasPadId(rs: UserForm) {
+  checkIsHasPadId(rs: UserForm): void {
     if (!rs.padid) {
       const options = {
         withCredentials: false
@@ -74,13 +74,13 @@ export class PlatformHeaderComponent implements OnInit {
     }
   }
 
-  updateUser(padid: string, userId: number) {
+  updateUser(padid: string, userId: number): void {
     this.authService.updateUserProfile({padid}, userId).subscribe(() => {
       this.createSession(padid);
     });
   }
 
-  createSession(authorID: string) {
+  createSession(authorID: string): void {
     const isSession = localStorage.getItem('isSession');
     const sessionId = localStorage.getItem('sessionID');
     if (sessionId) {
