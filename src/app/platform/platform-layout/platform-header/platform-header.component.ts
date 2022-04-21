@@ -82,10 +82,10 @@ export class PlatformHeaderComponent implements OnInit {
 
   createSession(authorID: string): void {
     const isSession = localStorage.getItem('isSession');
-    const sessionId = localStorage.getItem('sessionID');
-    if (sessionId) {
-      this.iframeURl = `https://etherpad.cobalt.origamilab.ch/auth_session?sessionID=${sessionId}`;
-    }
+    // const sessionId = localStorage.getItem('sessionID');
+    // if (sessionId) {
+    //   this.iframeURl = `https://etherpad.cobalt.origamilab.ch/auth_session?sessionID=${sessionId}`;
+    // }
     if (isSession) {
       return;
     }
