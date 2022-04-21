@@ -12,7 +12,7 @@ import {AuthTokenService} from 'ngx-api-utils';
 import {JwtTokenPayload} from '../../../../../core/auth/jwt-token-payload';
 import {HttpClient} from '@angular/common/http';
 import {environment} from 'src/environments/environment';
-import * as uuid from 'uuid';
+import md5 from 'md5-hash';
 @Component({
   selector: 'co-experiment-protocol',
   templateUrl: './experiment-protocol.component.html',
@@ -91,7 +91,7 @@ export class ExperimentProtocolComponent implements OnInit, OnDestroy, Resizable
 
     const params = {
       groupID: environment.padGroupId,
-      padName: uuid.v4(),
+      padName: md5(new Date().getTime().toString()),
       text: decodeURI(protocol ? (protocol.protocol as string) : ''),
       apikey: environment.apiKey
     };

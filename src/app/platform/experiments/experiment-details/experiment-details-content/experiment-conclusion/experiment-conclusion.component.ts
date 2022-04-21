@@ -11,7 +11,7 @@ import {ToastrService} from 'ngx-toastr';
 import {AuthTokenService} from 'ngx-api-utils';
 import {JwtTokenPayload} from '../../../../../core/auth/jwt-token-payload';
 import {environment} from 'src/environments/environment';
-import * as uuid from 'uuid';
+import md5 from 'md5-hash';
 import {HttpClient} from '@angular/common/http';
 @Component({
   selector: 'co-experiment-conclusion',
@@ -88,10 +88,9 @@ export class ExperimentConclusionComponent implements OnInit, OnDestroy, Resizab
     const options = {
       withCredentials: false
     };
-
     const params = {
       groupID: environment.padGroupId,
-      padName: uuid.v4(),
+      padName: md5(new Date().getTime().toString()),
       text: decodeURI(conclusion ? (conclusion.conclusions as string) : ''),
       apikey: environment.apiKey
     };
