@@ -4,8 +4,8 @@
   </div>
 </div>
 <div class="d-flex h-100" *ngIf="!loading">
-  <div class="col-12 h-100">
-    <iframe class="w-100" [src]='iframeURL | safe' height=400 *ngIf="!isOldEditor"></iframe>
+  <div class="col-12 h-100 d-flex">
+    <iframe class="w-100 h-100" [src]='iframeURL | safe' *ngIf="!isOldEditor"></iframe>
     <co-text-editor *ngIf="isOldEditor" [initialValue]="protocol.protocol" format="html"
       [contentWrapperHeight]="boxContentHeight" (contentChanged)="onChange($event)"></co-text-editor>
   </div>
