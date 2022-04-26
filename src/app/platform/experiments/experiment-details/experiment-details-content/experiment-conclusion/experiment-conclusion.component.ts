@@ -73,7 +73,7 @@ export class ExperimentConclusionComponent implements OnInit, OnDestroy, Resizab
             } else {
               this.iframeURL = `https://etherpad.cobalt.origamilab.ch/p/${
                 this.conclusion.padid
-              }?showChat=true&userName=${localStorage.getItem('userName')}`;
+              }?showChat=false&userName=${localStorage.getItem('userName')}`;
             }
           }
         },
@@ -101,7 +101,7 @@ export class ExperimentConclusionComponent implements OnInit, OnDestroy, Resizab
       } else {
         this.save(rs.data.padID);
       }
-      this.iframeURL = `https://etherpad.cobalt.origamilab.ch/p/${rs.data.padID}?showChat=true&userName=${localStorage.getItem(
+      this.iframeURL = `https://etherpad.cobalt.origamilab.ch/p/${rs.data.padID}?showChat=false&userName=${localStorage.getItem(
         'userName'
       )}`;
     });
