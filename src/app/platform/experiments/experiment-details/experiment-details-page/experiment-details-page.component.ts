@@ -63,7 +63,7 @@ export class ExperimentDetailsPageComponent implements OnInit, OnDestroy {
     window.addEventListener('message', this.receiveMessage);
   }
 
-  receiveMessage(e) {
+  receiveMessage(e: any): void {
     const iframeEl: any = document.getElementById('h_iframe');
     if (e.data === 'expand_chat_iframe') {
       iframeEl.style = 'width:406px; height:306px;';
