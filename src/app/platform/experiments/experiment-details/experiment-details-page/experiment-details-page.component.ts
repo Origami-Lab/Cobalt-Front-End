@@ -9,8 +9,10 @@ import {ToastrService} from 'ngx-toastr';
 import {ConfirmModalComponent} from '../../../platform-shared/components/confirm-modal/confirm-modal.component';
 import {ApiError} from '../../../../core/api-error/api-error';
 import {ApiHttpErrorResponse} from '../../../../core/api-error/api-http-error-response';
-import {HttpErrorResponse} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {ExperimentDetailsContentComponent} from '../experiment-details-content/experiment-details-content.component';
+import {environment} from 'src/environments/environment';
+import md5 from 'md5-hash';
 
 @Component({
   selector: 'co-experiment-details-page',
@@ -28,12 +30,14 @@ export class ExperimentDetailsPageComponent implements OnInit, OnDestroy {
   deleteExperimentLoading = false;
   apiError: ApiError;
   private subscription: Subscription;
+  iframeURL = '';
 
   constructor(
     private experimentsService: ExperimentsService,
     private route: ActivatedRoute,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private http: HttpClient
   ) {}
 
   ngOnInit(): void {
@@ -44,10 +48,52 @@ export class ExperimentDetailsPageComponent implements OnInit, OnDestroy {
       .subscribe(experiment => {
         this.experiment = experiment;
         this.loading = false;
+        if (experiment.padid) {
+          this.iframeURL = `https://etherpad.cobalt.origamilab.ch/p/${this.experiment.padid}?showChat=true&userName=${localStorage.getItem(
+            'userName'
+          )}`;
+        } else {
+          this.createGroupPad();
+        }
       });
     this.subscription = this.experimentsService.events$.pipe(filter(e => e instanceof EditExperiment)).subscribe(({experiment}) => {
       this.experiment = experiment;
     });
+
+    window.addEventListener('message', this.receiveMessage);
+  }
+
+  receiveMessage(e: any): void {
+    const iframeEl: any = document.getElementById('h_iframe');
+    if (e.data === 'expand_chat_iframe') {
+      iframeEl.style = 'width:406px; height:306px;';
+    }
+    if (e.data === 'collapse_chat_iframe') {
+      iframeEl.style = 'width:86px; height:82px;';
+    }
+  }
+
+  createGroupPad(): void {
+    const options = {
+      withCredentials: false
+    };
+    const params = {
+      groupID: environment.padGroupId,
+      padName: 'cobalt-chat' + md5(new Date().getTime().toString()),
+      text: '',
+      apikey: environment.apiKey
+    };
+    this.http.post(`${environment.padUrl}createGroupPad`, params, options).subscribe((rs: any) => {
+      this.updateExperiments(rs.data.padID);
+      this.iframeURL = `https://etherpad.cobalt.origamilab.ch/p/${rs.data.padID}?showChat=true&userName=${localStorage.getItem(
+        'userName'
+      )}`;
+    });
+  }
+
+  updateExperiments(padid: string): void {
+    const {experimentId} = this.route.snapshot.params;
+    this.experimentsService.editExperiment({id: experimentId, padid}).subscribe(() => {});
   }
 
   ngOnDestroy(): void {
