@@ -91,7 +91,7 @@ export class ExperimentDetailsPageComponent implements OnInit, OnDestroy {
     });
   }
 
-  updateExperiments(padid: string) {
+  updateExperiments(padid: string): void {
     const {experimentId} = this.route.snapshot.params;
     this.experimentsService.editExperiment({id: experimentId, padid}).subscribe(() => {});
   }
