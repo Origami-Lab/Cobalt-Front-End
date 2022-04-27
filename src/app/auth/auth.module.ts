@@ -7,9 +7,10 @@ import {LogoutComponent} from './logout/logout.component';
 import {AuthRoutingModule} from './auth-routing.module';
 import {TabsModule} from 'ngx-bootstrap/tabs';
 import {FormsModule} from '@angular/forms';
+import {SignupComponent} from './signup/signup.component';
 
 @NgModule({
-  declarations: [AuthLayoutComponent, LoginComponent, LogoutComponent],
+  declarations: [AuthLayoutComponent, LoginComponent, LogoutComponent, SignupComponent],
   imports: [CommonModule, SharedModule, AuthRoutingModule, TabsModule, FormsModule]
 })
 export class AuthModule {}

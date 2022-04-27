@@ -42,6 +42,14 @@ export class AuthService {
     return this.apiHttp.post<UserForm>('/users', userForm);
   }
 
+  signUp(userForm: UserForm): Observable<any> {
+    const options = {
+      headers: this.apiHttp.headersWithNoAuthorization(),
+      withCredentials: false
+    };
+    return this.apiHttp.post<UserForm>('/user-management/signup', userForm, options);
+  }
+
   coutUser(): Observable<CountUser> {
     return this.apiHttp.get<CountUser>('/count_users');
   }
