@@ -15,7 +15,7 @@ export class SignupComponent implements OnInit {
   signUpForm: FormGroup = new FormGroup({});
   errorMessage = '';
 
-  ConfirmedValidator(controlName: string, matchingControlName: string) {
+  ConfirmedValidator(controlName: string, matchingControlName: string): any {
     return (formGroup: FormGroup) => {
       const control = formGroup.controls[controlName];
       const matchingControl = formGroup.controls[matchingControlName];
