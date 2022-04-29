@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
 import {tap} from 'rxjs/operators';
 import {ApiHttpService, AuthTokenService} from 'ngx-api-utils';
-import {CountUser, LoginCredentials, UserForm} from './model/auth.interface';
+import {CountUser, LoginCredentials, ResetForm, UserForm} from './model/auth.interface';
 import {UserRolesService} from './user-role.service';
 import {User} from '../platform/teams/model/team.interface';
 import {UserDropDown} from '../platform/manage-users/manage-users.interface';
@@ -48,6 +48,22 @@ export class AuthService {
       withCredentials: false
     };
     return this.apiHttp.post<UserForm>('/user-management/signup', userForm, options);
+  }
+
+  forgotPassword(email: string): Observable<any> {
+    const options = {
+      headers: this.apiHttp.headersWithNoAuthorization(),
+      withCredentials: false
+    };
+    return this.apiHttp.post<UserForm>('/user-management/forgot-password', {email}, options);
+  }
+
+  resetPassword(resetForm: ResetForm): Observable<any> {
+    const options = {
+      headers: this.apiHttp.headersWithNoAuthorization(),
+      withCredentials: false
+    };
+    return this.apiHttp.post<UserForm>('/user-management/reset-password', resetForm, options);
   }
 
   coutUser(): Observable<CountUser> {

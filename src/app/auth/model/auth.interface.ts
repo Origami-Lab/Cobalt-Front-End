@@ -18,3 +18,8 @@ export interface Count {
   count: number;
   name: string;
 }
+
+export interface ResetForm {
+  hash: string;
+  password: string;
+}

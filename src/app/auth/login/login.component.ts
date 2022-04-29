@@ -23,6 +23,10 @@ export class LoginComponent implements OnInit {
     this.router.navigateByUrl('/auth/signup');
   }
 
+  forgotPasswordRedirect(): void {
+    this.router.navigateByUrl('/auth/forgot-password');
+  }
+
   onSubmit(event: Event): void {
     event.preventDefault();
     markFormControlAsTouched(this.loginForm);
