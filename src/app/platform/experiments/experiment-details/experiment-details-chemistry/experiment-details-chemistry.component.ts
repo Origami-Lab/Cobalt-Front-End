@@ -43,7 +43,7 @@ export class ExperimentDetailsChemistryComponent implements OnInit {
     };
     const formBody = [];
 
-    for (const property in this.chemistryForm.value) {
+    for (const property of Object.keys(this.chemistryForm.value)) {
       const encodedKey = encodeURIComponent(property);
       const encodedValue = encodeURIComponent(this.chemistryForm.value[property]);
       formBody.push(encodedKey + '=' + encodedValue);
