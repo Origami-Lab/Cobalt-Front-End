@@ -6,5 +6,6 @@ export const environment = {
     name: 'co_token'
   },
   apiKey: '73e75ae01759d9312f5f6eb7ebb0efb0f3e8af52025dc8cdd508bbeea1de6290',
-  padGroupId: 'g.at3YEpNez6r2svU5'
+  padGroupId: 'g.at3YEpNez6r2svU5',
+  chemistryURL: 'https://stoichiometry.cobalt.origamilab.ch/api/webapi/all'
 };

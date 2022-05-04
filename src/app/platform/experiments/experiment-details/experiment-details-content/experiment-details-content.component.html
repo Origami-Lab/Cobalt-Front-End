@@ -1,6 +1,6 @@
 <div class="position-relative">
   <div class="row position-static">
-    <div class="col-12 col-xl-6 position-static mb-4">
+    <!-- <div class="col-12 col-xl-6 position-static mb-4">
       <div class="content-box-wrapper">
         <co-resizable-box title="Protocol">
           <button *ngIf="protocolOldEditor" class="btn btn-ghost-color-primary py-1"
@@ -11,6 +11,7 @@
         </co-resizable-box>
       </div>
     </div>
+
     <div class="col-12 col-xl-6 position-static mb-4">
       <div class="content-box-wrapper">
         <co-resizable-box title="Notes">
@@ -18,6 +19,7 @@
         </co-resizable-box>
       </div>
     </div>
+
     <div class="col-12 position-static">
       <div class="content-box-wrapper">
         <co-resizable-box title="Conclusion">
@@ -26,6 +28,14 @@
             [class.loading]="experimentConclusionRef.saveConclusionLoading" (click)="onSaveConclusion()">Save</button>
           <co-experiment-conclusion [experiment]="experiment" (checkEditor)="conclusionEditor()"
             #experimentConclusionRef></co-experiment-conclusion>
+        </co-resizable-box>
+      </div>
+    </div> -->
+
+    <div class="col-12 position-static mt-10">
+      <div class="content-box-wrapper">
+        <co-resizable-box title="Chemistry">
+          <co-experiment-details-chemistry></co-experiment-details-chemistry>
         </co-resizable-box>
       </div>
     </div>

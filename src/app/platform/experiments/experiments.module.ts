@@ -7,9 +7,10 @@ import {SharedModule} from '../../shared/shared.module';
 import {ExperimentsRoutingModule} from './experiments-routing.module';
 import {PlatformSharedModule} from '../platform-shared/platform-shared.module';
 import {ExperimentsViewComponent} from './experiments-list/experiments-views/experiments-views.component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [ExperimentsPageComponent, ExperimentsListComponent, ExperimentsViewComponent],
-  imports: [CommonModule, SharedModule, ExperimentsRoutingModule, TabsModule, PlatformSharedModule]
+  imports: [CommonModule, SharedModule, ExperimentsRoutingModule, TabsModule, PlatformSharedModule, FormsModule]
 })
 export class ExperimentsModule {}

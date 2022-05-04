@@ -1,0 +1,46 @@
+<form [formGroup]="chemistryForm" (ngSubmit)="onSubmit($event)" class="pt-30 px-15 px-lg-0">
+    <div class="general-error mb-2">
+        <co-form-control-errors [control]="chemistryForm">
+            <co-form-control-error *ngIf="chemistryForm.errors?.wrongLoginCredentials" class="">
+                <div class="p-2 badge badge-danger-50 d-block text-left text-danger-900 text-xs font-weight-700">
+                    {{errorMessage}}</div>
+            </co-form-control-error>
+        </co-form-control-errors>
+    </div>
+
+    <fieldset class="mb-3">
+        <label for="equation" class="form-label">Equation</label>
+        <input type="text" id="equation" class="form-control" formControlName="equation" placeholder="Enter Equation">
+        <co-form-control-errors [controlName]="'equation'"></co-form-control-errors>
+    </fieldset>
+
+    <div class="row justify-content-between mb-5">
+        <fieldset class="col">
+            <label for="compound" class="form-label">Compound</label>
+            <input type="text" id="compound" class="form-control" formControlName="compound"
+                placeholder="Enter Compound">
+            <co-form-control-errors [controlName]="'compound'"></co-form-control-errors>
+        </fieldset>
+
+        <fieldset class="col">
+            <label for="value" class="form-label">Value</label>
+            <input type="text" id="value" class="form-control" formControlName="value" placeholder="Enter Value">
+            <co-form-control-errors [controlName]="'value'"></co-form-control-errors>
+        </fieldset>
+
+        <fieldset class="col">
+            <label for="unit" class="form-label">Unit</label>
+            <select id="unit" class="form-control" formControlName="unit" placeholder="Enter Unit">
+                <option value="">Select Unit</option>
+                <option value="g">g</option>
+                <option value="m">m</option>
+            </select>
+            <co-form-control-errors [controlName]="'unit'"></co-form-control-errors>
+        </fieldset>
+    </div>
+
+    <fieldset>
+        <button class="btn btn-primary btn-block" type="submit" [disabled]="loading"
+            [class.loading]="loading">submit</button>
+    </fieldset>
+</form>
