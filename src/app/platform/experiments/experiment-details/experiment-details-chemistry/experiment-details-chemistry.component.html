@@ -1,4 +1,4 @@
-<form [formGroup]="chemistryForm" (ngSubmit)="onSubmit($event)" class="pt-30 px-15 px-lg-0">
+<form [formGroup]="chemistryForm" (ngSubmit)="onSubmit($event)" class="py-30 px-15 px-lg-0">
     <div class="general-error mb-2">
         <co-form-control-errors [control]="chemistryForm">
             <co-form-control-error *ngIf="chemistryForm.errors?.wrongLoginCredentials" class="">
@@ -44,3 +44,7 @@
             [class.loading]="loading">submit</button>
     </fieldset>
 </form>
+
+<div *ngIf="chemistryData" class="mt-20">
+    <pre class="text-center">{{chemistryData}}</pre>
+</div>

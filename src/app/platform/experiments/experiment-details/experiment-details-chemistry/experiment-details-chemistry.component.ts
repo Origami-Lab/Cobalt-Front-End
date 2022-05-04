@@ -15,6 +15,7 @@ export class ExperimentDetailsChemistryComponent implements OnInit {
   loading = false;
   chemistryForm: FormGroup = new FormGroup({});
   errorMessage = '';
+  chemistryData = '';
 
   constructor(private fb: FormBuilder, private authService: AuthService, private toastr: ToastrService, private http: HttpClient) {
     this.chemistryForm = this.fb.group({
@@ -33,13 +34,13 @@ export class ExperimentDetailsChemistryComponent implements OnInit {
     if (!this.chemistryForm.valid) {
       return;
     }
-    // this.loading = true;
+    this.loading = true;
     const options = {
       withCredentials: false,
       headers: {
-        'Content-type': 'application/x-www-form-urlencoded',
-        responseType: 'text'
-      }
+        'Content-type': 'application/x-www-form-urlencoded'
+      },
+      responseType: 'text' as 'text'
     };
     const formBody = [];
 
@@ -51,26 +52,12 @@ export class ExperimentDetailsChemistryComponent implements OnInit {
     const params = formBody.join('&');
     this.http.post(environment.chemistryURL, params, options).subscribe(
       (rs: any) => {
-        console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', rs.text);
+        this.chemistryData = rs;
+        this.loading = false;
       },
       error => {
-        console.log('error 123:', error);
+        this.loading = false;
       }
     );
-
-    // this.authService.signUp(params).subscribe(
-    //   () => {
-    //     this.toastr.success('Registration successfully');
-
-    //     this.loading = false;
-    //   },
-    //   error => {
-    //     this.errorMessage = error.error.errors.message;
-
-    //     this.chemistryForm.setErrors({wrongLoginCredentials: true});
-
-    //     this.loading = false;
-    //   }
-    // );
   }
 }
