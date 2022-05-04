@@ -17,7 +17,9 @@ export class LoginComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private ngZone: NgZone) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    localStorage.removeItem('isSession');
+  }
 
   signUp(): void {
     this.router.navigateByUrl('/auth/signup');
