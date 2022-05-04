@@ -41,10 +41,11 @@ export class ExperimentDetailsChemistryComponent implements OnInit {
         responseType: 'text'
       }
     };
-    let formBody = [];
-    for (let property in this.chemistryForm.value) {
-      var encodedKey = encodeURIComponent(property);
-      var encodedValue = encodeURIComponent(this.chemistryForm.value[property]);
+    const formBody = [];
+
+    for (const property in this.chemistryForm.value) {
+      const encodedKey = encodeURIComponent(property);
+      const encodedValue = encodeURIComponent(this.chemistryForm.value[property]);
       formBody.push(encodedKey + '=' + encodedValue);
     }
     const params = formBody.join('&');
