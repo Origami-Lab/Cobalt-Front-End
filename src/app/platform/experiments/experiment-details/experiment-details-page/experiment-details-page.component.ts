@@ -49,9 +49,9 @@ export class ExperimentDetailsPageComponent implements OnInit, OnDestroy {
         this.experiment = experiment;
         this.loading = false;
         if (experiment.padid) {
-          this.iframeURL = `https://etherpad.cobalt.origamilab.ch/p/${this.experiment.padid}?showChat=true&userName=${localStorage.getItem(
-            'userName'
-          )}`;
+          this.iframeURL = `https://etherpad.cobalt.origamilab.ch/p/${
+            this.experiment.padid
+          }?showChat=true&lang=en&userName=${localStorage.getItem('userName')}`;
         } else {
           this.createGroupPad();
         }
@@ -85,7 +85,7 @@ export class ExperimentDetailsPageComponent implements OnInit, OnDestroy {
     };
     this.http.post(`${environment.padUrl}createGroupPad`, params, options).subscribe((rs: any) => {
       this.updateExperiments(rs.data.padID);
-      this.iframeURL = `https://etherpad.cobalt.origamilab.ch/p/${rs.data.padID}?showChat=true&userName=${localStorage.getItem(
+      this.iframeURL = `https://etherpad.cobalt.origamilab.ch/p/${rs.data.padID}?showChat=true&lang=en&userName=${localStorage.getItem(
         'userName'
       )}`;
     });
