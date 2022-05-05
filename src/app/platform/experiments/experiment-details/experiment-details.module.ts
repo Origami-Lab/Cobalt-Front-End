@@ -18,6 +18,9 @@ import {ExperimentLinkUploadModalComponent} from './experiment-details-side-nav/
 import {CollapseModule} from 'ngx-bootstrap/collapse';
 import {ExperimentDetailsTagComponent} from './experiment-details-tag/experiment-details-tag.component';
 import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
+import {PipeModule} from 'src/app/shared/pipe.module';
+import {ExperimentDetailsChemistryComponent} from './experiment-details-chemistry/experiment-details-chemistry.component';
+import {FormsModule} from '@angular/forms';
 @NgModule({
   declarations: [
     ExperimentDetailsPageComponent,
@@ -30,7 +33,8 @@ import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
     ExperimentConclusionComponent,
     ExperimentFileUploadComponent,
     ExperimentLinkUploadModalComponent,
-    ExperimentDetailsTagComponent
+    ExperimentDetailsTagComponent,
+    ExperimentDetailsChemistryComponent
   ],
   imports: [
     CommonModule,
@@ -40,7 +44,9 @@ import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
     TextareaAutosizeModule,
     ExperimentDetailsSharedModule,
     CollapseModule,
-    BsDropdownModule
+    BsDropdownModule,
+    PipeModule,
+    FormsModule
   ],
   exports: [ExperimentDetailsTagComponent]
 })

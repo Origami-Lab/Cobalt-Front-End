@@ -17,7 +17,17 @@ export class LoginComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private ngZone: NgZone) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    localStorage.removeItem('isSession');
+  }
+
+  signUp(): void {
+    this.router.navigateByUrl('/auth/signup');
+  }
+
+  forgotPasswordRedirect(): void {
+    this.router.navigateByUrl('/auth/forgot-password');
+  }
 
   onSubmit(event: Event): void {
     event.preventDefault();
@@ -27,7 +37,7 @@ export class LoginComponent implements OnInit {
     }
     this.loading = true;
     this.authService.login(this.loginForm.value).subscribe(
-      () => {
+      rs => {
         this.router.navigateByUrl('/platform/view/experiments/list');
         this.loading = false;
       },

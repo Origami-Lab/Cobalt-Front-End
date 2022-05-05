@@ -38,10 +38,11 @@
     "bootstrap": "^4.5.3",
     "jwt-decode": "^3.1.2",
     "moment": "^2.29.1",
+    "md5-hash": "^1.0.1",
     "ngx-api-utils": "^1.0.10",
     "ngx-bootstrap": "^6.2.0",
     "ngx-logger": "^4.1.9",
-    "ngx-mutation-observer": "^1.0.1",
+    "ngx-mutation-observer": "1.0.1",
     "ngx-quill": "^13.0.1",
     "ngx-textarea-autosize": "^2.0.3",
     "ngx-toastr": "^13.2.0",
@@ -54,6 +55,7 @@
     "quill-image-uploader": "^1.2.2",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
+    "uuid": "^8.3.2",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {

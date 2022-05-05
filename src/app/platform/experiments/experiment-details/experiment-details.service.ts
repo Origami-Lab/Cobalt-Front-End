@@ -18,7 +18,11 @@ export class ExperimentDetailsService {
   getProtocol(experimentId: number): Observable<Protocol> {
     return this.apiHttp
       .get<Protocol[]>('/experiments_protocols', {params: {experimentid: String(experimentId)}})
-      .pipe(map(([protocol]) => protocol));
+      .pipe(
+        map(([protocol]) => {
+          return protocol;
+        })
+      );
   }
 
   updateProtocol({id, ...rest}: Protocol): Observable<Protocol> {

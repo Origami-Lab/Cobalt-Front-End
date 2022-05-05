@@ -16,7 +16,7 @@ import {
 import {JwtTokenDecoderService} from './auth/jwt-token-decoder.service';
 import {JsonResponseInterceptor} from './api-http/json-response.interceptor';
 
-export const authGuardPublicOnlyRoutes = /^\/(auth\/login)/;
+export const authGuardPublicOnlyRoutes = /^\/(auth\/login|auth\/signup|auth\/forgot-password|auth\/reset-password)/;
 
 @NgModule({
   declarations: [],
