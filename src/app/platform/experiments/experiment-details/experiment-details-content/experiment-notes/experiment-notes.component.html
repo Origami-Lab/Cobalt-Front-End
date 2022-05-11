@@ -12,7 +12,7 @@
             <ng-container *ngIf="notes.length; else emptyNotesRef">
               <div *ngFor="let note of notes; let last = last" [class.mb-4]="!last" #noteRef>
                 <div class="note-created-at text-xxs text-gray mb-2">
-                  {{note.datetime | date}}
+                  {{formatDate(note.datetime)}}
                 </div>
                 <textarea
                   autosize

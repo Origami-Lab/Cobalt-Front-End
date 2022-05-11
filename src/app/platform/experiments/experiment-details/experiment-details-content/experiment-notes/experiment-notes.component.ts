@@ -9,6 +9,7 @@ import {Note} from '../../models/note.interface';
 import {ToastrService} from 'ngx-toastr';
 import {AuthTokenService} from 'ngx-api-utils';
 import {JwtTokenPayload} from '../../../../../core/auth/jwt-token-payload';
+import * as moment from 'moment';
 
 @Component({
   selector: 'co-experiment-notes',
@@ -100,7 +101,7 @@ export class ExperimentNotesComponent implements OnInit, AfterViewInit, OnDestro
     }
 
     const noteReq: Note = {
-      datetime: '2021-01-18T14:55:41.405Z',
+      datetime: new Date().toISOString(),
       notes: this.notesForm.value.note.trim(),
       experimentId: `/experiments/${this.experiment.id}`,
       userid: this.authToken.payload.uid
@@ -118,5 +119,10 @@ export class ExperimentNotesComponent implements OnInit, AfterViewInit, OnDestro
         this.createNoteLoading = false;
       }
     );
+  }
+
+  formatDate(date: string): string {
+    const newDate = moment(date).format('MMM DD, YYYY hh:mm:ss');
+    return newDate;
   }
 }
