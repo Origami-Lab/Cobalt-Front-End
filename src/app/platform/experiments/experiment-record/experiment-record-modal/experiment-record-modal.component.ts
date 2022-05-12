@@ -19,6 +19,9 @@ import {ConfirmModalComponent} from '../../../platform-shared/components/confirm
 import {Link} from '../../experiment-details/models/link.interface';
 import {Attachment} from '../../experiment-details/models/attachment.interface';
 import {environment} from 'src/environments/environment';
+import {DatatablesRenderer} from '../../../../shared/datatables-renderer.js';
+import { asBlob } from 'html-docx-js-typescript';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'co-experiment-record-modal',
@@ -85,14 +88,74 @@ export class ExperimentRecordModalComponent implements OnInit {
           this.loading = false;
 
           if (!protocol.protocol && protocol.padid) {
-            this.getText(protocol.padid).then(rs => {
-              this.protocol = rs;
+            this.getHTML(protocol.padid).then(rs => {
+              var finalHtml = '';
+              var safeHtml;
+              if (rs.indexOf("data-tables") != -1) {
+                var renderer = new DatatablesRenderer.Renderer();
+                var parts = rs.split('<br>');
+                var count = parts.length;
+                for(let i = 0; i < count; i++ ){
+                  if (parts[i].indexOf("data-tables") == -1) {
+                    finalHtml += parts[i] + '<br>';
+                  }else{
+                    let partContent = parts[i];
+                    if(partContent.indexOf("<table class=") != -1){
+                        var divContent = document.createElement("div");
+                        divContent.innerHTML = partContent;
+                        partContent = divContent.innerText;
+                    }
+                    partContent = partContent.replace(/(&quot;)/g,'"');
+                    let isLastRow = false;
+                    let j = i + 1;
+                    if(parts[j].indexOf("payload") == -1){
+                        isLastRow = true;
+                    }
+                    partContent = renderer.getLineHtml(partContent, isLastRow);
+                    finalHtml += partContent;
+                  }
+                }
+                safeHtml = this.sanitized.bypassSecurityTrustHtml(finalHtml);
+              }else{
+                safeHtml = rs;
+              }
+              this.protocol = safeHtml;
             });
           }
 
           if (!conclusions.conclusions && conclusions.padid) {
-            this.getText(conclusions.padid).then(rs => {
-              this.conclusion = rs;
+            this.getHTML(conclusions.padid).then(rs => {
+              var finalHtml = '';
+              var safeHtml;
+              if (rs.indexOf("data-tables") != -1) {
+                var renderer = new DatatablesRenderer.Renderer();
+                var parts = rs.split('<br>');
+                var count = parts.length;
+                for(let i = 0; i < count; i++ ){
+                  if (parts[i].indexOf("data-tables") == -1) {
+                    finalHtml += parts[i] + '<br>';
+                  }else{
+                    let partContent = parts[i];
+                    if(partContent.indexOf("<table class=") != -1){
+                        var divContent = document.createElement("div");
+                        divContent.innerHTML = partContent;
+                        partContent = divContent.innerText;
+                    }
+                    partContent = partContent.replace(/(&quot;)/g,'"');
+                    let isLastRow = false;
+                    let j = i + 1;
+                    if(parts[j].indexOf("payload") == -1){
+                        isLastRow = true;
+                    }
+                    partContent = renderer.getLineHtml(partContent, isLastRow);
+                    finalHtml += partContent;
+                  }
+                }
+                safeHtml = this.sanitized.bypassSecurityTrustHtml(finalHtml);
+              }else{
+                safeHtml = rs;
+              }
+              this.conclusion = safeHtml;
             });
           }
         }
@@ -111,6 +174,21 @@ export class ExperimentRecordModalComponent implements OnInit {
     };
     const data: any = await this.http.post(`${environment.padUrl}getText`, params, options).toPromise();
     contentText = data.data.text;
+    return contentText;
+  }
+
+  async getHTML(padID: string): Promise<string> {
+    let contentText = '';
+    const options = {
+      withCredentials: false
+    };
+
+    const params = {
+      padID,
+      apikey: environment.apiKey
+    };
+    const data: any = await this.http.post(`${environment.padUrl}getHTML`, params, options).toPromise();
+    contentText = data.data.html;
     return contentText;
   }
 
@@ -138,21 +216,21 @@ export class ExperimentRecordModalComponent implements OnInit {
     );
   }
 
-  exportToWord(element, filename = ''): void {
-    const preHtml = `<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title></head><body>`;
+  async exportToWord(element, filename = ''): Promise<void> {
+    const preHtml = `<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title></head><body><style>table {width: 100%; border:1px solid #000}img,canvas{max-width: 100%; height:auto}</style>`;
     const postHtml = '</body></html>';
-    const html = preHtml + document.getElementById(element).innerHTML + postHtml;
-    const url = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(html);
+    let innerHtml = document.getElementById(element).innerHTML;
+    innerHtml = innerHtml.replace('src="assets/icons/outlined-editor-insert-photo.svg"', 'src="https://cobalt.origamilab.ch/assets/icons/outlined-editor-insert-photo.svg"');
+    const html = preHtml + innerHtml + postHtml;
+    const opt = {
+        margin: {
+            top: 100
+        },
+        orientation: 'landscape' as const 
+    }
+    var temp = await asBlob(html, opt);
     filename = filename ? filename.replace(/\s/g, '_') + '.docx' : 'document.docx';
-    const downloadLink = document.createElement('a');
-
-    document.body.appendChild(downloadLink);
-
-    downloadLink.href = url;
-    downloadLink.download = filename;
-    downloadLink.click();
-
-    document.body.removeChild(downloadLink);
+    saveAs(temp, filename);
   }
 
   onEdit(): void {
