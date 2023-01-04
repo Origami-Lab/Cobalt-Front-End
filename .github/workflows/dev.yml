@@ -48,3 +48,10 @@ jobs:
           namespace: cobalt
           name: dev-cobalt-front-end
           chart-path: ./helm
+
+      - name: Restart Deployment
+        uses: kodermax/kubectl-aws-eks@master
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.AWS_KUBE_CONFIG }}
+        with:
+          args: rollout restart deployment/dev-cobalt-front-end -n cobalt
