@@ -29,7 +29,7 @@ jobs:
           ECR_REPOSITORY: ${{ secrets.AWS_REPO_NAME }}
           IMAGE_TAG: fe
         run: |
-          docker build -t $IMAGE_TAG:latest .
+          docker build -f Dockerfile.prod -t $IMAGE_TAG:latest .
           docker tag $IMAGE_TAG:latest $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
