@@ -2,8 +2,8 @@
 replicaCount: 1
 
 image:
-  repository: rg.fr-par.scw.cloud/cobalt/cobalt-front-end
-  tag: latest
+  repository: 478935270195.dkr.ecr.eu-north-1.amazonaws.com/cobalt
+  tag: dev-fe
   pullPolicy: Always
 
 imagePullSecrets: [{
