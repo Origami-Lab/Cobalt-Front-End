@@ -2,16 +2,16 @@
 replicaCount: 1
 
 image:
-  repository: rg.fr-par.scw.cloud/cobalt-prod/cobalt-front-end
-  tag: latest
+  repository: 478935270195.dkr.ecr.eu-north-1.amazonaws.com/cobalt
+  tag: fe
   pullPolicy: Always
 
 imagePullSecrets: [{
   name: registry-secret
 }]
 
-nameOverride: ""
-fullnameOverride: ""
+nameOverride: "cobaltfe"
+fullnameOverride: "cobaltfe"
 
 service:
   type: ClusterIP
@@ -20,17 +20,21 @@ service:
 
 ingress:
   enabled: true
-  annotations:
-    kubernetes.io/ingress.class: "nginx"
-    cert-manager.io/issuer: "letsencrypt-prod"
+  className: alb
+  annotations: 
+    alb.ingress.kubernetes.io/load-balancer-name: cobaltfe
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/ip-address-type: ipv4
+    alb.ingress.kubernetes.io/load-balancer-attributes: routing.http2.enabled=true,deletion_protection.enabled=true
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
+    alb.ingress.kubernetes.io/ssl-redirect: '443'
+    alb.ingress.kubernetes.io/certificate-arn: "arn:aws:acm:eu-north-1:478935270195:certificate/03bbf492-3fc6-45ab-b3fc-b9f5320ffd57"
+    alb.ingress.kubernetes.io/backend-protocol: HTTP
+    alb.ingress.kubernetes.io/success-codes: 200,404
   hosts:
-    - host: cobalt.origamilab.ch
-      path: /
-      pathType: Prefix
-  tls:
-    - secretName: cobalt-front-end-tls
-      hosts:
-        - cobalt.origamilab.ch
+    path: /
+    pathType: Prefix
 
 resources:
 #  limits:
