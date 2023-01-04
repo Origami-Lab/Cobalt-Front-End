@@ -31,16 +31,13 @@ spec:
     {{- end }}
   {{- end }}
   rules:
-  {{- range .Values.ingress.hosts }}
-  - host: {{ .host | quote }}
     http:
       paths:
-        - path: {{ .path }}
-          pathType: {{ .pathType }}
+        - path: {{ .Values.ingress.hosts.path }}
+          pathType: {{ .Values.ingress.hosts.pathType }}
           backend:
             service:
               name: {{ $releaseName }}
               port:
                 number: 80
-  {{- end }}
   {{- end }}
