@@ -17,7 +17,7 @@ RUN yarn global add @api-platform/client-generator
 # prevent the reinstallation of node modules at every changes in the source code
 COPY package.json ./
 RUN set -eux; \
-  npm install
+  npm install --legacy-peer-deps
 
 COPY . ./
 
