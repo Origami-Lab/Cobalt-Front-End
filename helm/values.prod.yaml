@@ -2,7 +2,7 @@
 replicaCount: 1
 
 image:
-  repository: rg.fr-par.scw.cloud/cobalt
+  repository: rg.fr-par.scw.cloud/cobalt/front-end
   tag: latest
   pullPolicy: Always
 
