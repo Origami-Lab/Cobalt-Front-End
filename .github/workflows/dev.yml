@@ -1,9 +1,13 @@
 name: dev
-on: 
-  #workflow_dispatch
+on:
+  # workflow_dispatch
   push:
     branches:
       - develop
+
+env:
+  IMAGE: ${{ secrets.DOCKER_REGISTRY }}/dev-front-end
+  TAG: latest
 
 jobs:
   deploy:
@@ -11,47 +15,25 @@ jobs:
       name: dev
     name: Build and deploy
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1-node16
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION}}
-
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
-
-      - name: Build and Push images
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: ${{ secrets.AWS_REPO_NAME }}
-          IMAGE_TAG: dev-fe
+      - name: Build image
         run: |
-          docker build -t $IMAGE_TAG:latest .
-          docker tag $IMAGE_TAG:latest $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          docker build -t $IMAGE:$TAG .
+
+      - name: Push image
+        run: |
+          docker login ${{ secrets.DOCKER_REGISTRY }} -u nologin -p ${{ secrets.SCW_SECRET_KEY }}
+          docker push $IMAGE:$TAG
 
       - name: Deploy
-        uses: peymanmortazavi/eks-helm-deploy@v2.2.1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION}}
-          cluster-name: cobalt
-          config-files: ./helm/values.dev.yaml
-          namespace: cobalt
-          name: dev-cobalt-front-end
-          chart-path: ./helm
-
-      - name: Restart Deployment
-        uses: kodermax/kubectl-aws-eks@master
+        uses: wahyd4/kubectl-helm-action@master
         env:
-          KUBE_CONFIG_DATA: ${{ secrets.AWS_KUBE_CONFIG }}
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG }}
         with:
-          args: rollout restart deployment/dev-cobalt-front-end -n cobalt
+          args: |
+            helm uninstall dev-front-end
+            helm install dev-front-end helm --namespace=default -f helm/values.dev.yaml
