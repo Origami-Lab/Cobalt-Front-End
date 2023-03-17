@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {ExperimentsService} from '../experiments.service';
 import {Experiment} from '../models/experiment.interface';
 import {ExperimentsView} from '../models/experiments-view.enum';
@@ -13,6 +13,7 @@ import {Subscription} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from 'src/app/auth/auth.service';
 import {User} from '../../teams/model/team.interface';
+import {UserRolesService} from 'src/app/auth/user-role.service';
 
 @Component({
   selector: 'co-experiments-list',
@@ -41,7 +42,8 @@ export class ExperimentsListComponent implements OnInit, OnDestroy {
     private toastr: ToastrService,
     private activeRouter: ActivatedRoute,
     private authorService: AuthService,
-    private router: Router
+    private router: Router,
+    private userRoleService: UserRolesService
   ) {}
 
   ngOnInit(): void {
@@ -49,12 +51,24 @@ export class ExperimentsListComponent implements OnInit, OnDestroy {
       this.applyExperimentChanges(experiment);
     });
     this.subscription = this.activeRouter.queryParams.subscribe(rs => {
+      console.log('xxxxx', rs.id);
       this.userId = rs.id;
       if (this.userId) {
         this.getUserById(this.userId);
+        this.getExprimentList(this.userId);
+      } else {
+        this.getExpri();
       }
     });
-    this.getExprimentList(this.userId);
+    this.getExpri();
+  }
+
+  getExpri(): void {
+    this.userRoleService.getUserId().subscribe(val => {
+      if (val && val > -1 && !this.userId) {
+        this.getExprimentList(val);
+      }
+    });
   }
 
   ngOnDestroy(): void {

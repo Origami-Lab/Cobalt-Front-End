@@ -41,6 +41,7 @@ export class PlatformHeaderComponent implements OnInit {
           this.userInfo = rs;
           this.userRolesService.setRoles(rs.roles);
           this.userRolesService.setUserInfo(rs);
+          this.userRolesService.setUserId(rs.userid);
           this.loading = false;
           localStorage.setItem('userName', rs.name);
           this.checkIsHasPadId(rs);

@@ -23,6 +23,7 @@ export class AuthService {
       tap(rs => {
         this.userRolesService.setRoles(rs.data.roles);
         this.authToken.value$.next(rs.token);
+        this.userRolesService.setUserId(rs.data.userid);
         localStorage.setItem('user_id', rs.data.userid);
       })
     );

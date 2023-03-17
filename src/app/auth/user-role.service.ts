@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import {BehaviorSubject} from 'rxjs';
 import {User} from '../platform/teams/model/team.interface';
 
 @Injectable({
@@ -7,8 +8,13 @@ import {User} from '../platform/teams/model/team.interface';
 export class UserRolesService {
   userRoles: string[] = [];
   userInfo: User;
+  private userId = new BehaviorSubject<number>(-1);
 
   constructor() {}
+
+  setUserId(userId: number) {
+    this.userId.next(userId);
+  }
 
   setRoles(Roles: string[]): void {
     this.userRoles = Roles.slice(0);
@@ -24,5 +30,9 @@ export class UserRolesService {
 
   getUserInfo(): User {
     return this.userInfo;
+  }
+
+  getUserId() {
+    return this.userId.asObservable();
   }
 }

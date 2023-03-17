@@ -149,5 +149,8 @@
       }
     }
   },
-  "defaultProject": "cobalt"
+  "defaultProject": "cobalt",
+  "cli": {
+    "analytics": "0aaa18f5-e15e-4e8f-b3bf-fe0779d8c354"
+  }
 }
