@@ -91,24 +91,24 @@ export class ExperimentRecordModalComponent implements OnInit {
             this.getHTML(protocol.padid).then(rs => {
               let finalHtml = '';
               let safeHtml;
-              if (rs.indexOf('data-tables') != -1) {
+              if (rs.indexOf('data-tables') !== -1) {
                 const renderer = new DatatablesRenderer.Renderer();
                 const parts = rs.split('<br>');
                 const count = parts.length;
                 for (let i = 0; i < count; i++) {
-                  if (parts[i].indexOf('data-tables') == -1) {
+                  if (parts[i].indexOf('data-tables') === -1) {
                     finalHtml += parts[i] + '<br>';
                   } else {
                     let partContent = parts[i];
-                    if (partContent.indexOf('<table class=') != -1) {
+                    if (partContent.indexOf('<table class=') !== -1) {
                       const divContent = document.createElement('div');
                       divContent.innerHTML = partContent;
                       partContent = divContent.innerText;
                     }
                     partContent = partContent.replace(/(&quot;)/g, '"');
                     let isLastRow = false;
-                    let j = i + 1;
-                    if (parts[j].indexOf('payload') == -1) {
+                    const j = i + 1;
+                    if (parts[j].indexOf('payload') === -1) {
                       isLastRow = true;
                     }
                     partContent = renderer.getLineHtml(partContent, isLastRow);
@@ -125,26 +125,26 @@ export class ExperimentRecordModalComponent implements OnInit {
 
           if (!conclusions.conclusions && conclusions.padid) {
             this.getHTML(conclusions.padid).then(rs => {
-              var finalHtml = '';
-              var safeHtml;
-              if (rs.indexOf('data-tables') != -1) {
-                var renderer = new DatatablesRenderer.Renderer();
-                var parts = rs.split('<br>');
-                var count = parts.length;
+              let finalHtml = '';
+              let safeHtml;
+              if (rs.indexOf('data-tables') !== -1) {
+                const renderer = new DatatablesRenderer.Renderer();
+                const parts = rs.split('<br>');
+                const count = parts.length;
                 for (let i = 0; i < count; i++) {
-                  if (parts[i].indexOf('data-tables') == -1) {
+                  if (parts[i].indexOf('data-tables') === -1) {
                     finalHtml += parts[i] + '<br>';
                   } else {
                     let partContent = parts[i];
-                    if (partContent.indexOf('<table class=') != -1) {
-                      var divContent = document.createElement('div');
+                    if (partContent.indexOf('<table class=') !== -1) {
+                      const divContent = document.createElement('div');
                       divContent.innerHTML = partContent;
                       partContent = divContent.innerText;
                     }
                     partContent = partContent.replace(/(&quot;)/g, '"');
                     let isLastRow = false;
-                    let j = i + 1;
-                    if (parts[j].indexOf('payload') == -1) {
+                    const j = i + 1;
+                    if (parts[j].indexOf('payload') === -1) {
                       isLastRow = true;
                     }
                     partContent = renderer.getLineHtml(partContent, isLastRow);
@@ -231,7 +231,7 @@ export class ExperimentRecordModalComponent implements OnInit {
       },
       orientation: 'landscape' as const
     };
-    var temp = await asBlob(html, opt);
+    const temp = await asBlob(html, opt);
     filename = filename ? filename.replace(/\s/g, '_') + '.docx' : 'document.docx';
     saveAs(temp, filename);
   }
