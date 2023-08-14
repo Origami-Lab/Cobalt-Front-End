@@ -13,11 +13,11 @@ export class KetcherModalComponent implements OnInit {
 
   modalConfig = {show: false, backdrop: 'static', keyboard: false};
 
-  openModal() {
+  openModal(): void {
     this.coModal.openModal();
   }
 
-  closeModal() {
+  closeModal(): void {
     this.coModal.closeModal();
   }
 
