@@ -1,0 +1,17 @@
+iframe {
+  height: calc(100vh - 190px);
+  flex: 1;
+  width: 100%;
+}
+
+::ng-deep .modal-body {
+  margin-bottom: 0px;
+}
+
+.modal-hidden {
+  display: none !important;
+}
+
+// ::ng-deep .modal-dialog {
+//   max-width: calc(100% - 50px);
+// }

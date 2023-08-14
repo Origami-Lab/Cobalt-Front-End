@@ -1,0 +1,10 @@
+::ng-deep .modal-content {
+  min-height: calc(100vh - 60px);
+  display: flex;
+  flex-direction: column;
+}
+
+iframe {
+  height: 100%;
+  flex: 1;
+}

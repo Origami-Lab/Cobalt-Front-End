@@ -5,6 +5,8 @@
         <button class="btn btn-link-white p-2" (click)="toggleNavExpand()">
           <i class="icon nav-arrow" [class.active]="isExpanded"></i>
         </button>
+
+        <img src="/assets/ketcher.png" class="ketcher-img" (click)="openKetcherModal()" />
       </div>
     </div>
     <div [class.d-none]="!isExpanded">
@@ -21,10 +23,17 @@
             </div>
           </div>
         </div>
-        <div class="row pb-4 border-bottom border-gray-200">
+        <div class="row mb-3 pb-4 border-bottom border-gray-200">
           <div class="col-12">
             <div class="px-3">
               <co-experiment-link-upload [experiment]="experiment"></co-experiment-link-upload>
+            </div>
+          </div>
+        </div>
+        <div class="row pb-4 border-bottom border-gray-200">
+          <div class="col-12">
+            <div class="px-3">
+              <co-experiment-molecules-upload [experiment]="experiment"></co-experiment-molecules-upload>
             </div>
           </div>
         </div>
@@ -33,3 +42,5 @@
   </div>
 </div>
 <div class="experiment-details-side-nav-curtain d-block d-md-none" [class.active]="isExpanded"></div>
+
+<co-ketcher-modal #ketcherModelRef></co-ketcher-modal>

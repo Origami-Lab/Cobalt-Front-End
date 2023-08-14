@@ -40,11 +40,19 @@ export class ExperimentLinkUploadModalComponent implements OnInit {
   ngOnInit(): void {}
 
   openModal(): void {
-    this.modalRef = this.modalService.show(this.uploadLinkModal);
+    this.modalRef = this.modalService.show(this.uploadLinkModal, {backdrop: 'static', ignoreBackdropClick: true});
+    const modalBackdrop = document.querySelector('.modal-backdrop');
+    if (modalBackdrop) {
+      modalBackdrop.classList.remove('hide-backdrop');
+    }
   }
 
   onModalClose(): void {
     this.modalRef.hide();
+    const modalBackdrop = document.querySelector('.modal-backdrop');
+    if (modalBackdrop) {
+      modalBackdrop.classList.add('hide-backdrop');
+    }
   }
 
   onUploadLink(): void {

@@ -35,11 +35,17 @@
   font-weight: bold;
 }
 
-.ab-full {
+.ab-centerfull {
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
+}
+
+.ab-center {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .h-100vh {
@@ -85,6 +91,15 @@
 
 .pointer {
   cursor: pointer;
+}
+
+.modal-hidden {
+  display: none !important;
+}
+
+.hide-backdrop {
+  z-index: -1 !important;
+  opacity: 0 !important;
 }
 
 @for $i from 1 through 80 {

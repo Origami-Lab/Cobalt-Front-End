@@ -21,6 +21,10 @@ import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
 import {PipeModule} from 'src/app/shared/pipe.module';
 import {ExperimentDetailsChemistryComponent} from './experiment-details-chemistry/experiment-details-chemistry.component';
 import {FormsModule} from '@angular/forms';
+import {ExperimentMoleculesUploadComponent} from './experiment-details-side-nav/experiment-molecules-upload/experiment-molecules-upload.component';
+import {ExperimentMoleculesUploadModalComponent} from './experiment-details-side-nav/experiment-molecules-upload-modal/experiment-molecules-upload-modal.component';
+import {KetcherModalComponent} from './experiment-details-side-nav/ketcher-modal/ketcher-modal.component';
+import {CoModalModule} from '../../../shared/co-modal/co-modal.module';
 @NgModule({
   declarations: [
     ExperimentDetailsPageComponent,
@@ -34,8 +38,12 @@ import {FormsModule} from '@angular/forms';
     ExperimentFileUploadComponent,
     ExperimentLinkUploadModalComponent,
     ExperimentDetailsTagComponent,
-    ExperimentDetailsChemistryComponent
+    ExperimentDetailsChemistryComponent,
+    ExperimentMoleculesUploadComponent,
+    ExperimentMoleculesUploadModalComponent,
+    KetcherModalComponent
   ],
+  exports: [ExperimentDetailsTagComponent],
   imports: [
     CommonModule,
     SharedModule,
@@ -46,8 +54,8 @@ import {FormsModule} from '@angular/forms';
     CollapseModule,
     BsDropdownModule,
     PipeModule,
-    FormsModule
-  ],
-  exports: [ExperimentDetailsTagComponent]
+    FormsModule,
+    CoModalModule
+  ]
 })
 export class ExperimentDetailsModule {}

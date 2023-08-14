@@ -8,6 +8,7 @@ import {Note} from './models/note.interface';
 import {transformToFormData} from '../../../core/utils/transform-to-form-data';
 import {Link} from './models/link.interface';
 import {Attachment} from './models/attachment.interface';
+import {Molecule} from './models/molecules';
 
 @Injectable({
   providedIn: 'root'
@@ -72,6 +73,10 @@ export class ExperimentDetailsService {
     return this.apiHttp.get<Link[]>('/experiments_links', {params: {experimentid: String(experimentId)}});
   }
 
+  getMolecule(experimentId: number): Observable<Molecule[]> {
+    return this.apiHttp.get<Molecule[]>(`/experiments/${experimentId}/experiments2molecules`);
+  }
+
   attachLink(link: Link): Observable<Link> {
     return this.apiHttp.post<Link>(`/experiments_links`, link);
   }
@@ -83,5 +88,9 @@ export class ExperimentDetailsService {
   uploadFile(file: File): any {
     const transformedAttachment = transformToFormData({file, filename: file.name});
     return this.apiHttp.post<any>(`/file_uploads`, transformedAttachment);
+  }
+
+  addMolecules(params: Molecule): Observable<Molecule> {
+    return this.apiHttp.post<Molecule>(`/experiments2molecules`, params);
   }
 }

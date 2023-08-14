@@ -36,3 +36,19 @@
     left: 0;
   }
 }
+
+.expanded {
+  .ketcher-img {
+    top: 6px;
+    transition: all 0.5s;
+  }
+}
+
+.ketcher-img {
+  cursor: pointer;
+  width: 30px;
+  position: absolute;
+  top: 52px;
+  right: 18px;
+  transition: all 0.5s;
+}

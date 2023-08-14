@@ -1,0 +1,19 @@
+<ng-template #uploadMoleculesModalRef>
+  <div>
+    <div class="modal-body">
+      <form [formGroup]="moleculesForm">
+        <fieldset>
+          <label for="molecules" class="form-label">Attach text</label>
+          <input type="text" formControlName="molecules" id="molecules" class="form-control">
+          <co-form-control-errors [controlName]="'molecules'"></co-form-control-errors>
+          <co-form-control-errors [control]="moleculesForm"></co-form-control-errors>
+        </fieldset>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost-primary" (click)="onModalClose()">Cancel</button>
+      <button class="btn btn-primary" [disabled]="loading" [class.loading]="loading"
+        (click)="onUploadLink()">Upload</button>
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,12 @@
+<ng-template #ketcherModalRef>
+  <div>
+    <div class="modal-body position-relative">
+      <div class="d-flex justify-content-between align-items-center pb-20 position-relative">
+        <h3 class="font-bold">Ketcher</h3>
+        <i class="icon close align-middle pointer" (click)="closeModal()"></i>
+      </div>
+      <co-loading [loading]="true" *ngIf="iframeLoading" class="position-absolute ab-center"></co-loading>
+      <iframe id="ifKetcher" src="https://ketcher.cobalt.origamilab.ch/" (load)="onIframeLoad()"></iframe>
+    </div>
+  </div>
+</ng-template>
