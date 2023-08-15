@@ -19,16 +19,8 @@
 
   .header-logo {
     .img-icon {
-      max-width: 22px;
-    }
-    @media (max-width: 575px) {
-      img {
-        max-width: 80px;
-        // padding-bottom: 8px;
-      }
-      .img-icon {
-        max-width: 20px;
-      }
+      max-width: 117px;
+      margin-bottom: 10px;
     }
   }
 }

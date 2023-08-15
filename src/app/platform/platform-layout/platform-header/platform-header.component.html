@@ -8,8 +8,8 @@
       </div>
       <h1 class="mb-0">
         <a class="header-logo d-flex align-items-center" routerLink="/platform/view">
-          <img class="img-icon mr-2" src="assets/icons/logo.png" />
-          <img src="assets/icons/my-cobalt-logo.svg" alt="My Cobalt">
+          <img class="img-icon mr-2" src="assets/icons/cobalt-logo.png" />
+          <!-- <img src="assets/icons/my-cobalt-logo.svg" alt="Cobalt"> -->
         </a>
       </h1>
     </div>
@@ -40,7 +40,7 @@
       <img class="notification mr-lg-30 mr-7" src="assets/icons/alarm.svg" alt="Notification">
       <div class="d-flex" dropdown [autoClose]="true" placement="bottom right">
         <button *ngIf="!loading" class="btn p-0 arrow-btn" aria-controls="dropdown-user-profile" dropdownToggle>
-          <img class="avatar" *ngIf="userInfo.avatar" [src]="userInfo.avatar" alt="My Cobalt">
+          <img class="avatar" *ngIf="userInfo.avatar" [src]="userInfo.avatar" alt="Cobalt">
           <span
             class="avatar bg-yellow d-block d-flex align-items-center justify-content-center font-bold fz-lg-24 fz-18 text-uppercase text-white"
             *ngIf="!userInfo.avatar">{{userInfo.name.charAt(0)}}</span>
