@@ -25,6 +25,7 @@ import {ExperimentMoleculesUploadComponent} from './experiment-details-side-nav/
 import {ExperimentMoleculesUploadModalComponent} from './experiment-details-side-nav/experiment-molecules-upload-modal/experiment-molecules-upload-modal.component';
 import {KetcherModalComponent} from './experiment-details-side-nav/ketcher-modal/ketcher-modal.component';
 import {CoModalModule} from '../../../shared/co-modal/co-modal.module';
+import {MoleculeDetailModalComponent} from './experiment-details-side-nav/molecule-detail-modal/molecule-detail-modal.component';
 @NgModule({
   declarations: [
     ExperimentDetailsPageComponent,
@@ -41,7 +42,8 @@ import {CoModalModule} from '../../../shared/co-modal/co-modal.module';
     ExperimentDetailsChemistryComponent,
     ExperimentMoleculesUploadComponent,
     ExperimentMoleculesUploadModalComponent,
-    KetcherModalComponent
+    KetcherModalComponent,
+    MoleculeDetailModalComponent
   ],
   exports: [ExperimentDetailsTagComponent],
   imports: [

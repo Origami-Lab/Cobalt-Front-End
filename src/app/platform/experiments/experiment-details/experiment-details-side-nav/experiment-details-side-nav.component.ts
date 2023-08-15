@@ -11,14 +11,14 @@ import {KetcherModalComponent} from './ketcher-modal/ketcher-modal.component';
   styleUrls: ['./experiment-details-side-nav.component.scss']
 })
 export class ExperimentDetailsSideNavComponent implements OnInit, OnDestroy {
-  @ViewChild('ketcherModelRef')
-  ketcherModelRef: KetcherModalComponent;
-
   @Input()
   experiment: Experiment;
 
   @Output()
   toggleNav = new EventEmitter<boolean>();
+
+  @Output()
+  toggleKetcher = new EventEmitter<boolean>();
 
   isExpanded = !this.windowSizeService.isMd;
   private subscription: Subscription;
@@ -43,7 +43,7 @@ export class ExperimentDetailsSideNavComponent implements OnInit, OnDestroy {
   }
 
   openKetcherModal(): void {
-    this.ketcherModelRef.openModal();
+    this.toggleKetcher.emit(true);
   }
 
   toggleNavExpand(): void {

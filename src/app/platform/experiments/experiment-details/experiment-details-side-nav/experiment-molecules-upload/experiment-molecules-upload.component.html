@@ -27,7 +27,7 @@
 <div class="row" *ngIf="!loading" id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="true">
   <div class="col-12">
     <div *ngFor="let molecule of molecules" class="text-truncate">
-      <div class="mb-2 fz-11">
+      <div class="mb-2 fz-11 pointer link" (click)="openMoleculeDetail(molecule)">
         {{molecule.molecule}}
       </div>
     </div>
@@ -36,3 +36,5 @@
 
 <co-experiment-molecules-upload-modal [experimentId]="experiment.id" (moleculeItem)="handleMoleculeOutput($event)"
   #uploadModalRef></co-experiment-molecules-upload-modal>
+
+<co-molecule-detail-modal #moleculeModalRef [moleculeItem]="moleculeItem"></co-molecule-detail-modal>

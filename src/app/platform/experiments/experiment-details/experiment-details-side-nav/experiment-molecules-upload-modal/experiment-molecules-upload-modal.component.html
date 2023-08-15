@@ -3,14 +3,19 @@
     <div class="modal-body">
       <form [formGroup]="moleculesForm">
         <fieldset>
-          <label for="molecules" class="form-label">Attach text</label>
+          <label for="molecules" class="form-label">Name</label>
           <input type="text" formControlName="molecules" id="molecules" class="form-control">
           <co-form-control-errors [controlName]="'molecules'"></co-form-control-errors>
+
+          <label for="fullmolecule" class="form-label mt-10">Molecules</label>
+          <textarea type="text" formControlName="fullmolecule" id="fullmolecule" class="form-control"></textarea>
+          <co-form-control-errors [controlName]="'fullmolecule'" [rows]="10"></co-form-control-errors>
+
           <co-form-control-errors [control]="moleculesForm"></co-form-control-errors>
         </fieldset>
       </form>
     </div>
-    <div class="modal-footer">
+    <div class="modal-footer mt-10">
       <button class="btn btn-ghost-primary" (click)="onModalClose()">Cancel</button>
       <button class="btn btn-primary" [disabled]="loading" [class.loading]="loading"
         (click)="onUploadLink()">Save</button>

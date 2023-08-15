@@ -22,7 +22,8 @@ export class ExperimentMoleculesUploadModalComponent implements OnInit {
   moleculeItem = new EventEmitter<Molecule>();
 
   moleculesForm = this.fb.group({
-    molecules: [null, [Validators.required]]
+    molecules: [null, [Validators.required]],
+    fullmolecule: [null, [Validators.required]]
   });
 
   private modalRef: BsModalRef;
@@ -35,7 +36,11 @@ export class ExperimentMoleculesUploadModalComponent implements OnInit {
   ) {}
 
   openModal(): void {
-    this.modalRef = this.modalService.show(this.uploadMoleculesModal, {backdrop: 'static', ignoreBackdropClick: true});
+    this.modalRef = this.modalService.show(this.uploadMoleculesModal, {
+      backdrop: 'static',
+      ignoreBackdropClick: true,
+      class: 'modal-dialog-centered'
+    });
     const modalBackdrop = document.querySelector('.modal-backdrop');
     if (modalBackdrop) {
       modalBackdrop.classList.remove('hide-backdrop');
@@ -60,14 +65,14 @@ export class ExperimentMoleculesUploadModalComponent implements OnInit {
     this.loading = true;
     const molecules: Molecule = {
       molecule: this.moleculesForm.value.molecules,
-      experimentId: Number(this.experimentId)
+      experimentId: Number(this.experimentId),
+      fullmolecule: this.moleculesForm.value.fullmolecule
     };
 
     this.experimentDetailsService.addMolecules(molecules).subscribe(
       result => {
-        console.log('result', result);
         this.loading = false;
-        this.toastr.success(`Molecule - ${result.id} - has been uploaded successfully`);
+        this.toastr.success(`Molecule - ${result.molecule} - has been uploaded successfully`);
         this.moleculeItem.emit(result);
         this.moleculesForm.reset();
         this.onModalClose();

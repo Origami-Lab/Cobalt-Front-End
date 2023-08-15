@@ -31,6 +31,8 @@ export class ExperimentDetailsPageComponent implements OnInit, OnDestroy {
   apiError: ApiError;
   private subscription: Subscription;
   iframeURL = '';
+  isExpandedKetcher = false;
+  iframeLoading = true;
 
   constructor(
     private experimentsService: ExperimentsService,
@@ -63,6 +65,10 @@ export class ExperimentDetailsPageComponent implements OnInit, OnDestroy {
     window.addEventListener('message', this.receiveMessage);
   }
 
+  closeKetcher(): void {
+    this.isExpandedKetcher = !this.isExpandedKetcher;
+  }
+
   receiveMessage(e: any): void {
     const iframeEl: any = document.getElementById('h_iframe');
     if (e.data === 'expand_chat_iframe') {
@@ -71,6 +77,10 @@ export class ExperimentDetailsPageComponent implements OnInit, OnDestroy {
     if (e.data === 'collapse_chat_iframe') {
       iframeEl.style = 'width:86px; height:82px;';
     }
+  }
+
+  onIframeLoad(): void {
+    this.iframeLoading = false;
   }
 
   createGroupPad(): void {
@@ -102,6 +112,10 @@ export class ExperimentDetailsPageComponent implements OnInit, OnDestroy {
 
   onNavToggle(isExpanded: boolean): void {
     this.isExpanded = isExpanded;
+  }
+
+  onKetcherToggle(isExpanded: boolean): void {
+    this.isExpandedKetcher = isExpanded;
   }
 
   onConfirmModalOpen(): void {

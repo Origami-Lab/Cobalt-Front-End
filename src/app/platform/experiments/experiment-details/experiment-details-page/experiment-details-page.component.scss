@@ -31,3 +31,35 @@
     box-shadow: 0px 0px 80px #ccc;
   }
 }
+
+.ketcher {
+  width: calc(100% - 20px);
+  height: calc(100vh - 70px);
+  background-color: #fff;
+  border-radius: 10px;
+  top: 10px;
+  left: 100%;
+  box-shadow: 3px 5px 6px #bdbcbc;
+  transition: all 0.5s;
+}
+
+.expanded-ketcher {
+  left: 10px;
+  transition: all 0.5s;
+}
+
+.hidden-scroll {
+  height: calc(100vh - 50px);
+  overflow: hidden;
+}
+
+.experiment-details-content {
+  overflow-x: hidden;
+}
+
+iframe#ifKetcher {
+  height: calc(100vh - 140px);
+  flex: 1;
+  width: 100%;
+  margin-top: 10px;
+}

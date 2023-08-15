@@ -1,6 +1,6 @@
 <section class="experiment-details-section" [class.expanded]="isExpanded">
-  <div class="experiment-details-content">
-    <div class="container container-padding-md">
+  <div class="experiment-details-content position-relative">
+    <div class="container container-padding-md position-relative" [class.hidden-scroll]="isExpandedKetcher">
       <div class="row mb-5 experiment-details-header-height">
         <div class="col-12">
           <co-experiment-details-header [experiment]="experiment" (openConfirmModal)="onConfirmModalOpen()"
@@ -14,9 +14,16 @@
         </div>
       </div>
     </div>
+    <div class="position-absolute ketcher p-10" [class.expanded-ketcher]="isExpandedKetcher">
+      <div class="text-left"><i class="icon close align-middle pointer" (click)="closeKetcher()"></i></div>
+      <co-loading [loading]="true" *ngIf="iframeLoading" class="position-absolute ab-center"></co-loading>
+      <iframe id="ifKetcher" src="https://ketcher.cobalt.origamilab.ch/" (load)="onIframeLoad()"
+        allow="clipboard-read; clipboard-write"></iframe>
+    </div>
   </div>
   <div class="experiment-details-side-nav">
-    <co-experiment-details-side-nav [experiment]="experiment" (toggleNav)="onNavToggle($event)" #sideNavRef>
+    <co-experiment-details-side-nav [experiment]="experiment" (toggleNav)="onNavToggle($event)"
+      (toggleKetcher)="onKetcherToggle($event)" #sideNavRef>
     </co-experiment-details-side-nav>
   </div>
 </section>

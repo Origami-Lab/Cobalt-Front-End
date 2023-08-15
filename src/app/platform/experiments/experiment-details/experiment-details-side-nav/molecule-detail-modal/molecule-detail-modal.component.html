@@ -1,0 +1,14 @@
+<ng-template #moleculeModalRef>
+  <div>
+    <div class="modal-body position-relative">
+      <div class="d-flex justify-content-between align-items-center pb-20 position-relative">
+        <h3 class="font-bold">{{moleculeItem.molecule}}</h3>
+        <i class="icon close align-middle pointer" (click)="closeModal()"></i>
+      </div>
+      <div>
+        {{moleculeItem?.fullmolecule}}
+      </div>
+
+    </div>
+  </div>
+</ng-template>
