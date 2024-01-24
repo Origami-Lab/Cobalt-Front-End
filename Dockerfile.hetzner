@@ -1,0 +1,29 @@
+# https://docs.docker.com/develop/develop-images/multistage-build/#stop-at-a-specific-build-stage
+# https://docs.docker.com/compose/compose-file/#target
+
+
+# https://docs.docker.com/engine/reference/builder/#understand-how-arg-and-from-interact
+ARG NODE_VERSION=16
+
+
+# "development" stage
+FROM node:${NODE_VERSION}-alpine AS api_platform_client_development
+
+WORKDIR /usr/src/client
+
+RUN yarn global add @api-platform/client-generator
+
+# prevent the reinstallation of node modules at every changes in the source code
+COPY package.json ./
+RUN set -eux; \
+  npm install --legacy-peer-deps
+
+COPY . ./
+
+VOLUME /usr/src/client/node_modules
+
+ENV HTTPS true
+
+EXPOSE 3000
+
+CMD ["yarn", "start:stage"]
