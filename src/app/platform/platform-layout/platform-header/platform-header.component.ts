@@ -85,7 +85,7 @@ export class PlatformHeaderComponent implements OnInit {
     const isSession = localStorage.getItem('isSession');
     // const sessionId = localStorage.getItem('sessionID');
     // if (sessionId) {
-    //   this.iframeURl = `https://etherpad.cobalt.origamilab.ch/auth_session?sessionID=${sessionId}`;
+    //   this.iframeURl = `https://etherpad.cobalteln.com/auth_session?sessionID=${sessionId}`;
     // }
     if (isSession) {
       return;
@@ -103,7 +103,7 @@ export class PlatformHeaderComponent implements OnInit {
 
     this.http.post(`${environment.padUrl}createSession`, params, options).subscribe((rs: any) => {
       localStorage.setItem('sessionID', rs.data.sessionID);
-      this.iframeURl = `https://etherpad.cobalt.origamilab.ch/auth_session?sessionID=${rs.data.sessionID}`;
+      this.iframeURl = `https://etherpad.cobalteln.com/auth_session?sessionID=${rs.data.sessionID}`;
     });
   }
 }
