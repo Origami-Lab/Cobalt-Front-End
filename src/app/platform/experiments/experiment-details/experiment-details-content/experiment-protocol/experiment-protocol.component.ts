@@ -71,7 +71,7 @@ export class ExperimentProtocolComponent implements OnInit, OnDestroy, Resizable
             if (!this.protocol.padid) {
               this.createGroupPad(protocol);
             } else {
-              this.iframeURL = `https://etherpad.cobalt.origamilab.ch/p/${
+              this.iframeURL = `https://etherpad.cobalteln.com/p/${
                 this.protocol.padid
               }?showChat=false&userName=${localStorage.getItem('userName')}`;
             }
@@ -102,7 +102,7 @@ export class ExperimentProtocolComponent implements OnInit, OnDestroy, Resizable
       } else {
         this.save(rs.data.padID as string);
       }
-      this.iframeURL = `https://etherpad.cobalt.origamilab.ch/p/${rs.data.padID}?showChat=false&userName=${localStorage.getItem(
+      this.iframeURL = `https://etherpad.cobalteln.com/p/${rs.data.padID}?showChat=false&userName=${localStorage.getItem(
         'userName'
       )}`;
     });

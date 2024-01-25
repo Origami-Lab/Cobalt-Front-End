@@ -71,7 +71,7 @@ export class ExperimentConclusionComponent implements OnInit, OnDestroy, Resizab
             if (!this.conclusion.padid) {
               this.createGroupPad(conclusion);
             } else {
-              this.iframeURL = `https://etherpad.cobalt.origamilab.ch/p/${
+              this.iframeURL = `https://etherpad.cobalteln.com/p/${
                 this.conclusion.padid
               }?showChat=false&userName=${localStorage.getItem('userName')}`;
             }
@@ -101,7 +101,7 @@ export class ExperimentConclusionComponent implements OnInit, OnDestroy, Resizab
       } else {
         this.save(rs.data.padID);
       }
-      this.iframeURL = `https://etherpad.cobalt.origamilab.ch/p/${rs.data.padID}?showChat=false&userName=${localStorage.getItem(
+      this.iframeURL = `https://etherpad.cobalteln.com/p/${rs.data.padID}?showChat=false&userName=${localStorage.getItem(
         'userName'
       )}`;
     });
